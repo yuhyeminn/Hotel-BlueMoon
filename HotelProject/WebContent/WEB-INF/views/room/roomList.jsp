@@ -1,14 +1,8 @@
-﻿<%@page import="board.model.service.BoardService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.model.vo.Board, java.util.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	List<Room> list = (List<Board>)request.getAttribute("list");
-	String pageBar = (String)request.getAttribute("pageBar");
-	int count = Integer.parseInt(request.getParameter("count"));
 %>
-
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 
 <section id="board-container">
