@@ -6,4 +6,5 @@
 	<h1>하하하하하하 test-hyemin22</h1>
 	<h1>하하하하하하 test-hyemin22</h1>
 	<h1>문을 여시오~_heojun</h1>
+	<li class="board"><a href="<%=request.getContextPath()%>/views/room/roomList.jsp">객실안내</a></li>
 <%-- <%@include file="/WEB-INF/views/common/footer.jsp" %> --%>
