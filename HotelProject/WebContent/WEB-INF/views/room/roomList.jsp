@@ -4,4 +4,6 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 
-	<h2>안내끝~~ </h2>
+<section id="board-container">
+	<h2>게시판 </h2>
+</section>
