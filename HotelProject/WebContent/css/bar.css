@@ -1,0 +1,93 @@
+@charset "UTF-8";
+#bar{
+    position: absolute;
+    width: 850px;
+    height: 115px;
+    border: 1px solid black;
+    padding: 10px;
+    display: inline-block;
+}
+#checkinout{
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    display: inline-block;
+    width: 300px;
+    height:100px;
+    /* border: 1px solid gray; */
+    color: rgb(175, 175, 175);
+}
+#chk1{
+    display: inline-block;
+    position: absolute;
+    width: 90px;
+    height:90px;
+    top: 10px;
+    left: 30px;
+    /* border: 1px solid gray; */
+}
+#moon{
+    display: inline-block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top:50px;
+    left:125px; 
+}
+#chk2{
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height:90px;
+    top: 10px;
+    left: 170px;
+    /* border: 1px solid gray; */
+}
+#room{
+    position: absolute;
+    top: 10px;
+    left: 390px;
+    display: inline-block;
+    width: 60px;
+    height:100px;
+    /* border: 1px solid gray; */
+    color: rgb(175, 175, 175);
+    
+}
+#people{
+    position: absolute;
+    top: 10px;
+    left: 590px;
+    display: inline-block;
+    width: 60px;
+    height:100px;
+    /* border: 1px solid gray; */
+    color: rgb(175, 175, 175);
+}
+#search{
+    position: absolute;
+    top: 45px;
+    left: 700px;
+    float: center;
+    width: 150px; height: 50px;
+    background-color: rgb(19, 42, 22);
+    color: white;
+    border: 0px;
+}
+#stick1{
+    padding-top: 0px;
+    position: absolute;
+    top: 0px;
+    left: 315px;
+}
+#stick2{
+    position: absolute;
+    top: 0px;
+    left: 525px;
+}
+#font{
+    font-size: 40px;
+    color: black;
+    text-decoration: none;
+    float: center;
+}
