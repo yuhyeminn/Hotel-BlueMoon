@@ -7,6 +7,7 @@
 	<h1>하하하하하하 test-hyemin22</h1>
 	<h1>하하하하하하 test-hyemin22</h1>
 	<h1>문을 여시오~_heojun</h1>
+	<h1>테스트_jieun</h1>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/room/roomList">객실안내</a></li>
 
 
