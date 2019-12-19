@@ -21,7 +21,6 @@
 					<li class="home"><a href="#">블루문호텔소개</a></li>
 					<li class="notice"><a href="#">객실</a></li>
 					<li class="board"><a href="#">공지사항</a></li>
-					
 				</ul>
             </nav>
             
