@@ -18,6 +18,7 @@ public class ReservationBarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Bar@servlet");
 		request.getRequestDispatcher("/WEB-INF/views/common/bar.jsp").forward(request, response);
 	}
 
