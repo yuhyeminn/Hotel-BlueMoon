@@ -7,6 +7,7 @@
 	<h1>TEST_minbyoungjun</h1>
 	<h1>TEST_HEOJUN</h1>
 	<h5>test shinyoonji</h5>
+	<h1>테스트_허준</h1>
 	
 	<li class="board"><a href="<%=request.getContextPath()%>/views/room/roomList">객실안내</a></li>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/common/bar">bar</a></li>
