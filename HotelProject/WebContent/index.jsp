@@ -6,6 +6,7 @@
 	<h2 align="center" style="margin-top:200px;">안녕하세요, MVC입니다.TEST2</h2>	
 	<h1>TEST_minbyoungjun</h1>
 	<h1>TEST_HEOJUN</h1>
+	<h5>test shinyoonji</h5>
 	
 	<li class="board"><a href="<%=request.getContextPath()%>/views/room/roomList">객실안내</a></li>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/common/bar">bar</a></li>
