@@ -1,0 +1,14 @@
+/* .bar{
+	background: yellow;
+} */
+.btn-bar{
+	background: white;
+	color: black;
+}
+
+.barContent{
+	background: lightgray;
+	width: 800px;
+	height: 200px;
+	visibility: hidden;
+}
