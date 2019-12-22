@@ -10,6 +10,8 @@
 	<li class="board"><a href="<%=request.getContextPath()%>/views/room/roomList">객실안내</a></li>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/common/bar">bar</a></li>
 	<li class="mypage"><a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a></li>
+	<li class="board"><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
+	<li class="board"><a href="<%=request.getContextPath()%>/views/member/enrollmember">회원가입</a></li>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
 
