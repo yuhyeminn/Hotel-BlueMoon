@@ -21,14 +21,14 @@
 	                <li><a href="#">로그인</a></li>
 	                <li><a href="#">회원가입</a></li>
 	                <li><a href="#">예약조회</a></li>
-	                <li><a href="#">라이브챗</a></li>
+	                <%-- <li><a href="#">라이브챗</a></li> --%>
 	            </ul>
 	        </nav>
-				<img src="<%=request.getContextPath() %>/images/logo.jpg" id="logo" />
+				<a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg" id="logo" /></a>
 			<nav id="nav1">
 				<ul class="main-nav">
 					<li class="home"><a href="#">블루문호텔소개</a></li>
-					<li class="notice"><a href="#">객실</a></li>
+					<li class="notice"><a href="<%=request.getContextPath()%>/views/room/roomList">객실</a></li>
 					<li class="board"><a href="#">공지사항</a></li>
 				</ul>
             </nav>

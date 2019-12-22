@@ -1,7 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500,700|Noto+Serif+KR&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500,700|Noto+Serif+KR&display=swap"
+	rel="stylesheet">
 <style>
 body {
 	padding: 0;
@@ -285,7 +287,13 @@ h1.room-title span {
 	clear: both;
 	margin-left: 20px;
 }
+
+.img-resizing {
+	width: 100% !important;
+	height: 487px;
+}
 </style>
+</head>
 <div class="room-detail-container">
 	<h1 class="room-title">
 		<span>객실</span>
@@ -296,8 +304,8 @@ h1.room-title span {
 
 	<!-- head title -->
 	<div class="head-title-section">
-		<p class="hts1">디럭스</p>
-		<h1>디럭스 룸</h1>
+		<p class="hts1">스페셜 스위트</p>
+		<h1>스페셜 스위트 룸</h1>
 	</div>
 
 	<!-- Image Slide -->
@@ -310,19 +318,31 @@ h1.room-title span {
 				class="rounded-circle"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"
 				class="rounded-circle"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="3"
+				class="rounded-circle"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="4"
+				class="rounded-circle"></li>
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="<%=request.getContextPath()%>/images/delux.jpg"
-					class="d-block w-100" alt="...">
+				<img src="<%=request.getContextPath()%>/images/specialSweet.jpg" class="d-block w-100 img-resizing"
+					alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="<%=request.getContextPath()%>/images/delux2.jpg"
-					class="d-block w-100" alt="...">
+				<img src="<%=request.getContextPath()%>/images/specialSweet2.jpg" class="d-block w-100 img-resizing"
+					alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="<%=request.getContextPath()%>/images/delux3.jpg"
-					class="d-block w-100" alt="...">
+				<img src="<%=request.getContextPath()%>/images/specialSweet3.jpg" class="d-block w-100 img-resizing"
+					alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="<%=request.getContextPath()%>/images/specialSweet4.jpg" class="d-block w-100 img-resizing"
+					alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="<%=request.getContextPath()%>/images/specialSweet5.jpg" class="d-block w-100 img-resizing"
+					alt="...">
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators"
@@ -337,8 +357,9 @@ h1.room-title span {
 	</div>
 
 	<div class="detailTextBox">
-		<p class="subTitle">블루문호텔 디럭스 테라스 오션 룸은 야외 정원과 측면의 바다 전망을 즐길 수
-			있습니다. 경제적인 여행을 위한 최상의 객실입니다.</p>
+		<p class="subTitle">블루문호텔제주 스페셜 스위트 룸은 대형 침실과 6인이 회의를 할 수 있는 미팅 룸
+			겸 다이닝 공간, 키친 등이 구비된 VIP 스위트 룸입니다. 제주의 아름다운 전망, 일상을 탈피한 여유로움, 고급스러운
+			자쿠지 가 마련되어 있는 스위트 룸에서 품격 있는 휴식을 즐기십시오.</p>
 	</div>
 
 
@@ -348,7 +369,7 @@ h1.room-title span {
 		<ul class="content-col">
 			<div class="is-content">
 				<div class="content-title">침대타입</div>
-				<div class="content-text">더블, 트윈</div>
+				<div class="content-text">킹</div>
 			</div>
 		</ul>
 		<ul class="content-col">
@@ -364,7 +385,7 @@ h1.room-title span {
 		<ul class="content-col">
 			<div class="is-content">
 				<div class="content-title">객실크기</div>
-				<div class="content-text">46~60㎡</div>
+				<div class="content-text">204.3㎡</div>
 			</div>
 			<div class="is-content">
 				<div class="content-title">체크인/체크아웃</div>
@@ -379,16 +400,16 @@ h1.room-title span {
 		<ul class="content-col">
 			<div class="is-content">
 				<div class="content-title">일반</div>
-				<div class="content-text-amenities">55” HD TV / 60” HD TV 미니바
-					/ 티포트 / 사무용 데스크 (문구류 포함) / 전화기 / 체중계 / 우산</div>
+				<div class="content-text-amenities">75” HD TV / 60” HD TV /
+					발코니 / 슬리퍼 / 금고 / 미니바 / 티포트 / 사무용 데스크 (문구류 포함) / 전화기 / 체중계 / 우산</div>
 			</div>
 		</ul>
 		<ul class="content-col">
 			<div class="is-content">
 				<div class="content-title">욕실</div>
-				<div class="content-text-amenities">세면대 2개 / 면도기 / 면봉 /비데 / 샤워
-					캡 / 슬리퍼 / 욕실용품(Diptyque) / 욕조 / 위생봉지 / 목욕 가운 / 헤어드라이어 / 1회용 칫솔 및 치약
-				</div>
+				<div class="content-text-amenities">월풀(자쿠지) / 세면대 2개 / 면도기 /
+					면봉 /비데 / 샤워 캡 / 슬리퍼 / 욕실용품(Diptyque) / 위생봉지 / 목욕 가운 / 헤어드라이어 / 1회용
+					칫솔 및 치약</div>
 			</div>
 		</ul>
 		<ul class="content-col">
@@ -416,9 +437,9 @@ h1.room-title span {
 		<h2 class="review-title">후기</h2>
 		<div class="star-section">
 			<img src="<%=request.getContextPath()%>/images/purpleStar.png" alt="별" class="purpleStar">
-			<div class="ratingVal starText">4.89</div>
+			<div class="ratingVal starText">4.84</div>
 			<div class="verticalHr"></div>
-			<div class="reviewTotalCount starText">298 후기</div>
+			<div class="reviewTotalCount starText">116 후기</div>
 		</div>
 	</div>
 
@@ -435,7 +456,7 @@ h1.room-title span {
 				</div>
 				<div class="ratinig-container">
 					<div class="ratingText">의사소통</div>
-					<span class="rating-value communicationRatingVal">5.0</span>
+					<span class="rating-value communicationRatingVal">4.8</span>
 					<div class="progress p-bar-container">
 						<div class="progress-bar w-100" role="progressbar"
 							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
@@ -453,7 +474,7 @@ h1.room-title span {
 			<div class="three-container">
 				<div class="ratinig-container">
 					<div class="ratingText">위치</div>
-					<span class="rating-value locationRatingVal">4.9</span>
+					<span class="rating-value locationRatingVal">4.6</span>
 					<div class="progress p-bar-container">
 						<div class="progress-bar w-100" role="progressbar"
 							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
@@ -489,9 +510,9 @@ h1.room-title span {
 				<img src="<%=request.getContextPath()%>/images/account_circle_black.png" alt="유저이미지"
 					class="user-profile-img">
 			</div>
-			<div class="user-id">Julia</div>
+			<div class="user-id">KimMinJae</div>
 			<div class="review-date">2019년 10월</div>
-			<div class="review-context">살면서 한번쯤 좋은추억으로 만들수있는곳</div>
+			<div class="review-context">깔끔하고 전망이 좋았다. 친절도도 좋고 전반적으로 만족스러웠음.</div>
 		</div>
 		<div class="one-context">
 			<div class="user-profile-pic">
@@ -510,26 +531,27 @@ h1.room-title span {
 			</div>
 			<div class="user-id">홍길동</div>
 			<div class="review-date">2019년 8월</div>
-			<div class="review-context">사진과 숙소가 같았고 사이사이 세심한 배려가 느껴져서
-				좋았습니다.</div>
+			<div class="review-context">친절의 끝을 달리는 일반 5성과 다른 느낌. 여러나라의 호텔을
+				많이 가봤지만 최고 수준의 친절함.</div>
 		</div>
 		<div class="one-context">
 			<div class="user-profile-pic">
 				<img src="<%=request.getContextPath()%>/images/account_circle_yellow.png" alt="유저이미지"
 					class="user-profile-img">
 			</div>
-			<div class="user-id">KangHoDong</div>
+			<div class="user-id">김승현</div>
 			<div class="review-date">2019년 7월</div>
-			<div class="review-context">호캉스 좋았다</div>
+			<div class="review-context">고층뷰가 선사하는 야경이 환상적입니다.</div>
 		</div>
 		<div class="one-context">
 			<div class="user-profile-pic">
 				<img src="<%=request.getContextPath()%>/images/account_circle_purple.png" alt="유저이미지"
 					class="user-profile-img">
 			</div>
-			<div class="user-id">LeeDongMin</div>
+			<div class="user-id">이동재</div>
 			<div class="review-date">2019년 6월</div>
-			<div class="review-context">환상적인 뷰와 서비스</div>
+			<div class="review-context">밖에서 봤을때 너무 화려하고 삐까뻔쩍해서 꼭 와보고 싶다고
+				생각했는데 바깥도 좋지만 내부시설도 너무 만족스러웠네요. 잘 묵었다 갑니다.</div>
 		</div>
 	</div>
 
@@ -553,3 +575,4 @@ h1.room-title span {
 		</nav>
 	</div>
 </div>
+<%@include file="/WEB-INF/views/common/footer.jsp" %>
