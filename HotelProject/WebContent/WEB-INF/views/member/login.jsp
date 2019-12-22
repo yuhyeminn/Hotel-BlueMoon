@@ -6,6 +6,7 @@
 <style>
 .info-text{position: absolute; top: 80px; left:180px; width:300px; height: 300px; float:center;}
 #body{width:700px; height:600px;}
+.form{margin: 0 auto;}
 #login-form{width: 600px; height: 500px; border: 1.5px solid gray; position:absolute; top: 310px; left:280px;}
 #login-join{width: 350px; height: 240px; border: 1.5px solid gray; position:absolute; top: 310px; left:900px;}
 #login-finder{width: 350px; height: 240px; border: 1.5px solid gray; position:absolute; top: 570px; left:900px;}
@@ -27,6 +28,7 @@ a:hover{text-decoration: none; color: white;}
 </style>
 
 <div id="body">
+<div class="form">
 <div id="login-form">
 		<div class="info-text">
 		<label align="center">로그인을 원하시면<br>아이디&비밀번호를 입력하세요.</label><br><br>
@@ -53,7 +55,7 @@ a:hover{text-decoration: none; color: white;}
 		</div>
   		<button class="send" id="send-finder"><a href="<%=request.getContextPath()%>/views/member/loginfinder">아이디/비번 찾기</a></button>
 </div>
-
+</div>
 </div>
 <script>
 $("#send-finder")
