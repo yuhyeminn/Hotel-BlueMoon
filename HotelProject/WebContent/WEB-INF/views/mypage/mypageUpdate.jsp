@@ -54,8 +54,10 @@
       
 <style>
 .btn{
-	margin-left: 610px;
-	margin-bottom: 20px;
+	/* margin-left: 610px;
+	margin-bottom: 20px; */
+	display: block;
+	margin: 0 auto;
 	border: 2px solid gray;
 }
 h1{
