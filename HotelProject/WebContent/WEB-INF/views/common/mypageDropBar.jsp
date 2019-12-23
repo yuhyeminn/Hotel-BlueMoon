@@ -16,7 +16,7 @@
     <button class="dropdown-item" type="button" id="btn-reservation">예약 조회</button>
     <button class="dropdown-item" type="button" id="btn-viewCoupon">쿠폰함</button>
     <button class="dropdown-item" type="button">리뷰 관리</button>
-    <button class="dropdown-item" type="button">회원 탈퇴</button>
+    <button class="dropdown-item" type="button" id="btn-delete">회원 탈퇴</button>
   </div>
 </div>
 <style>
@@ -30,6 +30,9 @@
 }
 </style>
 <script>
+$("#btn-view").click(function(){
+	location.href = "<%=request.getContextPath()%>/mypage/main";
+});
 $("#btn-update").click(function(){
 	location.href = "<%=request.getContextPath()%>/mypage/update";
 });
@@ -38,6 +41,9 @@ $("#btn-reservation").click(function(){
 });
 $("#btn-viewCoupon").click(function(){
 	location.href = "<%=request.getContextPath()%>/mypage/myCoupon";
+});
+$("#btn-delete").click(function(){
+	location.href = "<%=request.getContextPath()%>/mypage/deleteMember";
 });
 </script>
 </body>

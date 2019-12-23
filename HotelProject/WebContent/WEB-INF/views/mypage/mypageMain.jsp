@@ -1,29 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css" />
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageDropBar.jsp" %>
-<!-- <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" 
-  		  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" 
-  		  aria-expanded="false">마이페이지</button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button" id="btn-view">내정보 보기</button>
-    <button class="dropdown-item" type="button" id="btn-update">내정보 수정</button>
-    <button class="dropdown-item" type="button">예약 조회</button>
-    <button class="dropdown-item" type="button">쿠폰함</button>
-    <button class="dropdown-item" type="button">리뷰 관리</button>
-    <button class="dropdown-item" type="button">회원 탈퇴</button>
-  </div>
-</div> -->
-<script>
-$("#btn-update").click(function(){
-	location.href = "<%=request.getContextPath()%>/mypage/update";
-});
-$("#btn-reservation").click(function(){
-	location.href = "<%=request.getContextPath()%>/mypage/myReservation";
-});
+<div id="card1">
+	<br />
+	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원 프로필</h1>
+	<br />
+	<ul class="list-group list-group-flush">
+  		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>최주영</span></li>
+  		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>larva223</span></li>
+  		<li class="list-group-item"><strong>주소</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>경기도 수원시</span></li>
+  		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>010-1234-1234</span></li>
+  		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>larva223@naver.com</span></li>
+	</ul>
+</div>
 
-</script>
+<div id="card2">
+	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 예약건</h1>
+	<h2>1건</h2>
+</div>
 
+<div id="card3">
+	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
+	<h2>1개</h2>
+</div>
+<style>
+#card1{
+	border: 3px solid gray;
+	border-radius: 5px;
+	width: 70%;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+#card2{
+	border: 3px solid gray;
+	border-radius: 5px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	width: 70%;
+}
+#card3{
+	border: 3px solid gray;
+	border-radius: 5px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	width: 70%;
+}
+
+</style>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

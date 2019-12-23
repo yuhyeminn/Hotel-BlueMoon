@@ -9,7 +9,7 @@
 <div id="updateDiv">
  <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updateEnd" method="POST">
  <table>
-  <tr>
+ <!--  <tr>
    <td>이름</td>
    <td>
    <input type = "text" name="name" id="name"/>
@@ -18,8 +18,8 @@
   <tr>
    <td>아이디</td>
    <td> <input type = "text" name="id" id="id"/> </td>
-  </tr>
-  <tr>
+  </tr> -->
+  <!-- <tr>
    <td>현재 비밀번호</td>
    <td> <input type = "password" name="nowPW" id="nowPW"/></td>
   </tr>
@@ -32,11 +32,17 @@
    <td>
     <input type = "password" name="newPWChk" id="newPWChk"/>
    </td>
-  </tr>
+  </tr> -->
   <tr>
    <td>전화번호</td>
    <td>
     <input type = "text" name="phone" id="phone"/>
+   </td>
+  </tr>
+  <tr>
+   <td>이메일</td>
+   <td>
+    <input type = "email" name="email" id="email"/>
    </td>
   </tr>
   <tr>
