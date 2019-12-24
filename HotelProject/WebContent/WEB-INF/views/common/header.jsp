@@ -12,6 +12,30 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
+<style>
+/* #dropmenu {
+	width: 100%;
+	height: 200px;
+	background: black;
+ 	display: none;
+} */
+
+.main-nav li:hover #dropmenu{
+	display:block;
+	background: gray;
+	height: 200px;
+	opacity: 1;
+  	transform: translateY(0);
+}
+
+#dropmenu{
+	width: 100%;
+	height: 0;
+ 	opacity: 0;
+ 	transition: all .5s 
+}
+
+</style>
 <body>
 	<div id="container">
 		<header>
@@ -25,13 +49,18 @@
 	            </ul>
 	        </nav>
 				<a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg" id="logo" /></a>
+			
 			<nav id="nav1">
 				<ul class="main-nav">
 					<li class="home"><a href="#">블루문호텔소개</a></li>
+
 					<li class="notice"><a href="<%=request.getContextPath()%>/views/room/roomList">객실</a></li>
+
 					<li class="board"><a href="#">공지사항</a></li>
 				</ul>
+				
+					<div id="dropmenu"></div>
             </nav>
 		</div>
-		        </header>
+		</header>
 		<section id="content">
