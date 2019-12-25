@@ -36,7 +36,8 @@ footer p{
     background: white;
     width: 100%;
     display: block;
-    margin: 40px auto;
+    margin: 40px auto auto auto;
+    height: 50px;
 }
 
 #nav2{
@@ -66,8 +67,8 @@ ul.main-nav li a, ul.main-nav2 li a{
 	color: #292929;
 }
 ul.main-nav li:hover, ul.main-nav2 li:hover{
-	background: gray;
+	background: white;
 }
 ul.main-nav li:hover a, ul.main-nav2 li:hover a{
-	color: #fff;
+	color: gray;
 }

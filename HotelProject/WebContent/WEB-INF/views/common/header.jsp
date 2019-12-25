@@ -20,20 +20,61 @@
  	display: none;
 } */
 
-.main-nav li:hover #dropmenu{
-	display:block;
+
+#nav1 ul:hover+#dropmenu, #dropmenu:hover{
+	display:inline-block;
 	background: gray;
 	height: 200px;
 	opacity: 1;
   	transform: translateY(0);
 }
 
+
+
 #dropmenu{
+	display: none;
 	width: 100%;
 	height: 0;
  	opacity: 0;
- 	transition: all .5s 
+ 	transition: all .7s;
+ 	
+ 	margin: 0 auto;
+ 	text-align:center;
+ 	padding:30px;
+ 	z-index: 2147483640;
+} 
+
+#dropmenu li{
+	list-style-type: none;
 }
+
+/* #dropmenu_1{
+	display: inline-block;
+}
+
+#dropmenu_2{
+	display: inline-block;
+}
+
+#dropmenu_3{
+	display: inline-block;
+} */
+
+.dropmenu-list{
+	display:inline-block;
+	width:300px;
+	text-align: left;
+	
+}
+
+#dropmenu_title span{
+	font-size: 25px;
+	margin: 100px;
+}
+
+/* .dropmenu-list li:first-child{
+	font-size: 30px;
+} */
 
 </style>
 <body>
@@ -58,9 +99,38 @@
 
 					<li class="board"><a href="#">공지사항</a></li>
 				</ul>
-				
-					<div id="dropmenu"></div>
+            <div id="dropmenu">
+						<div id="dropmenu_title">
+							<span>호텔블루문소개</span>
+							<span>객실소개</span>
+							<span>공지사항</span>
+						</div>
+					<div id="dropmenu_1" class="dropmenu-list">
+						<ul>
+
+							<li>호텔소개</li>
+							<li>부대시설</li>
+							<li>오시는길</li>
+						</ul>
+					</div>
+					
+					<div id="dropmenu_2" class="dropmenu-list">
+						<ul>
+							<li>디럭스</li>
+							<li>프리미엄 디럭스</li>
+							<li>스위트</li>
+							<li>스페셜 스위트</li>
+						</ul>
+					</div>
+					
+					<div id="dropmenu_3" class="dropmenu-list">
+						<ul>
+							<li>공지사항</li>
+						</ul>
+					</div>
+				</div>
             </nav>
+            
 		</div>
 		</header>
 		<section id="content">
