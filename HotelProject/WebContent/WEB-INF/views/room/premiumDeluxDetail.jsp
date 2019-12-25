@@ -5,7 +5,7 @@
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500,700|Noto+Serif+KR&display=swap"
 	rel="stylesheet">
 <style>
-body {
+.room-detail-container{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -13,12 +13,6 @@ body {
 	font-size: 14px;
 	color: #666;
 	-webkit-font-smoothing: antialiased;
-}
-
-.room-detail-container {
-	width: 1280px;
-	padding: 0 90px;
-	margin: 0 auto;
 }
 
 h1.room-title {

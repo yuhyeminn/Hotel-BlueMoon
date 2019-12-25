@@ -17,30 +17,32 @@
 </tr>
 <tr>
 	<td>20191222_123</td>
-	<td>디럭스룸 201호</td>
+	<td>디럭스룸</td>
 	<td>2019/12/24</td>
 	<td>2019/12/25</td>
 	<td>2</td>
 	<td>O</td>
-	<td><input type="checkbox" name="cancleChk" id="cancleChk" /></td>
+	<!-- <td><input type="checkbox" name="cancleChk" id="cancleChk" /></td> -->
+	<td><button type="button" style="border: 2px solid" class="btn btn-outline-secondary">예약취소</button></td>
 </tr>
 <tr>
 	<td>20191222_456</td>
-	<td>스페셜스위트룸 101호</td>
+	<td>스페셜스위트룸</td>
 	<td>2019/12/24</td>
 	<td>2019/12/25</td>
 	<td>2</td>
 	<td>O</td>
-	<td><input type="checkbox" name="cancleChk" id="cancleChk" /></td>
+	<td><button type="button" style="border: 2px solid" class="btn btn-outline-secondary">예약취소</button></td>
 </tr>
 </table>
-<h6 style="text-align:right; margin-right: 200px">* 취소를 원할시 취소버튼 체크해주세요</h6>
-<div id="btnDiv" align="right" style="margin-right: 200px">
-<button type="button" style="border: 2px solid" class="btn btn-outline-secondary">예약취소</button>
-</div>
+<!-- <div id="btnDiv">
+<span>* 취소를 하시는 경우 취소버튼 체크해주세요</span><br>
+
+</div> -->
 <style>
 table{
 	margin: 0 auto;
+	margin-top:30px;
 	border-left: 1px solid white;
 	border-right: 1px solid white;
 	border-top: 2px solid black;
@@ -59,6 +61,12 @@ td{
 }
 tr{
 	border-bottom: 1px solid black;
+}
+#btnDiv{
+margin-right:100px;
+margin-top:20px;
+text-align:right;
+
 }
 </style>
 

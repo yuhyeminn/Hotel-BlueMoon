@@ -6,7 +6,7 @@
 <style>
 #body{width:700px; height:600px;}
 .info-text{position: absolute; top: 80px; left:145px; width:300px; height: 300px; float:center;}
-.finder{width:500px; height:500px; border:1.5px solid gray; position:absolute;}
+.finder{width:500px; height:500px; border:1.5px solid gray; position:absolute; margin: 0 auto;}
 #id-finder{top:310px; left:250px;}
 #pwd-finder{top:310px; left:770px;}
 .form-control{position: absolute; width:400px; height:40px; left:50px;}

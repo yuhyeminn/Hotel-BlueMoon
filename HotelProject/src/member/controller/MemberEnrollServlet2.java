@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberEnrollServlet
+ * Servlet implementation class MemberEnrollServlet2
  */
-@WebServlet("/views/member/enrollmember")
-public class MemberEnrollServlet extends HttpServlet {
+@WebServlet("/views/member/enrollmember2")
+public class MemberEnrollServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/enrollmember.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/enrollmember2.jsp").forward(request, response);
 	}
 
 	/**

@@ -3,7 +3,7 @@
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <style>
-body {
+.room-detail-container {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -17,13 +17,6 @@ body {
 .card-body {
 	padding: 2.25rem 1.25rem 0 1.25rem;
 }
-
-.room-detail-container {
-	width: 1280px;
-	padding: 0 90px;
-	margin: 0 auto;
-}
-
 h1.room-title {
 	padding: 59px 0 58px;
 	font-weight: 100;

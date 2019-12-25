@@ -20,7 +20,6 @@
  	display: none;
 } */
 
-
 #nav1 ul:hover+#dropmenu, #dropmenu:hover{
 	display:inline-block;
 	background: gray;
@@ -28,8 +27,6 @@
 	opacity: 1;
   	transform: translateY(0);
 }
-
-
 
 #dropmenu{
 	display: none;

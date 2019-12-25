@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 section, header, aside{padding:10px;}
 
+/*header*/
 header{
 	position: relative;
 	padding-bottom: 0px;
@@ -16,21 +17,116 @@ header{
     display: block;
     margin: 0 auto;
 }
-
-
-/********** content **********/
-footer p{
-	display: inline-block;
+#content{
+	width: 1280px;
+	padding: 30px 100px 50px 100px;
 	margin: 0 auto;
+	min-height:1000px;
 }
-.footer-section{
-	display: block;
-    margin: 0 auto;
-    text-align: center;
-    background-color: #00123e;
-    color: #afb0b1;
-}
-	
+
+/*footer*/
+footer{
+            background-color: rgb(33, 32, 30);
+            height: 250px;
+        }
+        #footer {
+            text-align: center;
+            margin:0 auto;
+        }
+        #footercontents{
+            display:inline-block;
+            margin-top:60px;
+        }
+        #footer-left {
+            text-align: left;
+            float: left;
+            margin-top:2px;
+        }
+        #footer-right {
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-top:3px;
+            text-align: left;
+            float: left;
+        }
+        #footer-nav {
+            display: inline-block;
+            width: auto;
+            height: 20px;
+            margin-bottom: 10px;
+            margin-top:2px;
+        }
+
+        #footer-nav ul {
+            padding: 0;
+        }
+
+        #footer-nav ul li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        #footer-nav ul li:not(:last-of-type)::after {
+            content: "|";
+            color: #908886;
+            font-size: 15px;
+            opacity: 0.5;
+        }
+
+        #footer-nav ul li a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 15px;
+            font-weight: 300;
+            padding: 7px;
+        }
+
+        #info {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-left:10px;
+            margin-top: 2px;
+        }
+
+        #copyright {
+            width: auto;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 15px;
+            margin-top:15px;
+            margin-left:10px;
+        }
+
+        #verticalLine {
+            width: 1px;
+            height: 130px;
+            background-color: rgba(226, 224, 224, 0.747);
+            opacity: 0.5;
+            float: left;
+            margin:0px 80px;
+        }
+        #center {
+            color: rgb(156, 131, 106);
+            margin: 0;
+            margin-bottom: 4px;
+        }
+
+        #footer-right span {
+            display: inline-block;
+            width: 75px;
+        }
+
+        #footer-right a {
+            text-decoration: underline;
+            color: rgba(255, 255, 255, 0.65);
+        }
+        #contact{
+            margin-top:10px;
+        }
+/********** content **********/
+
 /*메뉴관련*/
 #nav1{
     background: white;

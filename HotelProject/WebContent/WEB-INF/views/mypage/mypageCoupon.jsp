@@ -34,6 +34,7 @@
 <style>
 table{
 	margin: 0 auto;
+	margin-top:30px;
 	border-left: 1px solid white;
 	border-right: 1px solid white;
 	border-top: 2px solid black;
