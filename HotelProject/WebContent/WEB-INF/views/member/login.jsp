@@ -62,18 +62,18 @@
 				로그인을 원하시면<br>아이디&비밀번호를 입력하세요.
 			</p>
 		</div>
-		<form id="login-form">
+		<form id="login-form" action="<%=request.getContextPath()%>/member/loginCheck" method="POST">
 			<div>
 				<label id="login-label-id" class="login-label">아이디</label> <input
-					type="text" id="login-id" class="form-control"
+					type="text" id="login-id" class="form-control" name="id"
 					placeholder="아이디를 입력하세요." aria-label="아이디">
 			</div>
 			<div>
 				<label id="login-label-pwd" class="login-label">비밀번호</label> <input
-					type="text" id="login-pwd" class="form-control"
+					type="password" id="login-pwd" class="form-control" name="password"
 					placeholder="비밀번호를 입력하세요." aria-label="비밀번호">
 			</div>
-			<input type="button" class="button" id="button-login" value="로그인">
+			<input type="submit" class="button" id="button-login" value="로그인" onclick="return loginValidate();">
 		</form>
 	</div>
 	<!-- end of form -->
@@ -94,7 +94,24 @@
 		</div>
 	</div>
 </div>
-
+<script>
+function loginValidate(){
+	var $memberId = $("#login-id");
+	var $password = $("#login-pwd");
+	
+	if($memberId.val().trim().length == 0){
+		alert("아이디를 입력하세요.");
+		$memberId.focus();
+		return false;
+	} 
+	if($password.val().trim().length == 0){
+		alert("비밀번호를 입력하세요.");
+		$password.focus();
+		return false;
+	}
+	return true;
+}
+</script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
