@@ -1,5 +1,19 @@
 @CHARSET "UTF-8";
+/* main page */
+body{   
+    margin: 0;
+    padding: 0;
+    /* min-width: 1025px; */
+}
+#container{
+    position: relative;
+    /* max-width: 5000px; */
+    width: 100%;
 
+    margin: 0 auto;
+    height: auto;
+    /* font-size: 0; */
+}
 section, header, aside {
 	padding: 10px;
 }
@@ -17,10 +31,20 @@ header {
 	padding: 0px;
 }
 
-#logo {
-	width: 180px;
-	display: block;
-	margin: 0 auto;
+#logo-img{
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+#logo-img a{
+   
+}
+#logo-img img{
+    margin: 10px;
+    width: 220px;
+    height: 140px;
 }
 
 /*content*/
@@ -53,11 +77,13 @@ header {
 footer {
 	background-color: rgb(33, 32, 30);
 	height: 250px;
+	with: 100%;
 }
 
 #footer {
 	text-align: center;
 	margin: 0 auto;
+	max-width: 1363px;
 }
 
 #footercontents {
@@ -161,44 +187,82 @@ footer {
 
 /*메뉴관련*/
 #nav1 {
-	background: white;
-	width: 100%;
-	display: block;
-	margin: 40px auto auto auto;
-	height: 50px;
+    max-width: 1440px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px
+}
+#nav1::after{
+    content: '';
+    display: block;
+    height: 0;
+    background: #fff;
+    border-top: 1px solid #c7c7c7;
+}
+#nav1 ul{
+    display: inline-block;
+    margin: 0 auto;
+}
+#nav1 ul li{
+    list-style: none;
+    display: inline-block;
+}
+#nav1 ul li a {
+    text-decoration: none; 
+    color:#524d4c;
+    font-weight: 600;
+    padding-right: 100px;
+    font-size: 16px;
+}
+#nav1 ul li a:hover {
+    color: rgb(0, 30, 70);
+    font-weight: 550;
 }
 
-#nav2 {
-	right: 50px;
-	background: white;
-	position: absolute;
+#nav2{
+    display: inline-block;
+    position: absolute;
+    top: 16px;
+    right: 80px;
+    
+    
+}
+#nav2 ul li{
+    list-style: none;
+    display: inline;
+}
+#nav2 ul li:not(:last-of-type)::after {
+    content: "|";
+    color:#908886;
+    font-size: 13px;
+    opacity: 0.5;
+}
+#nav2 ul li a {
+    text-decoration: none; 
+    color:#524d4c;
+    padding: 10px;
+    font-size: 13px;
+}
+#nav2 ul li a:hover {
+    color: rgb(0, 30, 70);
+    font-weight: 550;
+
 }
 
-ul.main-nav, ul.main-nav2 {
-	display: table;
-	padding: 0px;
-	margin: auto;
-}
-
-ul.main-nav li, ul.main-nav2 li {
-	list-style-type: none;
-	width: 8em;
-	height: 2em;
-	float: left;
-	text-align: center;
-}
-
-ul.main-nav li a, ul.main-nav2 li a {
-	display: block;
-	padding: .5em;
-	text-decoration: none;
-	color: #292929;
-}
-
-ul.main-nav li:hover, ul.main-nav2 li:hover {
-	background: white;
-}
-
-ul.main-nav li:hover a, ul.main-nav2 li:hover a {
-	color: gray;
-}
+#rsv {
+    background-color: #1b65b3; /* Green */
+    border: none;
+    color: white;
+    font-weight: 500;
+    padding: 0 35px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    width: auto;
+    vertical-align: super;
+    right: 100px;
+    top: 142px;
+    position: absolute;
+  }

@@ -20,7 +20,7 @@
  	display: none;
 } */
 
-#nav1 ul:hover+#dropmenu, #dropmenu:hover{
+#nav1:hover+#dropmenu, #dropmenu:hover{
 	display:inline-block;
 	background: gray;
 	height: 200px;
@@ -78,24 +78,26 @@
 	<div id="container">
 		<header>
 		<div id="header">
-			<nav id="nav2">
-	      		<ul class="main-nav2">
+				<span id="logo-img"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg"/></a></span>
+				
+				<nav id="nav2">
+	      		<ul>
 	                <li><a href="#">로그인</a></li>
 	                <li><a href="#">회원가입</a></li>
 	                <li><a href="#">예약조회</a></li>
-	                <%-- <li><a href="#">라이브챗</a></li> --%>
 	            </ul>
 	        </nav>
-				<a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg" id="logo" /></a>
 			
 			<nav id="nav1">
-				<ul class="main-nav">
+				<ul>
 					<li class="home"><a href="#">블루문호텔소개</a></li>
 
 					<li class="notice"><a href="<%=request.getContextPath()%>/views/room/roomList">객실</a></li>
 
 					<li class="board"><a href="#">공지사항</a></li>
 				</ul>
+				<a href="예약.html" id="rsv" >예약하기</a>
+			</nav>	
             <div id="dropmenu">
 						<div id="dropmenu_title">
 							<span>호텔블루문소개</span>
@@ -126,7 +128,8 @@
 						</ul>
 					</div>
 				</div>
-            </nav>
+				
+           
             
 		</div>
 		</header>
