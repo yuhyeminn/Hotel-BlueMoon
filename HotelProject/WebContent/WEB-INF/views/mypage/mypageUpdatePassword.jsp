@@ -1,28 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	Member m = (Member)request.getAttribute("member");
-	//System.out.println("member@mypageUpdate.jsp="+m);
-%>
+
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 <hr />
-<h1>개인 정보 수정</h1>
+<h1>비밀번호 변경</h1>
 <hr />
 <div id="updateDiv">
- <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updateEnd" method="POST">
+ <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updatePassword" method="POST">
  <table>
-   <tr>
-   <td>이름</td>
-   <td>
-   <input type = "text" name="name" id="name" value="<%=m.getMemberName()%>" readonly/>
-   </td>
-  </tr>
   <tr>
-   <td>아이디</td>
-   <td> <input type = "text" name="id" id="id" value="<%=m.getMemberId()%>" readonly/> </td>
-  </tr> 
-  <!-- <tr>
    <td>현재 비밀번호</td>
    <td> <input type = "password" name="nowPW" id="nowPW"/></td>
   </tr>
@@ -35,28 +22,9 @@
    <td>
     <input type = "password" name="newPWChk" id="newPWChk"/>
    </td>
-  </tr> -->
-  <tr>
-   <td>전화번호</td>
-   <td>
-    <input type = "text" name="phone" id="phone" value="<%=m.getPhone()%>"/>
-   </td>
   </tr>
-  <tr>
-   <td>이메일</td>
-   <td>
-    <input type = "email" name="email" id="email" value="<%=m.getEmail()%>"/>
-   </td>
-  </tr>
- <!--  <tr>
-   <td>주소</td>
-   <td>
-    <input type = "text" name="address" id="address"/>
-   </td>
-  </tr> -->
-
 </table>
-<input type="submit" class="btn btn-outline-secondary" id="btn-updateEnd" value="수정하기"></input>
+<input type="submit" class="btn btn-outline-secondary" id="btn-updatePasswordEnd" value="비밀번호 변경하기" onclick="return updateValidate();"></input>
  </form>
  </div>
 <br/>
@@ -83,5 +51,24 @@ input{
 }
 
 </style> 
+<script>
+function updateValidate(){
+	$nowPW = $("#nowPW").val().trim();
+	$newPW = $("#newPW").val().trim();
+	$newPWChk = $("#newPWChk").val().trim();
+	
+	if($nowPW.length == 0){
+		alert("현재 비밀번호를 입력하세요.");
+		return false;
+	} else if($newPW.length == 0){
+		alert("변경할 비밀번호를 입력하세요.");
+		return false;
+	} else if($newPWChk.length == 0){
+		alert("변경할 비밀번호를 다시 입력하세요.");
+		return false;
+	}
+	return true;
+}
+</script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

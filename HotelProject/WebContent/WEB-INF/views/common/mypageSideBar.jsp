@@ -1,13 +1,22 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<button id="mypageBtn">마이페이지</button>
+<%
+	//로그인한 경우
+	Member memberLogIn = (Member)session.getAttribute("memberLoggedIn");
+	System.out.println("memberLoggedIn@index.jsp="+memberLogIn);
+%>
+<!DOCTYPE html>
+<html>
+<button id="mypageBtn"><img id="mypageBtnImg" src="<%=request.getContextPath() %>/images/mypageMenu.png" alt="" /></button>
 <aside class="sidenav" id="asideBar">
 <!-- <div class="sidenav__close-icon">
 <i class="fas fa-times sidenav__brand-close"></i>
 </div> -->
 <ul class="sidenav__list">
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/main">내정보 보기</a></li>
-<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/update">내정보 수정</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/update?memberId=<%=memberLogIn.getMemberId()%>">내정보 수정</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/updatePassword?memberId=<%=memberLogIn.getMemberId()%>">비밀번호 변경</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myReservation">예약 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myCoupon">쿠폰 조회</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/review">리뷰 관리</a></li>
@@ -15,6 +24,11 @@
 </ul>
 </aside>
 <style>
+#mypageBtnImg{
+	width: 40px;
+	height: 40px;
+	margin-left: -50px;
+}
 #mypageBtn{
 	border: 0px solid;
 	background: #ffffff;
@@ -36,7 +50,7 @@
   grid-area: sidenav;
   /* display: flex; */
   flex-direction: column;
-  height: 450px;
+  height: 520px;
   width: 240px;
   overflow-y: auto;
   transform: translateX(-245px);

@@ -1,5 +1,12 @@
+<%@page import="member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	//로그인한 경우
+	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+	System.out.println("memberLoggedIn@index.jsp="+memberLoggedIn);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,12 +87,24 @@
 		<div id="header">
 				<span id="logo-img"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg"/></a></span>
 				
-				<nav id="nav2">
-	      		<ul>
-	                <li><a href="#">로그인</a></li>
-	                <li><a href="#">회원가입</a></li>
-	                <li><a href="#">예약조회</a></li>
+			<nav id="nav2">
+	      		<%if(memberLoggedIn == null){ %>
+	      		<ul class="main-nav2">
+	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
+	                <%-- <li><a href="#">라이브챗</a></li> --%>
 	            </ul>
+	      		<%
+	      		}
+	      		else{
+	      		%>
+	      		<ul class="main-nav2">
+	                <li><a href="#"><%=memberLoggedIn.getMemberName()%>님</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
+	                <li><a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a></li>
+	                <li><a href="<%=request.getContextPath()%>/mypage/myReservation">예약조회</a></li>
+	            </ul>
+	      		<%} %>
 	        </nav>
 			
 			<nav id="nav1">

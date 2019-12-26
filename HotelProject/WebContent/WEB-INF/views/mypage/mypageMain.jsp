@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/mypage.css" />
 <link
@@ -13,12 +15,11 @@
 		프로필</h1>
 	<br />
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>최주영</span></li>
-		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>larva223</span></li>
-		<li class="list-group-item"><strong>주소</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>경기도
-				수원시</span></li>
-		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>010-1234-1234</span></li>
-		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span>larva223@naver.com</span></li>
+		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getMemberName() %></span></li>
+		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getMemberId() %></span></li>
+		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getPoint() %>원</span></li>
+		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getPhone() %></span></li>
+		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getEmail() %></span></li>
 	</ul>
 </div>
 <div id="inform-group">

@@ -8,7 +8,7 @@
 <hr />
 <br /><br />
 <form action="">	
-	<h3 style="text-align:center">블루문 회원을 탈퇴하시겠습니까?</h3>
+	<h3 style="text-align:center"><%=memberLoggedIn.getMemberName() %>님!<br/> 블루문 회원을 탈퇴하시겠습니까?</h3>
 	<br />
 	<h6 style="text-align:center">
 	회원 탈퇴를 신청하면 블루문 호텔 회원 자격이 상실됩니다.<br />
