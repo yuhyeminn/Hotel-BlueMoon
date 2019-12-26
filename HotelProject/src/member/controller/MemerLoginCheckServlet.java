@@ -8,22 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberLoginCheckServlet
+ * Servlet implementation class MemerLoginCheckServlet
  */
-@WebServlet("/views/member/login")
-public class MemberLoginCheckServlet extends HttpServlet {
+@WebServlet("/member/loginCheck")
+public class MemerLoginCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
+		String memberId = request.getParameter("id");
+		String password = request.getParameter("password");
+		System.out.println("memberId="+memberId+" | "+"password="+password);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
