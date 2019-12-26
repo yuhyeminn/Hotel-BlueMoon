@@ -199,6 +199,7 @@ footer {
     height: 0;
     background: #fff;
     border-top: 1px solid #c7c7c7;
+    margin-top: 10px;
 }
 #nav1 ul{
     display: inline-block;
@@ -263,6 +264,6 @@ footer {
     width: auto;
     vertical-align: super;
     right: 100px;
-    top: 142px;
+    top: 159px;
     position: absolute;
   }
