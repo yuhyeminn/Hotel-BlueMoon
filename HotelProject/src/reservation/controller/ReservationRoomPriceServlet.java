@@ -1,4 +1,4 @@
-package mypage.controller;
+package reservation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,14 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MypageDeleteServlet
+ * Servlet implementation class ReservationRoomPriceServlet
  */
-@WebServlet("/mypage/deleteMember")
-public class MypageDeleteServlet extends HttpServlet {
+@WebServlet("/views/reservation/roomPriceSelect")
+public class ReservationRoomPriceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReservationRoomPriceServlet() {
+        super();
+    }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/mypage/resvRoomPriceSelect.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/reservation/resvRoomPriceSelect.jsp").forward(request, response);
 	}
 
 	/**
