@@ -22,7 +22,6 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	private String gender;
 	private String email;
 	private String phone;
-	private String address;
 	private int point;
 	private Date enrollDate;
 
@@ -33,7 +32,7 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	
 
 	public Member(String memberId, String password, String memberName, String birth, String gender, String email,
-			String phone, String address, int point, Date enrollDate) {
+			String phone, int point, Date enrollDate) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
@@ -42,7 +41,6 @@ public class Member implements Serializable, HttpSessionBindingListener{
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
-		this.address = address;
 		this.point = point;
 		this.enrollDate = enrollDate;
 	}
@@ -89,12 +87,7 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 	public int getPoint() {
 		return point;
 	}
@@ -111,7 +104,7 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName + ", birth="
-				+ birth + ", gender=" + gender + ", email=" + email + ", phone=" + phone + ", address=" + address
+				+ birth + ", gender=" + gender + ", email=" + email + ", phone=" + phone 
 				+ ", point=" + point + ", enrollDate=" + enrollDate + "]";
 	}
 
