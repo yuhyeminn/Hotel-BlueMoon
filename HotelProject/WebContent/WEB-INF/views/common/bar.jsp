@@ -8,10 +8,16 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/dist/datepicker.min.css" type="text/css" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
 <script src="<%=request.getContextPath()%>/js/dist/datepicker.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/datepicker.ko.js"></script>
 </head>
 <script>
 var drag = $("#drag").val();
 console.log(drag);
+
+$(document).ready(function (){
+	$datepicker.setDefaults($.datePicker.regional["ko"]);
+	$("#drag").datepicker();
+});
 </script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bar.css"/>
 
