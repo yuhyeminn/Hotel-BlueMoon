@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
-<%@include file="/WEB-INF/views/common/mypageDropBar.jsp" %>
+<%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 
 <hr />
 <h1 style="text-align:center">회원 탈퇴</h1>
@@ -31,6 +31,7 @@
 	height: 40px;
 	border-radius: 5px;
 	border: 1px solid gray;
+	text-align:center;
 }
 </style>
 <script>

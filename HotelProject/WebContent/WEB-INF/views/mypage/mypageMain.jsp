@@ -6,7 +6,7 @@
 	href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap"
 	rel="stylesheet">
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<%@include file="/WEB-INF/views/common/mypageDropBar.jsp"%>
+<%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 <div id="my-profile" class="inform-card">
 	<br />
 	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원

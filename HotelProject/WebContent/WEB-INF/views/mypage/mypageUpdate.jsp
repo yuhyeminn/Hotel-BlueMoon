@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="/WEB-INF/views/common/header.jsp" %>
-<%@include file="/WEB-INF/views/common/mypageDropBar.jsp" %>
+<%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 <hr />
 <h1>개인 정보 수정</h1>
 <hr />
 <div id="updateDiv">
  <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updateEnd" method="POST">
  <table>
- <!--  <tr>
+   <tr>
    <td>이름</td>
    <td>
    <input type = "text" name="name" id="name"/>
@@ -18,7 +18,7 @@
   <tr>
    <td>아이디</td>
    <td> <input type = "text" name="id" id="id"/> </td>
-  </tr> -->
+  </tr> 
   <!-- <tr>
    <td>현재 비밀번호</td>
    <td> <input type = "password" name="nowPW" id="nowPW"/></td>
