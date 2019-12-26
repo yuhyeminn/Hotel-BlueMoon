@@ -16,9 +16,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		Member m = new MemberDAO().selectOne(conn, memberId);
-		
 		close(conn);
-		
 		return m;
 	}
 

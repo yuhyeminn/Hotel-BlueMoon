@@ -1,6 +1,6 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,8 +17,7 @@ public class MemberDAO {
 	private Properties prop = new Properties();
 	
 	public MemberDAO() {
-		String fileName = MemberDAO.class.getResource("/sql/member/member-query.properties")
-										 .getPath();
+		String fileName = MemberDAO.class.getResource("/member/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -49,17 +48,13 @@ public class MemberDAO {
 			if(rset.next()) {
 				m = new Member();
 				
-				m.setMemberId(rset.getString("memberid"));
-				m.setPassword(rset.getString("password"));
-				m.setMemberName(rset.getString("membername"));
-				m.setGender(rset.getString("gender"));
-				m.setAge(rset.getInt("age"));//숫자형
-				
-				m.setEmail(rset.getString("email"));
-				m.setPhone(rset.getString("phone"));
-				m.setAddress(rset.getString("address"));
-				m.setHobby(rset.getString("hobby"));
-				m.setEnrollDate(rset.getDate("enrolldate"));//날짜형
+				m.setMemberId(rset.getString("member_id"));
+				m.setPassword(rset.getString("member_password"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setGender(rset.getString("member_gender"));
+				m.setEmail(rset.getString("member_email"));
+				m.setPhone(rset.getString("member_phone"));
+				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
 			}
 			
 			System.out.println("member@dao.selectOne="+m);
@@ -90,11 +85,11 @@ public class MemberDAO {
 			pstmt.setString(2, member.getPassword());
 			pstmt.setString(3, member.getMemberName());
 			pstmt.setString(4, member.getGender());
-			pstmt.setInt(5, member.getAge());
+			//pstmt.setInt(5, member.getAge());
 			pstmt.setString(6, member.getEmail());
 			pstmt.setString(7, member.getPhone());
-			pstmt.setString(8, member.getAddress());
-			pstmt.setString(9, member.getHobby());
+			//pstmt.setString(8, member.getAddress());
+			//pstmt.setString(9, member.getHobby());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()
@@ -123,11 +118,11 @@ public class MemberDAO {
 //			pstmt.setString(1, member.getPassword());
 			pstmt.setString(1, member.getMemberName());
 			pstmt.setString(2, member.getGender());
-			pstmt.setInt(3, member.getAge());
+			//pstmt.setInt(3, member.getAge());
 			pstmt.setString(4, member.getEmail());
 			pstmt.setString(5, member.getPhone());
-			pstmt.setString(6, member.getAddress());
-			pstmt.setString(7, member.getHobby());
+			//pstmt.setString(6, member.getAddress());
+			//pstmt.setString(7, member.getHobby());
 			pstmt.setString(8, member.getMemberId());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
