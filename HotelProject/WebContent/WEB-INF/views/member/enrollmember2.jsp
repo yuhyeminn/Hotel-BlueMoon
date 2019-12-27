@@ -79,12 +79,39 @@ function idDuplicatedCheck(){
 		dataType: "json",
 		success: data => {
 			console.log(data);//json문자열, javascript object
+			
+			if(data == 0){
+				alert("사용가능한 아이디 입니다.");
+				$("#memberId").attr("style","border-bottom: 2px solid #00c500");
+				$("#idValid").val(1);
+				
+			}
+			else if(data ==1){
+				alert("중복된 아이디 입니다.");
+				$("#memberId").attr("style","border-bottom: 2px solid red");
+				$("#idValid").val(0);
+			}
+			
+			if($("#memberId").val().trim().length < 4 ){
+				$(".idValidateWarning").html('아이디는 최소4글자 이상');
+				$("#memberId").attr("style","border-bottom: 2px solid red");
+				$("#idValid").val(0);
+				return;
+			}
+			
 		},
 		error : (jqxhr, textStatus, errorThrown)=>{
 			console.log(jqxhr, textStatus, errorThrown);
 		}
 	});
 }
+
+
+$("#memberId").on('keyup', function(e){
+	//방향키 제어 ArrowDown, ArrowUp, Enter
+	console.log(e.key);
+});
+		
 
 
 
@@ -101,33 +128,56 @@ function idDuplicatedCheck(){
 		<button class="step" id="step3">Step3</button>
 	</div>
 
-	<form id="enrollFrm">
-
+	<form action="memberEnrollEnd" 
+        	  name="memberEnrollFrm" 
+        	  method="post" 
+        	  onsubmit="return enrollValidate();" >
 		<div class="table-box">
 			<table>
 				<tr>
 					<td>아이디<span>*</span></td>
 					<td><input class="form-control input-text" type="text"
 						name="memberId" id="memberId" placeholder="아이디" /></td>
-					<td><input type="button" class="btn btn-outline-secondary" onclick="idDuplicatedCheck();"
-						id="btn-id-already" value="중복확인" /></td>
-
+					<td>
+						<input type="button" class="btn btn-outline-secondary" onclick="idDuplicatedCheck();"
+						id="btn-id-already" value="중복확인" />
+						<input type="hidden" id="idValid" value="0"/>
+					</td>
 				</tr>
+				<tr>
+					<td></td>
+					<td class="idValidateWarning"></td>
+					<td></td>
+				</tr>	
 				<tr>
 					<td>비밀번호<span>*</span></td>
 					<td><input class="form-control input-text" type="password"
 						name="pwd" id="pwd" placeholder="비밀번호" /></td>
 				</tr>
 				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>비밀번호 확인<span>*</span></td>
 					<td><input class="form-control input-text" type="password"
 						name="pwdChk" id="nowChk" placeholder="비밀번호 확인" /></td>
 				</tr>
-
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 				<tr>
 					<td>성명<span>*</span></td>
 					<td><input class="form-control input-text" type="text"
 						name="name" id="name" placeholder="이름 입력" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>이메일주소<span>*</span></td>
@@ -137,14 +187,29 @@ function idDuplicatedCheck(){
 						id="btn-already" value="중복확인" /></td>
 				</tr>
 				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>전화번호<span>*</span></td>
 					<td><input type="text" class="form-control input-text"
 						name="phone" id="phone" placeholder=" (-)없이 입력" /></td>
 				</tr>
 				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>생년월일<span>*</span></td>
 					<td><input type="select" class="form-control input-text"
 						name="birth" id="birth" placeholder=" 8자리 입력" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</table>
 		</div>

@@ -9,7 +9,7 @@ h1{
 }
 </style>
 
-<h1>회원 관리</h1>
+<h1>예약 관리</h1>
 
 <div class="container">
     <div class="table-responsive">
@@ -18,24 +18,16 @@ h1{
           <tr>
           	<th></th>
       		<th>No.</th>
-      		<th>아이디</th>
-          	<th>이름</th>
-      		<th>생일</th>
-      		<th>성별</th>
-      		<th>이메일</th>
-      		<th>전화번호</th>
-      		<th>포인트</th>
-      		<th>가입일</th>
+      		<th>이름</th>
+          	<th>타입</th>
+      		<th>인원</th>
+      		<th>예약날짜</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-			<td><input type="checkbox" /></td>
+          	<td><input type="checkbox" /></td>
       		<td>1</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
 		    <td>Table cell</td>
 		    <td>Table cell</td>
 		    <td>Table cell</td>
@@ -49,19 +41,11 @@ h1{
 		    <td>Table cell</td>
 		    <td>Table cell</td>
 		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
 		   </tr>
 		   
 		   <tr>
-		   <td><input type="checkbox" /></td>
+		   	<td><input type="checkbox" /></td>
       		<td>3</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
-		    <td>Table cell</td>
 		    <td>Table cell</td>
 		    <td>Table cell</td>
 		    <td>Table cell</td>
@@ -74,6 +58,4 @@ h1{
     <input type="button" value="수정">
     <input type="button" value="삭제">
   </div>
-
-
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

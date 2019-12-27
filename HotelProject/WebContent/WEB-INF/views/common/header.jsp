@@ -20,61 +20,104 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <style>
-/* #dropmenu {
-	width: 100%;
-	height: 200px;
-	background: black;
- 	display: none;
-} */
+#nav1{
+	width: 580px;
+}
 
-#nav1:hover+#dropmenu, #dropmenu:hover{
+ #nav1:hover+#dropmenu, #dropmenu:hover{
 	display:inline-block;
 	background: gray;
-	height: 200px;
+	height: 220px;
 	opacity: 1;
   	transform: translateY(0);
 }
+ 
+ #dropmenu{
 
-#dropmenu{
 	display: none;
 	width: 100%;
-	height: 0;
+	height: 220px;
  	opacity: 0;
  	transition: all .7s;
  	
  	margin: 0 auto;
  	text-align:center;
- 	padding:30px;
+
  	z-index: 2147483640;
-} 
+}
 
 #dropmenu li{
 	list-style-type: none;
 }
 
-/* #dropmenu_1{
-	display: inline-block;
+ #dropmenu_1{
+/* 	background: white; */
+	margin-left: 10px;
 }
 
 #dropmenu_2{
-	display: inline-block;
+/* 	background: red; */
+	margin-left: 170px;
 }
 
 #dropmenu_3{
-	display: inline-block;
-} */
+/* 	background: blue; */
+	margin-left: 90px;
+} 
 
 .dropmenu-list{
-	display:inline-block;
-	width:300px;
-	text-align: left;
 	
+	display: inline-block;
+	width:200px;
+	text-align: left;
+	vertical-align: top;
+
+}
+
+#dropmenu_list{
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#dropmenu_title {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 10px;
+	font-weight: bold;
 }
 
 #dropmenu_title span{
-	font-size: 25px;
-	margin: 100px;
+	font-size: 27px;
+	margin: 90px;
 }
+
+.dropmenu-list li{
+	padding: 4px;
+	font-size: 17px;
+<<<<<<< Updated upstream
+}
+
+.dropmenu-list a{
+	color: black;
+}
+
+=======
+}
+
+.dropmenu-list a{
+	color: black;
+}
+
+>>>>>>> Stashed changes
+.dropmenu-list a:click{
+	color: black;
+}
+.dropmenu-list a:hover{
+	text-decoration: none;
+	color: white;
+}
+
+
 
 /* .dropmenu-list li:first-child{
 	font-size: 30px;
@@ -87,12 +130,21 @@
 		<div id="header">
 				<span id="logo-img"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg"/></a></span>
 				
+<<<<<<< Updated upstream
 			<nav id="nav2">
 	      		<%if(memberLoggedIn == null){ %>
 	      		<ul class="main-nav2">
 	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
 	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
 	                <%-- <li><a href="#">라이브챗</a></li> --%>
+=======
+				<nav id="nav2">
+	      		<ul>
+	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/">예약조회</a></li>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 	            </ul>
 	      		<%
 	      		}
@@ -103,12 +155,14 @@
 	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/myReservation">예약조회</a></li>
+=======
+>>>>>>> Stashed changes
 	            </ul>
 	      		<%} %>
 	        </nav>
 			
 			<nav id="nav1">
-				<ul>
+				<ul class="nav1_ul">
 					<li class="home"><a href="#">블루문호텔소개</a></li>
 
 					<li class="notice"><a href="<%=request.getContextPath()%>/views/room/roomList">객실</a></li>
@@ -123,32 +177,56 @@
 							<span>객실소개</span>
 							<span>공지사항</span>
 						</div>
+						<div id="dropmenu_list">
 					<div id="dropmenu_1" class="dropmenu-list">
 						<ul>
 
-							<li>호텔소개</li>
-							<li>부대시설</li>
-							<li>오시는길</li>
+							<li><a href="<%=request.getContextPath()%>/views/introduce/introduceHotel">호텔소개</a></li>
+							<li><a href="<%=request.getContextPath()%>/views/introduce/introduceFacility">부대시설</a></li>
+							<li><a href="<%=request.getContextPath()%>/views/introduce/introduceLocation">오시는길</a></li>
 						</ul>
 					</div>
 					
 					<div id="dropmenu_2" class="dropmenu-list">
 						<ul>
-							<li>디럭스</li>
-							<li>프리미엄 디럭스</li>
-							<li>스위트</li>
-							<li>스페셜 스위트</li>
+							<li><a href="<%=request.getContextPath()%>/views/room/deluxDetail">디럭스</a></li>
+							<li><a href="<%=request.getContextPath()%>/views/room/premiumDeluxDetail">프리미엄 디럭스</a></li>
+							<li><a href="<%=request.getContextPath()%>/views/room/sweetDetail">스위트</a></li>
+							<li><a href="<%=request.getContextPath()%>/views/room/specialSweetDetail">스페셜 스위트</a></li>
 						</ul>
 					</div>
 					
 					<div id="dropmenu_3" class="dropmenu-list">
 						<ul>
-							<li>공지사항</li>
+							<li><a href="<%=request.getContextPath()%>/views/notice/noticeList">공지사항</a></li>
 						</ul>
+					</div>
 					</div>
 				</div>
 				
-           
+<!--          <script>
+$('#nav1 ul').hover(function() {
+     $('#dropmenu').css({
+        display:"inline-block",
+      background: "gray",
+      height: "200px",
+      opacity: "1",
+        transform: "translateY(0)"
+     });
+   }, function(){
+     $('#dropmenu').css({
+        display: "none",
+      width: "100%",
+      height: "0",
+       opacity: "0",
+       transition: "all .7s",
+       margin: "0 auto",
+       "text-align":"center",
+       padding:"30px",
+       "z-index": "2147483640"
+     });
+   });
+</script>   -->
             
 		</div>
 		</header>

@@ -40,6 +40,7 @@ public class MemberIdDuplicatedCheckServlet extends HttpServlet {
 		//3.비지니스로직처리 : 해당하는 User찾기
 		Member m = new MemberService().selectOne(memberId);
 		System.out.println("servlet@="+m);
+		int booleanchk = m==null?0:1;
 		
 //		JSONArray jsonArray = new JSONArray();
 //		
@@ -59,7 +60,7 @@ public class MemberIdDuplicatedCheckServlet extends HttpServlet {
 		//4.응답객체에 출력
 		response.setContentType("application/json; charset=utf-8"); 
 		PrintWriter out = response.getWriter();
-		out.print(m);		
+		out.print(booleanchk);		
 	
 	}
 
