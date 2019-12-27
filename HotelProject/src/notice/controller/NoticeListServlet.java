@@ -45,7 +45,7 @@ public class NoticeListServlet extends HttpServlet {
 		// 페이지 바 영역
 		// b.페이징바영역
 		// 전체게시글수, 전체페이지수
-//		int totalContent = noticeService.selectNoticeCount();
+		int totalContent = noticeService.selectNoticeCount();
 		int totalPage = (int) Math.ceil((double) totalContent / numPerPage);// (공식2)
 
 		String pageBar = "";
@@ -59,7 +59,7 @@ public class NoticeListServlet extends HttpServlet {
 			// pageBar += "<span>[이전]</span>";
 		} else {
 			pageBar += "<a href='" + request.getContextPath() + "/notice/noticeList?cPage=" + (pageNo - 1)
-					+ "'>[이전]</a> ";
+					+ "'>&lt;</a> ";
 		}
 
 		// pageNo section
@@ -78,7 +78,7 @@ public class NoticeListServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + "/board/boardList?cPage=" + pageNo + "'>[다음]</a>";
+			pageBar += "<a href='" + request.getContextPath() + "/board/boardList?cPage=" + pageNo + "'>&gt;</a>";
 		}
 
 		// 4.뷰단 포워딩
@@ -86,7 +86,6 @@ public class NoticeListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		reqDispatcher.forward(request, response);
-
 	}
 
 	/**

@@ -64,4 +64,40 @@ public class NoticeDAO {
 		return list;
 	}
 
+	public int selectNoticeCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectNoticeCount");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				totalContent = rset.getInt("cnt");
+			
+			System.out.println("totalContent@dao="+totalContent);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
+	public Notice selectNoticeOne(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectNoticeOne");
+		
+		return null;
+	}
+
+	public int increaseReadCount(Connection conn, int noticeNo) {
+		return 0;
+	}
+
 }
