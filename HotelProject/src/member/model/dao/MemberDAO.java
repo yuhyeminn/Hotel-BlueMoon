@@ -17,7 +17,7 @@ public class MemberDAO {
 	private Properties prop = new Properties();
 	
 	public MemberDAO() {
-		String fileName = MemberDAO.class.getResource("/member/member-query.properties").getPath();
+		String fileName = MemberDAO.class.getResource("/sql/member/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -59,7 +59,7 @@ public class MemberDAO {
 				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
 			}
 			
-			//System.out.println("member@dao.selectOne="+m);
+			System.out.println("member@dao.selectOne="+m);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
