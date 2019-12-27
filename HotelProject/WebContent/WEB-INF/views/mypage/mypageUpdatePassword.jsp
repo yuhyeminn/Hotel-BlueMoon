@@ -7,7 +7,7 @@
 <h1>비밀번호 변경</h1>
 <hr />
 <div id="updateDiv">
- <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updatePassword" method="POST">
+ <form id="updateFrm" action="<%=request.getContextPath()%>/mypage/updatePasswordEnd" method="POST">
  <table>
   <tr>
    <td>현재 비밀번호</td>
@@ -24,6 +24,7 @@
    </td>
   </tr>
 </table>
+<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" />
 <input type="submit" class="btn btn-outline-secondary" id="btn-updatePasswordEnd" value="비밀번호 변경하기" onclick="return updateValidate();"></input>
  </form>
  </div>
@@ -57,6 +58,7 @@ function updateValidate(){
 	$newPW = $("#newPW").val().trim();
 	$newPWChk = $("#newPWChk").val().trim();
 	
+	
 	if($nowPW.length == 0){
 		alert("현재 비밀번호를 입력하세요.");
 		return false;
@@ -65,6 +67,9 @@ function updateValidate(){
 		return false;
 	} else if($newPWChk.length == 0){
 		alert("변경할 비밀번호를 다시 입력하세요.");
+		return false;
+	} else if($newPW != $newPWChk){
+		alert("입력하신 비밀번호를 확인하세요.");
 		return false;
 	}
 	return true;

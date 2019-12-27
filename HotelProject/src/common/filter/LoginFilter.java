@@ -18,13 +18,7 @@ import member.model.vo.Member;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter( urlPatterns= {
-				   "/mypage/main",
-				   "/mypage/deleteMember",
-				   "/mypage/myReservation",
-				   "/mypage/review",
-				   "/mypage/updateEnd",
-				   "/mypage/update",
-				   "/mypage/myCoupon",
+				   "/mypage/*",
 				   "/member",
 				   "/views"
 		   })

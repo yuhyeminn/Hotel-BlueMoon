@@ -17,7 +17,10 @@ import member.model.vo.Member;
 /**
  * Servlet Filter implementation class MemberAuthFilter
  */
-@WebFilter(servletNames = { "MemberViewServlet" })
+@WebFilter( urlPatterns= {
+		   "/mypage/update",
+		   "/mypage/updatePassword"
+})
 public class MemberAuthFilter implements Filter {
 
     /**
