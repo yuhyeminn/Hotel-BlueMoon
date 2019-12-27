@@ -43,13 +43,13 @@
 			data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="images/pool1.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/pool1.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/pool2.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/pool2.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/pool3.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/pool3.jpg" class="d-block w-100" alt="...">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleFade1"
@@ -83,13 +83,13 @@
 			data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="images/spa1.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/spa1.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/spa2.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/spa2.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/spa3.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/spa3.jpg" class="d-block w-100" alt="...">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleFade2"
@@ -121,13 +121,13 @@
 			data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="images/gym1.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/gym1.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/gym2.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/gym2.jpg" class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="images/gym3.jpg" class="d-block w-100" alt="...">
+					<img src="<%=request.getContextPath() %>/images/gym3.jpg" class="d-block w-100" alt="...">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleFade3"

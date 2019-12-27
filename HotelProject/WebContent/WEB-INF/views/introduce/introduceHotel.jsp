@@ -43,7 +43,7 @@
 	<div class="row">
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="images/room1.jpg"
+				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/introduce-room.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
@@ -62,7 +62,7 @@
 		</div>
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="images/jeju.jpg"
+				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/jeju.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
@@ -75,7 +75,7 @@
 		</div>
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="images/pool1.jpg"
+				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/pool1.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">

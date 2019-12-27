@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class IntroduceHotel
  */
-@WebServlet("/views/introduce/introduceHotel")
-public class IntroduceHotel extends HttpServlet {
+@WebServlet("/views/introduce/introduceFacility")
+public class IntroduceFacility extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/introduce/introduceHotel.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/introduce/introduceFacility.jsp").forward(request, response);
 	}
 
 	/**

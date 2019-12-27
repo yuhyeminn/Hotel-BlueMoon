@@ -94,14 +94,12 @@
 .dropmenu-list li{
 	padding: 4px;
 	font-size: 17px;
-<<<<<<< Updated upstream
 }
 
 .dropmenu-list a{
 	color: black;
 }
 
-=======
 }
 
 .dropmenu-list a{
@@ -136,6 +134,7 @@
 	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
 	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
 	                <%-- <li><a href="#">라이브챗</a></li> --%>
+	            </ul>
 	      		<%
 	      		}
 	      		else{
