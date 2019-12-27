@@ -3,7 +3,7 @@
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <style>
         #qna-container {
-            /* margin: 70px; */
+            margin: 50px 0px;
             text-align: center;
             padding: 30px;
             margin-bottom: 100px;
@@ -24,7 +24,6 @@
 
         #qna-content {
             padding: 30px;
-            /* background:black; */
             color: black;
             text-align: initial;
             min-height: 200px;
@@ -60,17 +59,12 @@
             margin: 0px 5px;
             width: 70px;
         }
-
-        #list-button {
-            height: 60px;
-            font-size: 20px;
-            float: left;
-        }
         #qna-comment{
             padding:20px 40px;
         }
         #qnaCommentContent {
-            width: 820px;
+            width: 800px;
+            display:inline-block
         }
         #btn-commentInsert {
             width: 100px;
@@ -82,6 +76,7 @@
             border: none;
             background: #343a40;
             color: white;
+            display:inline-block
         }
         #btn-commentInsert:hover {
             background: #23272b;
@@ -92,7 +87,6 @@
         }
         .comment{
             text-align: initial;
-            /* background:yellow; */
             border-bottom:1px solid rgb(207, 207, 207);
             padding:20px;
         }
@@ -133,7 +127,8 @@
                     <span id="qna-title">문의사항 타이틀</span>
                     <span id="qna-date">날짜 부분</span>
                 </div>
-                <div id="qna-content">문의 내용ddddddddddddddddddddddddddddddddddddddddddd<br>dddddddddddddddddddddddddddddd
+                <div id="qna-content">
+                	<p>문의 내용 들어갈 부분ddddddddddddddddddddddddddddddddddddddddddd<br>dddddddddddddddddddddddddddddd</p>
                 </div>
                 <div id="qna-file" class="content-row"><img src="images/file.png" id="file-image">첨부파일.txt<div
                         class="txt"></div>
@@ -151,6 +146,7 @@
                             <span class="comment-date">2019-12-25 12:29</span><br>
                             <button id="recomment-btn">답글</button>
                     </div>
+                    
                     <!-- 댓글 작성 -->
                     <div class="comment-editor">
                         <form action="" name="qnaCommentFrm">
@@ -166,6 +162,5 @@
                     </div>
                 </div>
             </div>
-	
 	</section>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
