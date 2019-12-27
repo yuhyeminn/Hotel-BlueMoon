@@ -104,8 +104,4 @@ public class Notice implements Serializable{
 				+ noticeReadCount + ", noticeOriginalFileName=" + noticeOriginalFileName + ", noticeRenamedFileName="
 				+ noticeRenamedFileName + "]";
 	}
-	
-	
-	
-
 }
