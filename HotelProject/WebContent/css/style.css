@@ -193,7 +193,7 @@ footer {
     text-align: center;
     margin-top: 10px
 }
-#nav1::after{
+#header::after{
     content: '';
     display: block;
     height: 0;

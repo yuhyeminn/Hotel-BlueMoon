@@ -9,7 +9,7 @@
 	<li class="mypage"><a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a></li>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
 	<li class="board"><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
-	<li class="admin"><a href="<%=request.getContextPath()%>/views/admin/adminMain">관리자페이지</a></li>
+	<li class="admin"><a href="<%=request.getContextPath()%>/views/admin/adminMemberList">관리자페이지</a></li>
 	<li class="admin"><a href="<%=request.getContextPath()%>/views/reservation/roomPriceSelect">객실/요금선택~예약완료</a></li>
 	
 	<li class="introduce"><a href="<%=request.getContextPath()%>/views/introduce/introduceHotel">호텔 소개</a></li>
