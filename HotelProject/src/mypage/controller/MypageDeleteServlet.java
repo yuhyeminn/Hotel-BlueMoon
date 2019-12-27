@@ -15,7 +15,7 @@ public class MypageDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/mypage/resvRoomPriceSelect.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageDelete.jsp").forward(request, response);
 	}
 
 	/**

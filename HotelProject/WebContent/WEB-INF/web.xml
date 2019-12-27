@@ -9,6 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+<<<<<<< HEAD
+=======
+  <session-config>
+    <session-timeout>0</session-timeout>
+  </session-config>
+>>>>>>> master
   <filter>
     <filter-name>EncodeFilter</filter-name>
     <filter-class>common.filter.EncodeFilter</filter-class>

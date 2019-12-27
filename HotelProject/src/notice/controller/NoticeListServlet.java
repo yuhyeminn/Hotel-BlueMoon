@@ -45,7 +45,7 @@ public class NoticeListServlet extends HttpServlet {
 		// 페이지 바 영역
 		// b.페이징바영역
 		// 전체게시글수, 전체페이지수
-		int totalContent = noticeService.selectNoticeCount();
+//		int totalContent = noticeService.selectNoticeCount();
 		int totalPage = (int) Math.ceil((double) totalContent / numPerPage);// (공식2)
 
 		String pageBar = "";

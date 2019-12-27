@@ -17,7 +17,7 @@ public class MemberDAO {
 	private Properties prop = new Properties();
 	
 	public MemberDAO() {
-		String fileName = MemberDAO.class.getResource("/member/member-query.properties").getPath();
+		String fileName = MemberDAO.class.getResource("/sql/member/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -51,9 +51,11 @@ public class MemberDAO {
 				m.setMemberId(rset.getString("member_id"));
 				m.setPassword(rset.getString("member_password"));
 				m.setMemberName(rset.getString("member_name"));
+				m.setBirth(rset.getString("member_birth"));
 				m.setGender(rset.getString("member_gender"));
 				m.setEmail(rset.getString("member_email"));
 				m.setPhone(rset.getString("member_phone"));
+				m.setPoint(rset.getInt("member_points"));
 				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
 			}
 			
@@ -112,21 +114,11 @@ public class MemberDAO {
 		String query = prop.getProperty("updateMember"); 
 
 		try {
-			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
-			//쿼리문미완성
-//			pstmt.setString(1, member.getPassword());
-			pstmt.setString(1, member.getMemberName());
-			pstmt.setString(2, member.getGender());
-			//pstmt.setInt(3, member.getAge());
-			pstmt.setString(4, member.getEmail());
-			pstmt.setString(5, member.getPhone());
-			//pstmt.setString(6, member.getAddress());
-			//pstmt.setString(7, member.getHobby());
-			pstmt.setString(8, member.getMemberId());
+			pstmt.setString(1, member.getPhone());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setString(3, member.getMemberId());
 			
-			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
-			//DML은 executeUpdate()
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -134,7 +126,6 @@ public class MemberDAO {
 		} finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
 

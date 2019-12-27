@@ -17,11 +17,16 @@ import member.model.vo.Member;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames = { "MemberViewServlet" }, 
-		   urlPatterns= {
-				   "/board/boardForm",
-				   "/board/boardFormEnd",
-				   "/board/boardCommentInsert"
+@WebFilter( urlPatterns= {
+				   "/mypage/main",
+				   "/mypage/deleteMember",
+				   "/mypage/myReservation",
+				   "/mypage/review",
+				   "/mypage/updateEnd",
+				   "/mypage/update",
+				   "/mypage/myCoupon",
+				   "/member",
+				   "/views"
 		   })
 public class LoginFilter implements Filter {
 

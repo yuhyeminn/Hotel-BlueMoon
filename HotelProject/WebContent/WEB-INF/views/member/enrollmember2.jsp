@@ -70,7 +70,25 @@ span {
 	margin-top: 0px;
 }
 </style>
+<script>
+function idDuplicatedCheck(){
+	$.ajax({
+		url: "<%=request.getContextPath()%>/member/memberIdDuplicatedCheckServlet",
+		type: "post",
+		data: {memberId: $("#memberId").val()},
+		dataType: "json",
+		success: data => {
+			console.log(data);//json문자열, javascript object
+		},
+		error : (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		}
+	});
+}
 
+
+
+</script>
 <section>
 	<div class="steps">
 		<hr>
@@ -90,8 +108,8 @@ span {
 				<tr>
 					<td>아이디<span>*</span></td>
 					<td><input class="form-control input-text" type="text"
-						name="id" id="id" placeholder="아이디" /></td>
-					<td><input type="button" class="btn btn-outline-secondary"
+						name="memberId" id="memberId" placeholder="아이디" /></td>
+					<td><input type="button" class="btn btn-outline-secondary" onclick="idDuplicatedCheck();"
 						id="btn-id-already" value="중복확인" /></td>
 
 				</tr>
