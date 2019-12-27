@@ -29,7 +29,7 @@ public class JDBCTemplate {
 			//getPath(): 절대경로를 문자열로 반환
 			String fileName = JDBCTemplate.class.getResource("/driver.properties")
 												.getPath();
-//			System.out.println(fileName);
+			//System.out.println(fileName);
 			prop.load(new FileReader(fileName));
 			
 			

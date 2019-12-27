@@ -39,7 +39,7 @@ public class EncodeFilter implements Filter{
 		String encodeType = fConfig.getInitParameter("encodeType");
 		
 		request.setCharacterEncoding(encodeType);
-		System.out.println("["+encodeType+"]인코딩처리됨@EncodeFilter");
+		//System.out.println("["+encodeType+"]인코딩처리됨@EncodeFilter");
 		
 
 		//다음 필터의 doFilter메소드 호출: 마지막 필터라면, servlet호출!

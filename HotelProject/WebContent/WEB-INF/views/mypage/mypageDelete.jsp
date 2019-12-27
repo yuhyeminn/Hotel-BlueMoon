@@ -7,7 +7,7 @@
 <h1 style="text-align:center">회원 탈퇴</h1>
 <hr />
 <br /><br />
-<form action="">	
+<form action="<%=request.getContextPath()%>/mypage/deleteEnd">	
 	<h3 style="text-align:center"><%=memberLoggedIn.getMemberName() %>님!<br/> 블루문 회원을 탈퇴하시겠습니까?</h3>
 	<br />
 	<h6 style="text-align:center">
@@ -21,9 +21,10 @@
 	</div>
 	<br /><br />
 	<div align="center">
-		<button type="button" class="btn btn-outline-secondary" id="btnDel">탈퇴하기</button>
+		<input type="submit" class="btn btn-outline-secondary" id="btnDel" value="탈퇴하기" onclick="return deleteValidate();"></button>
 	</div>
 	<br /><br />
+	<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" />
 </form>
 <style>
 #password{
@@ -35,15 +36,14 @@
 }
 </style>
 <script>
-$("#btnDel").click(function(){
-	$pwd = $("#password").val().trim();
-	if($pwd.length == 0){
-		alert("비밀번호 입력하세요.");
+function deleteValidate(){
+	$password = $("#password").val().trim();
+	if($password.length == 0){
+		alert("비밀번호를 입력하세요.");
+		return false;
 	}
-	else{
-		alert("회원 탈퇴 완료~!");
-	}
-});
+	return true;
+}
 </script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
