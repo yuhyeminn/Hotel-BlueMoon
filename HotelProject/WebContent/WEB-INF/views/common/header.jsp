@@ -130,22 +130,12 @@
 		<div id="header">
 				<span id="logo-img"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/logo.jpg"/></a></span>
 				
-<<<<<<< Updated upstream
 			<nav id="nav2">
 	      		<%if(memberLoggedIn == null){ %>
 	      		<ul class="main-nav2">
 	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
 	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
 	                <%-- <li><a href="#">라이브챗</a></li> --%>
-=======
-				<nav id="nav2">
-	      		<ul>
-	                <li><a href="<%=request.getContextPath()%>/views/member/login">로그인</a></li>
-	                <li><a href="<%=request.getContextPath()%>/views/member/enrollmember1">회원가입</a></li>
-	                <li><a href="<%=request.getContextPath()%>/views/">예약조회</a></li>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-	            </ul>
 	      		<%
 	      		}
 	      		else{
@@ -155,8 +145,6 @@
 	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main">마이페이지</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/myReservation">예약조회</a></li>
-=======
->>>>>>> Stashed changes
 	            </ul>
 	      		<%} %>
 	        </nav>
