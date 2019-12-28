@@ -83,7 +83,7 @@
 				<label>아직,호텔블루문 회원이 아니신가요?<br>회원가입후 최상의 서비스를 누려보세요.
 				</label>
 			</div>
-			<button class="button" id="button-join">회원가입</button>
+			<button class="button" id="button-join" onclick="location.href='<%=request.getContextPath()%>/views/member/enrollmember1'" >회원가입</button>
 		</div>
 
 		<div id="login-finder" class="box">

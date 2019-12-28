@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-<hr />
 <style>
 .steps {
 	text-align: center;
 	margin-top: 30px;
 }
-
 .step {
 	width: 300px;
 	height: 60px;
@@ -69,6 +67,10 @@ span {
 #button-group .step {
 	margin-top: 0px;
 }
+.td-warn{
+	font-size: 14px;
+    color: rgba(221, 30, 47, 1)
+}
 </style>
 <script>
 <%--onload function--%>
@@ -96,7 +98,7 @@ $("#memberId").keyup(function(event){
 		$("#idValid").val(0);
 	}
 	if(!regExpId.test(memberId.value)){
-		$(".idValidateWarning").html('영문,숫자를 포함한 4~12자의 조합!');
+		$(".idValidateWarning").html('영문,숫자를 포함한 4~12자를 입력해 주세요');
 		$("#memberId").attr("style","border-bottom: 2px solid red");
 		$("#idValid").val(0);
 	}
@@ -115,7 +117,7 @@ $("#password").keyup(function(event){
 		$("#password").attr("style","border-bottom: 2px solid red");
 	}
 	if(!regExpPw.test(password.value)){
-// 		$(".pwValidateWarning").html('8~20자의 영문 대 소문자, 숫자, 특수기호 포함');
+ 		$(".pwValidateWarning").html('8~20자의 영문, 숫자, 특수기호를 입력해주세요.');
 		$("#password").attr("style","border-bottom: 2px solid red");
 	}
 	else{
@@ -149,6 +151,7 @@ $("#email").keyup(function(event){
 		$("#email").attr("style","border-bottom: 2px solid red");
 	}
 	if(!regExpEmail.test(email.value)){
+		$(".emailValidateWarning").html('이메일 형식이 올바르지 않습니다.');
 		$("#email").attr("style","border-bottom: 2px solid red");
 	}
 	else{
@@ -165,7 +168,7 @@ $("#phone").keyup(function(event){
 		$("#phone").attr("style","border-bottom: 2px solid red");
 	}
 	if(!regExpPhone.test(phone.value)){
-		$(".phoneValidateWarning").html('10~11자의 숫자, 문자제외');
+		$(".phoneValidateWarning").html('10~11자의 숫자를 입력해주세요.( - 없이 입력) ');
 		$("#phone").attr("style","border-bottom: 2px solid red");
 	}
 	else{
@@ -182,6 +185,7 @@ $("#birth").keyup(function(event){
 		$("#birth").attr("style","border-bottom: 2px solid red");
 	}
 	if(isValidDate2(birth.value)==false){
+		$(".birthValidateWarning").html('생년월일 형식이 올바르지 않습니다.');
 		$("#birth").attr("style","border-bottom: 2px solid red");
 	}
 	else{
@@ -418,7 +422,7 @@ function regExpTest(regExp, el, msg){
 	<div class="steps">
 		<hr>
 		<h2>
-			<strong>블루문 회원가입(약관동의)</strong>
+			<strong>블루문 회원가입(개인정보 입력)</strong>
 		</h2>
 		<hr>
 		<button class="step" id="step1">Step1</button>
@@ -444,7 +448,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="idValidateWarning"></td>
+					<td class="idValidateWarning td-warn"></td>
 					<td></td>
 				</tr>	
 				<tr>
@@ -454,7 +458,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="pwValidateWarning"></td>
+					<td class="pwValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -464,7 +468,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="pwChkValidateWarning"></td>
+					<td class="pwChkValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -474,7 +478,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="nameValidateWarning"></td>
+					<td class="nameValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -484,7 +488,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="birthValidateWarning"></td>
+					<td class="birthValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -496,7 +500,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="emailValidateWarning"></td>
+					<td class="emailValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -508,7 +512,7 @@ function regExpTest(regExp, el, msg){
 				</tr>
 				<tr>
 					<td></td>
-					<td class="phoneValidateWarning"></td>
+					<td class="phoneValidateWarning td-warn"></td>
 					<td></td>
 				</tr>
 			</table>

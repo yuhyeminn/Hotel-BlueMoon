@@ -36,7 +36,7 @@
 	padding: 15px 20px;
 	overflow: auto;
 	overflow-x: hidden;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #next-btn {
