@@ -52,7 +52,6 @@ public class MemberDAO {
 				m.setPassword(rset.getString("member_password"));
 				m.setMemberName(rset.getString("member_name"));
 				m.setBirth(rset.getString("member_birth"));
-				m.setGender(rset.getString("member_gender"));
 				m.setEmail(rset.getString("member_email"));
 				m.setPhone(rset.getString("member_phone"));
 				m.setPoint(rset.getInt("member_points"));
@@ -86,12 +85,10 @@ public class MemberDAO {
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getPassword());
 			pstmt.setString(3, member.getMemberName());
-			pstmt.setString(4, member.getGender());
-			//pstmt.setInt(5, member.getAge());
-			pstmt.setString(6, member.getEmail());
-			pstmt.setString(7, member.getPhone());
-			//pstmt.setString(8, member.getAddress());
-			//pstmt.setString(9, member.getHobby());
+			pstmt.setString(4, member.getBirth());
+			pstmt.setString(5, member.getEmail());
+			pstmt.setString(6, member.getPhone());
+			pstmt.setInt(7, member.getPoint());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()

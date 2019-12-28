@@ -19,7 +19,6 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	private String password;
 	private String memberName;
 	private String birth;
-	private String gender;
 	private String email;
 	private String phone;
 	private int point;
@@ -31,14 +30,13 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	
 	
 
-	public Member(String memberId, String password, String memberName, String birth, String gender, String email,
+	public Member(String memberId, String password, String memberName, String birth, String email,
 			String phone, int point, Date enrollDate) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
 		this.memberName = memberName;
 		this.birth = birth;
-		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
 		this.point = point;
@@ -69,12 +67,6 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -104,11 +96,9 @@ public class Member implements Serializable, HttpSessionBindingListener{
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName + ", birth="
-				+ birth + ", gender=" + gender + ", email=" + email + ", phone=" + phone 
-				+ ", point=" + point + ", enrollDate=" + enrollDate + "]";
+				+ birth + ", email=" + email + ", phone=" + phone + ", point=" + point + ", enrollDate=" + enrollDate
+				+ "]";
 	}
-
-
 
 	/**
 	 * 세션속성으로 해당객체가 등록될때 호출됨
