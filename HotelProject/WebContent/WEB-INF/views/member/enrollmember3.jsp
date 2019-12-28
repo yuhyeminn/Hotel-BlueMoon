@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+ 	Member m = (Member)request.getAttribute("member");
+ %>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <hr />
 <style>
@@ -31,12 +34,13 @@ label{float:center;}
 <!-- 회원가입후 정보넘기기 -->
 <br><br>
 <label>성명</label>
+<p class="memberName"><%=m.getMemberName() %></p>
 <hr>
 <label>아이디</label>
+<p class="memberName"><%=m.getMemberId() %></p>
 <hr>
 <label>이메일</label>
-<hr>
-<label>가입날짜</label>
+<p class="memberName"><%=m.getEmail() %></p>
 <hr>
 </div>
 
