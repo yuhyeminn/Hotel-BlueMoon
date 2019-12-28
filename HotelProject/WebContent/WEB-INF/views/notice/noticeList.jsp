@@ -1,6 +1,13 @@
+<%@page import="notice.model.vo.Notice"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
+
+<%
+	List<Notice> list = (List<Notice>)request.getAttribute("list");
+	String pageBar = (String)request.getAttribute("pageBar");
+%>
 <style>
 #search-container {
 	background-color: #e7e7e7;
@@ -21,6 +28,13 @@
 
 #writeBtn {
 	margin-top: 25px;
+}
+#pageBar{
+margin:30px auto;
+}
+.board-title{
+text-decoration:none;
+color:black;
 }
 </style>
 
@@ -53,47 +67,38 @@
 				</tr>
 			</thead>
 			<tbody>
+			<%
+				for(Notice n : list){
+			%>
 				<tr>
-					<th scope="row">1</th>
-					<td>gg</td>
-					<td>Otto</td>
-					<td>2019-12-25</td>
-					<td>1</td>
+					<th scope="row"><%=n.getNoticeNo() %></th>
+					<td><a href="" class="board-title"><%=n.getNoticeTitle() %></a></td>
+					<td>
+					<%if(n.getNoticeOriginalFileName() != null) {%>
+					<img src="<%=request.getContextPath() %>/images/file.png" width="20px"/>
+					<%}%>
+					</td>
+					<td><%=n.getNoticeDate() %></td>
+					<td><%=n.getNoticeReadCount() %></td>
 				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>2019-12-25</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>2019-12-25</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>2019-12-25</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>2019-12-25</td>
-					<td>1</td>
-				</tr>
+			<%
+				}
+			%>
 			</tbody>
-
 		</table>
-		<div id="writebtnbox" style="text-align: right; padding-right: 110px;">
+		<div id="pageBar">
+			<%=pageBar%>
+		</div>
+		<%
+				if(memberLoggedIn != null && "admin".equals(memberLoggedIn.getMemberId())){
+			%>
+			<div id="writebtnbox" style="text-align: right; padding-right: 110px;">
 			<button class="btn btn-dark" id="writeBtn">글쓰기</button>
 		</div>
+		<%
+				}
+			%>
+		
 	</div>
 </section>
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
