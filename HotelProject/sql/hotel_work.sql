@@ -118,6 +118,7 @@ insert into room values(seq_room_no.nextval,'슈퍼스위트','편안한 객실'
 --drop table room;
 ​
 select * from room;
+
 ​
 --SELECT COUNT(*) CNT FROM room;
 --insert into room values(?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -177,6 +178,8 @@ select * from booked_room;
 create sequence seq_booked_no;
 
 
+commit;
+
 --drop table booked_room;
 --drop sequence seq_booked_no;
 
@@ -184,5 +187,14 @@ create sequence seq_booked_no;
 
 select room_no, count(*) reservedcnt from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31') group by room_no;
 --select room_no from booked_room where (booked_checkin >= ? and booked_checkin < ? ) or (booked_checkout > ? and booked_checkout <= ? )
-select r.room_no, count(*) reservedcnt from room r left join booked_room br on r.room_no = br.room_no
-where (br.booked_checkin >= '2019-12-28' and br.booked_checkin < '2019-12-31') or (br.booked_checkout > '2019-12-28' and br.booked_checkout <= '2019-12-31') group by r.room_no;
+select r.room_no, count(*) reservedcnt 
+from room r left join booked_room br on r.room_no = br.room_no
+where (br.booked_checkin >= '2019-12-28' and br.booked_checkin < '2019-12-31') or (br.booked_checkout > '2019-12-28' and br.booked_checkout <= '2019-12-31') 
+group by r.room_no;
+
+select *
+from room r left join (select room_no from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31')) br on r.room_no = br.room_no;
+
+select r.room_no, count()
+from room r left join (select room_no from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31')) br on r.room_no = br.room_no
+group by r.room_no;

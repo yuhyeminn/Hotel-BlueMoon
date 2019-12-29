@@ -1,9 +1,185 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500,700|Noto+Serif+KR&display=swap" rel="stylesheet">
-    <title>Hotel Blue Moon</title>
-</head>
+
+<script>
+    function ToPaymentPage(){
+		location.href = "<%=request.getContextPath()%>/views/reservation/payment";	
+	};
+</script>
+<%
+	Map<Object,Object> infomap = (Map<Object,Object>)request.getAttribute("infomap");
+	String checkindate = (String)infomap.get("checkindate");
+	String checkoutdate = (String)infomap.get("checkoutdate");
+	int room1 = Integer.parseInt(infomap.get("room1").toString());
+	int room2 = infomap.get("room2")!=null?Integer.parseInt(infomap.get("room2").toString()):0;
+	int roomcnt =Integer.parseInt(infomap.get("roomcnt").toString());
+	
+	System.out.println(checkindate +"," + checkoutdate + "," + room1 + "," + room2 + "," +roomcnt);
+	
+    String strFormat = "yyyy-MM-dd"; 
+    
+    //SimpleDateFormat 을 이용하여 startDate와 endDate의 Date 객체를 생성한다.
+    SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
+    long diffDay=0;
+    try{
+        Date startDate = sdf.parse(checkoutdate);
+        Date endDate = sdf.parse(checkindate);
+
+        diffDay = (startDate.getTime() - endDate.getTime()) / (24*60*60*1000);
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+%>
+    <div class="reservation-container">
+        <div class="current-path">
+            <span>홈</span>
+            <span>일정선택</span>
+            <span>객실,요금 선택</span>
+        </div>
+        <div class="stepbox">
+            <div class="container-fluid ">
+                <br /><br />
+                <ul class="list-unstyled multi-steps">
+                    <li>일정선택</li>
+                    <li class="is-active">객실/요금 선택</li>
+                    <li >결제</li>
+                    <li>예약완료</li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-section-container">
+            <div class="reservation-selectedOption">
+                <ul>
+                    <li><span class="hotel-location">블루문제주</span></li>
+                    <li>
+                    <span class="hotel-date">
+                    	<span id="checkindate"><%=checkindate %></span>
+                    	<span id="checkoutdate"><%=checkoutdate %></span>
+                    	<span id="diffday">(<%=diffDay %>박)</span>
+                    </span>
+                    </li>
+                    <li><span class="hotel-person">객실 <%=roomcnt %>, 인원 <%= room1+room2%></span></li>
+                </ul>
+            </div>
+            <div class="tap-section">
+                
+            </div>
+        </div>
+        <div class="product-container">
+            <div class="product-img">
+                <img src="<%=request.getContextPath()%>/images/premiumDelux.jpg" alt="프리미엄디럭스">
+            </div>
+            <div class="room-info">
+                <ul class="room-type">
+                    <li>프리미엄디럭스</li>
+                    <li>프리미엄 디럭스 더블</li>
+                </ul>
+                <ul class="room-option">
+                    <li>전망<span>시티뷰/리버뷰</span></li>
+                    <li>객실크기<span>56~65 ㎡</span></li>
+                </ul>        
+                <div class="product-price">
+                    <div class="room-price">
+                        <span>KRW</span>
+                        <span class="price-text">580,000</span>
+                    </div>
+                    <div class="price-textInfo">
+                        <p>표준요금/1박<br>(세금,봉사료 포함)</p>
+                    </div>
+                    <div class="room-button">
+                        <button type="button" class="btn btn-outline-secondary" onclick="ToPaymentPage();">예약하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-container">
+                <div class="product-img">
+                    <img src="<%=request.getContextPath()%>/images/premiumDelux2.jpg" alt="프리미엄디럭스">
+                </div>
+                <div class="room-info">
+                    <ul class="room-type">
+                        <li>프리미엄디럭스</li>
+                        <li>프리미엄 디럭스 트윈</li>
+                    </ul>
+                    <ul class="room-option">
+                        <li>전망<span>시티뷰/리버뷰</span></li>
+                        <li>객실크기<span>56~65 ㎡</span></li>
+                    </ul>        
+                    <div class="product-price">
+                        <div class="room-price">
+                            <span>KRW</span>
+                            <span class="price-text">580,000</span>
+                        </div>
+                        <div class="price-textInfo">
+                            <p>표준요금/1박<br>(세금,봉사료 포함)</p>
+                        </div>
+                        <div class="room-button">
+                            <button type="button" class="btn btn-outline-secondary">예약하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-container">
+                    <div class="product-img">
+                        <img src="<%=request.getContextPath()%>/images/sweet.jpg" alt="프리미엄디럭스">
+                    </div>
+                    <div class="room-info">
+                        <ul class="room-type">
+                            <li>스위트</li>
+                            <li>스위트 트윈</li>
+                        </ul>
+                        <ul class="room-option">
+                            <li>전망<span>시티뷰/리버뷰</span></li>
+                            <li>객실크기<span>204.3㎡</span></li>
+                        </ul>        
+                        <div class="product-price">
+                            <div class="room-price">
+                                <span>KRW</span>
+                                <span class="price-text">685,000</span>
+                            </div>
+                            <div class="price-textInfo">
+                                <p>표준요금/1박<br>(세금,봉사료 포함)</p>
+                            </div>
+                            <div class="room-button">
+                                <button type="button" class="btn btn-outline-secondary">예약하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-container">
+                        <div class="product-img">
+                            <img src="<%=request.getContextPath()%>/images/specialSweet3.jpg" alt="프리미엄디럭스">
+                        </div>
+                        <div class="room-info">
+                            <ul class="room-type">
+                                <li>스위트</li>
+                                <li>스페셜 스위트</li>
+                            </ul>
+                            <ul class="room-option">
+                                <li>전망<span>시티뷰/리버뷰</span></li>
+                                <li>객실크기<span>204.3㎡</span></li>
+                            </ul>        
+                            <div class="product-price">
+                                <div class="room-price">
+                                    <span>KRW</span>
+                                    <span class="price-text">4,500,000</span>
+                                </div>
+                                <div class="price-textInfo">
+                                    <p>표준요금/1박<br>(세금,봉사료 포함)</p>
+                                </div>
+                                <div class="room-button">
+                                    <button type="button" class="btn btn-outline-secondary">예약하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </div><!--End of reservation-container-->
+
 <style>
 .reservation-container{
     padding: 0;
@@ -181,151 +357,4 @@
     width: 160px;
 }
 </style>
-<script>
-    function ToPaymentPage(){
-		location.href = "<%=request.getContextPath()%>/views/reservation/payment";	
-	};
-</script>
-    <div class="reservation-container">
-        <div class="current-path">
-            <span>홈</span>
-            <span>일정선택</span>
-            <span>객실,요금 선택</span>
-        </div>
-        <div class="stepbox">
-            <!-- <span>01호텔선택</span>
-            <span>02객실,요금,옵션 선택</span>
-            <span>03고객정보입력</span> -->
-            <div class="container-fluid ">
-                <br /><br />
-                <ul class="list-unstyled multi-steps">
-                    <li>일정선택</li>
-                    <li class="is-active">객실/요금 선택</li>
-                    <li >결제</li>
-                    <li>예약완료</li>
-                </ul>
-            </div>
-        </div>
-        <div class="main-section-container">
-            <div class="reservation-selectedOption">
-                <ul>
-                    <li><span class="hotel-location">블루문제주</span></li>
-                    <li><span class="hotel-date">2019-12-25-2019-12-27(2박)</span></li>
-                    <li><span class="hotel-person">객실 1, 성인 1</span></li>
-                </ul>
-            </div>
-            <div class="tap-section">
-                
-            </div>
-        </div>
-        <div class="product-container">
-            <div class="product-img">
-                <img src="<%=request.getContextPath()%>/images/premiumDelux.jpg" alt="프리미엄디럭스">
-            </div>
-            <div class="room-info">
-                <ul class="room-type">
-                    <li>프리미엄디럭스</li>
-                    <li>프리미엄 디럭스 더블</li>
-                </ul>
-                <ul class="room-option">
-                    <li>전망<span>시티뷰/리버뷰</span></li>
-                    <li>객실크기<span>56~65 ㎡</span></li>
-                </ul>        
-                <div class="product-price">
-                    <div class="room-price">
-                        <span>KRW</span>
-                        <span class="price-text">580,000</span>
-                    </div>
-                    <div class="price-textInfo">
-                        <p>표준요금/1박<br>(세금,봉사료 포함)</p>
-                    </div>
-                    <div class="room-button">
-                        <button type="button" class="btn btn-outline-secondary" onclick="ToPaymentPage();">예약하기</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-container">
-                <div class="product-img">
-                    <img src="<%=request.getContextPath()%>/images/premiumDelux2.jpg" alt="프리미엄디럭스">
-                </div>
-                <div class="room-info">
-                    <ul class="room-type">
-                        <li>프리미엄디럭스</li>
-                        <li>프리미엄 디럭스 트윈</li>
-                    </ul>
-                    <ul class="room-option">
-                        <li>전망<span>시티뷰/리버뷰</span></li>
-                        <li>객실크기<span>56~65 ㎡</span></li>
-                    </ul>        
-                    <div class="product-price">
-                        <div class="room-price">
-                            <span>KRW</span>
-                            <span class="price-text">580,000</span>
-                        </div>
-                        <div class="price-textInfo">
-                            <p>표준요금/1박<br>(세금,봉사료 포함)</p>
-                        </div>
-                        <div class="room-button">
-                            <button type="button" class="btn btn-outline-secondary">예약하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-container">
-                    <div class="product-img">
-                        <img src="<%=request.getContextPath()%>/images/sweet.jpg" alt="프리미엄디럭스">
-                    </div>
-                    <div class="room-info">
-                        <ul class="room-type">
-                            <li>스위트</li>
-                            <li>스위트 트윈</li>
-                        </ul>
-                        <ul class="room-option">
-                            <li>전망<span>시티뷰/리버뷰</span></li>
-                            <li>객실크기<span>204.3㎡</span></li>
-                        </ul>        
-                        <div class="product-price">
-                            <div class="room-price">
-                                <span>KRW</span>
-                                <span class="price-text">685,000</span>
-                            </div>
-                            <div class="price-textInfo">
-                                <p>표준요금/1박<br>(세금,봉사료 포함)</p>
-                            </div>
-                            <div class="room-button">
-                                <button type="button" class="btn btn-outline-secondary">예약하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-container">
-                        <div class="product-img">
-                            <img src="<%=request.getContextPath()%>/images/specialSweet3.jpg" alt="프리미엄디럭스">
-                        </div>
-                        <div class="room-info">
-                            <ul class="room-type">
-                                <li>스위트</li>
-                                <li>스페셜 스위트</li>
-                            </ul>
-                            <ul class="room-option">
-                                <li>전망<span>시티뷰/리버뷰</span></li>
-                                <li>객실크기<span>204.3㎡</span></li>
-                            </ul>        
-                            <div class="product-price">
-                                <div class="room-price">
-                                    <span>KRW</span>
-                                    <span class="price-text">4,500,000</span>
-                                </div>
-                                <div class="price-textInfo">
-                                    <p>표준요금/1박<br>(세금,봉사료 포함)</p>
-                                </div>
-                                <div class="room-button">
-                                    <button type="button" class="btn btn-outline-secondary">예약하기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    </div><!--End of reservation-container-->
-
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
