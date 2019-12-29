@@ -3,7 +3,7 @@ package reservation.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class RoomReservation implements Serializable{
+public class Reservation implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -19,11 +19,11 @@ public class RoomReservation implements Serializable{
 	private Date resvOut;
 	private int resvBfPeople;
 	
-	public RoomReservation() {
+	public Reservation() {
 		super();
 	}
 
-	public RoomReservation(int resvNo, String resvMemberId, int resvPeople, int resvUsedPoint, int resvAddPoint,
+	public Reservation(int resvNo, String resvMemberId, int resvPeople, int resvUsedPoint, int resvAddPoint,
 			Date resvDate, int resvPrice, boolean resvCancel, Date resvIn, Date resvOut, int resvBfPeople) {
 		super();
 		this.resvNo = resvNo;

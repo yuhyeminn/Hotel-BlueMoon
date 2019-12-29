@@ -5,7 +5,7 @@
     <title>Hotel Blue Moon</title>
 </head>
 <style>
-body {
+.reservation-container{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -14,7 +14,6 @@ body {
     color: #666;
     -webkit-font-smoothing: antialiased;
 }
-.reservation-container{width: 1280px;padding: 0 90px;margin: 0 auto;}
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
 .current-path{font-size: 16px;padding: 13px 0 30px 0;}

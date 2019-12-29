@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,200,300,400,500,700|Noto+Serif+KR&display=swap" rel="stylesheet">
-</head>
+
 <style>
-body {
+.reservation-container{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -13,7 +13,6 @@ body {
     color: #666;
     -webkit-font-smoothing: antialiased;
 }
-.reservation-container{width: 1280px;padding: 0 90px;margin: 0 auto;}
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
 .current-path{font-size: 16px;padding: 13px 0 30px 0;}
@@ -237,6 +236,7 @@ body {
 		location.href = "<%=request.getContextPath()%>";	
 	};
 </script>
+   
     <div class="reservation-container">
         <div class="current-path">
             <span>홈</span>
@@ -338,7 +338,5 @@ body {
             </div>
           </div>
     </div><!--End of reservation-container-->
-
-
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
