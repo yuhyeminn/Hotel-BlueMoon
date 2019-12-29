@@ -3,7 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-
+<%
+	Notice n = (Notice)request.getAttribute("notice");
+%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/notice.css" />
 
 <section>
@@ -16,24 +18,35 @@
 
 	<div id="notice-container">
 		<p id="noticeNo">
-			<span>NO.</span><span id="notice-no">글번호</span>
+			<span>NO.</span><span id="notice-no"><%=n.getNoticeNo() %></span>
 		</p>
 		<div id="notice-titlebox" class="content-row">
-			<span id="notice-title">공지사항 타이틀</span><span id="notice-date">날짜
-				부분</span>
+			<span id="notice-title"><%=n.getNoticeTitle() %></span>
+			<span id="notice-date"><%=n.getNoticeDate() %></span>
 		</div>
 		<div id="notice-content">
-			ddddddddddddddddddddddddddddddddddddddddddd<br>dddddddddddddddddddddddddddddd
+			<%=n.getNoticeContent() %>
 		</div>
 		<div id="notice-file" class="content-row">
-			<img src="images/file.png" id="file-image">첨부파일.txt
-			<div class="txt"></div>
+			<%if(n.getNoticeOriginalFileName() != null){ %>
+                <a href="javascript:fileDownload('<%=n.getNoticeOriginalFileName()%>','<%=n.getNoticeRenamedFileName()%>')">
+                    <img alt="첨부파일" src="<%=request.getContextPath() %>/images/file.png" width=16px>
+                    <%=n.getNoticeOriginalFileName() %>
+                </a>
+                <%} %>
 		</div>
 		<div id="btn-group">
+		<%
+			if(memberLoggedIn != null &&
+			("admin".equals(memberLoggedIn.getMemberId()))) {
+		%>
 			<button type="button" class="btn btn-dark">수정</button>
 			<button type="button" class="btn btn-dark">삭제</button>
 			<button type="button" id="list-button" class="btn btn-dark"
 				style="width: 150px;">목록</button>
+		<%
+			} 
+		%>  
 		</div>
 
 		

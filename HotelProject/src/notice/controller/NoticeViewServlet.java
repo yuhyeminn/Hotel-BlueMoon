@@ -16,7 +16,7 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeViewServlet
  */
-@WebServlet("/views/notice/noticeView")
+@WebServlet("/notice/noticeView")
 public class NoticeViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

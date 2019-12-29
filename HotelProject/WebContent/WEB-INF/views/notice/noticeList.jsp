@@ -55,6 +55,10 @@ color:black;
 	</div>
 
 	<div id="notice-container">
+	<% if(memberLoggedIn != null){ %>
+	<input type="button" value="글쓰기" id="btn-add" 
+		   onclick="location.href='<%=request.getContextPath() %>/notice/noticeForm';" />
+	<% } %>
 		<table class="table"
 			style="border-bottom: 1px solid #dee2e6; width: 80%; margin: 0 auto;">
 			<thead>
@@ -72,7 +76,7 @@ color:black;
 			%>
 				<tr>
 					<th scope="row"><%=n.getNoticeNo() %></th>
-					<td><a href="" class="board-title"><%=n.getNoticeTitle() %></a></td>
+					<td><a href="<%=request.getContextPath() %>/notice/noticeView?noticeNo=<%=n.getNoticeNo()%>" class="board-title"><%=n.getNoticeTitle() %></a></td>
 					<td>
 					<%if(n.getNoticeOriginalFileName() != null) {%>
 					<img src="<%=request.getContextPath() %>/images/file.png" width="20px"/>

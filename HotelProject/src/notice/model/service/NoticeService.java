@@ -38,4 +38,19 @@ public class NoticeService {
 		return n;
 	}
 
+	public int insertNotice(Notice n) {
+		Connection conn = getConnection();
+		int result = new NoticeDAO().insertNotice(conn, n);
+		//트랜잭션 처리
+		if(result>0) {
+			//새로 발급된 게시글번호를 가져와서 board객체에 대입 
+			n.setNoticeNo(new NoticeDAO().selectLastSeq(conn));
+			commit(conn);
+		}
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
 }

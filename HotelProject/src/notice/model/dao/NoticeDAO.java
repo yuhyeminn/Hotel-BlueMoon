@@ -91,13 +91,94 @@ public class NoticeDAO {
 	public Notice selectNoticeOne(Connection conn, int noticeNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectNoticeOne");
+		String query = prop.getProperty("selectNoticeOne"); 
+		Notice notice = null;
 		
-		return null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1,  noticeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				notice = new Notice();
+				Notice n = new Notice();
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeWriter(rset.getString("notice_writer"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeDate(rset.getDate("notice_date"));
+				n.setNoticeReadCount(rset.getInt("notice_readcount"));
+				n.setNoticeOriginalFileName(rset.getString("notice_original_filename"));
+				n.setNoticeRenamedFileName(rset.getString("notice_renamed_filename"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return notice;
 	}
 
 	public int increaseReadCount(Connection conn, int noticeNo) {
 		return 0;
 	}
+
+	public int insertNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertNotice");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeWriter());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getNoticeOriginalFileName());
+			pstmt.setString(5, n.getNoticeRenamedFileName());
+
+			result = pstmt.executeUpdate();
+			
+			System.out.println("dao@insert"+result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+
+	public int selectLastSeq(Connection conn) {
+		int noticeNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectLasSeq");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				noticeNo = rset.getInt("currval");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return noticeNo;
+	}
+
+
 
 }
