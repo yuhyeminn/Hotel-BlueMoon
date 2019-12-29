@@ -42,20 +42,6 @@ public class MemberIdDuplicatedCheckServlet extends HttpServlet {
 		System.out.println("servlet@="+m);
 		int booleanchk = m==null?0:1;
 		
-//		JSONArray jsonArray = new JSONArray();
-//		
-//		for(Member m : list) {
-////					System.out.println(m);
-////					System.out.println(m.getName());
-//			if(m.getName().contains(srchName)) {
-//				JSONObject jsonMember = new JSONObject();
-//				jsonMember.put("name", m.getName());
-//				jsonMember.put("phone", m.getPhone());
-//				jsonMember.put("profile", m.getProfile());
-//				jsonArray.add(jsonMember);
-//			}
-//		}
-//		System.out.println(jsonArray);
 		
 		//4.응답객체에 출력
 		response.setContentType("application/json; charset=utf-8"); 
