@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import room.model.vo.Room;
 
 public class AdminDAO {
 	
@@ -328,7 +329,205 @@ public class AdminDAO {
 		return totalContent;
 	}
 
+	
+	public int insertRoom(Connection conn, Room r) {
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertRoom");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, r.getRoomName());
+			pstmt.setString(2, r.getRoomDescribe());
+			pstmt.setString(3, r.getRoomDescribe2());
+			pstmt.setInt(4, r.getRoomPeople());
+			pstmt.setString(5, r.getRoomBed());
+			pstmt.setString(6, r.getRoomView());
+			pstmt.setInt(7, r.getRoomPrice());
+			pstmt.setInt(8, r.getRoomBfPrice());
+			pstmt.setInt(9, r.getRoomAmount());
+			pstmt.setInt(10, r.getRoomSize());
+			pstmt.setString(11, r.getOriginalFileName());
+			pstmt.setString(12, r.getRenamedFileName());
+			
+			result = pstmt.executeUpdate();
+			
+//			System.out.println("insertRoom@dao="+result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
+	public List<Room> selectRoomList(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRoomList");
+		List<Room> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(2, cPage*numPerPage);//end rownum
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Room r = new Room();
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setRoomDescribe(rset.getString("room_describe"));
+				r.setRoomDescribe2(rset.getString("room_describe2"));
+				r.setRoomPeople(rset.getInt("room_people"));
+				r.setRoomBed(rset.getString("room_bed"));
+				r.setRoomView(rset.getString("room_view"));
+				r.setRoomPrice(rset.getInt("room_price"));
+				r.setRoomBfPrice(rset.getInt("room_bfPrice"));
+				r.setRoomAmount(rset.getInt("room_amount"));
+				r.setRoomSize(rset.getInt("room_size"));
+				r.setOriginalFileName(rset.getString("room_original_filename"));
+				r.setRenamedFileName(rset.getString("room_renamed_filename"));
+				
+				list.add(r);
+			}
+//			System.out.println("list@dao="+list);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+
+	public int selectRoomCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectRoomCount");
+		int totalContent = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				totalContent = rset.getInt("cnt");
+			
+//			System.out.println("totalContent/selectRoomCount@dao="+totalContent);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContent;
+	}
+
+	public int deleteRoom(Connection conn, String roomName) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteRoom"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, roomName);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Room> selectAllRoomList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectAllRoomList");
+		List<Room> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Room r = new Room();
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setRoomDescribe(rset.getString("room_describe"));
+				r.setRoomDescribe2(rset.getString("room_describe2"));
+				r.setRoomPeople(rset.getInt("room_people"));
+				r.setRoomBed(rset.getString("room_bed"));
+				r.setRoomView(rset.getString("room_view"));
+				r.setRoomPrice(rset.getInt("room_price"));
+				r.setRoomBfPrice(rset.getInt("room_bfPrice"));
+				r.setRoomAmount(rset.getInt("room_amount"));
+				r.setRoomSize(rset.getInt("room_size"));
+				r.setOriginalFileName(rset.getString("room_original_filename"));
+				r.setRenamedFileName(rset.getString("room_renamed_filename"));
+				
+				list.add(r);
+			}
+			System.out.println("AllRoomList@dao="+list);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public Room selectOne(Connection conn, int roomNo) {
+		Room r = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOneByRoomNo");
+		try{
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			//쿼리문미완성
+			pstmt.setInt(1, roomNo);
+			//쿼리문실행
+			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				r = new Room();
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setRoomDescribe(rset.getString("room_describe"));
+				r.setRoomDescribe2(rset.getString("room_describe2"));
+				r.setRoomPeople(rset.getInt("room_people"));
+				r.setRoomBed(rset.getString("room_bed"));
+				r.setRoomView(rset.getString("room_view"));
+				r.setRoomPrice(rset.getInt("room_price"));
+				r.setRoomBfPrice(rset.getInt("room_bfPrice"));
+				r.setRoomAmount(rset.getInt("room_amount"));
+				r.setRoomSize(rset.getInt("room_size"));
+				r.setOriginalFileName(rset.getString("room_original_filename"));
+				r.setRenamedFileName(rset.getString("room_renamed_filename"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+		
+	}
 }
 
 
