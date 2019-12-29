@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QusetionFormServlet
  */
-@WebServlet("/views/qna/qnaForm")
+@WebServlet("/mypage/question")
 public class QusetionFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

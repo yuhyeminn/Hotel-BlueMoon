@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
-<%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 <%
 	Question q = (Question)request.getAttribute("question");
 	Comment c = (Comment)request.getAttribute("comment");
@@ -122,10 +122,10 @@
     </style>
 	<section>
 	<span id="current-root"><a href="">홈</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a
-                    href="">마이페이지</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="">1:1문의</a></span>
+                    href="">관리자페이지</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="">문의내역</a></span>
             <div id="content-header">
                 <br>
-                <span id="content-title">1 : 1 문 의</span>
+                <span id="content-title">문의사항</span>
                 <hr>
             </div>
 

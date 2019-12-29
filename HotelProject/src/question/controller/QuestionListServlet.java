@@ -1,4 +1,4 @@
-package admin.controller;
+package question.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,16 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import question.model.service.QuestionService;
 import question.model.vo.Question;
 
 /**
- * Servlet implementation class AdminQnAListServlet
+ * Servlet implementation class QuestionMainViewServlet
  */
-@WebServlet("/views/admin/adminQnAList")
-public class AdminQnAListServlet extends HttpServlet {
+@WebServlet("/mypage/questionList")
+public class QuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String memberId = request.getParameter("memberId");
 		
 		int cPage = 1;
 		final int numPerPage = 5; 
@@ -28,12 +31,9 @@ public class AdminQnAListServlet extends HttpServlet {
 			cPage = Integer.parseInt(request.getParameter("cPage"));			
 		} catch(NumberFormatException e) {
 		}
-		System.out.println("cPage@list="+cPage);
 				
-		int totalContent = new AdminService().selectTotalContent();
+		int totalContent = new QuestionService().selectTotalContentByMemberId(memberId);
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
-		System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
-		
 		
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -44,7 +44,7 @@ public class AdminQnAListServlet extends HttpServlet {
 		int pageNo = pageStart;
 
 		if(pageNo != 1) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminQnAList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+			pageBar += "<a href='"+request.getContextPath()+"/mypage/questionList?cPage="+(pageNo-1)+"&memberId="+memberId+"'>[이전]</a>\n";
 		}
 				
 		while(pageNo<=pageEnd && pageNo<=totalPage) {
@@ -52,24 +52,46 @@ public class AdminQnAListServlet extends HttpServlet {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
 			}
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminQnAList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+				pageBar += "<a href='"+request.getContextPath()+"/mypage/questionList?cPage="+pageNo+"&memberId="+memberId+"'>"+pageNo+"</a>\n";				
 			}
 			pageNo++;
 		}
 				
 		if(pageNo <= totalPage) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminQnAList?cPage="+pageNo+"'>[다음]</a>\n";							
+			pageBar += "<a href='"+request.getContextPath()+"/mypage/questionList?cPage="+pageNo+"&memberId="+memberId+"'>[다음]</a>\n";							
 		}
 				
-		List<Question> list = new AdminService().selectQuestionList(cPage, numPerPage);
+		List<Question> list = new QuestionService().selectQuestionByMemberId(memberId, cPage, numPerPage);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar", pageBar);
 				
 		//4.view단처리
-		request.getRequestDispatcher("/WEB-INF/views/admin/adminQnAList.jsp")
-					 .forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageQuestionView.jsp")
+				.forward(request, response);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*String memberId = request.getParameter("memberId");
+		//System.out.println("memberId@servletQ&A="+memberId);
+
+		List<Question> qnaList = new QuestionService().selectQuestion(memberId);
+		
+		request.setAttribute("qnaList", qnaList);
+		
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageQuestionView.jsp").forward(request, response);*/
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
