@@ -1,4 +1,4 @@
-package member.controller;
+package mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,7 +19,6 @@ public class MemberReviewEndServlet extends HttpServlet {
      */
     public MemberReviewEndServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,6 +32,8 @@ public class MemberReviewEndServlet extends HttpServlet {
 		String starLocation = request.getParameter("input-4");
 		String starValue = request.getParameter("input-5");
 		String memberId = request.getParameter("memberId");
+		String roomNo = request.getParameter("clickedRoomNo");
+		String resvNo = request.getParameter("clickedResvNo");
 		
 		System.out.println("reviewContext@ReviewEndServlet="+reviewContext);
 		System.out.println("star1@ReviewEndServlet="+starClean);
@@ -41,6 +42,8 @@ public class MemberReviewEndServlet extends HttpServlet {
 		System.out.println("star4@ReviewEndServlet="+starLocation);
 		System.out.println("star5@ReviewEndServlet="+starValue);
 		System.out.println("memberId@ReviewEndServlet="+memberId);
+		System.out.println("roomNo@ReviewEndServlet="+roomNo);
+		System.out.println("resvNo@ReviewEndServlet="+resvNo);
 		
 		
 		
