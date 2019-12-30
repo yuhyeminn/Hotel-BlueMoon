@@ -16,10 +16,11 @@ import notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/views/notice/noticeList")
+@WebServlet("/notice/noticeList")
 public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -32,13 +33,13 @@ public class NoticeListServlet extends HttpServlet {
 		final int numPerPage = 5;
 		int cPage = 1;
 		try {
-
-		} catch (NumberFormatException e) {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+		
 		}
 
 		// * 업무 로직
-
+		//a.컨텐츠영역
 		List<Notice> list = noticeService.selectNoticeAll(cPage, numPerPage);
 		System.out.println("noticeList@servlet=" + list);
 

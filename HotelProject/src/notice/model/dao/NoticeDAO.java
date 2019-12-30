@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.sun.javafx.geom.transform.GeneralTransform3D;
+
 import notice.model.vo.Notice;
 import static common.JDBCTemplate.*;
 
@@ -49,6 +51,7 @@ public class NoticeDAO {
 				n.setNoticeReadCount(rset.getInt("notice_readcount"));
 				n.setNoticeOriginalFileName(rset.getString("notice_original_filename"));
 				n.setNoticeRenamedFileName(rset.getString("notice_renamed_filename"));
+				n.setNoticeAvailable(rset.getString("notice_available"));
 				
 				list.add(n);
 			}
@@ -92,18 +95,17 @@ public class NoticeDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("selectNoticeOne"); 
-		Notice notice = null;
+		Notice n = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1,  noticeNo);
+			pstmt.setInt(1, noticeNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				notice = new Notice();
-				Notice n = new Notice();
+				n = new Notice();
 				n.setNoticeNo(rset.getInt("notice_no"));
 				n.setNoticeWriter(rset.getString("notice_writer"));
 				n.setNoticeTitle(rset.getString("notice_title"));
@@ -112,6 +114,7 @@ public class NoticeDAO {
 				n.setNoticeReadCount(rset.getInt("notice_readcount"));
 				n.setNoticeOriginalFileName(rset.getString("notice_original_filename"));
 				n.setNoticeRenamedFileName(rset.getString("notice_renamed_filename"));
+				n.setNoticeAvailable(rset.getString("notice_available"));
 			}
 			
 		} catch (SQLException e) {
@@ -121,11 +124,28 @@ public class NoticeDAO {
 			close(pstmt);
 		}
 		
-		return notice;
+		return n;
 	}
 
 	public int increaseReadCount(Connection conn, int noticeNo) {
-		return 0;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
 	}
 
 	public int insertNotice(Connection conn, Notice n) {
@@ -135,15 +155,15 @@ public class NoticeDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeWriter());
+			pstmt.setString(1, n.getNoticeWriter());
+			pstmt.setString(2, n.getNoticeTitle());
 			pstmt.setString(3, n.getNoticeContent());
 			pstmt.setString(4, n.getNoticeOriginalFileName());
 			pstmt.setString(5, n.getNoticeRenamedFileName());
 
 			result = pstmt.executeUpdate();
 			
-			System.out.println("dao@insert"+result);
+			System.out.println("insert@dao="+result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -178,6 +198,52 @@ public class NoticeDAO {
 		
 		return noticeNo;
 	}
+
+	public int updateNotice(Connection conn, Notice n) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setString(3, n.getNoticeOriginalFileName());
+			pstmt.setString(4, n.getNoticeRenamedFileName());
+			pstmt.setInt(5, n.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteNotice(Connection conn, Notice n) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, n.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);		
+			}
+		
+		return result;
+	}
+
+
 
 
 

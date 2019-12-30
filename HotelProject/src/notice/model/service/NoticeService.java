@@ -23,18 +23,22 @@ public class NoticeService {
 		close(conn);
 		return totalContent;
 	}
+	
 
 	public Notice selectNoticeOne(int noticeNo, boolean hasRead) {
 		Connection conn = getConnection();
 		int result = 0;
-		Notice n = new NoticeDAO().selectNoticeOne(conn, noticeNo);
+		
 		if(!hasRead) {
 			result = new NoticeDAO().increaseReadCount(conn, noticeNo);
 		}
 		
+		Notice n = new NoticeDAO().selectNoticeOne(conn, noticeNo);
+		
 		if(result>0) commit(conn);
 		else rollback(conn);
 		
+		close(conn);		
 		return n;
 	}
 
@@ -43,13 +47,53 @@ public class NoticeService {
 		int result = new NoticeDAO().insertNotice(conn, n);
 		//트랜잭션 처리
 		if(result>0) {
-			//새로 발급된 게시글번호를 가져와서 board객체에 대입 
+			
 			n.setNoticeNo(new NoticeDAO().selectLastSeq(conn));
 			commit(conn);
 		}
 		else 
 			rollback(conn);
 		close(conn);
+		return result;
+	}
+
+	public Notice selectNoticeOne(int noticeNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		Notice notice = new NoticeDAO().selectNoticeOne(conn, noticeNo);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return notice;
+	}
+
+	public int updateNotice(Notice n) {
+		Connection conn = getConnection();
+		int result = new NoticeDAO().updateNotice(conn, n);
+		
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteNotice(Notice n) {
+		Connection conn = getConnection();
+		int result = new NoticeDAO().deleteNotice(conn, n);
+		
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
 		return result;
 	}
 

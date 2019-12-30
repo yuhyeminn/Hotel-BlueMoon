@@ -63,13 +63,16 @@ public class NoticeFormEndServlet extends HttpServlet {
 									.replaceAll(">", "&gt")
 									.replaceAll("\\n", "<br/>");
 		
+		System.out.println("noticeTitle="+noticeTitle);
 		
-		String noticeoriginalFileName 
+		String noticeOriginalFileName 
 			= multiReq.getOriginalFileName("upFile");//사용자 업로드한 파일명
-		String noticerenamedFileName
+		String noticeRenamedFileName
 			= multiReq.getFilesystemName("upFile");//실제 저장된 파일명
+		String noticeAvailable = multiReq.getParameter("noticeAvailable");
 		
-		Notice n = new Notice(0, noticeTitle, noticeWriter, noticeContent, null, 0, noticeoriginalFileName, noticerenamedFileName);
+		Notice n = new Notice(0, noticeWriter, noticeTitle, noticeContent, null, 0, noticeOriginalFileName, noticeRenamedFileName, noticeAvailable);
+
 		System.out.println("n@noticeFormEnd="+n);
 		
 		//2.business logic

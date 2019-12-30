@@ -55,10 +55,7 @@ color:black;
 	</div>
 
 	<div id="notice-container">
-	<% if(memberLoggedIn != null){ %>
-	<input type="button" value="글쓰기" id="btn-add" 
-		   onclick="location.href='<%=request.getContextPath() %>/notice/noticeForm';" />
-	<% } %>
+
 		<table class="table"
 			style="border-bottom: 1px solid #dee2e6; width: 80%; margin: 0 auto;">
 			<thead>
@@ -97,11 +94,12 @@ color:black;
 				if(memberLoggedIn != null && "admin".equals(memberLoggedIn.getMemberId())){
 			%>
 			<div id="writebtnbox" style="text-align: right; padding-right: 110px;">
-			<button class="btn btn-dark" id="writeBtn">글쓰기</button>
+			<button class="btn btn-dark" id="writeBtn"
+			onclick="location.href='<%=request.getContextPath() %>/notice/noticeForm';">글쓰기</button>
 		</div>
 		<%
 				}
-			%>
+		%>
 		
 	</div>
 </section>

@@ -33,24 +33,49 @@
                     <img alt="첨부파일" src="<%=request.getContextPath() %>/images/file.png" width=16px>
                     <%=n.getNoticeOriginalFileName() %>
                 </a>
-                <%} %>
+            <%} 
+			else{
+			%>
+				<span>첨부파일 없음</span>
+			<% 
+			}
+            %>
 		</div>
 		<div id="btn-group">
 		<%
 			if(memberLoggedIn != null &&
 			("admin".equals(memberLoggedIn.getMemberId()))) {
 		%>
-			<button type="button" class="btn btn-dark">수정</button>
-			<button type="button" class="btn btn-dark">삭제</button>
-			<button type="button" id="list-button" class="btn btn-dark"
-				style="width: 150px;">목록</button>
+			<button type="button" class="btn btn-dark" onclick="updateNotice()">수정</button>
+			<button type="button" class="btn btn-dark" onclick="deleteNotice()">삭제</button>
+
 		<%
 			} 
 		%>  
+			<button type="button" id="list-button" class="btn btn-dark"
+				style="width: 150px;"
+				onclick="location.href='<%=request.getContextPath() %>/notice/noticeList';">
+				목록
+			</button>
 		</div>
 
 		
 	</div>
 </section>
+
+<script>
+function updateNotice(){
+    location.href = "<%=request.getContextPath()%>/notice/noticeUpdate?noticeNo=<%=n.getNoticeNo()%>";
+}
+
+function deleteNotice(){
+    if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) 
+    	return;
+    else{
+    	location.href = "<%=request.getContextPath()%>/notice/noticeDelete?noticeNo=<%=n.getNoticeNo()%>";
+<%--     	location.href = "<%=request.getContextPath()%>/notice/noticeList"; --%>
+    }
+}
+</script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>

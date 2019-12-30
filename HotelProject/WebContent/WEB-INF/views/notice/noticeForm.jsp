@@ -59,7 +59,9 @@
 	<hr>
 </div>
 <!--공지사항 등록 폼-->
-<form action="" id="noticeWriteFrm">
+<form action="<%=request.getContextPath() %>/notice/noticeFormEnd" id="noticeWriteFrm"
+method="post" enctype="multipart/form-data">
+<input type="hidden" name="noticeWriter" value=<%=memberLoggedIn.getMemberId() %> />
 	<div id="notice-container">
 		<div id="notice-titlebox" class="content-row">
 			<span style="font-weight: bold; margin-right: 20px;">제목</span> <input
@@ -68,19 +70,43 @@
 		</div>
 		<div id="notice-content">
 			<p style="font-weight: bold; font-size: 20px; margin-top: 5px;">내용</p>
-			<textarea class="form-control" name="" id="" cols="130" rows="20"></textarea>
+			<textarea class="form-control" name="noticeContent" id="" cols="130" rows="20"></textarea>
 		</div>
 		<div id="notice-file" class="content-row">
 			<input type="file" name="upFile" />
 		</div>
 		<div id="btn-group">
-			<button type="submit" class="btn btn-dark">등록</button>
+			<button type="submit" class="btn btn-dark"
+			onclick="return noticeValidate();" >등록</button>
 			<button type="button" id="list-button" class="btn btn-dark"
-				style="width: 150px;">목록</button>
+				style="width: 150px;"
+				onclick="location.href='<%=request.getContextPath() %>/notice/noticeList';">
+				목록</button>
 		</div>
 	</div>
 </form>
 </seciton>
 
+<script>
+function noticeValidate() {
+	//제목
+	var $title = $("[name=noticeTitle]");
+	
+	if($title.val().trim().length == 0){
+		alert("제목을 입력하세요");
+		return false;
+	}
+	
+	//내용
+	var $content = $("[name=noticeContent]");
+	if($content.val().trim().length == 0){
+		alert("내용을 입력하세요.");
+		return false;
+	}
+	
+	return true;
+	
+}
+</script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
