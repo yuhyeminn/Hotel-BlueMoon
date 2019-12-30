@@ -10,6 +10,7 @@ import admin.model.dao.AdminDAO;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import room.model.vo.Room;
 
 public class AdminService {
 	
@@ -86,6 +87,20 @@ public class AdminService {
 		return result;
 	}
 
+			
+	public int insertRoom(Room r) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().insertRoom(conn, r);
+		//트랜잭션 처리
+		if(result>0) 
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+
+		return result;
+	}
+
 	public int insertComment(Comment c) {
 		Connection conn = getConnection();
 		
@@ -101,7 +116,7 @@ public class AdminService {
 	}
 
 	public int updateCommnet(Comment c) {
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		int result = new AdminDAO().updateCommnet(conn, c);
 		
@@ -115,6 +130,47 @@ Connection conn = getConnection();
 	}
 
 
+	public List<Room> selectRoomList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Room> list 
+			= new AdminDAO().selectRoomList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectRoomCount() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectRoomCount(conn);
+		close(conn);
+		return totalContent;
+	}
+
+	public int deleteRoom(String roomName) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().deleteRoom(conn, roomName);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public List<Room> selectAllRoomList() {
+		Connection conn = getConnection();
+		List<Room> list = new AdminDAO().selectAllRoomList(conn);
+		close(conn);
+		return list;
+	}
+
+	public Room selectOne(int roomNo) {
+		Connection conn = getConnection();
+		Room r = new AdminDAO().selectOne(conn, roomNo);
+		close(conn);
+		return r;
+	
+	}
 
 }
 
