@@ -17,17 +17,10 @@ import member.model.vo.Member;
 /**
  * Servlet Filter implementation class AdminFilter
  */
-@WebFilter(
-		urlPatterns= {
-				"/admin/*"},
-		servletNames = { 
-			"NoticeDeleteServlet", 
-			"NoticeUpdateEndServlet",
-			"NoticeUpdateServlet",
-			"NoticeFormEndServlet",
-			"NoticeFormServlet"
-				}
-		)
+@WebFilter( urlPatterns= {
+		   "/views/admin/*",
+		   "/admin/*"
+})
 public class AdminFilter implements Filter {
 
     /**

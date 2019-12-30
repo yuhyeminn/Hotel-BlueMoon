@@ -14,11 +14,12 @@
 <i class="fas fa-times sidenav__brand-close"></i>
 </div> -->
 <ul class="sidenav__list">
-<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/main">내정보 보기</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLogIn.getMemberId()%>">내정보 보기</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/update?memberId=<%=memberLogIn.getMemberId()%>">내정보 수정</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/updatePassword?memberId=<%=memberLogIn.getMemberId()%>">비밀번호 변경</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myReservation">예약 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myCoupon">쿠폰 조회</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/questionList?memberId=<%=memberLogIn.getMemberId()%>">문의사항 조회</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/review">리뷰 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/deleteMember">회원탈퇴</a></li>
 </ul>
@@ -50,7 +51,7 @@
   grid-area: sidenav;
   /* display: flex; */
   flex-direction: column;
-  height: 520px;
+  height: 590px;
   width: 240px;
   overflow-y: auto;
   transform: translateX(-245px);

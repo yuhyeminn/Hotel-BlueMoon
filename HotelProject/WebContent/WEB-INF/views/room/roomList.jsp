@@ -1,7 +1,12 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@page import="room.model.vo.Room"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
-
+<%
+	List<Room> roomList =  (List<Room>)request.getAttribute("roomList");
+	System.out.println("roomList@jsp="+roomList);
+%>
 <style>
 .room-detail-container {
 	padding: 0;
@@ -168,149 +173,44 @@ h1.room-title span {
 				블루문 호텔에서 격이 다른 <br> 휴식과 여유를 경험해 보세요
 			</p>
 		</h1>
-
+		
+		<% for(Room r : roomList){ %>
 		<div class="room-wrap">
-			<h4>디럭스</h4>
-			<p>모던하면서도 세련된 최신 트렌드의 인테리어가 돋보이는 객실</p>
+			<h4><%=r.getRoomName() %></h4>
+			<p><%=r.getRoomDescribe() %></p>
 
 			<div class="card mb-3 mx-auto" style="max-width: 1100px;">
 				<div class="row no-gutters">
 					<div class="col-md-4">
-						<img src="<%=request.getContextPath()%>/images/room1.jpg"
+						<img src="<%=request.getContextPath()%>/upload/adminRoomAdd/<%=r.getRenamedFileName()%>"
 							class="card-img room-img" alt="객실사진">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body pl-10">
-							<h5 class="card-title room-title-fs font-weight-bold">디럭스룸</h5>
-							<p class="card-text room-context-fs">은은한 조명과 어우러진 다크브라운의 조화</p>
+							<h5 class="card-title room-title-fs font-weight-bold"><%=r.getRoomName() %>&nbsp;룸</h5>
+							<p class="card-text room-context-fs"><%=r.getRoomDescribe2() %></p>
 							<hr class="hr1">
 							<p class="card-text">
-								<span class="s1">전망</span><span class="s2">시티뷰</span>
+								<span class="s1">전망</span><span class="s2"><%=r.getRoomView() %></span>
 							</p>
 							<p class="card-text">
-								<span class="s1">인원</span><span class="s2">성인 2인</span>
+								<span class="s1">인원</span><span class="s2">성인 <%=r.getRoomPeople() %>인</span>
 							</p>
 							<p class="card-text">
-								<span class="s1">배드타입</span><span class="s2">더블, 트윈, 온돌</span>
+								<span class="s1">배드타입</span><span class="s2"><%=r.getRoomBed() %></span>
 							</p>
 							<p class="card-text">
-								<span class="s1">객실크기</span><span class="s2">40~50㎡</span>
+								<span class="s1">객실크기</span><span class="s2"><%=r.getRoomSize() %>㎡</span>
 							</p>
-							<button type="button" class="btn draw-border btn-room-detail"
-								id="btnToDelux" onclick="ToDeluxDetailPage();">상세보기</button>
+							<a href="<%=request.getContextPath()%>/views/room/detail?roomNo=<%=r.getRoomNo()%>">
+								<button type="button" class="btn draw-border btn-room-detail" id="btnToDelux">상세보기</button>
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="room-wrap">
-			<h4>프리미엄디럭스</h4>
-			<p>해변의 아름다운 해안선을 만끽할 수 있는 객실</p>
-
-			<div class="card mb-3 mx-auto" style="max-width: 1100px;">
-				<div class="row no-gutters">
-					<div class="col-md-4">
-						<img src="<%=request.getContextPath()%>/images/room2.jpg"
-							class="card-img room-img" alt="객실사진">
-					</div>
-					<div class="col-md-8">
-						<div class="card-body pl-10">
-							<h5 class="card-title room-title-fs font-weight-bold">프리미엄디럭스룸</h5>
-							<p class="card-text room-context-fs">은은한 조명과 어우러진 다크브라운의 조화</p>
-							<hr class="hr1">
-							<p class="card-text">
-								<span class="s1">전망</span><span class="s2">리버뷰</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">인원</span><span class="s2">성인 2인</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">배드타입</span><span class="s2">더블, 트윈</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">객실크기</span><span class="s2">59~73㎡</span>
-							</p>
-							<button type="button" class="btn draw-border btn-room-detail"
-								id="btnToPremiumDelux" onclick="ToPremiumDeluxDetailPage();">상세보기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="room-wrap">
-			<h4>스위트</h4>
-			<p>편안한 침실과 안락한 거실이 분리되어 품격 있는 휴식을 누릴 수 있는 스위트 룸</p>
-
-			<div class="card mb-3 mx-auto" style="max-width: 1100px;">
-				<div class="row no-gutters">
-					<div class="col-md-4">
-						<img src="<%=request.getContextPath()%>/images/room6.jpg"
-							class="card-img room-img" alt="객실사진">
-					</div>
-					<div class="col-md-8">
-						<div class="card-body pl-10">
-							<h5 class="card-title room-title-fs font-weight-bold">스위트 룸</h5>
-							<p class="card-text room-context-fs">편안한 침실과 안락한 거실이 분리되어 품격
-								있는 휴식을 누릴 수 있는 스위트 룸</p>
-							<hr class="hr1">
-							<p class="card-text">
-								<span class="s1">전망</span><span class="s2">시티뷰/리버뷰</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">인원</span><span class="s2">성인 2인</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">배드타입</span><span class="s2">더블, 트윈</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">객실크기</span><span class="s2">353㎡</span>
-							</p>
-							<button type="button" class="btn draw-border btn-room-detail"
-								id="btnToSweet" onclick="ToSweetDetailPage();">상세보기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="room-wrap">
-			<h4>스페셜 스위트</h4>
-			<p>편안한 침실과 안락한 거실에서 품격 있는 휴식을 누릴 수 있는 객실</p>
-
-			<div class="card mb-3 mx-auto" style="max-width: 1100px;">
-				<div class="row no-gutters">
-					<div class="col-md-4">
-						<img src="<%=request.getContextPath()%>/images/room4.jpg"
-							class="card-img room-img" alt="객실사진">
-					</div>
-					<div class="col-md-8">
-						<div class="card-body pl-10">
-							<h5 class="card-title room-title-fs font-weight-bold">스페셜
-								스위트 룸</h5>
-							<p class="card-text room-context-fs">고급스럽고 풍부한 인테리어와 메인 침실에서
-								바라보는 바다 전경이 감탄을 자아내게 하는 최상급 스위트 스페셜 룸</p>
-							<hr class="hr1">
-							<p class="card-text">
-								<span class="s1">전망</span><span class="s2">시티뷰/리버뷰</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">인원</span><span class="s2">성인 2인</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">배드타입</span><span class="s2">더블, 트윈</span>
-							</p>
-							<p class="card-text">
-								<span class="s1">객실크기</span><span class="s2">353㎡</span>
-							</p>
-							<button type="button" class="btn draw-border btn-room-detail"
-								id="btnToSpecialSweet" onclick="ToSpecialSweetDetailPage();">상세보기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<% } %>
 	</div>
 </body>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

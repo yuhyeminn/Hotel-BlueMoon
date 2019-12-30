@@ -1,6 +1,13 @@
+<%@page import="question.model.vo.Comment"%>
+<%@page import="question.model.vo.Question"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
+<%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%
+	Question q = (Question)request.getAttribute("question");
+	Comment c = (Comment)request.getAttribute("comment");
+%>
 <style>
         #qna-container {
             margin: 50px 0px;
@@ -34,8 +41,10 @@
         }
 
         #file-image {
-            width: 27px;
-            margin-right: 15px;
+            width: 400px;
+            margin-right: 300px; 
+            margin-left: 300px; 
+            
         }
 
         #qna-category {
@@ -121,46 +130,44 @@
             </div>
 
             <div id="qna-container">
-                <p id="qnaNo"><span>NO.</span><span id="qna-no">문의글번호</span></p>
+                <p id="qnaNo"><span>NO.</span><span id="qna-no"><%=q.getQuestionNo() %></span></p>
                 <div id="qna-titlebox" class="content-row">
-                    <span id="qna-category">[문의카테고리]</span>
-                    <span id="qna-title">문의사항 타이틀</span>
-                    <span id="qna-date">날짜 부분</span>
+                    <span id="qna-category">[ <%=q.getQuestionCode() %> ]</span>
+                    <span id="qna-title"><%=q.getQuestionTitle() %></span>
+                    <span id="qna-date"><%=q.getQuestionDate() %></span>
                 </div>
                 <div id="qna-content">
-                	<p>문의 내용 들어갈 부분ddddddddddddddddddddddddddddddddddddddddddd<br>dddddddddddddddddddddddddddddd</p>
+                	<p><%=q.getQuestionContent() %>
                 </div>
-                <div id="qna-file" class="content-row"><img src="images/file.png" id="file-image">첨부파일.txt<div
+                <%if(q.getQuestionOriginalFileName() != null){ %>
+                <div id="qna-file" class="content-row"><img src="<%=request.getContextPath() %>/upload/question/<%=q.getQuestionRenamedFileName()%>" id="file-image"><div
                         class="txt"></div>
                 </div>
-                <div id="qna-comment">
-                    <div id="comment-box" class="comment">
-                        <span class="comment-writer">Hotel BlueMoon</span><br>
-                        <span class="comment-content"> 안녕하세요 고객님~ 댓글 내용</span><br>
-                        <span class="comment-date">2019-12-25 12:29</span><br>
-                        <button id="recomment-btn">답글</button>
-                    </div>  
-                    <div id="recomment-box" class="comment">
-                            <span class="comment-writer">Hotel BlueMoon</span><br>
-                            <span class="comment-content"> 안녕하세요 고객님~ 댓글 내용</span><br>
-                            <span class="comment-date">2019-12-25 12:29</span><br>
-                            <button id="recomment-btn">답글</button>
-                    </div>
-                    
-                    <!-- 댓글 작성 -->
-                    <div class="comment-editor">
-                        <form action="" name="qnaCommentFrm">
-                            <input type="hidden" name="qnaRef" value="" />
-                            <input type="hidden" name="qnaCommentWriter" value="" />
-                            <input type="hidden" name="qnaCommentLevel" value="1" />
-                            <input type="hidden" name="qnaCommentRef" value="0" />
-
-                            <textarea class="form-control" name="qnaCommentContent" id="qnaCommentContent" cols="20"
-                                rows="3" style="display:inline-block"></textarea>
-                            <input type="submit" id="btn-commentInsert" value="등록" style="display:inline-block" />
-                        </form>
-                    </div>
+                <%} %>
+                
+                
+                <%if("admin".equals(memberLoggedIn.getMemberId()) && "F".equals(q.getQuestionAnswer())){ %>
+                <div class="comment-editor">
+                	<form action="<%=request.getContextPath()%>/admin/insertComment" method="POST" name="qnaCommentFrm">
+                		<input type="hidden" name="qnaRef" value="<%=q.getQuestionNo() %>" />
+                		<textarea class="form-control" name="qnaCommentContent" id="qnaCommentContent" cols="20"
+                          		  rows="3" style="display:inline-block"></textarea>
+                		<input type="submit" id="btn-commentInsert" value="등록" style="display:inline-block" />
+                	</form>
                 </div>
+                <%} %>
+                
+                    <%if("T".equals(q.getQuestionAnswer())){ %>
+                    <hr />
+                    <div id="qna-comment">
+                    	<div id="comment-box" class="comment">
+                        	<span class="comment-writer"><%=c.getCommentWriter()%></span><br>
+                        	<span class="comment-content"><%=c.getCommentContent()%></span><br>
+                        	<span class="comment-date"><%=c.getCommentDate()%></span><br>
+                        	<!-- <button id="recomment-btn">답글</button> -->
+                    	</div> 
+                	</div>
+                	<%} %>
             </div>
 	</section>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

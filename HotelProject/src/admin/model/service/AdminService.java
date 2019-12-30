@@ -1,6 +1,6 @@
 package admin.model.service;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -8,36 +8,39 @@ import java.util.List;
 
 import admin.model.dao.AdminDAO;
 import member.model.vo.Member;
+import question.model.vo.Comment;
+import question.model.vo.Question;
+import room.model.vo.Room;
 
 public class AdminService {
 	
-    public List<Member> selectMemberList(int cPage, int numPerPage) {
+    public List<Question> selectQuestionList(int cPage, int numPerPage) {
         Connection conn = getConnection();
-        List<Member> list= new AdminDAO().selectMemberList(conn, cPage, numPerPage);
+        List<Question> list= new AdminDAO().selectQuestionList(conn, cPage, numPerPage);
         close(conn);
         return list;
     }
 
-	public List<Member> selectMemberByMemberId(String searchKeyword, 
+	public List<Question> selectQuestionByMemberId(String searchKeyword, 
 											   int cPage, 
 											   int numPerPage) {
-		List<Member> list = null;
+		List<Question> list = null;
 		Connection conn = getConnection();
-		list = new AdminDAO().selectMemberByMemberId(conn, searchKeyword, cPage, numPerPage);
+		list = new AdminDAO().selectQuestionByMemberId(conn, searchKeyword, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 	
-	public List<Member> selectMemberByMemberName(String searchKeyword, int cPage, int numPerPage) {
+	public List<Question> selectQuestionByMemberName(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Member> list = new AdminDAO().selectMemberByMemberName(conn, searchKeyword, cPage, numPerPage);
+		List<Question> list = new AdminDAO().selectQuestionByQuestionName(conn, searchKeyword, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public List<Member> selectMemberByGender(String searchKeyword, int cPage, int numPerPage) {
+	public List<Question> selectQuestionByGender(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Member> list = new AdminDAO().selectMemberByGender(conn, searchKeyword, cPage, numPerPage);
+		List<Question> list = new AdminDAO().selectQuestionByAnswer(conn, searchKeyword, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
@@ -56,21 +59,118 @@ public class AdminService {
 		return totalContent;
 	}
 
-	public int selectTotalContentByMemberName(String searchKeyword) {
+	public int selectTotalContentByQuestionName(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByMemberName(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalContentByQuestionName(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
 
-	public int selectTotalContentByGender(String searchKeyword) {
+	public int selectTotalContentByAnswer(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByGender(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalContentByAnswer(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
 
+	public int deleteQuestion(int qnaNo) {
 
+		Connection conn = getConnection();
+		int result = new AdminDAO().deleteQuestion(conn, qnaNo);
+		
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+			
+	public int insertRoom(Room r) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().insertRoom(conn, r);
+		//트랜잭션 처리
+		if(result>0) 
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+
+		return result;
+	}
+
+	public int insertComment(Comment c) {
+		Connection conn = getConnection();
+		
+		int result = new AdminDAO().insertComment(conn, c);
+		
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateCommnet(Comment c) {
+		Connection conn = getConnection();
+		
+		int result = new AdminDAO().updateCommnet(conn, c);
+		
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+
+	public List<Room> selectRoomList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Room> list 
+			= new AdminDAO().selectRoomList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int selectRoomCount() {
+		Connection conn = getConnection();
+		int totalContent = new AdminDAO().selectRoomCount(conn);
+		close(conn);
+		return totalContent;
+	}
+
+	public int deleteRoom(String roomName) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().deleteRoom(conn, roomName);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public List<Room> selectAllRoomList() {
+		Connection conn = getConnection();
+		List<Room> list = new AdminDAO().selectAllRoomList(conn);
+		close(conn);
+		return list;
+	}
+
+	public Room selectOne(int roomNo) {
+		Connection conn = getConnection();
+		Room r = new AdminDAO().selectOne(conn, roomNo);
+		close(conn);
+		return r;
+	
+	}
 
 }
 

@@ -17,10 +17,18 @@ import member.model.vo.Member;
 /**
  * Servlet Filter implementation class MemberAuthFilter
  */
-@WebFilter( urlPatterns= {
-		   "/mypage/update",
-		   "/mypage/updatePassword"
-})
+@WebFilter( servletNames = {
+		"MypageReviewServlet",
+		"MypageViewCouponServlet",
+		"MypageViewServlet"
+	},
+	urlPatterns = {
+			"/mypage/main",
+			"/mypage/update",
+			"/mypage/questionList",
+			"/mypage/updatePassword"
+			
+	})
 public class MemberAuthFilter implements Filter {
 
     /**
@@ -50,6 +58,7 @@ public class MemberAuthFilter implements Filter {
 		
 		//상세보기 요청사용자
 		String viewMemberId =  ((HttpServletRequest)request).getParameter("memberId");
+		System.out.println("viewMemberId@filter="+viewMemberId);
 		
 		if(memberLoggedIn==null
 		 || !(memberLoggedIn.getMemberId().equals(viewMemberId)
