@@ -19,7 +19,7 @@ import room.model.vo.Room;
  * Servlet implementation class ResvRoomSearchEndServlet
  */
 @WebServlet("/resv/roomSearchEnd")
-public class ResvRoomSearchEndServlet extends HttpServlet {
+public class ReservationSearchRoomEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,6 +30,7 @@ public class ResvRoomSearchEndServlet extends HttpServlet {
 		String checkoutdate = request.getParameter("checkout-date");
 		String room1 = request.getParameter("room1-cnt");
 		String room2 = request.getParameter("room2-cnt");
+		
 		int roomcnt = 1;
 		
 		if(room2!=null) roomcnt = 2;

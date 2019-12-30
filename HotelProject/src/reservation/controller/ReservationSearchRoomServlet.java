@@ -13,14 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/views/reservation/search")
 public class ReservationSearchRoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReservationSearchRoomServlet() {
-        super();
-    }
-
+      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

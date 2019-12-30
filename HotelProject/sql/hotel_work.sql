@@ -1,5 +1,8 @@
+
+--=======================================================
 --member
 --회원 테이블 생성
+--=======================================================
 --drop table member;
 create table member(
     member_id varchar2(20) not null,
@@ -13,6 +16,7 @@ create table member(
     constraint pk_member_id primary key(member_id)
 );
 select * from member;
+alter table member add unique(member_email);
 --insert
 --admin 비밀번호 : adminadmin++00
 --기본사용자 비밀번호 : aaaaaaaa++00
@@ -22,8 +26,9 @@ insert into member values('abcde','VWMd9qoj+9c69+lGrn2fDND2RUHg5DdJYbd+qSqxBFXuq
 insert into member values('korea','VWMd9qoj+9c69+lGrn2fDND2RUHg5DdJYbd+qSqxBFXuqgJnxQzivFRAC1p42wbxLOBuzKpVU50OvfTatNh0aA==','김한국','19900204','korea@korea.com','0101111234',default,default);​
 
 --commit;
-
+--=======================================================
 --탈퇴한 회원 테이블 생성
+--=======================================================
 --quit member
 --drop table member_quit
 create table member_quit(
@@ -40,8 +45,9 @@ create table member_quit(
 );
 
 select * from member_quit;
-
+--=======================================================
 --탈퇴 회원 트리거
+--=======================================================
 --quit member trigger
 create or replace trigger tri_member_del
     before
@@ -51,9 +57,10 @@ begin
     insert into member_quit values(:old.member_id, :old.member_password, :old.member_name, :old.member_birth, :old.member_email, :old.member_phone, :old.member_points, :old.member_enrolldate, sysdate);
 end;
 /
-
+--=======================================================
 --notice board
 --공지사항 게시판 테이블 생성
+--=======================================================
 create table notice(
     notice_no number not null,
     notice_writer varchar2(20) not null,
@@ -87,7 +94,9 @@ commit;
 --drop table notice;
 --drop sequence seq_notice_no;
 
+--=======================================================
 --room테이블 생성
+--=======================================================
 create table room(
     room_no number,
     room_name varchar2(300) not null,
@@ -124,7 +133,9 @@ select * from room;
 --insert into room values(?, ?, ?, ?, ?, ?, ?, ?, ?);
 --SELECT * FROM( SELECT RANK() OVER(ORDER BY room_name DESC) RNUM, R.* FROM room R) V WHERE RNUM BETWEEN ? AND ?
 
+--=======================================================
 --reservation (예약)테이블 생성
+--=======================================================
 create table reservation(
     resv_no number not null,
     resv_member varchar2(15),
@@ -153,8 +164,9 @@ insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,
 select * from reservation;
 
 --drop table reservation;
-
+--=======================================================
 --booked_room 예약된 객실 테이블 생성
+--=======================================================
 create table booked_room(
     booked_no number not null,
     room_no number not null,
@@ -185,16 +197,74 @@ commit;
 
 --select trunc(to_date('2020-1-1','YYYY-MM-DD')) - trunc(notice_date) from notice;
 
-select room_no, count(*) reservedcnt from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31') group by room_no;
+--select room_no, count(*) reservedcnt from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31') group by room_no;
 --select room_no from booked_room where (booked_checkin >= ? and booked_checkin < ? ) or (booked_checkout > ? and booked_checkout <= ? )
-select r.room_no, count(*) reservedcnt 
-from room r left join booked_room br on r.room_no = br.room_no
-where (br.booked_checkin >= '2019-12-28' and br.booked_checkin < '2019-12-31') or (br.booked_checkout > '2019-12-28' and br.booked_checkout <= '2019-12-31') 
+--select r.room_no, count(*) reservedcnt from room r left join booked_room br on r.room_no = br.room_no where (br.booked_checkin >= '2019-12-28' and br.booked_checkin < '2019-12-31') or (br.booked_checkout > '2019-12-28' and br.booked_checkout <= '2019-12-31') group by r.room_no;
+
+--select * from room r left join (select room_no from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31')) br on r.room_no = br.room_no;
+
+select r.room_no, count(cnt) cnt
+from room r left join (select room_no cnt from booked_room where (booked_checkin >= '2019-12-31' and booked_checkin < '2020-1-1') or (booked_checkout > '2019-12-31' and booked_checkout <= '2020-1-1')) br on r.room_no = br.cnt
 group by r.room_no;
 
-select *
-from room r left join (select room_no from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31')) br on r.room_no = br.room_no;
+--select r.room_no, count(cnt) cnt from room r left join (select room_no cnt from booked_room where (booked_checkin >= ? and booked_checkin < ?) or (booked_checkout > ? and booked_checkout <= ?)) br on r.room_no = br.cnt group by r.room_no
 
-select r.room_no, count()
-from room r left join (select room_no from booked_room where (booked_checkin >= '2019-12-28' and booked_checkin < '2019-12-31') or (booked_checkout > '2019-12-28' and booked_checkout <= '2019-12-31')) br on r.room_no = br.room_no
-group by r.room_no;
+--=======================================================
+--리뷰테이블
+--=======================================================
+create table review(
+    review_no number not null,
+    review_writer varchar2(20) not null,
+    resv_no number not null,
+    room_no number not null,
+    review_content varchar2(3000) not null,
+    review_date date default sysdate,
+    review_starClean number not null,
+    review_starComm number not null,
+    review_starCheckIn number not null,
+    review_starLocation number not null,
+    review_starValue number not null,
+    constraint pk_review_no primary key(review_no),
+    constraint fk_review_writer foreign key(review_writer) references member(member_id) on delete cascade,
+    constraint fk_rv_resv_no foreign key(resv_no) references reservation(resv_no) on delete cascade,
+    constraint fk_rv_room_no foreign key(room_no) references room(room_no) on delete cascade
+);
+--drop table review;
+create sequence seq_review_no;
+insert into review values(seq_review_no.nextval, 'qwerty', 201912301069, 61, '아오 청소좀 하세요', default, 1,1,1,1,1);
+--insert into review values(seq_review_no.nextval, default, default, default, '리뷰테스트', default, 1,1,1,1,1);
+select * from review;
+commit;
+
+--=======================================================
+-- 쿠폰 테이블
+--=======================================================
+create table coupon(
+    coupon_no varchar2(24) not null,
+    coupon_code varchar2(30) not null,
+    member_id varchar2(20) default null,
+    coupon_startDate date default sysdate+365,
+    coupon_endDate date default sysdate,
+    coupon_used char(1) default 'F',
+    constraint pk_coupon_no primary key(coupon_no),
+    constraint fk_coupon_code foreign key(coupon_code) references coupon_kind(coupon_code),
+    constraint fk_member_id foreign key(member_id) references member(member_id),
+    constraint ck_coupon_used check(coupon_used in ('T','F'))
+);
+​
+insert into coupon values('eqwesd','123','larva', default, default, default);
+
+--쿠폰 종류 테이블 생성
+create table coupon_kind(
+    coupon_code varchar2(30) not null,
+    coupon_content varchar2(50) not null,
+    coupon_salePersent number not null,
+    coupon_min number not null,
+    conpon_max number not null,
+    constraint pk_coupon_code primary key(coupon_code)
+);
+​
+insert into coupon_kind values('123', '웰컴쿠폰', 5, 500000, 10000);
+​
+select * from coupon_kind;
+select * from coupon;
