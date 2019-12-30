@@ -8,26 +8,21 @@ public class Comment implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int commentNo;
-	private String questionRef; //문의사항 번호
-	private String commentRef; //댓글참조 번호
+	private int questionRef; //문의사항 번호
 	private String commentWriter;
 	private String commentContent;
-	private int commentLevel;
 	private Date commentDate;
 	
 	public Comment() {
 		super();
 	}
 
-	public Comment(int commentNo, String questionRef, String commentRef, String commentWriter, String commentContent,
-			int commentLevel, Date commentDate) {
+	public Comment(int commentNo, int questionRef, String commentWriter, String commentContent, Date commentDate) {
 		super();
 		this.commentNo = commentNo;
 		this.questionRef = questionRef;
-		this.commentRef = commentRef;
 		this.commentWriter = commentWriter;
 		this.commentContent = commentContent;
-		this.commentLevel = commentLevel;
 		this.commentDate = commentDate;
 	}
 
@@ -39,20 +34,12 @@ public class Comment implements Serializable{
 		this.commentNo = commentNo;
 	}
 
-	public String getQuestionRef() {
+	public int getQuestionRef() {
 		return questionRef;
 	}
 
-	public void setQuestionRef(String questionRef) {
+	public void setQuestionRef(int questionRef) {
 		this.questionRef = questionRef;
-	}
-
-	public String getCommentRef() {
-		return commentRef;
-	}
-
-	public void setCommentRef(String commentRef) {
-		this.commentRef = commentRef;
 	}
 
 	public String getCommentWriter() {
@@ -71,14 +58,6 @@ public class Comment implements Serializable{
 		this.commentContent = commentContent;
 	}
 
-	public int getCommentLevel() {
-		return commentLevel;
-	}
-
-	public void setCommentLevel(int commentLevel) {
-		this.commentLevel = commentLevel;
-	}
-
 	public Date getCommentDate() {
 		return commentDate;
 	}
@@ -89,10 +68,11 @@ public class Comment implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Comment [commentNo=" + commentNo + ", questionRef=" + questionRef + ", commentRef=" + commentRef
-				+ ", commentWriter=" + commentWriter + ", commentContent=" + commentContent + ", commentLevel="
-				+ commentLevel + ", commentDate=" + commentDate + "]";
+		return "Comment [commentNo=" + commentNo + ", questionRef=" + questionRef + ", commentWriter=" + commentWriter
+				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + "]";
 	}
+	
+	
 	
 	
 }

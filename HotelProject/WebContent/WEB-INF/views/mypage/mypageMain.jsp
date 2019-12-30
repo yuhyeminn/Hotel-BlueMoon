@@ -9,17 +9,22 @@
 	rel="stylesheet">
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+
+<%
+	Member m = (Member)request.getAttribute("m");
+%>
 <div id="my-profile" class="inform-card">
 	<br />
 	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원
 		프로필</h1>
 	<br />
+	<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" />
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getMemberName() %></span></li>
-		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getMemberId() %></span></li>
-		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getPoint() %>원</span></li>
-		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getPhone() %></span></li>
-		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=memberLoggedIn.getEmail() %></span></li>
+		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberName() %></span></li>
+		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberId() %></span></li>
+		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getPoint() %>원</span></li>
+		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getPhone() %></span></li>
+		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getEmail() %></span></li>
 	</ul>
 </div>
 <div id="inform-group">

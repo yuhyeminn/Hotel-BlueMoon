@@ -13,7 +13,7 @@
 	
 	System.out.println("searchType@memberFinder.jsp="+searchType);
 	System.out.println("searchKeyword@memberFinder.jsp="+searchKeyword);
-	//String searchKey = "null".equals(searchKeyword) ? "" : searchKeyword;
+	String searchKey = "null".equals(searchKeyword) ? "" : searchKeyword;
 %>
 <style>
 #search-container{
@@ -64,15 +64,15 @@ $(()=>{
 <hr />
 
 <section id="memberList-container">
-	<h2>문의사항 검색</h2>
+	<h2>문의사항 관리</h2>
 	
 	<div id="search-container">  
 	
 		<label for="searchType">검색타입 : </label>
 		<select id="searchType">
-			<option value="memberId">아이디</option>
-			<option value="category">카테고리</option>
-			<option value="answer">답변여부</option>
+			<option value="memberId" <%="memberId".equals(searchType)?"selected":"" %>>아이디</option>
+			<option value="category" <%="category".equals(searchType)?"selected":"" %>>카테고리</option>
+			<option value="answer" <%="answer".equals(searchType)?"selected":"" %>>답변여부</option>
 		</select>
 	
 		<div id="search-memberId">
@@ -80,7 +80,8 @@ $(()=>{
 				<input type="hidden" name="searchType" value="memberId" />
 				<input type="search" name="searchKeyword" 
 					   size="25" 
-					   placeholder="검색할 아이디를 입력하세요"/>
+					   placeholder="검색할 아이디를 입력하세요" 
+					   value="<%="memberId".equals(searchType)?searchKeyword:""%>"/>
 				<input type="submit" value="검색" />
 			</form>
 		</div>
@@ -89,9 +90,9 @@ $(()=>{
 			<form action="<%=request.getContextPath()%>/admin/qnaFinder">
 				<input type="hidden" name="searchType" value="category" />
 				<select id="question_name" name="searchKeyword">
-					<option value="객실문의">객실문의</option>
-					<option value="예약문의">예약문의</option>
-					<option value="기타문의">기타문의</option>
+					<option value="객실문의" <%="객실문의".equals(searchKeyword)?"selected":"" %>>객실문의</option>
+					<option value="예약문의" <%="예약문의".equals(searchKeyword)?"selected":"" %>>예약문의</option>
+					<option value="기타문의" <%="기타문의".equals(searchKeyword)?"selected":"" %>>기타문의</option>
 				</select>
 				<input type="submit" value="검색" />
 			</form>
@@ -100,9 +101,9 @@ $(()=>{
 		<div id="search-answer">
 			<form action="<%=request.getContextPath()%>/admin/qnaFinder">
 				<input type="hidden" name="searchType" value="answer" />
-				<input type="radio" name="searchKeyword" value="T" checked/>
+				<input type="radio" name="searchKeyword" value="T" <%="answer".equals(searchType) && "T".equals(searchKeyword)?"checked":""%>/>
 				답변완료
-				<input type="radio" name="searchKeyword" value="F"/>
+				<input type="radio" name="searchKeyword" value="F" <%="answer".equals(searchType) && "F".equals(searchKeyword)?"checked":""%>/>
 				답변대기
 				<input type="submit" value="검색" />
 			</form>
@@ -138,13 +139,13 @@ $(()=>{
 	<td><%=q.getQuestionNo() %></td>
 	<td><%=q.getQuestionCode() %></td>
 	<td><%=q.getQuestionWriter() %></td>
-	<td><a id="qnaATag" href="<%=request.getContextPath()%>/admin/questionView?question_no=<%=q.getQuestionNo()%>"><%=q.getQuestionTitle() %></a></td>
+	<td><a id="qnaATag" href="<%=request.getContextPath()%>/mypage/questionView?question_no=<%=q.getQuestionNo()%>"><%=q.getQuestionTitle() %></a></td>
 	<td><%=q.getQuestionDate() %></td>
 	<td><%=q.getQuestionOriginalFileName() != null ? "O" : "X" %></td>
 	<td><%="T".equals(q.getQuestionAnswer())? "답변완료" : "답변대기" %></td>
 	<td>
 		<form action="<%=request.getContextPath()%>/admin/qnaDelete">
-			<input type="submit" class="btn btn-outline-dark" value="삭제" />
+			<input type="submit" value="삭제" class="btn btn-outline-dark"/>
 			<input type="hidden" name="qnaNo" value="<%=q.getQuestionNo()%>" />
 			<input type="hidden" name="renamedFileName" value="<%=q.getQuestionRenamedFileName()!=null?q.getQuestionRenamedFileName():"" %>" />
 		</form>
@@ -168,7 +169,6 @@ table{
 	border-right: 1px solid white;
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
-	width: 1200px;
 }
 th{
 	padding: 10px 30px 10px 30px;
