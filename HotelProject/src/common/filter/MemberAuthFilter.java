@@ -23,7 +23,7 @@ import member.model.vo.Member;
 		"MypageViewServlet"
 	},
 	urlPatterns = {
-			"/mypage/main",
+			/*"/mypage/main"*/
 			"/mypage/update",
 			"/mypage/questionList",
 			"/mypage/updatePassword"

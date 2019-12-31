@@ -37,6 +37,16 @@ div#pageBar a{
 }
 </style>
 <script>
+function qnaDel(){
+	var result = confirm("정말로 삭제하시겠습니까?");
+	if(!result)
+		return false;
+	
+	return true;
+}
+
+
+
 $(()=>{
 	var $searchMemberId = $("#search-memberId");
 	var $searchCategory = $("#search-category");
@@ -143,8 +153,8 @@ $(()=>{
 	<td><%=q.getQuestionOriginalFileName() != null ? "O" : "X" %></td>
 	<td><%="T".equals(q.getQuestionAnswer())? "답변완료" : "답변대기" %></td>
 	<td>
-		<form action="<%=request.getContextPath()%>/admin/qnaDelete">
-			<input type="submit" class="btn btn-outline-dark" value="삭제" />
+		<form action="<%=request.getContextPath()%>/admin/qnaDelete" onsubmit = "return qnaDel();">
+			<input type="submit" id="qnaDel_Btn" class="btn btn-outline-dark" value="삭제" />
 			<input type="hidden" name="qnaNo" value="<%=q.getQuestionNo()%>" />
 			<input type="hidden" name="renamedFileName" value="<%=q.getQuestionRenamedFileName()!=null?q.getQuestionRenamedFileName():"" %>" />
 		</form>

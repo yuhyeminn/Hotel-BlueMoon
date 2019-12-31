@@ -251,5 +251,50 @@ public class QuestionDAO {
 
 		return list;
 	}
+	
+	
+	/*문의사항(지은)*/
+	 public int updateQuestion(Connection conn, Question q) {
+	      PreparedStatement pstmt = null;
+	      String query = prop.getProperty("updateQuestion");
+	      int result = 0;
+
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setString(1, q.getQuestionWriter());
+	         pstmt.setString(2, q.getQuestionCode());
+	         pstmt.setString(3, q.getQuestionTitle());
+	         pstmt.setString(4, q.getQuestionContent());
+	         pstmt.setString(5, q.getQuestionOriginalFileName());
+	         pstmt.setString(6, q.getQuestionRenamedFileName());
+	         pstmt.setInt(7, q.getQuestionNo());
+
+	         result = pstmt.executeUpdate();
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+
+	      return result;
+	   }
+
+	   public int deleteQuestion(Connection conn, int question_no) {
+	      int result = 0;
+	      PreparedStatement pstmt = null;
+	      String query = prop.getProperty("deleteQuestion");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setInt(1, question_no);
+	         result = pstmt.executeUpdate();
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(pstmt);
+	      }
+	      return result;
+	   }
 
 }

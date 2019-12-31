@@ -178,4 +178,113 @@ public class MemberDAO {
 
 
 
+	public Member selectMemberId(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query = prop.getProperty("selectMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("member_password"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setBirth(rset.getString("member_birth"));
+				member.setEmail(rset.getString("member_email"));
+				member.setPhone(rset.getString("member_phone"));
+				member.setPoint(rset.getInt("member_points"));
+				member.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberFinder@DAO="+member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return member;
+	}
+
+
+
+	public Member selectMemberPW(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query = prop.getProperty("selectMemberPW");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("member_password"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setBirth(rset.getString("member_birth"));
+				member.setEmail(rset.getString("member_email"));
+				member.setPhone(rset.getString("member_phone"));
+				member.setPoint(rset.getInt("member_points"));
+				member.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberFinder@DAO="+member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return member;
+		
+	}
+
+
+
+	public Member selectMemberByEmail(Connection conn, String email) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberByEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("member_id"));
+				m.setPassword(rset.getString("member_password"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setBirth(rset.getString("member_birth"));
+				m.setEmail(rset.getString("member_email"));
+				m.setPhone(rset.getString("member_phone"));
+				m.setPoint(rset.getInt("member_points"));
+				m.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberByEmail@dao.selectOne="+m);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+		
+	}
+
+
+
 }

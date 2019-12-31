@@ -90,7 +90,7 @@
 			<div class="box-title">
 				<label>아이디 혹은 비밀번호를 잊어버리셨나요?</label>
 			</div>
-			<button class="button" id="button-finder">아이디/비밀번호 찾기</button>
+			<button class="button" id="button-finder" onclick="location.href='<%=request.getContextPath()%>/views/member/loginfinder'">아이디/비밀번호 찾기</button>
 		</div>
 	</div>
 </div>

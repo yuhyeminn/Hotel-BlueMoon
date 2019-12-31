@@ -69,5 +69,30 @@ public class MemberService {
 	}
 
 
+	public Member selectMemberId(Member m) {
+		Connection conn = getConnection();
+		Member member = new MemberDAO().selectMemberId(conn, m);
+		close(conn);
+		return member;
+		
+	}
+
+
+	public Member selectMemberPW(Member m) {
+		Connection conn = getConnection();
+		Member member = new MemberDAO().selectMemberPW(conn, m);
+		close(conn);
+		return member;
+	}
+
+
+	public Member selectMemberByEmail(String email) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().selectMemberByEmail(conn, email);
+		close(conn);
+		return m;
+	}
+
+
 	
 }
