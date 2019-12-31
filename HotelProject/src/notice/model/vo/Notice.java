@@ -15,13 +15,14 @@ public class Notice implements Serializable{
 	private int noticeReadCount;
 	private String noticeOriginalFileName;
 	private String noticeRenamedFileName;
+	private String noticeAvailable;
 	
 	public Notice() {
 		super();
 	}
 
 	public Notice(int noticeNo, String noticeWriter, String noticeTitle, String noticeContent, Date noticeDate,
-			int noticeReadCount, String noticeOriginalFileName, String noticeRenamedFileName) {
+			int noticeReadCount, String noticeOriginalFileName, String noticeRenamedFileName, String noticeAvailable) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeWriter = noticeWriter;
@@ -31,6 +32,7 @@ public class Notice implements Serializable{
 		this.noticeReadCount = noticeReadCount;
 		this.noticeOriginalFileName = noticeOriginalFileName;
 		this.noticeRenamedFileName = noticeRenamedFileName;
+		this.noticeAvailable = noticeAvailable;
 	}
 
 	public int getNoticeNo() {
@@ -96,12 +98,21 @@ public class Notice implements Serializable{
 	public void setNoticeRenamedFileName(String noticeRenamedFileName) {
 		this.noticeRenamedFileName = noticeRenamedFileName;
 	}
+	
+
+	public String getNoticeAvailable() {
+		return noticeAvailable;
+	}
+
+	public void setNoticeAvailable(String noticeAvailable) {
+		this.noticeAvailable = noticeAvailable;
+	}
 
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", noticeReadCount="
 				+ noticeReadCount + ", noticeOriginalFileName=" + noticeOriginalFileName + ", noticeRenamedFileName="
-				+ noticeRenamedFileName + "]";
+				+ noticeRenamedFileName + ", noticeAvailable="+ noticeAvailable + "]";
 	}
 }

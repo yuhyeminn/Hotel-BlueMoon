@@ -5,6 +5,8 @@
 
 <%
    Question q = (Question)request.getAttribute("question");
+   System.out.println("question@udForm.jsp="+q);
+   
 %>
 <style>
 #qna-container {
@@ -76,38 +78,54 @@
       <hr>
    </div>
    <!--문의사항 등록 폼-->
-   <form action="<%=request.getContextPath()%>/mypage/questionFormEnd" id="qnaWriteFrm" method="POST" enctype="multipart/form-data">
+   <form action="<%=request.getContextPath()%>/mypage/qnaUpdateEnd" id="qnaWriteFrm" method="POST" enctype="multipart/form-data">
       <div id="qna-container">
 
          <div id="qna-titlebox" class="content-row">
             <span class="form-txt">문의 제목</span> <input class="form-control"
                type="text" name="qnaTitle" id="qnaTitle"
-               style="width: 850px; display: inline-block;">
+               style="width: 850px; display: inline-block;" value="<%=q.getQuestionTitle() %>">
          </div>
          <!-- 문의사항 작성자(로그인된 회원 아이디 가져오기) -->
          <input type="hidden" value="<%=memberLoggedIn.getMemberId()%>" name="memberId"/>
          <div id="qna-category">
             <span class="form-txt">문의 종류</span> 
-            <select class="form-control" name="select"
+            <select class="form-control" name="select" 
                style="width: 150px; display: inline-block;">
+               
                <option value="">카테고리 선택</option>
-               <option value="예약문의">예약문의</option>
-               <option value="객실문의">객실문의</option>
-               <option value="기타문의">기타문의</option>
+               <option value="예약문의 "<%="예약문의".equals(q.getQuestionCode())?"selected":""%>>예약문의</option>
+               <option value="객실문의" <%="객실문의".equals(q.getQuestionCode())?"selected":""%>>객실문의</option>
+               <option value="기타문의" <%="기타문의".equals(q.getQuestionCode())?"selected":""%>>기타문의</option>
+               
             </select>
          </div>
          <div id="qna-content">
             <p style="font-size: 20px; margin-top: 5px;" class="form-txt">문의
                내용</p>
             <textarea class="form-control" name="qnaContent" id="qnaContent"
-               cols="130" rows="10"></textarea>
+               cols="130" rows="10"><%=q.getQuestionContent() %></textarea>
          </div>
+         <!-- 첨부파일 -->
          <div id="qna-file" class="content-row">
-            <input type="file" name="upFile" />
+            <input type="file" name="upFile"/>
+            <!-- 첨부파일이 있는 경우 파일명 표시 -->
+            <span id="fname"><%=q.getQuestionOriginalFileName()!=null?q.getQuestionOriginalFileName():"" %></span>
+         <input type="hidden" name="oldOriginalFileName" value="<%=q.getQuestionOriginalFileName()!=null?q.getQuestionOriginalFileName():""%>" />
+         <input type="hidden" name="oldRenamedFileName" value="<%=q.getQuestionRenamedFileName()!=null?q.getQuestionRenamedFileName():""%>" />
+               
+         <!-- 기존파일삭제 체크박스 -->
+         <% if(q.getQuestionOriginalFileName()!=null) {%>
+         <br />
+         <input type="checkbox" name="delFileChk" id="delFileChk" />
+         <label for="delFileChk">첨부파일삭제</label>
+         <% } %>         
          </div>
+         
          <div id="btn-group">
-            <input type="submit" class="btn btn-dark" value="등록"></input>
+            <input type="submit" class="btn btn-dark" value="등록"/>
          </div>
+         <input type="hidden" name="question_no" value="<%=q.getQuestionNo()%>"/>
       </div>
    </form>
 </section>

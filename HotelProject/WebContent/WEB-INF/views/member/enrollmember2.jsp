@@ -87,6 +87,9 @@ $(()=>{
 $("#memberId").change(function(){
 	$("#idValid").val(0);
 });
+$("#email").change(function(){
+	$("#emailValid").val(0);
+});
 	
 	
 $("#memberId").keyup(function(event){
@@ -223,6 +226,7 @@ function enrollValidate(){
 	var email = document.getElementById("email");
 	var phone = document.getElementById("phone");
 	var $idValid = $("#idValid");
+	var $emailValid = $("#emailValid");
 	
 	<%--아이디 유효성검사--%>
 	if(!regExpTest(/^[a-zA-Z0-9]{4,12}$/, memberId, "아이디는 4~12자의 영문 대 소문자, 숫자만 사용 가능합니다.")){
@@ -259,6 +263,12 @@ function enrollValidate(){
 	if(!regExpTest(/\w+@\w+\.\w+/g, email, "이메일 형식이 올바르지 않습니다.")){
         return false;
 	}
+	<%--이메일 중복검사를 하지않았을경우--%>
+	if($emailValid.val() == 0){
+		alert("이메일 중복 검사 해주세요.");
+		return false;
+	}
+	
 	
     <%--전화번호 유효성검사--%>
 	if(!regExpTest(/^01[0179][0-9]{7,8}$/, phone, "전화번호 형식이 올바르지 않습니다.")){
@@ -270,6 +280,44 @@ function enrollValidate(){
 
 
 <%--중복검사 ajax--%>
+function emailDuplicatedCheck(){
+	var regExpEmail = /\w+@\w+\.\w+/g;
+	var email = document.getElementById("email");
+	
+	$.ajax({
+		url: "<%=request.getContextPath()%>/member/memberEmailDuplicatedCheckServlet",
+		type: "post",
+		data: {email: $("#email").val()},
+		dataType: "json",
+		success: data => {
+			console.log(data);
+			
+			if((data == 0) && (!$("#email").val() == "") && regExpEmail.test(email.value)){
+				alert("사용가능한 이메일 입니다.");
+				$("#email").attr("style","border-bottom: 2px solid #00c500");
+				$("#emailValid").val(1);
+				
+			}
+			/* if(($("#email").val() == "") || (!regExpEmail.test(email.value))){
+				alert("이메일 형식이 올바르지 않습니다.");
+				$("#email").attr("style","border-bottom: 2px solid red");
+				$("#emailValid").val(0);
+				
+			} */
+			else if(data ==1){
+				alert("중복된 이메일 입니다.");
+				$("#email").val("");
+				$("#email").attr("style","border-bottom: 2px solid red");
+				$("#emailValid").val(0);
+			}
+		},
+		error : (jqxhr, textStatus, errorThrown)=>{
+			console.log(jqxhr, textStatus, errorThrown);
+		}
+	});
+}
+
+
 function idDuplicatedCheck(){
 	var regExpId = /^[a-zA-Z0-9]{4,12}$/;
 	var memberId = document.getElementById("memberId");
@@ -496,6 +544,11 @@ function regExpTest(regExp, el, msg){
 					<td>
 						<input class="form-control input-text" type="email"
 						name="email" id="email" placeholder="example@bluemoon.com" />
+					</td>
+					<td>
+						<input type="button" class="btn btn-outline-secondary" onclick="emailDuplicatedCheck();"
+						id="btn-email-already" value="중복확인" />
+						<input type="hidden" id="emailValid" value="0"/>
 					</td>
 				</tr>
 				<tr>
