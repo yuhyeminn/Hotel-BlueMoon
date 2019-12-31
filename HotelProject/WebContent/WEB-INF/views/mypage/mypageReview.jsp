@@ -157,11 +157,8 @@ body {
         $("#input-4").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm'});
         $("#input-5").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm'});
         
-        $(".btn-delete").click(function(){
-            a.submit();
-        });
-        
-      //리뷰작성버튼 클릭시
+                
+      	//리뷰작성버튼 클릭시
         $("[name='modal-btn-write']").click(function(){
         	console.log($(this).parent().parent().find(".roomNo").val());
         	console.log($(this).parent().parent().find(".resvNo").val());
@@ -171,7 +168,13 @@ body {
         	/* a.submit(); */
         });
         
-        
+       	<%--삭제버튼 클릭시--%>
+        $(".btn-delete").click(function(){
+            if(!confirm("이 객실을 삭제하시겠습니까?")) return;
+
+            var a = $(this).prev()
+            a.submit();
+        });
         
     }) //End of onload
 	
@@ -279,7 +282,12 @@ body {
                 </div>
                 <div class="card-stacked">
                   <div class="card-content">
-                      <button type="button" class="btn btn-light">삭제</button>
+                  	  <%-- delete버튼용 frm --%>
+				      <form name="roomDelFrm" action="<%=request.getContextPath()%>/mypage/reviewDelete" method="post">
+						<input type="hidden" name="reviewNoforDelete" id="reviewNoforDelete" class="reviewNoforDelete" value="<%= nnl.getReviewNo() %>" />
+						<input type="hidden" name="memberId" id="memberId" class="memberId" value="<%= nnl.getMemberId() %>" />
+				      </form>
+                      <button type="button" class="btn btn-light btn-delete">삭제</button>
                     <span class="card-title"><%=nnl.getMemberId() %></span><br>
                     <span class="card-date"><%=nnl.getResvIn() %> ~ <%=nnl.getResvOut() %> · <%=nnl.getResvPeople() %>인 · <%=nnl.getRoomName() %></span>
                     <hr class="nnl-hr">

@@ -25,15 +25,15 @@ public class MypageReviewServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");	
 		
 		String memberId = request.getParameter("memberId");
-		System.out.println("memberId@mypageReviewServlet="+memberId);
+//		System.out.println("memberId@mypageReviewServlet="+memberId);
 		
 		//리뷰가 작성되지 않은 예약리스트(ReviewN)
 		List<ReviewN> reviewNullList = new MemberService().selectReviewN(memberId);
-		System.out.println("reviewNullList@mypageReviewServlet"+reviewNullList);
+//		System.out.println("reviewNullList@mypageReviewServlet"+reviewNullList);
 		
 		//리뷰가 작성되지 않은 예약리스트(ReviewNN)
 		List<ReviewNN> reviewNotNullList = new MemberService().selectReviewNN(memberId);
-		System.out.println("reviewNotNullList@mypageReviewServlet"+reviewNotNullList);
+//		System.out.println("reviewNotNullList@mypageReviewServlet"+reviewNotNullList);
 		
 		
 		request.setAttribute("rvnl", reviewNullList);
