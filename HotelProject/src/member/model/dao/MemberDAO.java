@@ -8,9 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import review.model.vo.ReviewN;
+import review.model.vo.ReviewNN;
+import room.model.vo.Room;
 
 public class MemberDAO {
 	
@@ -176,8 +181,6 @@ public class MemberDAO {
 		return result;
 	}
 
-
-
 	public Member selectMemberId(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -210,7 +213,42 @@ public class MemberDAO {
 		}
 		return member;
 	}
+		
+		
+	public List<ReviewN> selectReviewN(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectReviewN");
+		List<ReviewN> list = new ArrayList<>();
 
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ReviewN r = new ReviewN();
+				r.setMemberId(rset.getString("member_id"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setResvIn(rset.getDate("resv_in"));
+				r.setResvOut(rset.getDate("resv_out"));
+				r.setResvPeople(rset.getInt("resv_people"));
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setResvNo(rset.getDouble("resv_no"));
+				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
+				
+				list.add(r);
+			}
+//			System.out.println("selectReviewN@dao=" + list);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 
 
 	public Member selectMemberPW(Connection conn, Member m) {
@@ -274,7 +312,6 @@ public class MemberDAO {
 				m.setEnrollDate(rset.getDate("member_enrolldate"));
 			}
 			System.out.println("memberByEmail@dao.selectOne="+m);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -282,7 +319,46 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return m;
-		
+	}
+			
+	public List<ReviewNN> selectReviewNN(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectReviewNN");
+		List<ReviewNN> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ReviewNN r = new ReviewNN();
+				r.setMemberId(rset.getString("member_id"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setResvIn(rset.getDate("resv_in"));
+				r.setResvOut(rset.getDate("resv_out"));
+				r.setResvPeople(rset.getInt("resv_people"));
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setReviewStarClean(rset.getInt("review_starclean"));
+				r.setReviewStarComm(rset.getInt("review_starcomm"));
+				r.setReviewStarCheckIn(rset.getInt("review_starcheckin"));
+				r.setReviewStarLocation(rset.getInt("review_starlocation"));
+				r.setReviewStarValue(rset.getInt("review_starvalue"));
+				
+				list.add(r);
+			}
+			System.out.println("selectReviewNN@dao=" + list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 
