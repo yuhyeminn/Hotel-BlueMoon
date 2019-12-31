@@ -1,4 +1,4 @@
-package mypage.controller;
+package member.controller;
 
 import java.io.IOException;
 
@@ -13,29 +13,29 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MypageUpdatePasswordEndServlet
+ * Servlet implementation class MemberFinderUpdatePWEndServlet
  */
-@WebServlet(name ="MypageUpdatePasswordEndServlet",
-			urlPatterns = "/mypage/updatePasswordEnd")
-public class MypageUpdatePasswordEndServlet extends HttpServlet {
+@WebServlet(name="MemberFinderUpdatePWEndServlet",
+			urlPatterns = "/member/finderUpdatePWEnd")
+public class MemberFinderUpdatePWEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		String nowPW = request.getParameter("password");
-		String newPW = request.getParameter("password_new");
-		
-		System.out.println(memberId);
-		System.out.println(nowPW);
-		System.out.println(newPW);
 
+		String memberId = request.getParameter("memberId");
+		String newPW = request.getParameter("password_new");
+		String newPWChk = request.getParameter("password_newChk");
+		System.out.println("finderUpdatePW@servlet="+memberId+","+newPW+","+newPWChk);
+		
+		
 		Member m = new MemberService().selectOne(memberId);
-		System.out.println("m@updatePasswordServlet="+m);
+		System.out.println("m@findeUupdatePasswordServlet="+m);
 		
 		String msg = "";
 		String loc = "";
 		String view = "/WEB-INF/views/common/msg.jsp";
-		if(m != null && m.getPassword().equals(nowPW)){
+		
+		if(m != null){
 			Member member = new Member();
 			member.setMemberId(memberId);
 			member.setPassword(newPW);
@@ -43,18 +43,18 @@ public class MypageUpdatePasswordEndServlet extends HttpServlet {
 			int result = new MemberService().updatePassword(member);
 			if(result>0){
 				msg = "패스워드 변경 성공";
+				loc = "/views/member/login";
 			}	
 		}
 		else {
 			msg = "패스워드를 잘못 입력하셨습니다.";
-			loc = "/mypage/updatePassword?memberId="+memberId;
+			loc = "/member/finderUpdatePW";
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
-		//request.getRequestDispatcher("/WEB-INF/views/mypage/mypageUpdatePassword.jsp").forward(request, response);
 	
 	}
 

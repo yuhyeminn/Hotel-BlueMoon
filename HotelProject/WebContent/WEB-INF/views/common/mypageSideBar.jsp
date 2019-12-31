@@ -20,7 +20,7 @@
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myReservation">예약 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myCoupon">쿠폰 조회</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/questionList?memberId=<%=memberLogIn.getMemberId()%>">문의사항 조회</a></li>
-<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/review">리뷰 관리</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/review?memberId=<%=memberLogIn.getMemberId()%>">리뷰 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/deleteMember">회원탈퇴</a></li>
 </ul>
 </aside>

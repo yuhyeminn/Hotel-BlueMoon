@@ -11,16 +11,16 @@
  <table>
   <tr>
    <td>현재 비밀번호</td>
-   <td> <input type = "password" name="nowPW" id="nowPW"/></td>
+   <td> <input type = "password" name="password" id="nowPW"/></td>
   </tr>
   <tr>
    <td>변경할 비밀번호</td>
-   <td> <input type = "password" name="newPW" id="newPW"/> </td>
+   <td> <input type = "password" name="password_new" id="newPW"/> </td>
   </tr>
   <tr>
    <td>변경할 비밀번호 확인</td>
    <td>
-    <input type = "password" name="newPWChk" id="newPWChk"/>
+    <input type = "password" name="password_newChk" id="newPWChk"/>
    </td>
   </tr>
 </table>
@@ -53,10 +53,15 @@ input{
 
 </style> 
 <script>
+var regExpPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+
 function updateValidate(){
 	$nowPW = $("#nowPW").val().trim();
+	console.log($nowPW);
 	$newPW = $("#newPW").val().trim();
+	console.log($newPW);
 	$newPWChk = $("#newPWChk").val().trim();
+	console.log($newPWChk);
 	
 	
 	if($nowPW.length == 0){
@@ -72,6 +77,14 @@ function updateValidate(){
 		alert("입력하신 비밀번호를 확인하세요.");
 		return false;
 	}
+	
+	if($newPW == $newPWChk){
+		if(!regExpPw.test($newPW)){
+			alert("8~20자의 영문, 숫자, 특수기호를 입력해주세요.");
+			return false;
+		}
+	}
+	
 	return true;
 }
 </script>

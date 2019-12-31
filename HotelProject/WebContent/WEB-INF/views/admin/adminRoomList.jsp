@@ -112,7 +112,6 @@ $(()=>{
 		}
 	}); */
 
-   console.log()
    //삭제버튼 클릭시
    $(".btn-delete").click(function(){
        if(!confirm("이 객실을 삭제하시겠습니까?")) return;
