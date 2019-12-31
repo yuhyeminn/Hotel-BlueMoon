@@ -9,7 +9,7 @@ public class Review implements Serializable{
 	 
 	private int reviewNo;
 	private String reviewWriter;
-	private int resvNo;
+	private long resvNo;
 	private int roomNo;
 	private String reviewContent;
 	private Date reviewDate;
@@ -25,7 +25,7 @@ public class Review implements Serializable{
 	}
 
 
-	public Review(int reviewNo, String reviewWriter, int resvNo, int roomNo, String reviewContent, Date reviewDate,
+	public Review(int reviewNo, String reviewWriter, long resvNo, int roomNo, String reviewContent, Date reviewDate,
 			int reviewStarClean, int reviewStarComm, int reviewStarCheckIn, int reviewStarLocation,
 			int reviewStarValue) {
 		super();
@@ -63,12 +63,12 @@ public class Review implements Serializable{
 	}
 
 
-	public int getResvNo() {
+	public long getResvNo() {
 		return resvNo;
 	}
 
 
-	public void setResvNo(int resvNo) {
+	public void setResvNo(long resvNo) {
 		this.resvNo = resvNo;
 	}
 

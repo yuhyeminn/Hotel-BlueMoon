@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import review.model.vo.Review;
 import review.model.vo.ReviewN;
 import review.model.vo.ReviewNN;
 import room.model.vo.Room;
@@ -202,7 +203,7 @@ public class MemberDAO {
 				r.setResvOut(rset.getDate("resv_out"));
 				r.setResvPeople(rset.getInt("resv_people"));
 				r.setRoomNo(rset.getInt("room_no"));
-				r.setResvNo(rset.getDouble("resv_no"));
+				r.setResvNo(rset.getLong("resv_no"));
 				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
 				
 				list.add(r);
@@ -259,6 +260,56 @@ public class MemberDAO {
 			close(pstmt);
 		}
 		return list;
+	}
+
+
+
+	public int insertReview(Connection conn, Review review) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertReview"); 
+		//INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, ?, ?, ?, ?, ?)
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			
+			/*
+			 * review_no number not null,
+			   1 review_writer varchar2(20) not null,
+			   2 resv_no number not null,
+			   3 room_no number not null,
+			   4 review_content varchar2(3000) not null,
+			    review_date date default sysdate,
+			   5 review_starClean number not null,
+			   6 review_starComm number not null,
+			   7 review_starCheckIn number not null,
+			   8 review_starLocation number not null,
+			   9 review_starValue number not null,
+			 */
+			
+			//쿼리문미완성
+			pstmt.setString(1, review.getReviewWriter());
+			pstmt.setLong(2, review.getResvNo());
+			pstmt.setInt(3, review.getRoomNo());
+			pstmt.setString(4, review.getReviewContent());
+			pstmt.setInt(5, review.getReviewStarClean());
+			pstmt.setInt(6, review.getReviewStarComm());
+			pstmt.setInt(7, review.getReviewStarCheckIn());
+			pstmt.setInt(8, review.getReviewStarLocation());
+			pstmt.setInt(9, review.getReviewStarValue());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

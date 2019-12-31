@@ -19,7 +19,7 @@
 <link href="<%=request.getContextPath()%>/css/theme.css" media="all" rel="stylesheet" type="text/css" />
 <script src="<%=request.getContextPath()%>/js/star-rating.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/ko.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,200,300,400,500,700|Noto+Serif+KR&display=swap" rel="stylesheet">
+
 </head>
 <style>
 body {
@@ -94,8 +94,9 @@ body {
 /* card css */
 .container-nnl{
    	clear: both;
+    display: table;
     margin: 0 auto;
-    width: 80%;
+    vertical-align: middle;
 }
 .room-pic {
   width: 300px;
@@ -289,6 +290,8 @@ body {
               </div>
             </div>
         </div>
+        <br />
+        <br />
 <% }%>
 <!-- 작성한리뷰 end -->
 

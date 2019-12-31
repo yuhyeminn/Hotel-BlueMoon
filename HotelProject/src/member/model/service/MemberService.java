@@ -11,6 +11,7 @@ import java.util.List;
 import admin.model.dao.AdminDAO;
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
+import review.model.vo.Review;
 import review.model.vo.ReviewN;
 import review.model.vo.ReviewNN;
 import room.model.vo.Room;
@@ -88,6 +89,18 @@ public class MemberService {
 		List<ReviewNN> list = new MemberDAO().selectReviewNN(conn, memberId);
 		close(conn);
 		return list;
+	}
+
+
+	public int insertReview(Review review) {
+		Connection conn = getConnection();
+		int result = new MemberDAO().insertReview(conn, review);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
 	}
 
 
