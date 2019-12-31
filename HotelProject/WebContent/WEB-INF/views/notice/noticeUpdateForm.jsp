@@ -7,7 +7,20 @@
 	Notice n = (Notice)request.getAttribute("notice");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/notice.css" />
-
+<style>
+#delFileChk+label{
+	font-size: .8em;
+	position: relative;
+	left: -3px;
+}
+span#fname{
+	position: absolute;
+    left: 385px;
+	width: 200px;
+	background: white;
+	font-size:18px;
+}
+</style>
 <seciton> 
 <span id="current-root"><a href="">홈</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="">공지사항</a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="">공지사항 작성</a></span>
 <div id="content-header">
@@ -21,13 +34,13 @@ method="post" enctype="multipart/form-data">
 <input type="hidden" name="noticeWriter" value=<%=memberLoggedIn.getMemberId() %> />
 	<div id="notice-container">
 		<div id="notice-titlebox" class="content-row">
-			<span style="font-weight: bold; margin-right: 20px;"></span> <input
+			<span style="font-weight: bold; margin-right: 20px;">제목</span> <input
 				class="form-control" type="text" name="noticeTitle" id="noticeTitle"
 				value="<%=n.getNoticeTitle() %>"
 				style="width: 850px; display: inline-block;">
 		</div>
 		<div id="notice-content">
-			<p style="font-weight: bold; font-size: 20px; margin-top: 5px;"></p>
+			<p style="font-weight: bold; font-size: 20px; margin-top: 5px;">내용</p>
 			<textarea class="form-control" name="noticeContent" id="" cols="130" rows="20"><%=n.getNoticeContent() %></textarea>
 		</div>
 		<div id="notice-file" class="content-row">
@@ -46,7 +59,7 @@ method="post" enctype="multipart/form-data">
 					<!-- 기존파일삭제 체크박스 -->
 					<% if(n.getNoticeOriginalFileName()!=null) {%>
 					&nbsp;
-					<input type="checkbox" name="delFileChk" id=delFileChk""/>
+					<input type="checkbox" name="delFileChk" id="delFileChk"/>
 					<label for="delFileChk">첨부파일삭제</label>
 					<%} %>
 		</div>

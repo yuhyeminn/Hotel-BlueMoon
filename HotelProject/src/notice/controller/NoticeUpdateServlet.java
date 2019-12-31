@@ -25,8 +25,18 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		Notice n = new NoticeService().selectNoticeOne(noticeNo);
 		
-		request.setAttribute("notice", n);
-		request.getRequestDispatcher("/WEB-INF/views/notice/noticeUpdateForm.jsp").forward(request, response);
+		String view = "";//RequestDispatcher객체에 전달한 view단 주소
+		if(n == null){
+			request.setAttribute("msg", "조회한 게시글이 존재하지 않습니다.");
+			request.setAttribute("loc", "/notice/noticeList");
+			view = "/WEB-INF/views/common/msg.jsp";
+		}
+		else {
+			request.setAttribute("notice", n);
+			view = "/WEB-INF/views/notice/noticeUpdateForm.jsp";			
+		}
+		request.getRequestDispatcher(view)
+			   .forward(request, response);
 	}
 
 	/**

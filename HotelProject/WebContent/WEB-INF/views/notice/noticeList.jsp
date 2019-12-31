@@ -49,10 +49,45 @@ color:black;
 		<select name="search-option" id="search-option" style="height: 30px;">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
-		</select> <input type="text" name="notice-search" id="notice-search"
+		</select> 
+		<input type="text" name="notice-search" id="noticeSearch"
 			placeholder="검색어를 입력하세요.">
-		<button>검색</button>
+		<button id="btn">검색</button>
 	</div>
+	<div id="area" class="area"></div>
+	
+	<script>
+	$("#btn").click(()=>{
+		var type = $("#search-option").val();
+		$.ajax({
+			url: "<%=request.getContextPath()%>/notice/jsonNoticeSearch",
+			type: "GET",
+			data: {searchType:type, noticeSearch: $("#noticeSearch").val()},
+			dataType: "json",
+			success: data => {
+				/* console.log(data);//json문자열, javascript object */
+				$("#pageBar").css('display','none');
+				$("#tbody").html('');
+				
+				$(data).each((idx, notice)=>{
+					
+					
+					let html = "<tr><th>"+notice.no+"</th>";
+					html += "<td><a href='<%=request.getContextPath() %>/notice/noticeView?noticeNo="+notice.no+"' class='board-title'>"+notice.title+"</a></td>";
+					if(notice.filename != null) html+="<td><img src='<%=request.getContextPath() %>/images/file.png' width='20px'/></td>"
+					else html+="<td></td>"
+					html += "<td>"+notice.date+"</td>";
+					html += "<td>"+notice.readcnt+"</td></tr>";
+					
+					$("#tbody").append(html);
+				});
+			},
+			error : (jqxhr, textStatus, errorThrown)=>{
+				console.log(jqxhr, textStatus, errorThrown);
+			}
+		});
+	});
+	</script>
 
 	<div id="notice-container">
 
@@ -67,7 +102,7 @@ color:black;
 					<th scope="col" width="10%">조회수</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tbody">
 			<%
 				for(Notice n : list){
 			%>

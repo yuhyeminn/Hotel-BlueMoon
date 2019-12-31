@@ -30,7 +30,7 @@ public class NoticeDAO {
 	public List<Notice> selectNoticeAll(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectNoticeAll");
+		String query = prop.getProperty("selectNoticeAllByPage");
 		List<Notice> list = new ArrayList<>();
 		
 		try {
@@ -241,6 +241,82 @@ public class NoticeDAO {
 			}
 		
 		return result;
+	}
+
+	public List<Notice> selectNoticeAll(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectNoticeAll");
+		List<Notice> list = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Notice n = new Notice();
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeWriter(rset.getString("notice_writer"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeDate(rset.getDate("notice_date"));
+				n.setNoticeReadCount(rset.getInt("notice_readcount"));
+				n.setNoticeOriginalFileName(rset.getString("notice_original_filename"));
+				n.setNoticeRenamedFileName(rset.getString("notice_renamed_filename"));
+				n.setNoticeAvailable(rset.getString("notice_available"));
+				
+				list.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public List<Notice> selectNoticeSearch(Connection conn,String noticeSearch, String searchType) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query ="";
+		
+		List<Notice> list = new ArrayList<>();
+		if("title".equals(searchType)) query = prop.getProperty("selectNoticeSearchByTitle");
+		else if("content".equals(searchType)) query = prop.getProperty("selectNoticeSearchByContent");
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "%"+noticeSearch+"%");
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Notice n = new Notice();
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeWriter(rset.getString("notice_writer"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeDate(rset.getDate("notice_date"));
+				n.setNoticeReadCount(rset.getInt("notice_readcount"));
+				n.setNoticeOriginalFileName(rset.getString("notice_original_filename"));
+				n.setNoticeRenamedFileName(rset.getString("notice_renamed_filename"));
+				n.setNoticeAvailable(rset.getString("notice_available"));
+				
+				list.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 

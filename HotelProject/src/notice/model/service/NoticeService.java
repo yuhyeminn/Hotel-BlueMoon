@@ -97,4 +97,18 @@ public class NoticeService {
 		return result;
 	}
 
+	public List<Notice> selectNoticeAll() {
+		Connection conn = getConnection();
+		List<Notice> list = new NoticeDAO().selectNoticeAll(conn);
+		close(conn);
+		return list;
+	}
+
+	public List<Notice> selectNoticeSearch(String noticeSearch, String searchType) {
+		Connection conn = getConnection();
+		List<Notice> list = new NoticeDAO().selectNoticeSearch(conn,noticeSearch,searchType);
+		close(conn);
+		return list;
+	}
+
 }

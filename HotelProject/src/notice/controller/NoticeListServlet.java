@@ -79,7 +79,7 @@ public class NoticeListServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 
 		} else {
-			pageBar += "<a href='" + request.getContextPath() + "/board/boardList?cPage=" + pageNo + "'>&gt;</a>";
+			pageBar += "<a href='" + request.getContextPath() + "/notice/noticeList?cPage=" + pageNo + "'>&gt;</a>";
 		}
 
 		// 4.뷰단 포워딩

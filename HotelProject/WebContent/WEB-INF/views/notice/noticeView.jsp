@@ -73,8 +73,15 @@ function deleteNotice(){
     	return;
     else{
     	location.href = "<%=request.getContextPath()%>/notice/noticeDelete?noticeNo=<%=n.getNoticeNo()%>";
-<%--     	location.href = "<%=request.getContextPath()%>/notice/noticeList"; --%>
     }
+}
+
+function fileDownload(oName, rName){
+    //ie대비 한글 인코딩 명시적 처리
+    oName = encodeURIComponent(oName);
+    //console.log(oName);
+    
+    location.href = "<%=request.getContextPath()%>/notice/noticeFileDownload?oName="+oName+"&rName="+rName;
 }
 </script>
 
