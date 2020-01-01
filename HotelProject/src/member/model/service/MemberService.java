@@ -138,5 +138,13 @@ public class MemberService {
 	}
 
 
+	public Member checkDuplicatedMemberId(String memberId) {
+		Connection conn = getConnection();
+		Member m = new MemberDAO().checkDuplicatedMemberId(conn, memberId);
+		close(conn);
+		return m;
+	}
+
+
 	
 }

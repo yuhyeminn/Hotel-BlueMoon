@@ -1,9 +1,60 @@
-﻿<%@page import="room.model.vo.Room"%>
+﻿<%@page import="review.model.vo.ReviewM"%>
+<%@page import="java.util.List"%>
+<%@page import="room.model.vo.Room"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
+<script src="<%=request.getContextPath()%>/js/jquery.twbsPagination.js"></script>
 <%
 	Room r = (Room)request.getAttribute("room");
+	List<ReviewM> rvList = (List<ReviewM>)request.getAttribute("review");
+	
+	
+	//평점 계산
+	double totalPerPerson = 0; //1명당 평점 총계
+	double totalScore = 0; // 전체 평점 합계
+	double totalReview = 0; //총 후기수
+	double totalAvgScore = 0; // 전체 평점 평균
+	
+	double totalClean = 0; //청결도 평점 총계
+	double totalComm = 0; //커뮤니케이션 평점 총계
+	double totalCheckIn = 0; //체크인 평점 총계
+	double totalLocation = 0; //위치 평점 총계
+	double totalValue = 0; //가치 평점 총계
+	
+	double totalAvgClean = 0; //총 청결도 평균
+	double totalAvgComm = 0; //총 커뮤니케이션 평균
+	double totalAvgCheckIn = 0; //총 체크인 평균
+	double totalAvgLocation = 0; //총 위치 평균
+	double totalAvgValue = 0; //총 가치 평균
+	
+	for(ReviewM rv : rvList){
+		totalPerPerson = rv.getReviewStarClean();
+		totalPerPerson += rv.getReviewStarComm();
+		totalPerPerson += rv.getReviewStarCheckIn();
+		totalPerPerson += rv.getReviewStarLocation();
+		totalPerPerson += rv.getReviewStarValue();
+		totalPerPerson /= 5;
+		
+		totalClean += rv.getReviewStarClean();
+		totalComm += rv.getReviewStarComm();
+		totalCheckIn += rv.getReviewStarCheckIn();
+		totalLocation += rv.getReviewStarLocation();
+		totalValue += rv.getReviewStarValue();
+		
+		totalScore += totalPerPerson;
+		totalReview++; 
+	}
+	totalAvgScore = totalScore/totalReview; 
+	
+	totalAvgClean = totalClean/totalReview;
+	totalAvgComm = totalComm/totalReview;
+	totalAvgCheckIn = totalCheckIn/totalReview;
+	totalAvgLocation = totalLocation/totalReview;
+	totalAvgValue = totalValue/totalReview;
+	
+	
+	
 %>
 <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500,700|Noto+Serif+KR&display=swap"
@@ -237,7 +288,6 @@ h1.room-title span {
 
 .user-review-context-section {
 	margin: 40px 0 20px 20px;
-	height: 670px;
 }
 
 .user-profile-img {
@@ -285,10 +335,91 @@ h1.room-title span {
 	clear: both;
 	margin-left: 20px;
 }
-.w-100{
-	height: 487px;
+#pagination a {
+display:inline-block;
+margin-right:5px;
+cursor:pointer;
+}
+
+/* paging js*/
+.wrapper{
+  margin: 60px auto;
+  text-align: center;
+}
+h1{
+  margin-bottom: 1.25em;
+}
+#pagination-demo{
+  display: inline-block;
+  margin-bottom: 1.75em;
+}
+#pagination-demo li{
+  display: inline-block;
+}
+
+.page-content{
+  background: #eee;
+  display: inline-block;
+  padding: 10px;
+  width: 100%;
+  max-width: 660px;
 }
 </style>
+<script>
+
+/* $(() => {
+	console.log($('.user-review-context-section').length);
+}); */
+
+$(()=>{
+	
+	//pagination script
+	 var $tr = $('.one-context');
+     var total_num_row = $tr.length;
+     var tpg = Math.ceil(total_num_row/5);
+         
+     $('#pagination-demo').twbsPagination({
+     totalPages: tpg,
+     visiblePages: 5,
+     next: 'Next',
+     prev: 'Prev',
+     onPageClick: function (event, page) {
+    	 var numPerPage = 5;
+    	 var totalContent = $tr.length;
+    	 var totalPage =  Math.ceil(totalContent/numPerPage);
+    	 
+    	 var pageBarSize = 5; 
+    	 var pageStart = ((page-1)/pageBarSize)*pageBarSize+1;
+    	 var pageEnd = pageStart+pageBarSize-1;
+    	 var pageNo = pageStart;
+    	 
+    	 var stt = ((page - 1) * numPerPage + 1);// start rownum
+		 var edd = (page * numPerPage);// end rownum
+    	 
+    	 
+         if(page == 1){
+             $tr.each(function(i){
+             $(this).hide();
+             for(var i =page-1; i<page+4;i++){
+                 $tr.eq(i).show();
+             }
+         })
+         }
+         else{
+             $tr.each(function(i){
+             $(this).hide();
+             console.log(page)
+             for(var i = stt-1; i<=edd-1; i++){
+                 $tr.eq(i).show();
+             }
+         })
+         }
+     }
+     });
+})
+
+
+</script>
 <div class="room-detail-container">
 	<h1 class="room-title">
 		<span>객실</span>
@@ -420,9 +551,9 @@ h1.room-title span {
 		<div class="star-section">
 			<img src="<%=request.getContextPath()%>/images/purpleStar.png"
 				alt="별" class="purpleStar">
-			<div class="ratingVal starText">4.89</div>
+			<div class="ratingVal starText"><%=Math.round(totalAvgScore *100)/100.0 %></div>
 			<div class="verticalHr"></div>
-			<div class="reviewTotalCount starText">298 후기</div>
+			<div class="reviewTotalCount starText"><%=(int)totalReview %> 후기</div>
 		</div>
 	</div>
 
@@ -431,50 +562,45 @@ h1.room-title span {
 			<div class="three-container">
 				<div class="ratinig-container">
 					<div class="ratingText">청결도</div>
-					<span class="rating-value cleanRatingVal">4.9</span>
+					<span class="rating-value cleanRatingVal"><%=Math.round(totalAvgClean *10)/10.0 %></span>
 					<div class="progress p-bar-container">
-						<div class="progress-bar w-100" role="progressbar"
-							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
-					</div>
+    					<div class="progress-bar" role="progressbar" style="width: <%=(totalAvgClean/5)*100 %>%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"></div>
+  					</div>
 				</div>
 				<div class="ratinig-container">
 					<div class="ratingText">의사소통</div>
-					<span class="rating-value communicationRatingVal">5.0</span>
+					<span class="rating-value communicationRatingVal"><%=Math.round(totalAvgComm *10)/10.0 %></span>
 					<div class="progress p-bar-container">
-						<div class="progress-bar w-100" role="progressbar"
-							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
-					</div>
+    					<div class="progress-bar" role="progressbar" style="width: <%=(totalAvgComm/5)*100 %>%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"></div>
+  					</div>
 				</div>
 				<div class="ratinig-container">
 					<div class="ratingText">체크인</div>
-					<span class="rating-value checkinRatingVal">5.0</span>
+					<span class="rating-value checkinRatingVal"><%=Math.round(totalAvgCheckIn *10)/10.0 %></span>
 					<div class="progress p-bar-container">
-						<div class="progress-bar w-100" role="progressbar"
-							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
-					</div>
+    					<div class="progress-bar" role="progressbar" style="width: <%=(totalAvgCheckIn/5)*100 %>%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"></div>
+  					</div>
 				</div>
 			</div>
 			<div class="three-container">
 				<div class="ratinig-container">
 					<div class="ratingText">위치</div>
-					<span class="rating-value locationRatingVal">4.9</span>
+					<span class="rating-value locationRatingVal"><%=Math.round(totalAvgLocation *10)/10.0 %></span>
 					<div class="progress p-bar-container">
-						<div class="progress-bar w-100" role="progressbar"
-							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
-					</div>
+    					<div class="progress-bar" role="progressbar" style="width: <%=(totalAvgLocation/5)*100 %>%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"></div>
+  					</div>
 				</div>
 				<div class="ratinig-container">
 					<div class="ratingText">가치</div>
-					<span class="rating-value valueRatingVal">4.9</span>
+					<span class="rating-value valueRatingVal"><%=Math.round(totalAvgValue *10)/10.0 %></span>
 					<div class="progress p-bar-container">
-						<div class="progress-bar w-100" role="progressbar"
-							aria-valuenow="75" aria-valuemin="0" aria-valuemax="5"></div>
-					</div>
+    					<div class="progress-bar" role="progressbar" style="width: <%=(totalAvgValue/5)*100 %>%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5"></div>
+  					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- search section -->
 	<div class="search-section">
 		<div class="input-group mb-3 input-textReview">
@@ -487,6 +613,7 @@ h1.room-title span {
 	</div>
 
 	<!-- user review context section -->
+	<% for(ReviewM rv : rvList){ %>
 	<div class="user-review-context-section">
 		<div class="one-context">
 			<div class="user-profile-pic">
@@ -494,72 +621,19 @@ h1.room-title span {
 					src="<%=request.getContextPath()%>/images/account_circle_black.png"
 					alt="유저이미지" class="user-profile-img">
 			</div>
-			<div class="user-id">Julia</div>
-			<div class="review-date">2019년 10월</div>
-			<div class="review-context">살면서 한번쯤 좋은추억으로 만들수있는곳</div>
-		</div>
-		<div class="one-context">
-			<div class="user-profile-pic">
-				<img
-					src="<%=request.getContextPath()%>/images/account_circle_green.png"
-					alt="유저이미지" class="user-profile-img">
-			</div>
-			<div class="user-id">KimDongMin</div>
-			<div class="review-date">2019년 9월</div>
-			<div class="review-context">Highly recommended. Don’t miss this
-				wonderful hotel!</div>
-		</div>
-		<div class="one-context">
-			<div class="user-profile-pic">
-				<img
-					src="<%=request.getContextPath()%>/images/account_circle_blue.png"
-					alt="유저이미지" class="user-profile-img">
-			</div>
-			<div class="user-id">홍길동</div>
-			<div class="review-date">2019년 8월</div>
-			<div class="review-context">사진과 숙소가 같았고 사이사이 세심한 배려가 느껴져서
-				좋았습니다.</div>
-		</div>
-		<div class="one-context">
-			<div class="user-profile-pic">
-				<img
-					src="<%=request.getContextPath()%>/images/account_circle_yellow.png"
-					alt="유저이미지" class="user-profile-img">
-			</div>
-			<div class="user-id">KangHoDong</div>
-			<div class="review-date">2019년 7월</div>
-			<div class="review-context">호캉스 좋았다</div>
-		</div>
-		<div class="one-context">
-			<div class="user-profile-pic">
-				<img
-					src="<%=request.getContextPath()%>/images/account_circle_purple.png"
-					alt="유저이미지" class="user-profile-img">
-			</div>
-			<div class="user-id">LeeDongMin</div>
-			<div class="review-date">2019년 6월</div>
-			<div class="review-context">환상적인 뷰와 서비스</div>
+			<div class="user-id"><%=rv.getMemberName() %></div>
+			<div class="review-date"><%=rv.getReviewDate() %></div>
+			<div class="review-context"><%=rv.getReviewContent() %></div>
 		</div>
 	</div>
-
+	<% } %>
 
 	<!-- Pagination section -->
 	<div class="pagination-section">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-						class="sr-only">Next</span>
-				</a></li>
-			</ul>
-		</nav>
+		<ul class="pagination" id="pagination">
+  		</ul>
 	</div>
+	
+	<ul id="pagination-demo" class="pagination-sm"></ul>
 </div>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

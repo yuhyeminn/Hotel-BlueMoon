@@ -19,6 +19,7 @@
 <link href="<%=request.getContextPath()%>/css/theme.css" media="all" rel="stylesheet" type="text/css" />
 <script src="<%=request.getContextPath()%>/js/star-rating.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/js/ko.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.twbsPagination.js"></script>
 
 </head>
 <style>
@@ -86,6 +87,7 @@ body {
 .nl-table{
 	font-size: 16px;
 	text-align: center;
+    border-bottom: #dddddd solid 2px;
 }
 .nl-table th{
 	font-size: 18px;
@@ -121,6 +123,7 @@ body {
 }
 .horizontal{
     width: 760px;
+    margin-bottom: 30px;
 }
 .card-title {
     margin-bottom: .75rem;
@@ -146,7 +149,77 @@ body {
 	margin-top: 15px;
     margin-bottom: 15px;
 }
-
+/* star button */
+.starbtn:hover{
+	color:white;
+	opacity:1;
+}
+.starbtn{
+    display: inline-block;
+	border-radius:7px;
+    font-weight: bold;
+    color: #ffbf00;
+    background: #fff;
+    width: 50px;
+    zoom: 0.5;
+    border: beige solid 1px;
+    transition:box-shadow .294s ease, color .1756s ease;
+    outline: none!important;
+}
+.starbtn:before{
+	color:#ffbf00;
+	content:"★";
+	font-family:fontawesome;
+	font-size:30px;
+}
+.starbtn:hover,
+.starbtn:hover:before{
+	color: #e2d2ff;
+}
+.starbtn:hover{
+	background: #fff8da;
+}
+.xButton{
+	margin-top: -9px;
+}
+.star-content{
+	padding: 20px;
+}
+#exampleModalLabel{
+	    line-height: normal;
+}
+.colorYellow{
+	background-color: #f8f7d1;
+}
+.fw700{
+	font-weight: 700;
+}
+.cwrt, .wtnr{
+	font-weight: 700;
+    color: #343434;
+}
+/* paging js*/
+#pagination-demo{
+  display: block;
+  text-align: center;
+}
+#pagination-demo li{
+  display: inline-block;
+}
+.page-content{
+  background: #eee;
+  display: inline-block;
+  padding: 10px;
+  width: 100%;
+  max-width: 660px;
+}
+#pagination-demo2{
+  display: block;
+  text-align: center;
+}
+#pagination-demo2 li{
+  display: inline-block;
+}
 </style>
 <script>
 	//onload
@@ -156,7 +229,11 @@ body {
         $("#input-3").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm'});
         $("#input-4").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm'});
         $("#input-5").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm'});
-        
+        $(".input-10").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm', displayOnly:true});
+        $(".input-11").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm', displayOnly:true});
+        $(".input-12").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm', displayOnly:true});
+        $(".input-13").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm', displayOnly:true});
+        $(".input-14").rating({language: 'ko', min: 0, max: 5, step: 1, stars: 5, size: 'sm', displayOnly:true});
                 
       	//리뷰작성버튼 클릭시
         $("[name='modal-btn-write']").click(function(){
@@ -170,11 +247,112 @@ body {
         
        	<%--삭제버튼 클릭시--%>
         $(".btn-delete").click(function(){
-            if(!confirm("이 객실을 삭제하시겠습니까?")) return;
+            if(!confirm("이 리뷰를 삭제하시겠습니까?")) return;
 
             var a = $(this).prev()
             a.submit();
         });
+        
+        $(".starbtn").click(function(){
+        	/* console.log($(this).parent().parent().parent().parent().parent().next()) */
+        	var clickedModal = $(this).parent().parent().parent().parent().parent().next();
+        	clickedModal.modal();
+        });
+
+        
+        //작성가능한리뷰 pagination
+      	//pagination script
+   	 	var $tr = $('.cr-tbody');
+        var total_num_row = $tr.length;
+        /* console.log(total_num_row); */
+        var tpg = Math.ceil(total_num_row/5);
+            
+        $('#pagination-demo').twbsPagination({
+        totalPages: tpg,
+        visiblePages: 5,
+        next: 'Next',
+        prev: 'Prev',
+        onPageClick: function (event, page) {
+       	 var numPerPage = 5;
+       	 var totalContent = $tr.length;
+       	 var totalPage =  Math.ceil(totalContent/numPerPage);
+       	 
+       	 var pageBarSize = 5; 
+       	 var pageStart = ((page-1)/pageBarSize)*pageBarSize+1;
+       	 var pageEnd = pageStart+pageBarSize-1;
+       	 var pageNo = pageStart;
+       	 
+       	 var stt = ((page - 1) * numPerPage + 1);// start rownum
+   		 var edd = (page * numPerPage);// end rownum
+       	 
+       	 
+            if(page == 1){
+                $tr.each(function(i){
+                $(this).hide();
+                for(var i =page-1; i<page+4;i++){
+                    $tr.eq(i).show();
+                }
+            })
+            }
+            else{
+                $tr.each(function(i){
+                $(this).hide();
+                console.log(page)
+                for(var i = stt-1; i<=edd-1; i++){
+                    $tr.eq(i).show();
+                }
+            })
+            }
+        }
+        });
+        
+        
+        //작성한리뷰 pagination
+      	//pagination script
+   	 	var $tr = $('.container-nnl');
+        var total_num_row = $tr.length;
+        console.log(total_num_row);
+        var tpg = Math.ceil(total_num_row/5);
+            
+        $('#pagination-demo2').twbsPagination({
+        totalPages: tpg,
+        visiblePages: 5,
+        next: 'Next',
+        prev: 'Prev',
+        onPageClick: function (event, page) {
+       	 var numPerPage = 5;
+       	 var totalContent = $tr.length;
+       	 var totalPage =  Math.ceil(totalContent/numPerPage);
+       	 
+       	 var pageBarSize = 5; 
+       	 var pageStart = ((page-1)/pageBarSize)*pageBarSize+1;
+       	 var pageEnd = pageStart+pageBarSize-1;
+       	 var pageNo = pageStart;
+       	 
+       	 var stt = ((page - 1) * numPerPage + 1);// start rownum
+   		 var edd = (page * numPerPage);// end rownum
+       	 
+       	 
+            if(page == 1){
+                $tr.each(function(i){
+                $(this).hide();
+                for(var i =page-1; i<page+4;i++){
+                    $tr.eq(i).show();
+                }
+            })
+            }
+            else{
+                $tr.each(function(i){
+                $(this).hide();
+                console.log(page)
+                for(var i = stt-1; i<=edd-1; i++){
+                    $tr.eq(i).show();
+                }
+            })
+            }
+        }
+        });
+        
         
     }) //End of onload
 	
@@ -238,7 +416,7 @@ body {
 <br />
 <br />
 
-<h4 style="text-align:center">[ 작성 가능한 리뷰 ]</h4> 
+<h4 style="text-align:center" class="cwrt">[ 작성 가능한 리뷰 ]</h4> 
 <br />
 <br />     
 <table class="table table-hover nl-table">
@@ -251,7 +429,7 @@ body {
       </tr>
     </thead>
     <% for(ReviewN  nl: rvnl){ %>
-    <tbody>
+    <tbody class="cr-tbody">
       <tr>
         <td><%=nl.getResvIn() %> ~ <%=nl.getResvOut() %></td>
         <td><%=nl.getRoomName() %></td>
@@ -267,11 +445,12 @@ body {
  	<% }%>	
     </tbody>
 </table>
+<ul id="pagination-demo"></ul>
 <br />
 <br />
 <br />
-<!-- 작성한리뷰 -->
-<h4 style="text-align:center">[ 작성한 리뷰 ]</h4>
+<%-- 작성한리뷰 --%>
+<h4 style="text-align:center" class="wtnr">[ 작성한 리뷰 ]</h4>
 <br />
 <% for(ReviewNN  nnl: rvnnl){ %>
  <div class="container-nnl">
@@ -284,11 +463,15 @@ body {
                   <div class="card-content">
                   	  <%-- delete버튼용 frm --%>
 				      <form name="roomDelFrm" action="<%=request.getContextPath()%>/mypage/reviewDelete" method="post">
-						<input type="hidden" name="reviewNoforDelete" id="reviewNoforDelete" class="reviewNoforDelete" value="<%= nnl.getReviewNo() %>" />
-						<input type="hidden" name="memberId" id="memberId" class="memberId" value="<%= nnl.getMemberId() %>" />
+						<input type="hidden" name="reviewNoforDelete" class="reviewNoforDelete" value="<%= nnl.getReviewNo() %>" />
+						<input type="hidden" name="memberId" class="memberId" value="<%= nnl.getMemberId() %>" />
 				      </form>
                       <button type="button" class="btn btn-light btn-delete">삭제</button>
-                    <span class="card-title"><%=nnl.getMemberId() %></span><br>
+                    <span class="card-title"><%=nnl.getMemberId() %></span>
+                  	<%-- 평점확인용 btn --%>
+                    <!-- <button class="action starbtn" data-toggle="modal" data-target=".starChkModal"></button> -->
+                    <button class="action starbtn" data-toggle="modal"></button>
+                    <br>
                     <span class="card-date"><%=nnl.getResvIn() %> ~ <%=nnl.getResvOut() %> · <%=nnl.getResvPeople() %>인 · <%=nnl.getRoomName() %></span>
                     <hr class="nnl-hr">
                     <p><%=nnl.getReviewContent() %></p>
@@ -298,15 +481,49 @@ body {
               </div>
             </div>
         </div>
-        <br />
-        <br />
+        <!-- 리뷰 평점 확인용 Small modal -->
+		<div class="modal starChkModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content colorYellow">
+		    <div class="modal-header">
+                <h4 class="modal-title fw700" id="exampleModalLabel">내 평점 보기</h4>
+                <button type="button" class="close xButton" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+			    <div class="star-content">
+				    <div class="star-view-wrapper">
+				      <label for="input-10" class="control-label">청결도</label>
+				      <input class="input-10" name="input-10" value="<%=nnl.getReviewStarClean() %>" class="rating-loading viewClean">
+				   	</div>
+				   	<div class="star-view-wrapper">
+				      <label for="input-11" class="control-label">의사소통</label>
+				      <input class="input-11" name="input-11" value="<%=nnl.getReviewStarComm() %>" class="rating-loading viewComm">
+				   	</div>
+				   	<div class="star-view-wrapper">
+				      <label for="input-12" class="control-label">체크인</label>
+				      <input class="input-12" name="input-12" value="<%=nnl.getReviewStarCheckIn() %>" class="rating-loading viewCheckIn">
+				   	</div>
+				   	<div class="star-view-wrapper">
+				      <label for="input-13" class="control-label">위치</label>
+				      <input class="input-13" name="input-13" value="<%=nnl.getReviewStarLocation() %>" class="rating-loading viewLoc">
+				   	</div>
+				   	<div class="star-view-wrapper">
+				      <label for="input-14" class="control-label">가치</label>
+				      <input class="input-14" name="input-14" value="<%=nnl.getReviewStarValue() %>" class="rating-loading viewVal">
+				   	</div>
+			   	</div>
+		    </div>
+		  </div>
+		</div>
 <% }%>
-<!-- 작성한리뷰 end -->
+<ul id="pagination-demo2"></ul>
+        <br />
+        <br />
 
-<!-- modal : write review -->
-<!-- modal button -->
+<%-- 작성한리뷰 end --%>
 
-<!-- modal context -->
+<%-- 리뷰 작성 modal context --%>
 <div class="modal" id="btn-write-review" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -317,7 +534,7 @@ body {
                 </button>
               </div>
 
-    <!-- modal body -->
+    <%-- modal body --%>
     <form action="<%=request.getContextPath()%>/mypage/reviewEnd" method="post">
         <div class="modal-body">
          <div class="review-wtire-title">
@@ -366,7 +583,8 @@ body {
         </div>
    </form>
     </div>
-   </div>
+   </div> <%-- 리뷰작성 modal end --%>
+
 
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

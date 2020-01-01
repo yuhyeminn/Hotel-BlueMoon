@@ -36,9 +36,8 @@ public class MemberIdDuplicatedCheckServlet extends HttpServlet {
 		
 		//2.파라미터값  가져오기
 		String memberId = request.getParameter("memberId");
-		System.out.println(memberId);
 		//3.비지니스로직처리 : 해당하는 User찾기
-		Member m = new MemberService().selectOne(memberId);
+		Member m = new MemberService().checkDuplicatedMemberId(memberId);
 		System.out.println("servlet@="+m);
 		int booleanchk = m==null?0:1;
 		
