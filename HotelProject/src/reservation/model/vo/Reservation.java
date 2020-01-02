@@ -7,14 +7,14 @@ public class Reservation implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int resvNo;
+	private long resvNo;
 	private String resvMemberId;
 	private int resvPeople;
 	private int resvUsedPoint;
 	private int resvAddPoint;
 	private Date resvDate;
 	private int resvPrice;
-	private boolean resvCancel;
+	private String resvCancel;
 	private Date resvIn;
 	private Date resvOut;
 	private int resvBfPeople;
@@ -23,8 +23,8 @@ public class Reservation implements Serializable{
 		super();
 	}
 
-	public Reservation(int resvNo, String resvMemberId, int resvPeople, int resvUsedPoint, int resvAddPoint,
-			Date resvDate, int resvPrice, boolean resvCancel, Date resvIn, Date resvOut, int resvBfPeople) {
+	public Reservation(long resvNo, String resvMemberId, int resvPeople, int resvUsedPoint, int resvAddPoint,
+			Date resvDate, int resvPrice, String resvCancel, Date resvIn, Date resvOut, int resvBfPeople) {
 		super();
 		this.resvNo = resvNo;
 		this.resvMemberId = resvMemberId;
@@ -39,11 +39,11 @@ public class Reservation implements Serializable{
 		this.resvBfPeople = resvBfPeople;
 	}
 
-	public int getResvNo() {
+	public long getResvNo() {
 		return resvNo;
 	}
 
-	public void setResvNo(int resvNo) {
+	public void setResvNo(long resvNo) {
 		this.resvNo = resvNo;
 	}
 
@@ -95,11 +95,11 @@ public class Reservation implements Serializable{
 		this.resvPrice = resvPrice;
 	}
 
-	public boolean isResvCancel() {
+	public String isResvCancel() {
 		return resvCancel;
 	}
 
-	public void setResvCancel(boolean resvCancel) {
+	public void setResvCancel(String resvCancel) {
 		this.resvCancel = resvCancel;
 	}
 

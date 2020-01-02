@@ -2,6 +2,7 @@ package reservation.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -12,16 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import member.model.dao.MemberDAO;
+import coupon.model.vo.Coupon;
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import reservation.model.service.ReservationService;
 import room.model.vo.Room;
 
 /**
  * Servlet implementation class ReservationPayment
  */
 @WebServlet("/views/reservation/selectRoomEnd")
-public class ReservationSelectRoomServlet extends HttpServlet {
+public class ReservationSelectRoomEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -37,13 +39,19 @@ public class ReservationSelectRoomServlet extends HttpServlet {
 		int room_no = Integer.parseInt(request.getParameter("roomNo"));
 		int diffDay = Integer.parseInt(request.getParameter("diffDay"));
 		
-//		System.out.println(checkindate +","+checkoutdate +","+room1+","+room2+","+roomcnt+","+room_no);
-		
+		//선택한 객실 정보
 		Room selectedroom = new AdminService().selectOne(room_no);
 		request.setAttribute("selectedroom", selectedroom);
 		
+		//예약자 정보
 		Member resvMember = new MemberService().selectOne(memberId);
 		request.setAttribute("resvMember", resvMember);
+		
+		int totalRoomPrice = roomcnt * selectedroom.getRoomPrice() * diffDay;
+		//예약자의 보유 쿠폰 리스트
+		Map<String, Object> couponMap = new ReservationService().selectCouponListByMemberId(resvMember.getMemberId(),totalRoomPrice);
+		request.setAttribute("couponMap", couponMap);
+		System.out.println("couponMap@selectRoomEnd="+couponMap);
 		
 		Map<Object, Object> map = new HashMap<>();
 		map.put("checkindate",checkindate);
@@ -52,7 +60,7 @@ public class ReservationSelectRoomServlet extends HttpServlet {
 		if(room2!=0) map.put("room2", room2);
 		map.put("roomcnt", roomcnt);
 		map.put("diffDay", diffDay);
-
+		map.put("totalRoomPrice", totalRoomPrice);
 		//뷰단 포워딩
 		request.setAttribute("infomap", map);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/reservation/resvPayment.jsp");

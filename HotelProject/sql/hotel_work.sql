@@ -17,6 +17,7 @@ create table member(
 );
 select * from member;
 alter table member add unique(member_email);
+alter table member modify (member_id default 3000);
 --insert
 --admin 비밀번호 : adminadmin++00
 --기본사용자 비밀번호 : aaaaaaaa++00
@@ -74,7 +75,8 @@ create table notice(
     constraint pk_notice_no primary key(notice_no),
     constraint fk_notice_writer foreign key(notice_writer)
                                 references member(member_id)
-                                on delete set null
+                                on delete set null,
+    constraint check_notice_available check (notice_available in ('Y','N'))
 );
 ​
 select * from notice;
@@ -82,7 +84,9 @@ select * from notice;
 --notice_no 시퀀스 생성
 create sequence seq_notice_no;
 
-​
+​--공지사항 테이블 notice_available 컬럼에 check제약 조건 추가(Y,N)
+alter table notice add constraint notice_available_check check(notice_available in ('Y','N'));
+
 --조회(페이징 포함)
 --SELECT * FROM(SELECT RANK() OVER(ORDER BY NOTICE_NO DESC) RNUM, N.* FROM NOTICE N WHERE NOTICE_AVAILABLE = 'Y')V WHERE RNUM BETWEEN ? AND ?
 ​
@@ -149,11 +153,16 @@ create table reservation(
     resv_out date not null,
     resv_breakfast number default 0,
 constraint pk_resv_no primary key(resv_no),
-constraint fk_resv_member foreign key(resv_member) references member(member_id)
+constraint fk_resv_member foreign key(resv_member) references member(member_id),
+constraint check_resv_iscancel check (resv_iscancel in ('N','Y'))
 );
 
-create sequence seq_resv_no start with 1000;
+--시퀀스 생성
+create sequence seq_resv_no start with 1001;
 --drop sequence seq_resv_no;
+
+--예약 테이블 resv_iscancel 컬럼에 check제약조건 추가(Y,N)
+alter table reservation add constraint resv_iscancel_check check(resv_iscancel in ('Y','N'));
 
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'hyemin',2,0,0,default,350000,'N','2019-12-29','2019-12-30',0);
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'hyemin',1,0,0,default,450000,'N','2019-12-25','2019-12-29',0);
@@ -187,6 +196,7 @@ insert into booked_room values(seq_booked_no.nextval,2,'201912291004',2,'2019-12
 
 select * from booked_room;
 
+--booked_no 시퀀스 생성
 create sequence seq_booked_no;
 
 
@@ -239,32 +249,73 @@ commit;
 --=======================================================
 -- 쿠폰 테이블
 --=======================================================
+--쿠폰 종류 테이블 생성
+create table coupon_kind(
+    coupon_code varchar2(30) not null,
+    coupon_content varchar2(50) not null,
+    coupon_salePercent number not null,
+    coupon_min number not null,
+    constraint pk_coupon_code primary key(coupon_code)
+);
+​
+insert into coupon_kind values('1', '웰컴쿠폰', 5, 500000);
+​
+--쿠폰 테이블 생성
 create table coupon(
     coupon_no varchar2(24) not null,
     coupon_code varchar2(30) not null,
     member_id varchar2(20) default null,
-    coupon_startDate date default sysdate+365,
-    coupon_endDate date default sysdate,
+    coupon_startDate date default sysdate,
+    coupon_endDate date default sysdate+365,
     coupon_used char(1) default 'F',
     constraint pk_coupon_no primary key(coupon_no),
     constraint fk_coupon_code foreign key(coupon_code) references coupon_kind(coupon_code),
     constraint fk_member_id foreign key(member_id) references member(member_id),
     constraint ck_coupon_used check(coupon_used in ('T','F'))
 );
-​
-insert into coupon values('eqwesd','123','larva', default, default, default);
 
---쿠폰 종류 테이블 생성
-create table coupon_kind(
-    coupon_code varchar2(30) not null,
-    coupon_content varchar2(50) not null,
-    coupon_salePersent number not null,
-    coupon_min number not null,
-    conpon_max number not null,
-    constraint pk_coupon_code primary key(coupon_code)
-);
-​
-insert into coupon_kind values('123', '웰컴쿠폰', 5, 500000, 10000);
-​
+insert into coupon values(DBMS_RANDOM.STRING('X', 10),'1','hyeminyu', default, default, default);
+
+--회원이 사용 가능한 쿠폰 리스트 조회
+select c.coupon_no, ck.coupon_content, ck.coupon_salepercent
+from coupon c left join coupon_kind ck on c.coupon_code = ck.coupon_code 
+where member_id ='hyeminyu' and coupon_enddate >= sysdate and coupon_min <=550000;
+--select c.coupon_no, ck.coupon_content, ck.coupon_salepercent from coupon c left join coupon_kind ck on c.coupon_code = ck.coupon_code  where member_id = ? and coupon_enddate >= sysdate and coupon_min >= ?
+
+
+
 select * from coupon_kind;
 select * from coupon;
+
+--=======================================================
+-- 포인트 내역 테이블
+--=======================================================
+create table point_io(
+    member_id varchar2(20) not null,
+    point number not null,
+    update_date date default sysdate,
+    point_status char(1) not null,
+    constraint fk_point_member_id foreign key (member_id) references member(member_id) on delete cascade,
+    constraint check_point_status check (point_status in ('I','O'))
+);
+--drop table point_io;
+--SELECT * FROM ALL_TRIGGERS;
+select * from point_io;
+create or replace trigger trg_enroll_point
+    after
+    insert on member
+    for each row
+begin
+        --회원가입한 경우, welcome 포인트 적립
+        insert into point_io values(:new.member_id,3000,sysdate,'I');
+end;
+/
+
+create or replace trigger trg_enroll_point
+    after
+    insert on reservation
+    for each row
+begin
+    
+end;
+/

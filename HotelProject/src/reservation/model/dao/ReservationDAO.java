@@ -1,4 +1,6 @@
 package reservation.model.dao;
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import coupon.model.vo.Coupon;
 import notice.model.dao.NoticeDAO;
 import room.model.vo.Room;
 
@@ -81,6 +84,40 @@ public class ReservationDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return map;
+	}
+	public Map<String, Object> selectCouponListByMemberId(Connection conn, String memberId, int totalRoomPrice) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Object> list = new ArrayList<>();
+		String query = prop.getProperty("selectCouponListByMemberId");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, totalRoomPrice);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.clear();
+				list.add(rset.getString("coupon_content"));
+				list.add(rset.getString("coupon_salePercent"));
+				System.out.println("couponlist@dao="+list);
+				map.put(rset.getString("coupon_no"), list);
+			}
+			System.out.println("couponmap@dao="+map);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return map;

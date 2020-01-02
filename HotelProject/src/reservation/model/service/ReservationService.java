@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import coupon.model.vo.Coupon;
 import reservation.model.dao.ReservationDAO;
 import room.model.vo.Room;
 public class ReservationService {
@@ -25,6 +26,13 @@ public class ReservationService {
 		}
 		close(conn);
 		return list;
+	}
+
+	public Map<String, Object> selectCouponListByMemberId(String memberId, int totalRoomPrice) {
+		Connection conn = getConnection();
+		Map<String, Object> map = new ReservationDAO().selectCouponListByMemberId(conn,memberId,totalRoomPrice);
+		close(conn);
+		return map;
 	}
 
 
