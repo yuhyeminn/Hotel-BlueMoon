@@ -26,11 +26,12 @@
 	<th>날짜</th>
 	<th>첨부파일</th>
 	<th>답변 여부</th>
+	<th>삭제</th>
 </tr>
 <%
 	if(qnaList.isEmpty()){
 %>
-<tr><td colspan="6">문의내역이 존재하지 않습니다.</td></tr>
+<tr><td colspan="7">문의내역이 존재하지 않습니다.</td></tr>
 <%
 	} else{ 
 		for(Question q : qnaList){
@@ -42,6 +43,15 @@
 	<td><%=q.getQuestionDate() %></td>
 	<td><%=q.getQuestionOriginalFileName()== null ? "X":"O" %></td>
 	<td><%="T".equals(q.getQuestionAnswer())? "답변완료":"답변대기" %></td>
+	<!-- 수정(지은) -->
+	<td>
+      <form action="<%=request.getContextPath() %>/mypage/DeleteQuestion" onsubmit="return deleteQuestion();">
+         <input type="submit" value="삭제">
+         <input type="hidden" name="qnaNo" value="<%=q.getQuestionNo() %>">
+         <input type="hidden" name="qnaWriter" value="<%=q.getQuestionWriter() %>">
+      </form>
+   </td>
+	
 </tr>
 <%} }%>
 </table>
@@ -95,6 +105,14 @@ div#pageBar a{
 $("#questionGo").click(function(){
 	location.href = "<%=request.getContextPath()%>/mypage/question";
 });
+/* 수정(지은) */
+function deleteQuestion(){
+	   var result = confirm("해당 문의글을 정말 삭제하시겠습니까?");
+	   if(!result)
+	      return false;
+	   return true;
+	}
+
 </script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

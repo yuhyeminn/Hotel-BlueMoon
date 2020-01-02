@@ -1,6 +1,8 @@
 package room.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
+import review.model.service.ReviewService;
+import review.model.vo.ReviewM;
 import room.model.vo.Room;
 
 /**
@@ -36,6 +40,9 @@ public class RoomDetailServlet extends HttpServlet {
 		Room r = new AdminService().selectOne(roomNo);
 		System.out.println("room@RoomDetailServlet="+r);
 		
+		List<ReviewM> rv = new ReviewService().selectReviewbyRoomNo(roomNo);
+		
+		
 		//3.view단처리:db에서 읽어온 r객체가 null인 경우, msg.jsp를 통해서
 		//"해당하는 글은 없습니다." 사용자에게 알려주고, 객실페이지로 이동시킬것
 		//게시글 가져오기에 실패한경우
@@ -47,6 +54,7 @@ public class RoomDetailServlet extends HttpServlet {
 		}
 		else {
 			request.setAttribute("room", r);
+			request.setAttribute("review", rv);
 			view = "/WEB-INF/views/room/roomDetail.jsp";			
 		}
 		request.getRequestDispatcher(view).forward(request, response);

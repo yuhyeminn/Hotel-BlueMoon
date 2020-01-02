@@ -15,14 +15,15 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MypageUpdatePasswordEndServlet
  */
-@WebServlet("/mypage/updatePasswordEnd")
+@WebServlet(name ="MypageUpdatePasswordEndServlet",
+			urlPatterns = "/mypage/updatePasswordEnd")
 public class MypageUpdatePasswordEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		String nowPW = request.getParameter("nowPW");
-		String newPW = request.getParameter("newPW");
+		String nowPW = request.getParameter("password");
+		String newPW = request.getParameter("password_new");
 		
 		System.out.println(memberId);
 		System.out.println(nowPW);

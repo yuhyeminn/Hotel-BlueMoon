@@ -65,5 +65,31 @@ public class QuestionService {
 		close(conn);
 		return list;
 	}
+	
+	/*문의사항 수정(지은)*/
+
+	   public int updateQuestion(Question q) {
+	      Connection conn = getConnection();
+	      int result = new QuestionDAO().updateQuestion(conn, q);
+
+	      if (result > 0) {
+	         commit(conn);
+	      } else
+	         rollback(conn);
+
+	      close(conn);
+	      return result;
+	   }
+
+	   public int deleteQuestion(int question_no) {
+	      Connection conn = getConnection();
+	      int result = new QuestionDAO().deleteQuestion(conn,question_no);
+	      if(result>0) commit(conn);
+	      else rollback(conn);
+	      close(conn);
+	      return result;
+	            
+	   }
+	
 
 }

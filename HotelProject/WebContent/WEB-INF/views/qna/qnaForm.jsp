@@ -1,6 +1,11 @@
+<%@page import="question.model.vo.Question"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
+
+<%
+   Question q = (Question)request.getAttribute("question");
+%>
 <style>
 #qna-container {
    margin: 50px 0px;

@@ -8,9 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import review.model.vo.Review;
+import review.model.vo.ReviewN;
+import review.model.vo.ReviewNN;
 
 public class MemberDAO {
 	
@@ -175,6 +180,304 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+	public Member selectMemberId(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query = prop.getProperty("selectMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("member_password"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setBirth(rset.getString("member_birth"));
+				member.setEmail(rset.getString("member_email"));
+				member.setPhone(rset.getString("member_phone"));
+				member.setPoint(rset.getInt("member_points"));
+				member.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberFinder@DAO="+member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return member;
+	}
+		
+		
+	public List<ReviewN> selectReviewN(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectReviewN");
+		List<ReviewN> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ReviewN r = new ReviewN();
+				r.setMemberId(rset.getString("member_id"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setResvIn(rset.getDate("resv_in"));
+				r.setResvOut(rset.getDate("resv_out"));
+				r.setResvPeople(rset.getInt("resv_people"));
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setResvNo(rset.getLong("resv_no"));
+				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
+				
+				list.add(r);
+			}
+//			System.out.println("selectReviewN@dao=" + list);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public Member selectMemberPW(Connection conn, Member m) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+		String query = prop.getProperty("selectMemberPW");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("member_password"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setBirth(rset.getString("member_birth"));
+				member.setEmail(rset.getString("member_email"));
+				member.setPhone(rset.getString("member_phone"));
+				member.setPoint(rset.getInt("member_points"));
+				member.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberFinder@DAO="+member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return member;
+		
+	}
+
+
+
+	public Member selectMemberByEmail(Connection conn, String email) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberByEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberId(rset.getString("member_id"));
+				m.setPassword(rset.getString("member_password"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setBirth(rset.getString("member_birth"));
+				m.setEmail(rset.getString("member_email"));
+				m.setPhone(rset.getString("member_phone"));
+				m.setPoint(rset.getInt("member_points"));
+				m.setEnrollDate(rset.getDate("member_enrolldate"));
+			}
+			System.out.println("memberByEmail@dao.selectOne="+m);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+			
+	public List<ReviewNN> selectReviewNN(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectReviewNN");
+		List<ReviewNN> list = new ArrayList<>();
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ReviewNN r = new ReviewNN();
+				r.setMemberId(rset.getString("member_id"));
+				r.setRoomName(rset.getString("room_name"));
+				r.setResvIn(rset.getDate("resv_in"));
+				r.setResvOut(rset.getDate("resv_out"));
+				r.setResvPeople(rset.getInt("resv_people"));
+				r.setRoomNo(rset.getInt("room_no"));
+				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setReviewStarClean(rset.getInt("review_starclean"));
+				r.setReviewStarComm(rset.getInt("review_starcomm"));
+				r.setReviewStarCheckIn(rset.getInt("review_starcheckin"));
+				r.setReviewStarLocation(rset.getInt("review_starlocation"));
+				r.setReviewStarValue(rset.getInt("review_starvalue"));
+				
+				list.add(r);
+			}
+			System.out.println("selectReviewNN@dao=" + list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+
+	public int insertReview(Connection conn, Review review) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertReview"); 
+		//INSERT INTO REVIEW VALUES(SEQ_REVIEW_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, ?, ?, ?, ?, ?)
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			
+			/*
+			 * review_no number not null,
+			   1 review_writer varchar2(20) not null,
+			   2 resv_no number not null,
+			   3 room_no number not null,
+			   4 review_content varchar2(3000) not null,
+			    review_date date default sysdate,
+			   5 review_starClean number not null,
+			   6 review_starComm number not null,
+			   7 review_starCheckIn number not null,
+			   8 review_starLocation number not null,
+			   9 review_starValue number not null,
+			 */
+			
+			//쿼리문미완성
+			pstmt.setString(1, review.getReviewWriter());
+			pstmt.setLong(2, review.getResvNo());
+			pstmt.setInt(3, review.getRoomNo());
+			pstmt.setString(4, review.getReviewContent());
+			pstmt.setInt(5, review.getReviewStarClean());
+			pstmt.setInt(6, review.getReviewStarComm());
+			pstmt.setInt(7, review.getReviewStarCheckIn());
+			pstmt.setInt(8, review.getReviewStarLocation());
+			pstmt.setInt(9, review.getReviewStarValue());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	public int deleteReview(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteReview"); 
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+
+
+
+	public Member checkDuplicatedMemberId(Connection conn, String memberId) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("checkDuplicatedMemberId");
+		
+		try {
+			//1.Statement객체생성
+			pstmt = conn.prepareStatement(query);//미완성 쿼리 전달
+			
+			//2.미완성 쿼리 값대입
+			pstmt.setString(1, memberId);
+			
+			//3.쿼리실행 => ResultSet
+			rset = pstmt.executeQuery();
+			
+			//4.ResultSet => Member
+			if(rset.next()) {
+				m = new Member();
+				
+				m.setMemberId(rset.getString("member_id"));
+				m.setPassword(rset.getString("member_password"));
+				m.setMemberName(rset.getString("member_name"));
+				m.setBirth(rset.getString("member_birth"));
+				m.setEmail(rset.getString("member_email"));
+				m.setPhone(rset.getString("member_phone"));
+				m.setPoint(rset.getInt("member_points"));
+				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
+			}
+			
+			System.out.println("idDuplicatedChk@dao.selectOne="+m);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//5.자원반납
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	
 	}
 
 

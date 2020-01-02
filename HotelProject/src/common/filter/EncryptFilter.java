@@ -20,6 +20,9 @@ import common.wrapper.EncryptWrapper;
 		servletNames = { 
 				"MemberEnrollEndServlet", 
 				"MemberLoginCheckServlet", 
+				"MemberFinderUpdatePWEndServlet",
+				"MemberFinderUpdatePWServlet",
+				"MypageUpdatePasswordEndServlet",
 //				"MemberUpdateServlet",
 //				"UpdatePasswordEndServlet"
 		})
