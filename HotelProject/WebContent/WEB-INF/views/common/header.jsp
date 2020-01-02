@@ -143,7 +143,7 @@
 	                <li><a href="<%=request.getContextPath()%>/views/admin/adminMemberList"><%=memberLoggedIn.getMemberName()%>님</a></li>
 	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a></li>
-	                <li><a href="<%=request.getContextPath()%>/mypage/myReservation">예약조회</a></li>
+	                <li><a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=memberLoggedIn.getMemberId()%>">예약조회</a></li>
 	            </ul>
 	      		<%} %>
 	        </nav>

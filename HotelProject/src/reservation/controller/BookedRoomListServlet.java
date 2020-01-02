@@ -1,28 +1,39 @@
-package mypage.controller;
+package reservation.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import reservation.model.service.BookedRoomService;
 import reservation.model.vo.BookedRoom;
 
 /**
- * Servlet implementation class MypageReservationServlet
+ * Servlet implementation class BookedRoomListServlet
  */
-@WebServlet("/mypage/myReservation")
-public class MypageReservationServlet extends HttpServlet {
+@WebServlet("/mypage/myReservationList")
+public class BookedRoomListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookedRoom br = new BookedRoom();
+//		int bookedNo = Integer.parseInt(request.getParameter("bookedNo"));
+//		System.out.println("bookedNo@BookedRoomListServlet="+bookedNo);
+		String memberId = request.getParameter("memberId");
+//		System.out.println("memberId@BookedRoomListServlet="+memberId);
 		
-		request.setAttribute("br",br);
+		
+		List<BookedRoom> list = new BookedRoomService().selectBookedRoomByMemberId(memberId);
+		request.setAttribute("list", list);
+//		System.out.println("list@BookedRoomListServlet="+list);
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageReservation.jsp").forward(request, response);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

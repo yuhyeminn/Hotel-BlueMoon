@@ -8,27 +8,37 @@ public class BookedRoom implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int bookedNo;
-	private String bookedRoomName;
-	private int bookedResvNo;
+	private int bookedRoomNo;
+	private long bookedResvNo;
 	private int bookedPeople;
 	private Date bookedCheckIn;
 	private Date bookedCheckOut;
 	private int bookedPrice;
+	private int bookedBreakfast;
 	
 	public BookedRoom() {
 		super();
 	}
 
-	public BookedRoom(int bookedNo, String bookedRoomName, int bookedResvNo, int bookedPeople, Date bookedCheckIn,
-			Date bookedCheckOut, int bookedPrice) {
+	public BookedRoom(int bookedNo, int bookedRoomNo, long bookedResvNo, int bookedPeople, Date bookedCheckIn,
+			Date bookedCheckOut, int bookedPrice, int bookedBreakfast) {
 		super();
 		this.bookedNo = bookedNo;
-		this.bookedRoomName = bookedRoomName;
+		this.bookedRoomNo = bookedRoomNo;
 		this.bookedResvNo = bookedResvNo;
 		this.bookedPeople = bookedPeople;
 		this.bookedCheckIn = bookedCheckIn;
 		this.bookedCheckOut = bookedCheckOut;
 		this.bookedPrice = bookedPrice;
+		this.bookedBreakfast = bookedBreakfast;
+	}
+
+	public int getBookedBreakfast() {
+		return bookedBreakfast;
+	}
+
+	public void setBookedBreakfast(int bookedBreakfast) {
+		this.bookedBreakfast = bookedBreakfast;
 	}
 
 	public int getBookedNo() {
@@ -39,19 +49,20 @@ public class BookedRoom implements Serializable{
 		this.bookedNo = bookedNo;
 	}
 
-	public String getBookedRoomName() {
-		return bookedRoomName;
+
+	public int getBookedRoomNo() {
+		return bookedRoomNo;
 	}
 
-	public void setBookedRoomName(String bookedRoomName) {
-		this.bookedRoomName = bookedRoomName;
+	public void setBookedRoomNo(int bookedRoomNo) {
+		this.bookedRoomNo = bookedRoomNo;
 	}
 
-	public int getBookedResvNo() {
+	public long getBookedResvNo() {
 		return bookedResvNo;
 	}
 
-	public void setBookedResvNo(int bookedResvNo) {
+	public void setBookedResvNo(long bookedResvNo) {
 		this.bookedResvNo = bookedResvNo;
 	}
 
@@ -89,7 +100,7 @@ public class BookedRoom implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BookedRoom [bookedNo=" + bookedNo + ", bookedRoomName=" + bookedRoomName + ", bookedResvNo="
+		return "BookedRoom [bookedNo=" + bookedNo + ", bookedRoomNo=" + bookedRoomNo + ", bookedResvNo="
 				+ bookedResvNo + ", bookedPeople=" + bookedPeople + ", bookedCheckIn=" + bookedCheckIn
 				+ ", bookedCheckOut=" + bookedCheckOut + ", bookedPrice=" + bookedPrice + "]";
 	}

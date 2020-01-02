@@ -1,4 +1,4 @@
-package mypage.controller;
+package admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,22 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import reservation.model.vo.BookedRoom;
-
 /**
- * Servlet implementation class MypageReservationServlet
+ * Servlet implementation class AdminTotalServlet
  */
-@WebServlet("/mypage/myReservation")
-public class MypageReservationServlet extends HttpServlet {
+@WebServlet("/admin/total")
+public class AdminTotalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookedRoom br = new BookedRoom();
-		
-		request.setAttribute("br",br);
-		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageReservation.jsp").forward(request, response);
-	}
+
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminTotal.jsp").forward(request, response);
 	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

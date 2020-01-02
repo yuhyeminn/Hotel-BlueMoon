@@ -16,7 +16,6 @@ import member.model.vo.Member;
 import review.model.vo.Review;
 import review.model.vo.ReviewN;
 import review.model.vo.ReviewNN;
-import room.model.vo.Room;
 
 public class MemberDAO {
 	
