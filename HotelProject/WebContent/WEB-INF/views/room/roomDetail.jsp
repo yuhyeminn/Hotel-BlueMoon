@@ -8,6 +8,7 @@
 <%
 	Room r = (Room)request.getAttribute("room");
 	List<ReviewM> rvList = (List<ReviewM>)request.getAttribute("review");
+	List<ReviewM> srchList = (List<ReviewM>)request.getAttribute("srchList");
 	
 	
 	//평점 계산
@@ -287,7 +288,7 @@ h1.room-title span {
 }
 
 .user-review-context-section {
-	margin: 40px 0 20px 20px;
+	margin: 0 0 20px 20px;
 }
 
 .user-profile-img {
@@ -336,12 +337,14 @@ h1.room-title span {
 	margin-left: 20px;
 }
 #pagination a {
-display:inline-block;
-margin-right:5px;
-cursor:pointer;
+	display:inline-block;
+	margin-right:5px;
+	cursor:pointer;
 }
-
-/* paging js*/
+.acimg{
+	width: 48px;
+    height: 48px;
+}
 .wrapper{
   margin: 60px auto;
   text-align: center;
@@ -352,6 +355,7 @@ h1{
 #pagination-demo{
   display: inline-block;
   margin-bottom: 1.75em;
+  margin-left: 20px;
 }
 #pagination-demo li{
   display: inline-block;
@@ -380,6 +384,7 @@ h1{
 }); */
 
 $(()=>{
+	
 	
 	//pagination script
 	 var $tr = $('.one-context');
@@ -425,96 +430,6 @@ $(()=>{
      }
      });
      
-     $(".src-btn").click(()=>{
- 		$.ajax({
- 			url: "<%=request.getContextPath()%>/room/searchReview",
- 			type: "get",
- 			data: {
- 					rvSrch: $(".rvSrch").val(),
- 					roomNo: <%=r.getRoomNo()%>,
- 				  },
- 			dataType: "json",
- 			success: data => {
- 				console.log(data);//json문자열, javascript object
- 				var $ajaxsrch = $('.one-context');
- 				let $jaxContent = $('<div class="one-context oc2"></div>');
- 				
- 				$ajaxsrch.each(function(i){
- 		             $(this).hide();
- 		             $("#pagination-demo").hide();
- 				})
- 				
- 		            $(data).each((idx, review)=>{
- 		            	console.log('idx',idx);
- 		            	
- 		            	let html = '<div class="ajaxOne">';
- 		            	html += '<div class="user-profile-pic">';
-	 		   			html += '<img src="<%=request.getContextPath()%>/images/account_circle_black.png" alt="유저이미지" class="user-profile-img"/>';
-	 		   			html +=	'</div>';
-	 		   			html +=	'<div class="user-id uid">'+review.name+'</div>';
-	 		   			html +=	'<div class="review-date">'+review.date+'</div>';
-	 		   			html +=	'<div class="review-context rc">'+review.content+'</div>';
-	 		   			html +=	'</div>';
-	 		   			
-	 		   			$jaxContent.append(html);
- 		           });   	
- 		         
- 		        	$("#srchbox").html($jaxContent); 
- 		        	
- 		        	
-		        	//pagination script
- 		      	   var $tr = $('.ajaxOne');
- 		           var total_num_row = $tr.length;
- 		           var tpg = Math.ceil(total_num_row/5);
- 		           console.log("총페이지",tpg)    
- 		           $('.ajaxPagination').twbsPagination({
- 		           totalPages: tpg,
- 		           visiblePages: 5,
- 		           next: 'Next',
- 		           prev: 'Prev',
- 		           onPageClick: function (event, page) {
- 		          	 var numPerPage = 5;
- 		          	 var totalContent = $tr.length;
- 		          	 var totalPage =  Math.ceil(totalContent/numPerPage);
- 		          	 
- 		          	 var pageBarSize = 5; 
- 		          	 var pageStart = ((page-1)/pageBarSize)*pageBarSize+1;
- 		          	 var pageEnd = pageStart+pageBarSize-1;
- 		          	 var pageNo = pageStart;
- 		          	 
- 		          	 var stt = ((page - 1) * numPerPage + 1);// start rownum
- 		      		 var edd = (page * numPerPage);// end rownum
- 		          	 
- 		          	 
- 		               if(page == 1){
- 		                   $tr.each(function(i){
- 		                   $(this).hide();
- 		                   for(var i =page-1; i<page+4;i++){
- 		                       $tr.eq(i).show();
- 		                   }
- 		               })
- 		               }
- 		               else{
- 		                   $tr.each(function(i){
- 		                   $(this).hide();
- 		                   console.log(page)
- 		                   for(var i = stt-1; i<=edd-1; i++){
- 		                       $tr.eq(i).show();
- 		                   }
- 		               })
- 		               }
- 		           }
- 		           });
- 		        	
- 		        	
- 		        	
- 			},
- 			error : (jqxhr, textStatus, errorThrown)=>{
- 				console.log(jqxhr, textStatus, errorThrown);
- 			}
- 		});
- 		
- 	});
      
      
 })//end of onload
@@ -702,20 +617,23 @@ $(()=>{
 		</div>
 	</div>
 	
-	<!-- search section -->
+<%-- 	<!-- search section -->
 	<div class="search-section">
 		<div class="input-group mb-3 input-textReview">
-			<input type="text" class="form-control rvSrch" placeholder="후기 검색"
+		<form action="<%=request.getContextPath()%>/room/searchReview">
+			<input type="text" class="form-control rvSrch" name="rvSrch" placeholder="후기 검색"
 				aria-label="Recipient's username" aria-describedby="basic-addon2">
 			<div class="input-group-append">
-				<button class="btn btn-outline-secondary src-btn" type="button">Search</button>
+			<input type="hidden" name="roomNo" value="<%=r.getRoomNo()%>"/>
+			<button class="btn btn-outline-secondary src-btn" type="submit">Search</button>
+		</form>	
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 	<!-- user review context section -->
-	<div class="srchbox" id="srchbox">
 	
+<!-- user review context section -->
 	</div>
 	<% for(ReviewM rv : rvList){ %>
 	<div class="user-review-context-section">
@@ -734,13 +652,10 @@ $(()=>{
 
 	<!-- Pagination section -->
 	<div class="pagination-section">
-		<ul class="pagination" id="pagination">
-  		</ul>
 	</div>
-	
+	<br />
 	<ul id="pagination-demo" class="pagination-sm"></ul>
 	
-	<div class="ajaxPagination"></div>
 	
 	
 </div>
