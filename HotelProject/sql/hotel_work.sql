@@ -18,6 +18,7 @@ create table member(
 select * from member;
 alter table member add unique(member_email);
 alter table member modify (member_id default 3000);
+
 --insert
 --admin 비밀번호 : adminadmin++00
 --기본사용자 비밀번호 : aaaaaaaa++00
@@ -163,7 +164,7 @@ create sequence seq_resv_no start with 1001;
 
 --예약 테이블 resv_iscancel 컬럼에 check제약조건 추가(Y,N)
 alter table reservation add constraint resv_iscancel_check check(resv_iscancel in ('Y','N'));
-
+select to_char(sysdate,'YYYYMMDD')||seq_resv_no.currval currval from dual;
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'hyemin',2,0,0,default,350000,'N','2019-12-29','2019-12-30',0);
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'hyemin',1,0,0,default,450000,'N','2019-12-25','2019-12-29',0);
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'hyemin',2,0,0,default,550000,'N','2019-12-30','2019-12-31',0);
@@ -300,7 +301,9 @@ create table point_io(
 );
 --drop table point_io;
 --SELECT * FROM ALL_TRIGGERS;
-select * from point_io;
+select * from point_io order by update_date;
+
+--회원가입할 경우 point_io에 웰컴 포인트 적립 내역 들어감
 create or replace trigger trg_enroll_point
     after
     insert on member
@@ -311,11 +314,45 @@ begin
 end;
 /
 
-create or replace trigger trg_enroll_point
+-- 예약 완료 시, 사용 포인트와 적립 포인트내역이 0이 아닐 경우 point_io테이블에 insert
+create or replace trigger trg_resv_point_io
     after
     insert on reservation
     for each row
 begin
-    
+    if :new.resv_usedpoint != 0 then
+        insert into point_io values(:new.resv_member,:new.resv_usedpoint,sysdate,'O');
+    end if;
+    if :new.resv_addpoint != 0 then
+        insert into point_io values(:new.resv_member,:new.resv_addpoint,sysdate,'I');
+    end if;
 end;
 /
+
+-- point_io 테이블 내역 따라서 member의 보유 포인트 변경
+create trigger trg_member_point_io
+    before 
+    insert on point_io
+    for each row
+begin
+     -- 입고인 경우
+        if :new.point_status = 'I' then
+            update member set member_points = member_points + :new.point
+            where member_id = :new.member_id;
+        -- 출고인 경우
+        else
+            update member set member_points = member_points - :new.point
+            where member_id = :new.member_id;
+        end if;
+end;
+/
+
+--예약 확인하기
+select * from reservation order by resv_date;
+--delete from reservation
+select * from booked_room order by resv_no;
+--delete from booked_room
+select * from point_io order by update_date;
+select * from coupon;
+select * from member where member_id='hyeminyu';
+commit;

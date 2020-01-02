@@ -2,9 +2,9 @@ package reservation.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +15,7 @@ import admin.model.service.AdminService;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 import reservation.model.service.ReservationService;
+import reservation.model.vo.BookedRoom;
 import reservation.model.vo.Reservation;
 import room.model.vo.Room;
 
@@ -59,13 +60,45 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 		int resvResult = new ReservationService().insertReservation(resv);
 		
 		//예약된 방 insert
-		
+		BookedRoom bookedroom1 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room1,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice(),0);
+		int room1Result = new ReservationService().insertBookedRoom(bookedroom1);
+		if(room2!=0) {
+			BookedRoom bookedroom2 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room2,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice(),0);
+			int room2Result = new ReservationService().insertBookedRoom(bookedroom2);
+		}
 		
 		//update 쿠폰 테이블
-
+		if(usedCouponNo!="") {
+			int couponResult = new ReservationService().updateCouponStatus(usedCouponNo);
+		}
+		System.out.println("usedCoupon="+usedCouponNo);
 		
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/reservation/resvComplete.jsp");
-		reqDispatcher.forward(request, response);
+		 Map<Object, Object> map = new HashMap<>();
+			map.put("checkindate",checkindate);
+			map.put("checkoutdate",checkoutdate);
+			map.put("room1",room1);
+			if(room2!=0) map.put("room2", room2);
+			map.put("roomcnt", roomcnt);
+			map.put("diffDay", diffDay);
+			map.put("resvTotalPrice", resvTotalPrice);
+			map.put("breakfastcnt", breakfastcnt);
+			
+		String msg = "";
+	    String loc = "/";
+	    String view = "/WEB-INF/views/reservation/resvComplete.jsp";
+	      
+	      if(resvResult>0) {
+	    	  request.setAttribute("infomap", map);
+	      }
+	      else {
+	    	  request.setAttribute("msg", msg);
+		      request.setAttribute("loc", loc);
+	         msg = "예약 실패. 관리자에게 문의하세요.";
+	         view="/WEB-INF/views/common/msg.jsp";
+	      }
+	      //3.view단 처리 
+	     
+	      request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**
