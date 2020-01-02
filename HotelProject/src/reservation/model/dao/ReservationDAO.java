@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import coupon.model.vo.Coupon;
 import notice.model.dao.NoticeDAO;
+import reservation.model.vo.Reservation;
 import room.model.vo.Room;
 
 public class ReservationDAO {
@@ -58,6 +59,9 @@ public class ReservationDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return list;
@@ -121,6 +125,32 @@ public class ReservationDAO {
 		}
 		
 		return map;
+	}
+	public int insertReservation(Connection conn, Reservation resv) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, resv.getResvMemberId());
+			pstmt.setInt(2, resv.getResvPeople());
+			pstmt.setInt(3, resv.getResvUsedPoint());
+			pstmt.setInt(4, resv.getResvAddPoint());
+			pstmt.setInt(5, resv.getResvPrice());
+			pstmt.setDate(6, resv.getResvIn());
+			pstmt.setDate(7, resv.getResvOut());
+			pstmt.setInt(8, resv.getResvBfPeople());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

@@ -1,6 +1,6 @@
 package reservation.model.service;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import coupon.model.vo.Coupon;
 import reservation.model.dao.ReservationDAO;
+import reservation.model.vo.Reservation;
 import room.model.vo.Room;
 public class ReservationService {
 
@@ -33,6 +33,14 @@ public class ReservationService {
 		Map<String, Object> map = new ReservationDAO().selectCouponListByMemberId(conn,memberId,totalRoomPrice);
 		close(conn);
 		return map;
+	}
+
+	public int insertReservation(Reservation resv) {
+		Connection conn = getConnection();
+		int result = new ReservationDAO().insertReservation(conn,resv);
+		if(result>0) commit(conn);
+		else commit(conn);
+		return result;
 	}
 
 

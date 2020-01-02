@@ -54,18 +54,9 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 		request.setAttribute("resvRoom",resvRoom);
 		
 		//insert 예약 테이블
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Reservation resv = new Reservation(0,resvMember.getMemberId(),room1+room2,usedPoint,Integer.parseInt(String.valueOf(Math.round(resvTotalPrice*0.03))),null,resvTotalPrice,null,Date.valueOf(checkindate),Date.valueOf(checkoutdate),breakfastcnt);
 
-		transFormat.parse(checkindate);
-
-		Reservation resv = new Reservation();
-		resv.setResvMemberId(resvMember.getMemberId());
-		resv.setResvPeople(room1+room2);
-		resv.setResvUsedPoint(usedPoint);
-		resv.setResvAddPoint(Integer.parseInt(String.valueOf(Math.round(resvTotalPrice*0.03)));
-
-		
-		int resvResult = new ReservationService().insertReservation();
+		int resvResult = new ReservationService().insertReservation(resv);
 		
 		//예약된 방 insert
 		
