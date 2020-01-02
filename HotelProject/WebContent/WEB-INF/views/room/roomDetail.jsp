@@ -255,7 +255,7 @@ h1.room-title span {
 	float: left;
 	margin-right: 45px;
 	font-size: 16px;
-	width: 59px;
+	width: 75px;
 }
 
 .ratinig-container {
@@ -364,6 +364,14 @@ h1{
   width: 100%;
   max-width: 660px;
 }
+.oc2{
+	margin: 40px 0 20px 20px;
+}
+.rc:not(:last-child) {
+	border-bottom: #d6d6d6 solid 1px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
 </style>
 <script>
 
@@ -416,7 +424,100 @@ $(()=>{
          }
      }
      });
-})
+     
+     $(".src-btn").click(()=>{
+ 		$.ajax({
+ 			url: "<%=request.getContextPath()%>/room/searchReview",
+ 			type: "get",
+ 			data: {
+ 					rvSrch: $(".rvSrch").val(),
+ 					roomNo: <%=r.getRoomNo()%>,
+ 				  },
+ 			dataType: "json",
+ 			success: data => {
+ 				console.log(data);//json문자열, javascript object
+ 				var $ajaxsrch = $('.one-context');
+ 				let $jaxContent = $('<div class="one-context oc2"></div>');
+ 				
+ 				$ajaxsrch.each(function(i){
+ 		             $(this).hide();
+ 		             $("#pagination-demo").hide();
+ 				})
+ 				
+ 		            $(data).each((idx, review)=>{
+ 		            	console.log('idx',idx);
+ 		            	
+ 		            	let html = '<div class="ajaxOne">';
+ 		            	html += '<div class="user-profile-pic">';
+	 		   			html += '<img src="<%=request.getContextPath()%>/images/account_circle_black.png" alt="유저이미지" class="user-profile-img"/>';
+	 		   			html +=	'</div>';
+	 		   			html +=	'<div class="user-id uid">'+review.name+'</div>';
+	 		   			html +=	'<div class="review-date">'+review.date+'</div>';
+	 		   			html +=	'<div class="review-context rc">'+review.content+'</div>';
+	 		   			html +=	'</div>';
+	 		   			
+	 		   			$jaxContent.append(html);
+ 		           });   	
+ 		         
+ 		        	$("#srchbox").html($jaxContent); 
+ 		        	
+ 		        	
+		        	//pagination script
+ 		      	   var $tr = $('.ajaxOne');
+ 		           var total_num_row = $tr.length;
+ 		           var tpg = Math.ceil(total_num_row/5);
+ 		           console.log("총페이지",tpg)    
+ 		           $('.ajaxPagination').twbsPagination({
+ 		           totalPages: tpg,
+ 		           visiblePages: 5,
+ 		           next: 'Next',
+ 		           prev: 'Prev',
+ 		           onPageClick: function (event, page) {
+ 		          	 var numPerPage = 5;
+ 		          	 var totalContent = $tr.length;
+ 		          	 var totalPage =  Math.ceil(totalContent/numPerPage);
+ 		          	 
+ 		          	 var pageBarSize = 5; 
+ 		          	 var pageStart = ((page-1)/pageBarSize)*pageBarSize+1;
+ 		          	 var pageEnd = pageStart+pageBarSize-1;
+ 		          	 var pageNo = pageStart;
+ 		          	 
+ 		          	 var stt = ((page - 1) * numPerPage + 1);// start rownum
+ 		      		 var edd = (page * numPerPage);// end rownum
+ 		          	 
+ 		          	 
+ 		               if(page == 1){
+ 		                   $tr.each(function(i){
+ 		                   $(this).hide();
+ 		                   for(var i =page-1; i<page+4;i++){
+ 		                       $tr.eq(i).show();
+ 		                   }
+ 		               })
+ 		               }
+ 		               else{
+ 		                   $tr.each(function(i){
+ 		                   $(this).hide();
+ 		                   console.log(page)
+ 		                   for(var i = stt-1; i<=edd-1; i++){
+ 		                       $tr.eq(i).show();
+ 		                   }
+ 		               })
+ 		               }
+ 		           }
+ 		           });
+ 		        	
+ 		        	
+ 		        	
+ 			},
+ 			error : (jqxhr, textStatus, errorThrown)=>{
+ 				console.log(jqxhr, textStatus, errorThrown);
+ 			}
+ 		});
+ 		
+ 	});
+     
+     
+})//end of onload
 
 
 </script>
@@ -604,15 +705,18 @@ $(()=>{
 	<!-- search section -->
 	<div class="search-section">
 		<div class="input-group mb-3 input-textReview">
-			<input type="text" class="form-control" placeholder="후기 검색"
+			<input type="text" class="form-control rvSrch" placeholder="후기 검색"
 				aria-label="Recipient's username" aria-describedby="basic-addon2">
 			<div class="input-group-append">
-				<button class="btn btn-outline-secondary" type="button">Search</button>
+				<button class="btn btn-outline-secondary src-btn" type="button">Search</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- user review context section -->
+	<div class="srchbox" id="srchbox">
+	
+	</div>
 	<% for(ReviewM rv : rvList){ %>
 	<div class="user-review-context-section">
 		<div class="one-context">
@@ -635,5 +739,9 @@ $(()=>{
 	</div>
 	
 	<ul id="pagination-demo" class="pagination-sm"></ul>
+	
+	<div class="ajaxPagination"></div>
+	
+	
 </div>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>
