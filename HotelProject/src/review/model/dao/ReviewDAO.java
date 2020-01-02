@@ -139,4 +139,5 @@ public class ReviewDAO {
 		}
 		return totalContent;
 	}
+
 }

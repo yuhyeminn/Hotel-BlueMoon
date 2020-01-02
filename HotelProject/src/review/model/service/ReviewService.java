@@ -5,6 +5,8 @@ import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import member.model.dao.MemberDAO;
+import member.model.vo.Member;
 import review.model.dao.ReviewDAO;
 import review.model.vo.ReviewM;
 
@@ -32,7 +34,6 @@ public class ReviewService {
 		close(conn);
 		return totalContent;
 	}
-
 }
 
 

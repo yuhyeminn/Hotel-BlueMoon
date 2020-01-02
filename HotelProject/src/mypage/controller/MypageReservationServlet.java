@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import reservation.model.vo.BookedRoom;
+
 /**
  * Servlet implementation class MypageReservationServlet
  */
@@ -15,8 +17,12 @@ public class MypageReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BookedRoom br = new BookedRoom();
+		
+		request.setAttribute("br",br);
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageReservation.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
