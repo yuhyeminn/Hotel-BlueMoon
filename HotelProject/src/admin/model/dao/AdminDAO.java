@@ -6,16 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
+import java.util.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import oracle.sql.DATE;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import reservation.model.vo.ReservationCount;
 import room.model.vo.Room;
 
 public class AdminDAO {
@@ -562,4 +568,129 @@ public class AdminDAO {
 		return r;
 
 	}
+
+	/*public List<ReservationCount> selectResvCountMonth(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ReservationCount> rcMonthList = null;
+		ReservationCount rc = null;
+		String query = prop.getProperty("selectResvCountMonth");
+		System.out.println("DAO@query="+query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			rcMonthList = new ArrayList<>();
+			
+			while(rset.next()) {
+				rc = new ReservationCount();
+				rc.setDay(rset.getInt("day"));
+				rc.setResvCount(rset.getInt("resvcount"));
+				rc.setResvPrice(rset.getInt("price"));
+				rcMonthList.add(rc);
+			}
+			System.out.println("rcList@DAO="+rcMonthList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rcMonthList;
+	}*/
+	
+	
+	
+	public List<ReservationCount> selectResvCountYear(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ReservationCount> rcYearList = null;
+		ReservationCount rc = null;
+		String query = prop.getProperty("selectResvCountYear");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			rcYearList = new ArrayList<>();
+			
+			while(rset.next()) {
+				rc = new ReservationCount();
+				rc.setDay(rset.getInt("day"));
+				rc.setResvCount(rset.getInt("resvcount"));
+				rc.setResvPrice(rset.getInt("price"));
+				rcYearList.add(rc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rcYearList;
+	}
+
+	public List<ReservationCount> select2019Month(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ReservationCount> month2019List = null;
+		ReservationCount rc = null;
+		String query = prop.getProperty("selectMonthByYear");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "20190101");
+			pstmt.setString(2, "20191231");
+			rset = pstmt.executeQuery();
+			month2019List = new ArrayList<>();
+			
+			while(rset.next()) {
+				rc = new ReservationCount();
+				rc.setDay(rset.getInt("day"));
+				rc.setResvCount(rset.getInt("resvcount"));
+				rc.setResvPrice(rset.getInt("price"));
+				month2019List.add(rc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return month2019List;
+	}
+
+	public List<ReservationCount> select2020Month(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<ReservationCount> month2020List = null;
+		ReservationCount rc = null;
+		String query = prop.getProperty("selectNextYear");
+		System.out.println("DAOSelect@="+query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "20200101");
+			pstmt.setString(2, "20201231");
+			rset = pstmt.executeQuery();
+			month2020List = new ArrayList<>();
+			
+			while(rset.next()) {
+				rc = new ReservationCount();
+				rc.setDay(rset.getInt("day"));
+				rc.setResvCount(rset.getInt("resvcount"));
+				rc.setResvPrice(rset.getInt("price"));
+				month2020List.add(rc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("DAO@2020List="+month2020List);
+		return month2020List;
+	}
+
 }

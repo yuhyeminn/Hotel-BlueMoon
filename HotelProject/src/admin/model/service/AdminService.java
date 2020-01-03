@@ -10,6 +10,7 @@ import admin.model.dao.AdminDAO;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import reservation.model.vo.ReservationCount;
 import room.model.vo.Room;
 
 public class AdminService {
@@ -171,6 +172,36 @@ public class AdminService {
 		return r;
 	
 	}
+
+	/*public List<ReservationCount> selectResvCountMonth() {
+		Connection conn = getConnection();
+		List<ReservationCount> rcList = new AdminDAO().selectResvCountMonth(conn);
+		close(conn);
+		return rcList;
+	}*/
+	
+	public List<ReservationCount> selectResvCountYear() {
+		Connection conn = getConnection();
+		List<ReservationCount> rcYearList = new AdminDAO().selectResvCountYear(conn);
+		close(conn);
+		return rcYearList;
+	}
+
+	public List<ReservationCount> select2019Month() {
+		Connection conn = getConnection();
+		List<ReservationCount> month2019List = new AdminDAO().select2019Month(conn);
+		close(conn);
+		return month2019List;
+	}
+
+	public List<ReservationCount> select2020Month() {
+		Connection conn = getConnection();
+		List<ReservationCount> month2020List = new AdminDAO().select2020Month(conn);
+		System.out.println("month2020List@service="+month2020List);
+		close(conn);
+		return month2020List;
+	}
+
 
 }
 

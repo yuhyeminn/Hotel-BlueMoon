@@ -19,8 +19,14 @@ import member.model.vo.Member;
  */
 @WebFilter( urlPatterns= {
 				   "/mypage/*",
-				   "/member",
-				   "/views"
+				   "/views/member/logout",
+				   "/member/memberView",
+				   "/member/pwdFinder",
+				   "/member/finderUpdatePW",
+				   "/member/finderUpdatePWEnd",
+				   "/views/reservation/complete",
+				   "/views/reservation/payment",
+				   "/views/reservation/roomPriceSelect"
 		   })
 public class LoginFilter implements Filter {
 
@@ -48,7 +54,7 @@ public class LoginFilter implements Filter {
 		
 		//로그인 하지 않은 경우
 		if(memberLoggedIn == null) {
-			request.setAttribute("msg", "로그인 후 이용하세요");
+			request.setAttribute("msg", "로그인 후 마이페이지를 통해 이용가능한 페이지입니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 				   .forward(request, response);
