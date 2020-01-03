@@ -309,19 +309,19 @@ body {
         
         //작성한리뷰 pagination
       	//pagination script
-   	 	var $tr = $('.container-nnl');
-        var total_num_row = $tr.length;
+   	 	var $trr = $('.container-nnl');
+        var total_num_row = $trr.length;
         console.log(total_num_row);
-        var tpg = Math.ceil(total_num_row/5);
+        var tpgg = Math.ceil(total_num_row/5);
             
         $('#pagination-demo2').twbsPagination({
-        totalPages: tpg,
+        totalPages: tpgg,
         visiblePages: 5,
         next: 'Next',
         prev: 'Prev',
         onPageClick: function (event, page) {
        	 var numPerPage = 5;
-       	 var totalContent = $tr.length;
+       	 var totalContent = $trr.length;
        	 var totalPage =  Math.ceil(totalContent/numPerPage);
        	 
        	 var pageBarSize = 5; 
@@ -334,19 +334,19 @@ body {
        	 
        	 
             if(page == 1){
-                $tr.each(function(i){
+                $trr.each(function(i){
                 $(this).hide();
                 for(var i =page-1; i<page+4;i++){
-                    $tr.eq(i).show();
+                    $trr.eq(i).show();
                 }
             })
             }
             else{
-                $tr.each(function(i){
+                $trr.each(function(i){
                 $(this).hide();
                 console.log(page)
                 for(var i = stt-1; i<=edd-1; i++){
-                    $tr.eq(i).show();
+                    $trr.eq(i).show();
                 }
             })
             }

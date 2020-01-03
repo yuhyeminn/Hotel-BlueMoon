@@ -1,12 +1,12 @@
 package admin.model.service;
 
 import static common.JDBCTemplate.*;
-import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
 
 import admin.model.dao.AdminDAO;
+import member.model.dao.MemberDAO;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
@@ -170,6 +170,18 @@ public class AdminService {
 		close(conn);
 		return r;
 	
+	}
+
+	public int updateRoomByRoomNo(Room r) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().updateRoomByRoomNo(conn, r);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+		
 	}
 
 }

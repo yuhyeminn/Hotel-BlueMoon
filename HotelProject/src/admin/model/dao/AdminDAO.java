@@ -562,4 +562,38 @@ public class AdminDAO {
 		return r;
 
 	}
+
+	public int updateRoomByRoomNo(Connection conn, Room r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateRoomByRoomNo"); 
+		System.out.println("updateRoom@DAO"+r);
+		//UPDATE ROOM SET ROOM_NAME = ?, ROOM_DESCRIBE = ?, ROOM_DESCRIBE2 = ?, ROOM_PEOPLE = ?, ROOM_BED = ?,
+		//ROOM_VIEW = ?, ROOM_PRICE = ?, ROOM_AMOUNT = ?, ROOM_SIZE = ? WHERE ROOM_NO = ?
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, r.getRoomName());
+			pstmt.setString(2, r.getRoomDescribe());
+			pstmt.setString(3, r.getRoomDescribe2());
+			pstmt.setInt(4, r.getRoomPeople());
+			pstmt.setString(5, r.getRoomBed());
+			pstmt.setString(6, r.getRoomView());
+			pstmt.setInt(7, r.getRoomPrice());
+			pstmt.setInt(8, r.getRoomAmount());
+			pstmt.setInt(9, r.getRoomSize());
+			pstmt.setInt(10, r.getRoomNo());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("updateRoom@DAO"+(result==1?"탈퇴성공":"탈퇴실패"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

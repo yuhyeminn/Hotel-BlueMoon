@@ -68,7 +68,7 @@ public class RoomDeleteServlet extends HttpServlet {
 		else 
 			System.out.println("게시글 삭제 실패!");	
 		
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/mypage/review");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/views/admin/adminRoomList");
 		reqDispatcher.forward(request, response);
 	}
 
