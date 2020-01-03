@@ -178,7 +178,7 @@
 							<button typue="button" class="btn btn-outline-secondary"
 								style="margin: -3px -3px 2px; display: none;"
 								id="usepoint-cancel-btn">사용안함</button>
-						</div>
+					</div>
 					</div>
 					<div class="form-row">
 						<div class="col">
@@ -459,17 +459,17 @@
     		$("#resvTotalPrice").val(resvPrice);
     	}
     	
-    	<%-- $("#payment-btn").click(function(){
+    	$("#payment-btn").click(function(){
     		var IMP = window.IMP; // 생략가능
             IMP.init('imp09545668'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
             var msg;
             
             IMP.request_pay({
-                pg : 'kakaopay',
+                pg : 'inicis',
                 pay_method : 'card',
-                merchant_uid : 'merchant_' + new Date().getTime(),
+                merchant_uid : 'BLUEMOON_' + new Date().getTime(),
                 name : 'HOTEL BLUEMOON 예약',
-               	amount : resvPrice/1000,
+               	amount : 3000,
                 buyer_email : '<%=resvMember.getEmail()%>',
                 buyer_name : '<%=resvMember.getMemberName()%>',
                 buyer_tel : '<%=resvMember.getPhone()%>'
@@ -484,11 +484,7 @@
                     alert(msg);
                 }
             });
-    	}); --%>
-    	 $("#payment-btn").click(function(){
-    		 
-    		 $("#resvInfoFrm").submit();
-    	 });
+    	});
     })();
     
     </script>

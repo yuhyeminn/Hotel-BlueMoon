@@ -356,3 +356,24 @@ select * from point_io order by update_date;
 select * from coupon;
 select * from member where member_id='hyeminyu';
 commit;
+
+--=======================================================
+-- 결제 내역 테이블
+--=======================================================
+create table payment(
+    resv_no number not null,
+    pay_date date not null,
+    pay_method varchar2(20) not null,
+    pay_money number not null,
+    constraint fk_payment_resv_no foreign key (resv_no) references reservation(resv_no) on delete cascade
+);
+
+--결제 후 예약이 완료되면은 결제 내역 테이블에 자동으로 insert
+--create or replace trigger trg_payment
+--    after
+--    insert on reservation
+--    for each row
+--begin
+--     insert into create table values(:new.resv_no,sysdate,sysdate,'I');
+--end;
+--/

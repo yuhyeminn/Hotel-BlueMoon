@@ -56,7 +56,6 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 		
 		//insert 예약 테이블
 		Reservation resv = new Reservation(0,resvMember.getMemberId(),room1+room2,usedPoint,Integer.parseInt(String.valueOf(Math.round(resvTotalPrice*0.03))),null,resvTotalPrice,null,Date.valueOf(checkindate),Date.valueOf(checkoutdate),breakfastcnt);
-
 		int resvResult = new ReservationService().insertReservation(resv);
 		
 		//예약된 방 insert
@@ -66,12 +65,14 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 			BookedRoom bookedroom2 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room2,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice(),0);
 			int room2Result = new ReservationService().insertBookedRoom(bookedroom2);
 		}
-		
+		System.out.println("CouponNo="+usedCouponNo);
 		//update 쿠폰 테이블
 		if(usedCouponNo!="") {
 			int couponResult = new ReservationService().updateCouponStatus(usedCouponNo);
 		}
-		System.out.println("usedCoupon="+usedCouponNo);
+		
+		//insert 결제 테이블
+		
 		
 		 Map<Object, Object> map = new HashMap<>();
 			map.put("checkindate",checkindate);

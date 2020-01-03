@@ -61,6 +61,7 @@ public class ReservationSelectRoomEndServlet extends HttpServlet {
 		map.put("roomcnt", roomcnt);
 		map.put("diffDay", diffDay);
 		map.put("totalRoomPrice", totalRoomPrice);
+		
 		//뷰단 포워딩
 		request.setAttribute("infomap", map);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/reservation/resvPayment.jsp");
