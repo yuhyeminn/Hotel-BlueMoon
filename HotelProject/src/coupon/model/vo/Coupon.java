@@ -12,14 +12,14 @@ public class Coupon implements Serializable{
 	private String couponMemberId;
 	private Date couponStartDate;
 	private Date couponEndDate;
-	private boolean couponUsed;
+	private char couponUsed;
 	
 	public Coupon() {
 		super();
 	}
 
 	public Coupon(String couponNo, String couponCode, String couponMemberId, Date couponStartDate, Date couponEndDate,
-			boolean couponUsed) {
+			char couponUsed) {
 		super();
 		this.couponNo = couponNo;
 		this.couponCode = couponCode;
@@ -69,11 +69,11 @@ public class Coupon implements Serializable{
 		this.couponEndDate = couponEndDate;
 	}
 
-	public boolean isCouponUsed() {
+	public char getCouponUsed() {
 		return couponUsed;
 	}
 
-	public void setCouponUsed(boolean couponUsed) {
+	public void setCouponUsed(char couponUsed) {
 		this.couponUsed = couponUsed;
 	}
 

@@ -34,6 +34,28 @@ public class ReviewService {
 		close(conn);
 		return totalContent;
 	}
+
+	public List<ReviewM> selectReviewListByContent(int cPage, int numPerPage, int roomNo, String rvSrch) {
+		Connection conn = getConnection();
+		List<ReviewM> list 
+			= new ReviewDAO().selectReviewListByContent(conn, cPage, numPerPage, roomNo, rvSrch);
+		close(conn);
+		return list;
+	}
+
+	public int selectTotalContentByContent(String rvSrch, int roomNo) {
+		Connection conn = getConnection();
+		int totalContent = new ReviewDAO().selectTotalContentByContent(conn, rvSrch, roomNo);
+		close(conn);
+		return totalContent;
+	}
+
+	public int selectTotalContentReview() {
+		Connection conn = getConnection();
+		int totalContent = new ReviewDAO().selectTotalContentReview(conn);
+		close(conn);
+		return totalContent;
+	}
 }
 
 

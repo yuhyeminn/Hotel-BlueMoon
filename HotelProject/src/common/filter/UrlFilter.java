@@ -13,10 +13,10 @@ import javax.servlet.annotation.WebFilter;
 		
 	},
 	urlPatterns = {
-			"/member/enrollmember3",
+			/*"/member/enrollmember3",
 			"/views/member/enrollmember1",
 			"/views/member/enrollmember2",
-			"/views/member/enrollmember3",
+			"/views/member/enrollmember3",*/
 			
 	})
 public class UrlFilter implements Filter {

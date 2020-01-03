@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import admin.model.service.AdminService;
 import review.model.service.ReviewService;
 import review.model.vo.ReviewM;
+import room.model.vo.Room;
 
 
 /**
@@ -36,42 +39,70 @@ public class RoomReviewSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.요청 인코딩처리
-		request.setCharacterEncoding("utf-8");
+		ReviewService reviewService = new ReviewService();
 		
-		//2.파라미터값  가져오기
-		String rvSrch = request.getParameter("rvSrch");
+		//1.파라미터 핸들링
 		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		String rvSrch = request.getParameter("rvSrch");
 		
-		System.out.println("rvSrch="+rvSrch);
-		System.out.println("roomNo="+roomNo);
+		final int numPerPage = 5;
+		int cPage = 1;
 		
-		
-		//3.비지니스로직처리 : 해당하는 User찾기
-		List<ReviewM> list = new ReviewService().selectReviewbyRoomNo(roomNo);
-		
-		JSONArray jsonArray = new JSONArray();
-		
-		for(ReviewM r : list) {
-			System.out.println(r);
-			System.out.println(r.getMemberName());
-			if(r.getMemberName().contains(rvSrch) || 
-			   r.getReviewContent().contains(rvSrch) || 
-			   r.getReviewDate().toString().contains(rvSrch)
-			   ) {
-				JSONObject jsonMember = new JSONObject();
-				jsonMember.put("name", r.getMemberName());
-				jsonMember.put("content", r.getReviewContent());
-				jsonMember.put("date", r.getReviewDate().toString());
-				jsonArray.add(jsonMember);
-			}
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));			
+		}catch(NumberFormatException e) {
+			
 		}
-		System.out.println(jsonArray);
 		
-		//4.응답객체에 출력
-		response.setContentType("application/json; charset=utf-8"); 
-		PrintWriter out = response.getWriter();
-		out.print(jsonArray);	
+		//2.업무로직
+		//a.컨텐츠영역
+		List<ReviewM> srchList = reviewService.selectReviewListByContent(cPage, numPerPage, roomNo, rvSrch); 
+		System.out.println("roomList@servlet="+srchList);
+		
+		//b.페이징바영역
+		//전체게시글수, 전체페이지수
+		int totalContent = reviewService.selectTotalContentByContent(rvSrch, roomNo);
+		int totalPage =  (int)Math.ceil((double)totalContent/numPerPage);//(공식2)
+		
+		String pageBar = "";
+		int pageBarSize = 5; 
+		int pageStart = ((cPage-1)/pageBarSize)*pageBarSize+1;//(공식3)
+		int pageEnd = pageStart+pageBarSize-1;
+		int pageNo = pageStart;
+		
+		//[이전] section
+		if(pageNo == 1 ){
+			//pageBar += "<span>[이전]</span>"; 
+		}
+		else {
+			pageBar += "<a href='"+request.getContextPath()+"/views/room/roomDetail?cPage="+(pageNo-1)+"'>[이전]</a> ";
+		}
+			
+		// pageNo section
+		while(pageNo<=pageEnd && pageNo<=totalPage){
+			
+			if(cPage == pageNo ){
+				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+			} 
+			else {
+				pageBar += "<a href='"+request.getContextPath()+"/views/room/roomDetail?cPage="+pageNo+"'>"+pageNo+"</a> ";
+			}
+			pageNo++;
+		}
+		
+		//[다음] section
+		if(pageNo > totalPage){
+
+		} else {
+			pageBar += "<a href='"+request.getContextPath()+"/views/room/roomDetail?cPage="+pageNo+"'>[다음]</a>";
+		}
+		
+		
+		//4.뷰단 포워딩		
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/room/roomDetail.jsp");
+		request.setAttribute("srchList", srchList);
+		request.setAttribute("pageBar",pageBar);		
+		reqDispatcher.forward(request, response);
 	
 	}
 

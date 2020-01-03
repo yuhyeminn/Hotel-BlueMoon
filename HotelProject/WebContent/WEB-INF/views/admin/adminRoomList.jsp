@@ -25,7 +25,7 @@ function oneCheckbox(a){
     }
 }
 
-//제출시 유효성검사
+//추가 버튼 모달 제출시 유효성검사
 function boardValidate(){
     var regExpNumber = /[^0-9]/g;
 
@@ -98,6 +98,75 @@ function boardValidate(){
 	return true;
 }
 
+//수정 버튼 모달 제출시 유효성검사
+function updateValidate(){
+    var regExpNumber = /[^0-9]/g;
+
+    //제목
+	var $title = $("#update-room-name");
+	if($title.val().trim().length == 0){
+        alert("객실 이름을 입력하세요.");
+        $title.focus();
+		return false;
+	}
+    //객실 상세설명
+	var $roomDes = $("#update-room-describe");
+	if($roomDes.val().trim().length == 0){
+        alert("객실 상세설명을 입력하세요.");
+        $roomDes.focus();
+		return false;
+	}
+    //객실 상세설명2
+	var $roomDes2 = $("#update-room-describe2");
+	if($roomDes2.val().trim().length == 0){
+        alert("객실 상세설명을 입력하세요.");
+        $roomDes2.focus();
+		return false;
+	}
+	//가격
+	var $price = $("#update-room-price");
+	if($price.val().trim().length == 0){
+        alert("객실 가격을 입력하세요.");
+        $price.focus();
+		return false;
+    }
+    if(regExpNumber.test($price.val())){
+        alert("객실가격은 숫자를 입력하세요.");
+        $price.val('');
+        $price.focus();
+		return false;
+    }
+    //개수
+	var $num = $("#update-room-num");
+	if($num.val().trim().length == 0){
+        alert("객실 개수를 입력하세요.");
+        $num.focus();
+		return false;
+    }
+    if(regExpNumber.test($num.val())){
+        alert("객실 개수는 숫자만 입력하세요.");
+        $num.val('');
+        $num.focus();
+		return false;
+    }
+    //크기
+	var $size = $("#update-room-size");
+	if($size.val().trim().length == 0){
+        alert("객실 크기를 입력하세요.");
+        $size.focus();
+		return false;
+    }
+    if(regExpNumber.test($size.val())){
+        alert("객실 크기는 숫자만 입력하세요.");
+        $size.val('');
+        $size.focus();
+		return false;
+    }
+	return true;
+}
+
+
+
 //onload
 $(()=>{
 	/* $("table input:checkbox").change(function(){
@@ -114,6 +183,10 @@ $(()=>{
 
    //삭제버튼 클릭시
    $(".btn-delete").click(function(){
+	   if($('table input:checkbox:checked').length == 0){
+		   alert("삭제할 객실을 선택해 주세요.");
+		   return;
+	   }
        if(!confirm("이 객실을 삭제하시겠습니까?")) return;
        
        var a = $('table input:checkbox:checked').parent().parent().next();
@@ -121,6 +194,33 @@ $(()=>{
        a.submit();
    });
    
+	//수정버튼 클릭시
+		
+   $(".btn-update").click(function(){
+	   console.log();
+	   if($('table input:checkbox:checked').length == 0){
+		   alert("수정할 객실을 선택해 주세요.");
+		   return;
+	   }
+	   
+	   var udtRoomName = $("#update-room-name").val($('table input:checkbox:checked').parent().siblings().eq(0).text());
+	   var people = $("#update-room-people").val($('table input:checkbox:checked').parent().siblings().eq(1).text());
+	   var bedType = $("#update-room-bedType").val($('table input:checkbox:checked').parent().siblings().eq(2).text());
+	   var price = $("#update-room-price").val($('table input:checkbox:checked').parent().siblings().eq(3).text());
+	   var num = $("#update-room-num").val($('table input:checkbox:checked').parent().siblings().eq(4).text());
+	   var size = $("#update-room-size").val($('table input:checkbox:checked').parent().siblings().eq(5).text());
+	   /* var input = $("#update-input").val($('table input:checkbox:checked').parent().siblings().eq(6).children().eq(1).val());  */
+	   var view = $("#update-room-view").val($('table input:checkbox:checked').parent().siblings().eq(7).children().val());
+	   var describe = $("#update-room-describe").val($('table input:checkbox:checked').parent().siblings().eq(8).children().val());
+	   var describe2 = $("#update-room-describe2").val($('table input:checkbox:checked').parent().siblings().eq(9).children().val());
+	   var roomNo = $("#update-room-no").val($('table input:checkbox:checked').parent().siblings().eq(10).children().val());
+	   
+	   $('#update-room').modal('toggle');
+   });
+   
+	
+	
+	
    
 })//end of onload
 
@@ -178,10 +278,15 @@ function handleFiles() {
           <td>
           	<% if(r.getOriginalFileName() != null){ %>
           	<img alt="첨부파일" 
-				 src="<%=request.getContextPath() %>/images/file.png" 
+				 src="<%=request.getContextPath() %>/images/file.png"
 				 width=16px>
+			<input type="hidden" name="rView" value="<%= r.getOriginalFileName() %>" />
 			<% }%>
           </td>
+          <td style="display: none" ><input type="hidden" name="rView" value="<%= r.getRoomView() %>" /></td>
+          <td style="display: none" ><input type="hidden" name="rDes" value="<%= r.getRoomDescribe() %>" /></td>
+          <td style="display: none" ><input type="hidden" name="rDes2" value="<%= r.getRoomDescribe2() %>"/></td>
+          <td style="display: none" ><input type="hidden" name="rNo" value="<%= r.getRoomNo() %>"/></td>
          </tr>
          <%-- delete버튼용 frm --%>
     	<form name="roomDelFrm" action="<%=request.getContextPath()%>/room/roomDelete" method="post">
@@ -196,9 +301,10 @@ function handleFiles() {
 	</div>
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-room">객실 추가</button>
-    <button type="button" class="btn btn-dark btn-update">수정(미구현)</button>
-    <button type="button" class="btn btn-dark btn-delete">삭제</button>
+    <button type="button" class="btn btn-dark btn-update">객실수정</button>
+    <button type="button" class="btn btn-dark btn-delete">객실삭제</button>
 
+	<%-- 객실 추가폼 --%>
     <div class="modal fade" id="add-room" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -275,6 +381,79 @@ function handleFiles() {
           </div>
           </div>
       </div>
+      
+      <%-- 객실 수정폼 --%>
+    <div class="modal fade" id="update-room" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">객실 추가하기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+          <!-- modal body -->
+          <form action="<%=request.getContextPath()%>/admin/adminRoomUpdate"
+                  method="post">
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label for="room-name" class="col-form-label">객실 이름</label>
+                    <input type="text" class="form-control" id="update-room-name" name="update-room-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="room-describe" class="col-form-label">객실 설명</label>
+                    <input type="text" class="form-control" id="update-room-describe" name="update-room-describe">
+                  </div>
+                   <div class="form-group">
+                    <label for="room-describe2" class="col-form-label">객실 상세설명</label>
+                    <input type="text" class="form-control" id="update-room-describe2" name="update-room-describe2">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleFormControlSelect1">수용인원</label>
+                      <select class="form-control" id="update-room-people" name="update-room-people">
+                        <option>2</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="room-bedType">침대종류</label>
+                      <select class="form-control" id="update-room-bedType" name="update-room-bedType">
+                          <option>더블,트윈</option>
+                          <option>퀸</option>
+                          <option>킹</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="room-view">전망</label>
+                      <select class="form-control" id="update-room-view" name="update-room-view">
+                          <option>시티뷰</option>
+                          <option>리버뷰</option>
+                          <option>시티뷰,리버뷰</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="room-price" class="col-form-label">객실 가격(KRW)</label>
+                      <input type="text" class="form-control" id="update-room-price" name="update-room-price">
+                  </div>
+                  <div class="form-group">
+                      <label for="room-num" class="col-form-label">객실 개수</label>
+                      <input type="text" class="form-control" id="update-room-num" name="update-room-num">
+                  </div>
+                  <div class="form-group">
+                      <label for="room-size" class="col-form-label">객실 크기(㎡)</label>
+                      <input type="text" class="form-control" id="update-room-size" name="update-room-size">
+                      <input type="hidden" class="form-control" id="update-room-no" name="update-room-no">
+                  </div>
+                  </div>
+	                  <button type="submit" class="btn btn-primary" onclick="return updateValidate();">수정</button>
+	                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+              	  </div>
+          </form>
+          </div>
+          </div>
+      </div>
+      
+      
   </div>
 </div>
 

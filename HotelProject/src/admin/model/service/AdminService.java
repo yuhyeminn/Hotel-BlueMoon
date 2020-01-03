@@ -1,16 +1,23 @@
 package admin.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import admin.model.dao.AdminDAO;
+import admin.model.vo.AdminReservation;
+import coupon.model.vo.Coupon;
+import coupon.model.vo.CouponKind;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
 import reservation.model.vo.ReservationCount;
+import review.model.vo.Review;
 import room.model.vo.Room;
 
 public class AdminService {
@@ -173,12 +180,6 @@ public class AdminService {
 	
 	}
 
-	/*public List<ReservationCount> selectResvCountMonth() {
-		Connection conn = getConnection();
-		List<ReservationCount> rcList = new AdminDAO().selectResvCountMonth(conn);
-		close(conn);
-		return rcList;
-	}*/
 	
 	public List<ReservationCount> selectResvCountYear() {
 		Connection conn = getConnection();
@@ -202,6 +203,135 @@ public class AdminService {
 		return month2020List;
 	}
 
+	public int updateRoomByRoomNo(Room r) {
+		Connection conn = getConnection();
+		int result = new AdminDAO().updateRoomByRoomNo(conn, r);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
+	 public List<Member> selectMemberList(int cPage, int numPerPage) {
+	        Connection conn = getConnection();
+	        List<Member> list= new AdminDAO().selectMemberList(conn, cPage, numPerPage);
+	        close(conn);
+	        return list;
+	    }
+	 
+	    public List<AdminReservation> selectReservationList(int cPage, int numPerPage) {
+	    	Connection conn = getConnection();
+	    	List<AdminReservation> list= new AdminDAO().selectReservationList(conn, cPage, numPerPage);
+	    	close(conn);
+	    	return list;
+	    }
+	    public List<Review> selectReviewList(int cPage, int numPerPage) {
+	    	Connection conn = getConnection();
+	    	List<Review> list= new AdminDAO().selectReviewList(conn, cPage, numPerPage);
+	    	close(conn);
+	    	return list;
+	    }
+	    
+		public List<Coupon> selectCouponList(int cPage, int numPerPage) {
+			Connection conn = getConnection();
+	    	List<Coupon> list= new AdminDAO().selectCouponList(conn, cPage, numPerPage);
+	    	close(conn);
+	    	return list;
+		}
+		public List<CouponKind> selectCouponKindList(int cPage, int numPerPage) {
+			Connection conn = getConnection();
+	    	List<CouponKind> list= new AdminDAO().selectCouponKindList(conn, cPage, numPerPage);
+	    	close(conn);
+	    	return list;
+		}
+		
+		public int selectTotalMemberContent() {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalMemberContent(conn);
+			close(conn);
+			return totalContent;
+		}
+		public int selectTotalReviewContent() {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalReviewContent(conn);
+			close(conn);
+			return totalContent;
+		}
+		public int selectTotalResvContent() {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalResvContent(conn);
+			close(conn);
+			return totalContent;
+		}
+		public int selectTotalCpnContent() {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalCpnContent(conn);
+			close(conn);
+			return totalContent;
+		}
+		public int selectTotalCpnKindContent() {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalCpnKindContent(conn);
+			close(conn);
+			return totalContent;
+		}
+		public int createCoupon(CouponKind ck) {
+			Connection conn = getConnection();
+			int result = new AdminDAO().createCoupon(conn, ck);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+		public int deleteMember(String memberId) {
+			Connection conn = getConnection();
+			int result = new AdminDAO().deleteMember(conn, memberId);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
+		public long deleteReservation(long resvNo) {
+			Connection conn = getConnection();
+			long result = new AdminDAO().deleteReservation(conn, resvNo);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
+		public int deleteCouponKind(int couponCode) {
+			Connection conn = getConnection();
+			int result = new AdminDAO().deleteCouponKind(conn, couponCode);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
+		public int deleteReview(String rvWriter) {
+			Connection conn = getConnection();
+			int result = new AdminDAO().deleteReview(conn, rvWriter);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
 
 }
 
