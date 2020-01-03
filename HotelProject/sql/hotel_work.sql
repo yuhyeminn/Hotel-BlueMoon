@@ -303,18 +303,43 @@ create table point_io(
 --SELECT * FROM ALL_TRIGGERS;
 select * from point_io order by update_date;
 
---회원가입할 경우 point_io에 웰컴 포인트 적립 내역 들어감
-create or replace trigger trg_enroll_point
+
+--회원가입할 경우 point_io에 웰컴 포인트 적립 내역 들어가는 트리거
+--create or replace trigger trg_enroll_point
+--    after
+--    insert on member
+--    for each row
+--begin
+--        --회원가입한 경우, welcome 포인트 적립
+----        dbms_output.put_line('trg_enroll_point');
+--        insert into point_io values(:new.member_id,3000,sysdate,'I');
+--end;
+--/
+
+-- point_io 테이블 내역 따라서 member의 보유 포인트 변경하는 트리거
+create or replace trigger trg_member_point_io
     after
-    insert on member
+    insert on point_io
     for each row
 begin
-        --회원가입한 경우, welcome 포인트 적립
-        insert into point_io values(:new.member_id,3000,sysdate,'I');
+      --적립인 경우
+        if :new.point_status = 'I' then
+            update member set member_points = member_points + :new.point
+            where member_id = :new.member_id;
+        -- 사용인 경우
+        else
+            update member set member_points = member_points - :new.point
+            where member_id = :new.member_id;
+        end if;
+--        dbms_output.put_line('trg_member_point_io');
 end;
 /
+--drop trigger trg_member_point_io;
+--drop trigger trg_enroll_point;
+commit;
 
--- 예약 완료 시, 사용 포인트와 적립 포인트내역이 0이 아닐 경우 point_io테이블에 insert
+
+-- 예약 완료 시, 사용 포인트와 적립 포인트내역이 0이 아닐 경우 point_io테이블에 insert하는 트리거
 create or replace trigger trg_resv_point_io
     after
     insert on reservation
@@ -329,23 +354,6 @@ begin
 end;
 /
 
--- point_io 테이블 내역 따라서 member의 보유 포인트 변경
-create trigger trg_member_point_io
-    before 
-    insert on point_io
-    for each row
-begin
-     -- 입고인 경우
-        if :new.point_status = 'I' then
-            update member set member_points = member_points + :new.point
-            where member_id = :new.member_id;
-        -- 출고인 경우
-        else
-            update member set member_points = member_points - :new.point
-            where member_id = :new.member_id;
-        end if;
-end;
-/
 
 --예약 확인하기
 select * from reservation order by resv_date;
