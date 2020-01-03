@@ -23,69 +23,51 @@
 #nav1{
 	width: 580px;
 }
-
- #nav1:hover+#dropmenu, #dropmenu:hover{
+#nav1:hover+#dropmenu, #dropmenu:hover{
 	display:inline-block;
 	background: gray;
 	height: 220px;
 	opacity: 1;
   	transform: translateY(0);
 }
- 
- #dropmenu{
-
+#dropmenu{
 	display: none;
 	width: 100%;
 	height: 220px;
  	opacity: 0;
  	transition: all .7s;
- 	
  	margin: 0 auto;
  	text-align:center;
-
  	z-index: 2147483640;
 }
-
 #dropmenu li{
 	list-style-type: none;
 }
-
  #dropmenu_1{
-/* 	background: white; */
 	margin-left: 10px;
 }
-
 #dropmenu_2{
-/* 	background: red; */
 	margin-left: 170px;
 }
-
 #dropmenu_3{
-/* 	background: blue; */
 	margin-left: 90px;
 } 
-
 .dropmenu-list{
-	
 	display: inline-block;
 	width:200px;
 	text-align: left;
 	vertical-align: top;
-
 }
-
 #dropmenu_list{
 	width: 1000px;
 	margin: 0 auto;
 }
-
 #dropmenu_title {
 	width: 1000px;
 	margin: 0 auto;
 	padding: 10px;
 	font-weight: bold;
 }
-
 #dropmenu_title span{
 	font-size: 27px;
 	margin: 90px;
@@ -95,18 +77,12 @@
 	padding: 4px;
 	font-size: 17px;
 }
-
 .dropmenu-list a{
 	color: black;
 }
-
-}
-
 .dropmenu-list a{
 	color: black;
 }
-
->>>>>>> Stashed changes
 .dropmenu-list a:click{
 	color: black;
 }
@@ -114,12 +90,6 @@
 	text-decoration: none;
 	color: white;
 }
-
-
-
-/* .dropmenu-list li:first-child{
-	font-size: 30px;
-} */
 
 </style>
 <body>
