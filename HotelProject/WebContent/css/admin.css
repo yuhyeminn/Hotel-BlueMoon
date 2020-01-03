@@ -1,4 +1,11 @@
 @charset "UTF-8";
+
+h1,h2,#container2{
+	text-align: center;
+	padding: 20px;
+	/* margin-top: 55px; */
+}
+
 section#memberList-container {
 	text-align:center;
 }
@@ -24,4 +31,13 @@ div#pageBar span.cPage{
 ​
 div#pageBar a{
 	margin-right: 10px;
+}
+div#btn{
+	margin: 10px;
+    text-align: center;
+}
+/* 쿠폰생성 */
+#create{
+	float:right;
+	margin-bottom: 20px;
 }
