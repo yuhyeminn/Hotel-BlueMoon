@@ -10,15 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import review.model.vo.Review;
+import coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class AdminReviewListServlet
+ * Servlet implementation class AdminCouponListServlet
  */
-@WebServlet("/views/admin/adminReviewList")
-public class AdminReviewListServlet extends HttpServlet {
+@WebServlet("/views/admin/adminCouponList")
+public class AdminCouponListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
+  
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -35,7 +36,7 @@ public class AdminReviewListServlet extends HttpServlet {
 //		System.out.println("cPage@list="+cPage);
 		
 		//페이징바영역처리
-		int totalContent = new AdminService().selectTotalReviewContent();
+		int totalContent = new AdminService().selectTotalCpnContent();
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);//(공식2)
 //		System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
 		
@@ -62,7 +63,7 @@ public class AdminReviewListServlet extends HttpServlet {
 		
 		//1.이전
 		if(pageNo != 1) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminReviewList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
 		}
 		
 		//2.pageNo
@@ -72,7 +73,7 @@ public class AdminReviewListServlet extends HttpServlet {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
 			}
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminReviewList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+				pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
 			}
 			
 			pageNo++;
@@ -80,19 +81,19 @@ public class AdminReviewListServlet extends HttpServlet {
 		
 		//3.다음
 		if(pageNo <= totalPage) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminReviewList?cPage="+pageNo+"'>[다음]</a>\n";							
+			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>[다음]</a>\n";							
 		}
 		
 		//3.업무로직
-		List<Review> list = new AdminService().selectReviewList(cPage, numPerPage);
+		List<Coupon> list = new AdminService().selectCouponList(cPage, numPerPage);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar", pageBar);
 		
 		//4.view단처리
-		request.getRequestDispatcher("/WEB-INF/views/admin/adminReviewList.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/admin/adminCouponList.jsp")
 			   .forward(request, response);
 	
-}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

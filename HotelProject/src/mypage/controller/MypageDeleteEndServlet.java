@@ -1,6 +1,7 @@
 package mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import reservation.model.vo.RoomReservation;
 
 /**
  * Servlet implementation class MypageDeleteEndServlet

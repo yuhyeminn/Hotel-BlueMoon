@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import member.model.vo.Member;
+import coupon.model.vo.CouponKind;
 
 /**
- * Servlet implementation class AdminMemberViewServlet
+ * Servlet implementation class AdminCouponKindListServlet
  */
-@WebServlet("/views/admin/adminMemberList")
-public class AdminMemberViewServlet extends HttpServlet {
+@WebServlet("/views/admin/adminCouponKindList")
+public class AdminCouponKindListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -35,7 +35,7 @@ public class AdminMemberViewServlet extends HttpServlet {
 //				System.out.println("cPage@list="+cPage);
 				
 				//페이징바영역처리
-				int totalContent = new AdminService().selectTotalMemberContent();
+				int totalContent = new AdminService().selectTotalCpnKindContent();
 				int totalPage = (int)Math.ceil((double)totalContent/numPerPage);//(공식2)
 //				System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
 				
@@ -62,7 +62,7 @@ public class AdminMemberViewServlet extends HttpServlet {
 				
 				//1.이전
 				if(pageNo != 1) {
-					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminMemberList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponKindList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
 				}
 				
 				//2.pageNo
@@ -72,7 +72,7 @@ public class AdminMemberViewServlet extends HttpServlet {
 						pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
 					}
 					else {
-						pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminMemberList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+						pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponKindList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
 					}
 					
 					pageNo++;
@@ -80,18 +80,17 @@ public class AdminMemberViewServlet extends HttpServlet {
 				
 				//3.다음
 				if(pageNo <= totalPage) {
-					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminMemberList?cPage="+pageNo+"'>[다음]</a>\n";							
+					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponKindList?cPage="+pageNo+"'>[다음]</a>\n";							
 				}
 				
 				//3.업무로직
-				List<Member> list = new AdminService().selectMemberList(cPage, numPerPage);
+				List<CouponKind> list = new AdminService().selectCouponKindList(cPage, numPerPage);
 				request.setAttribute("list",list);
 				request.setAttribute("pageBar", pageBar);
 				
 				//4.view단처리
-				request.getRequestDispatcher("/WEB-INF/views/admin/adminMemberList.jsp")
+				request.getRequestDispatcher("/WEB-INF/views/admin/adminCouponKindList.jsp")
 					   .forward(request, response);
-			
 	}
 
 	/**

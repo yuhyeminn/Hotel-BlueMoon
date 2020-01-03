@@ -5,6 +5,8 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%@include file="/WEB-INF/views/chat/chat.jsp" %>
+
 <%
 	List<ReviewN> rvnl = (List<ReviewN>)request.getAttribute("rvnl");
 	List<ReviewNN> rvnnl = (List<ReviewNN>)request.getAttribute("rvnnl");

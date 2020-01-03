@@ -6,31 +6,27 @@ public class CouponKind implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String couponCode;
+	private int couponCode;
 	private String couponContent;
 	private int couponSalePercent;
 	private int couponMinimum;
-	private int couponMaxsale;
 	
 	public CouponKind() {
 		super();
 	}
 
-	public CouponKind(String couponCode, String couponContent, int couponSalePercent, int couponMinimum,
-			int couponMaxsale) {
-		super();
+	public CouponKind(int couponCode, String couponContent, int couponSalePercent, int couponMinimum) {
 		this.couponCode = couponCode;
 		this.couponContent = couponContent;
 		this.couponSalePercent = couponSalePercent;
 		this.couponMinimum = couponMinimum;
-		this.couponMaxsale = couponMaxsale;
 	}
 
-	public String getCouponCode() {
+	public int getCouponCode() {
 		return couponCode;
 	}
 
-	public void setCouponCode(String couponCode) {
+	public void setCouponCode(int couponCode) {
 		this.couponCode = couponCode;
 	}
 
@@ -58,18 +54,11 @@ public class CouponKind implements Serializable{
 		this.couponMinimum = couponMinimum;
 	}
 
-	public int getCouponMaxsale() {
-		return couponMaxsale;
-	}
-
-	public void setCouponMaxsale(int couponMaxsale) {
-		this.couponMaxsale = couponMaxsale;
-	}
 
 	@Override
 	public String toString() {
 		return "CouponKind [couponCode=" + couponCode + ", couponContent=" + couponContent + ", couponSalePercent="
-				+ couponSalePercent + ", couponMinimum=" + couponMinimum + ", couponMaxsale=" + couponMaxsale + "]";
+				+ couponSalePercent + ", couponMinimum=" + couponMinimum + "]";
 	}
 	
 	
