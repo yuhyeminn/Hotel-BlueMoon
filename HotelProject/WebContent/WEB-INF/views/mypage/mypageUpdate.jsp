@@ -6,6 +6,7 @@
 %>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%@include file="/WEB-INF/views/chat/chat.jsp" %>
 <hr />
 <h1>개인 정보 수정</h1>
 <hr />

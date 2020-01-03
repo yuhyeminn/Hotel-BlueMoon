@@ -1,6 +1,7 @@
 package admin.model.service;
 
 import static common.JDBCTemplate.close;
+
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
@@ -15,6 +16,7 @@ import coupon.model.vo.CouponKind;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import reservation.model.vo.ReservationCount;
 import review.model.vo.Review;
 import room.model.vo.Room;
 
@@ -178,6 +180,29 @@ public class AdminService {
 	
 	}
 
+	
+	public List<ReservationCount> selectResvCountYear() {
+		Connection conn = getConnection();
+		List<ReservationCount> rcYearList = new AdminDAO().selectResvCountYear(conn);
+		close(conn);
+		return rcYearList;
+	}
+
+	public List<ReservationCount> select2019Month() {
+		Connection conn = getConnection();
+		List<ReservationCount> month2019List = new AdminDAO().select2019Month(conn);
+		close(conn);
+		return month2019List;
+	}
+
+	public List<ReservationCount> select2020Month() {
+		Connection conn = getConnection();
+		List<ReservationCount> month2020List = new AdminDAO().select2020Month(conn);
+		System.out.println("month2020List@service="+month2020List);
+		close(conn);
+		return month2020List;
+	}
+
 	public int updateRoomByRoomNo(Room r) {
 		Connection conn = getConnection();
 		int result = new AdminDAO().updateRoomByRoomNo(conn, r);
@@ -189,13 +214,14 @@ public class AdminService {
 		return result;
 		
 	}
-	//min
+	
 	 public List<Member> selectMemberList(int cPage, int numPerPage) {
 	        Connection conn = getConnection();
 	        List<Member> list= new AdminDAO().selectMemberList(conn, cPage, numPerPage);
 	        close(conn);
 	        return list;
 	    }
+	 
 	    public List<AdminReservation> selectReservationList(int cPage, int numPerPage) {
 	    	Connection conn = getConnection();
 	    	List<AdminReservation> list= new AdminDAO().selectReservationList(conn, cPage, numPerPage);

@@ -48,7 +48,7 @@ public class AdminFilter implements Filter {
 		
 		if(memberLoggedIn == null || 
 				!"admin".equals(memberLoggedIn.getMemberId())) {
-			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+			request.setAttribute("msg", "관리자만 접근가능한 페이지입니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 				   .forward(request, response);

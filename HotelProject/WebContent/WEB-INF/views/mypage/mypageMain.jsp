@@ -7,6 +7,7 @@
 	rel="stylesheet">
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%@include file="/WEB-INF/views/chat/chat.jsp" %>
 
 <%
 	Member m = (Member)request.getAttribute("m");
