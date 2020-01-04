@@ -14,9 +14,9 @@
 
 #loc-inform {
 	margin-top: 50px;
-	background: #e7e7e7;
-	height: 100px;
+	height: 200px;
 	padding: 20px;
+	position: relative;
 }
 
 .slide {
@@ -40,6 +40,22 @@
 	float: right;
 	cursor: pointer;
 }
+
+#locationLogo {
+	width: 200px;
+	height: 100px;
+	margin-top: 20px;
+	margin-left: 150px;
+}
+
+#infoDiv {
+	margin-left: 430px;
+	margin-top: -100px;
+}
+
+#locImg {
+	margin-left: 50px;
+}
 </style>
 
 <section>
@@ -51,97 +67,88 @@
 		<hr>
 
 	</div>
-	<div id="map_ma"></div>
+	<div id="map" style="width:900px;height:500px;margin-left: 80px;margin-top: 50px;"></div>
 	<div id="loc-inform">
-		<span style="font-weight: bold; font-size: 18px;">호텔 블루문</span> <span
-			style="margin-left: 40px;">제주특별자치도 서귀포시 중문관광로 100번길 24</span><br>
-		<span style="margin-left: 140px;">TEL.000-000-000
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAX-000-000-000</span>
+		<hr />
+		<!-- <span style="font-weight: bold; font-size: 18px;">호텔 블루문</span>  -->
+		<img id="locationLogo"
+			src="<%=request.getContextPath()%>/images/logo.jpg" />
+		<div id="infoDiv">
+			<span><strong>주소</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				제주특별자치도 서귀포시 중문관광로 100번길 24</span><br>
+			<br /> <span><strong>대표전화</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;051-749-2111~3</span><br />
+			<br /> <span><strong>홈페이지</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				www.bluemoon.com</span>
+		</div>
 	</div>
+	<hr />
 	<div id="slide-container">
 		<div class="slide">
-			자동차로 오시는 길 <span><img src="images/plusbtn.svg"
+			<strong>자동차로 오시는 길</strong><span><img
+				src="<%=request.getContextPath()%>/images/plusbtn.svg"
 				class="toggle-btn"></span>
 		</div>
-		<p class="slide-text">Lorem ipsum dolor sit amet consectetur
-			adipisicing elit. Saepe veritatis nesciunt commodi deserunt sunt ex,
-			illum nihil eveniet praesentium et eos corporis ullam dolor ipsam,
-			alias voluptas officiis. A, nam.</p>
+		<p class="slide-text">
+			<img id="locImg" src="<%=request.getContextPath()%>/images/car.PNG">
+		</p>
+
 		<div class="slide">
-			지하철로 오시는 길 <span><img src="images/plusbtn.svg"
+			<strong>택시로 오시는 길</strong><span><img
+				src="<%=request.getContextPath()%>/images/plusbtn.svg"
 				class="toggle-btn"></span>
 		</div>
-		<p class="slide-text">Lorem, ipsum dolor sit amet consectetur
-			adipisicing elit. Qui consequatur atque dolores delectus voluptas
-			magnam asperiores tempora saepe deleniti, illum fugit, ipsa tempore
-			officiis quibusdam accusamus ipsam alias voluptatum dignissimos?</p>
+		<p class="slide-text">
+			<img id="locImg" src="<%=request.getContextPath()%>/images/taxi.PNG">
+		</p>
+
 		<div class="slide">
-			버스로 오시는 길 <span><img src="images/plusbtn.svg"
+			<strong>버스로 오시는 길</strong><span><img
+				src="<%=request.getContextPath()%>/images/plusbtn.svg"
 				class="toggle-btn"></span>
 		</div>
-		<p class="slide-text">Lorem, ipsum dolor sit amet consectetur
-			adipisicing elit. Qui consequatur atque dolores delectus voluptas
-			magnam asperiores tempora saepe deleniti, illum fugit, ipsa tempore
-			officiis quibusdam accusamus ipsam alias voluptatum dignissimos?</p>
-		<div class="slide"></div>
+		<p class="slide-text">
+			<img id="locImg" src="<%=request.getContextPath()%>/images/bus.PNG">
+		</p>
 	</div>
 </section>
 
-<script type="text/javascript">
-            $(document).ready(function () {
-                var myLatlng = new google.maps.LatLng(35.837143, 128.558612); // 위치값 위도 경도
-                var Y_point = 35.837143;		// Y 좌표
-                var X_point = 128.558612;		// X 좌표
-                var zoomLevel = 18;				// 지도의 확대 레벨 : 숫자가 클수록 확대정도가 큼
-                var markerTitle = "대구광역시";		// 현재 위치 마커에 마우스를 오버을때 나타나는 정보
-                var markerMaxWidth = 300;				// 마커를 클릭했을때 나타나는 말풍선의 최대 크기
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86b7571e08fd939464a3f9d71b5a8055"></script>
+<script>
 
-                // 말풍선 내용
-                var contentString = '<div>' +
-                    '<h3>HOTEL BLUEMOON</h3>' +
-                    '<p>안녕하세요. 호텔 블루문입니다.</p>' +
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(33.245743, 126.408584), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
 
-                    '</div>';
-                var myLatlng = new google.maps.LatLng(Y_point, X_point);
-                var mapOptions = {
-                    zoom: zoomLevel,
-                    center: myLatlng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-                var map = new google.maps.Map(document.getElementById('map_ma'), mapOptions);
-                var marker = new google.maps.Marker({
-                    position: myLatlng,
-                    map: map,
-                    title: markerTitle
-                });
-                var infowindow = new google.maps.InfoWindow(
-                    {
-                        content: contentString,
-                        maxWizzzdth: markerMaxWidth
-                    }
-                );
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
-                });
-            });
+var markerPosition  = new kakao.maps.LatLng(33.245743, 126.408584); 
 
-            (()=>{
-              
-                $(".toggle-btn").on("click", function () {
-                    $(".toggle-btn").attr("src", "images/plusbtn.svg");
-                    var $btn = $(this);
-                    var $div = $(this).parents(2);
-                    $btn.attr("src", "images/plusbtn.svg");
-                    $(".slide").next().each(function () {
-                        if ($(this).is($div.next())) {
-                            $(this).slideToggle();
-                            $btn.attr("src", "images/minusbtn.svg");
-                        }
-                        else {
-                            $(this).slideUp();
-                        }
-                    });
-                });
-            })();
-        </script>
+var marker = new kakao.maps.Marker({
+ position: markerPosition
+});
+
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+marker.setMap(map);
+
+
+
+(()=>{
+	$(".toggle-btn").on("click", function () {
+		$(".toggle-btn").attr("src", "<%=request.getContextPath()%>/images/plusbtn.svg");
+			var $btn = $(this);
+			var $div = $(this).parents(2);
+			$btn.attr("src", "<%=request.getContextPath()%>/images/plusbtn.svg");
+			$(".slide").next().each(function () {
+			if ($(this).is($div.next())) {
+				$(this).slideToggle();
+				$btn.attr("src", "<%=request.getContextPath()%>/images/minusbtn.svg");
+			}
+			else {
+				$(this).slideUp();
+				}
+			});
+		});
+})();
+</script>
 <%@include file="/WEB-INF/views/common/footer.jsp"%>

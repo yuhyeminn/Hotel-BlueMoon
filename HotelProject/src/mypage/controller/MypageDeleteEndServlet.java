@@ -32,6 +32,8 @@ public class MypageDeleteEndServlet extends HttpServlet {
 		String msg = "";
 		String loc = "/";
 		
+	
+		
 		if(m != null && password.equals(m.getPassword())) {
 			int result = new MemberService().deleteMember(memberId);
 			if(result > 0) {

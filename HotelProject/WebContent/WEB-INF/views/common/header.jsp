@@ -139,10 +139,18 @@
 	      		else{
 	      		%>
 	      		<ul class="main-nav2">
+	      		<% if(!"admin".equals(memberLoggedIn.getMemberId())){ %>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>"><%=memberLoggedIn.getMemberName()%>님</a></li>
+	            <%} else{ %>
+	                <li><a href="<%=request.getContextPath()%>/views/admin/adminMemberList"><%=memberLoggedIn.getMemberName()%>님</a></li>
+	            <%} %>    
 	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
+	      		<% if(!"admin".equals(memberLoggedIn.getMemberId())){ %>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=memberLoggedIn.getMemberId()%>">예약조회</a></li>
+	            <%} else{ %>
+	                <li><a href="<%=request.getContextPath()%>/views/admin/adminMemberList">관리자페이지</a></li>
+	      		<%} %>
 	            </ul>
 	      		<%} %>
 	        </nav>

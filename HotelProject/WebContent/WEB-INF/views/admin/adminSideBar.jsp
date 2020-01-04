@@ -7,6 +7,7 @@
 </div> -->
 <ul class="sidenav__list">
 	<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/views/admin/adminMemberList">회원 관리</a></li>
+	<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/admin/total">매출 관리</a></li>
 	<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/views/admin/adminReservationList">예약 관리</a></li>
 	<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/views/admin/adminRoomList">객실 관리</a></li>
 	<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/views/admin/adminReviewList">리뷰 관리</a></li>
@@ -116,7 +117,7 @@
 
 </style>
 <script>
-$("li:nth-child(6),#sub").hover(function(){
+$("li:nth-child(7),#sub").hover(function(){
 	const $li = $("#sub");
 	
 	liDisplay = $li.css("display");

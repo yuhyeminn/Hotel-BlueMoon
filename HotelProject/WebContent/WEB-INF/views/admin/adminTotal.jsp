@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
+<%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 
 <%
 	List<ReservationCount> month2019List = (List<ReservationCount>)request.getAttribute("month2019List");
@@ -114,7 +115,7 @@
           subtitle: '' },
         axes: {
           x: {
-            0: { side: 'bottom', label: '2019년 월별 예약 현황'}
+            0: { side: 'bottom', label: '2019년 월별 예약 현황   (단위 : 건)'}
           }
         },
         bar: { groupWidth: "90%" }
@@ -128,7 +129,7 @@
     	          subtitle: '' },
     	        axes: {
     	          x: {
-    	            0: { side: 'bottom', label: '2019년 월별 결제금액 현황'}
+    	            0: { side: 'bottom', label: '2019년 월별 결제금액 현황   (단위 : 원)'}
     	          }
     	        },
     	        bar: { groupWidth: "90%" }
@@ -142,7 +143,7 @@
   	          subtitle: '' },
   	        axes: {
   	          x: {
-  	            0: { side: 'bottom', label: '2020년 월별 예약 현황'}
+  	            0: { side: 'bottom', label: '2020년 월별 예약 현황   (단위 : 건)'}
   	          }
   	        },
   	        bar: { groupWidth: "90%" }
@@ -156,7 +157,7 @@
   	          subtitle: '' },
   	        axes: {
   	          x: {
-  	            0: { side: 'bottom', label: '2020년 월별 결제금액 현황'}
+  	            0: { side: 'bottom', label: '2020년 월별 결제금액 현황   (단위 : 원)'}
   	          }
   	        },
   	        bar: { groupWidth: "90%" }
@@ -170,7 +171,7 @@
     	          subtitle: '' },
     	        axes: {
     	          x: {
-    	            0: { side: 'bottom', label: '년별 예약 현황'}
+    	            0: { side: 'bottom', label: '년별 예약 현황   (단위 : 원)'}
     	          }
     	        },
     	        bar: { groupWidth: "90%" }
@@ -184,7 +185,7 @@
     	          subtitle: '' },
     	        axes: {
     	          x: {
-    	            0: { side: 'bottom', label: '년별 결제금액 현황'}
+    	            0: { side: 'bottom', label: '년별 결제금액 현황   (단위 : 원)'}
     	          }
     	        },
     	        bar: { groupWidth: "90%" }
@@ -236,37 +237,48 @@ $(()=>{
 path {
 	fill: #BDBDBD;
 }
-#top_x_div {
-	margin: 0 auto;
-}
-#top_y_div {
-	margin: 0 auto;
-}
-#top_z_div {
-	margin: 0 auto;
-}
-#top_w_div {
-	margin: 0 auto;
-}
 #div-resv-month-2019 {
 	margin: 90px auto;
 	display: inline-block;
+	width: 100%;
+ 	text-align: center;
 }
 #div-resv-month-2020 {
 	margin: 90px auto;
 	display: none;
+	width: 100%;
+ 	text-align: center;
 }
 #div-resv-year {
 	margin: 90px auto;
 	display: none;
+	width: 100%;
+ 	text-align: center;
 }
 form{
 	margin-top: 100px;
 }
-
-/* #div-resv-month{display: inline-block;}
-#div-resv-year{display: none;} */
-
+#top_x_div {
+ display: inline-block;
+ margin-bottom: 100px;
+ }
+ #top_y_div {
+ display: inline-block;
+ }
+ #top_z_div {
+ display: inline-block;
+ margin-bottom: 100px;
+ }
+ #top_w_div {
+ display: inline-block;
+ }
+ #top_a_div {
+ display: inline-block;
+ margin-bottom: 100px;
+ }
+ #top_b_div {
+ display: inline-block;
+ }
 </style>
 
 <form action="<%=request.getContextPath()%>/admin/total" method="get">
