@@ -8,24 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReservationRoomPriceServlet
+ * Servlet implementation class ReservationComplete
  */
-@WebServlet("/views/reservation/roomPriceSelect")
-public class ReservationRoomPriceServlet extends HttpServlet {
+@WebServlet("/views/reservation/search")
+public class ReservationSearchRoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReservationRoomPriceServlet() {
-        super();
-    }
-
+      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/reservation/resvRoomPriceSelect.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/reservation/resvRoomSearch.jsp").forward(request, response);
 	}
 
 	/**
