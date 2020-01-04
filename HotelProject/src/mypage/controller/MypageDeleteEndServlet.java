@@ -1,6 +1,7 @@
 package mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,15 +25,14 @@ public class MypageDeleteEndServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String password = request.getParameter("password");
 		Member m = new MemberService().selectOne(memberId);
-		/*Member m = new MemberService().selectOne(memberId);
-		int result = new MemberService().deleteMember(memberId);
-		Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");*/
+		Member m = new MemberService().selectOne(memberId);
+		Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");
 
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		String loc = "/";
 		
-		Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");	
+
 		
 	if("admin".equals(memberLoggedIn.getMemberId())) {
 		msg = "관리자는 탈퇴 불가합니다.";
