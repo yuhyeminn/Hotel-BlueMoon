@@ -1,3 +1,4 @@
+<%@page import="java.util.regex.Pattern"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,7 +6,8 @@
 <%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 <%
     List<Member> list = (List<Member>)request.getAttribute("list");
-	String pageBar = (String)request.getAttribute("pageBar");	
+	String pageBar = (String)request.getAttribute("pageBar");
+	
 %>
 <!-- 관리자용 css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
@@ -75,9 +77,9 @@ $(()=>{
                 <td><input type="checkbox" name="chkbox" id="chkbox" onclick="oneCheckbox(this);"/></td>
                 <td><%=m.getMemberId()%></td>
                 <td><%=m.getMemberName()%></td>
-                <td><%=m.getBirth()%></td>
+                <td><%=m.getBirth().replaceAll("(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3")%></td>
                 <td><%=m.getEmail()%></td>
-                <td><%=m.getPhone()%></td>
+                <td><%=m.getPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3")%></td>
                 <td><%=m.getPoint()%></td>
                 <td><%=m.getEnrollDate()%></td>
             </tr>

@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="coupon.model.vo.CouponKind"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -214,7 +215,7 @@ $(() => {
                 <td><%=ck.getCouponCode()%></td>
                 <td><%=ck.getCouponContent()%></td>
                 <td><%=ck.getCouponSalePercent()%>%</td>
-                <td><%=ck.getCouponMinimum()%>원</td>
+                <td><%=NumberFormat.getInstance().format(ck.getCouponMinimum())%>원</td>
             </tr>
             <form name="couponKindDelFrm" action="<%=request.getContextPath()%>/views/admin/adminCouponKindDelete" method="post">
 	    		<input type="hidden" name="couponCode" value="<%=ck.getCouponCode() %>" />

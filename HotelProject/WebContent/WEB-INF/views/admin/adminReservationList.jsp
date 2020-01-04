@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="admin.model.vo.AdminReservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -82,7 +83,7 @@ $(()=>{
                 <td><%=ar.getPeople()%></td>
                 <td><%=ar.getChkIn()%></td>
                 <td><%=ar.getChkOut()%></td>
-                <td><%=ar.getPrice()%></td>
+                <td><%=NumberFormat.getInstance().format(ar.getPrice())%>원</td>
                 <td><%=ar.getEnrollDate()%></td>
                 <td><%=ar.getCancel()%></td>
                 <td><%=ar.getBreakfast()%></td>
