@@ -88,7 +88,7 @@ h1.room-title span {
 }
 
 .slide-next {
-	top: 490px;
+	top: 610px;
 }
 
 .slide-next li {
@@ -375,6 +375,10 @@ h1{
 	border-bottom: #d6d6d6 solid 1px;
     padding-bottom: 20px;
     margin-bottom: 20px;
+}
+.w-100 {
+    height: 605px;
+    width: 1080px!important;
 }
 </style>
 <script>

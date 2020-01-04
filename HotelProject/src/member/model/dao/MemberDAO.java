@@ -455,15 +455,7 @@ public class MemberDAO {
 			//4.ResultSet => Member
 			if(rset.next()) {
 				m = new Member();
-				
 				m.setMemberId(rset.getString("member_id"));
-				m.setPassword(rset.getString("member_password"));
-				m.setMemberName(rset.getString("member_name"));
-				m.setBirth(rset.getString("member_birth"));
-				m.setEmail(rset.getString("member_email"));
-				m.setPhone(rset.getString("member_phone"));
-				m.setPoint(rset.getInt("member_points"));
-				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
 			}
 			
 			System.out.println("idDuplicatedChk@dao.selectOne="+m);
