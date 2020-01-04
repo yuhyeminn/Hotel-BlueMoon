@@ -25,7 +25,6 @@ public class MypageDeleteEndServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String password = request.getParameter("password");
 		Member m = new MemberService().selectOne(memberId);
-		Member m = new MemberService().selectOne(memberId);
 		Member memberLoggedIn = (Member)request.getSession().getAttribute("memberLoggedIn");
 
 		String view = "/WEB-INF/views/common/msg.jsp";

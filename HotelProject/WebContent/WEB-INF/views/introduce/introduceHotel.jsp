@@ -47,7 +47,7 @@
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
-						<a href="#">객실</a>
+						<a href="<%=request.getContextPath()%>/views/room/roomList">객실</a>
 					</h4>
 					<p class="card-text">
 						비즈니스 고객, 관광객을 포함한 다양한 고객층이 만족할 수 있는 맞춤형 공간을 제공합니다.<br>
@@ -66,7 +66,7 @@
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
-						<a href="#">위치</a>
+						<a href="<%=request.getContextPath()%>/views/introduce/introduceLocation">위치</a>
 					</h4>
 					<p class="card-text">푸른 제주 바다와 하늘이 맞닿은 곳에 위치한 호텔블루문은 천국 같은 휴식과
 						여행의 즐거움을 동시에 누릴 수 있는 대한민국 대표 호텔입니다.</p>
@@ -79,7 +79,7 @@
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
-						<a href="#">부대시설</a>
+						<a href="<%=request.getContextPath()%>/views/introduce/introduceFacility">부대시설</a>
 					</h4>
 					<p class="card-text">고객의 라이프 스타일과 1:1 맞춤 카운셀링 결과를 토대로, 각 개인에
 						적합한 프로그램 및 트리트먼트를 제공합니다.

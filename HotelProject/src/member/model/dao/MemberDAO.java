@@ -93,7 +93,6 @@ public class MemberDAO {
 			pstmt.setString(4, member.getBirth());
 			pstmt.setString(5, member.getEmail());
 			pstmt.setString(6, member.getPhone());
-			pstmt.setInt(7, member.getPoint());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()
@@ -176,6 +175,8 @@ public class MemberDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally{
+			close(pstmt);
 		}
 		
 		return result;
@@ -454,15 +455,7 @@ public class MemberDAO {
 			//4.ResultSet => Member
 			if(rset.next()) {
 				m = new Member();
-				
 				m.setMemberId(rset.getString("member_id"));
-				m.setPassword(rset.getString("member_password"));
-				m.setMemberName(rset.getString("member_name"));
-				m.setBirth(rset.getString("member_birth"));
-				m.setEmail(rset.getString("member_email"));
-				m.setPhone(rset.getString("member_phone"));
-				m.setPoint(rset.getInt("member_points"));
-				m.setEnrollDate(rset.getDate("member_enrolldate"));//날짜형
 			}
 			
 			System.out.println("idDuplicatedChk@dao.selectOne="+m);

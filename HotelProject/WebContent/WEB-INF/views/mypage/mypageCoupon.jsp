@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
+<%@include file="/WEB-INF/views/chat/chat.jsp" %>
 <hr />
 <h1 style="text-align:center">나의 쿠폰 내역</h1>
 <hr />

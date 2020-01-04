@@ -1,6 +1,7 @@
 package notice.model.dao;
 
 import java.io.FileReader;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.sun.javafx.geom.transform.GeneralTransform3D;
 
 import notice.model.vo.Notice;
 import static common.JDBCTemplate.*;

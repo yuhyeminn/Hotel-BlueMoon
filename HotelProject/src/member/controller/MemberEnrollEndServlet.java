@@ -49,7 +49,6 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		request.setAttribute("member", member);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/member/enrollmember3.jsp");
 		reqDispatcher.forward(request, response);
-
 	}
 
 	/**

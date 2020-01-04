@@ -78,7 +78,7 @@ $(()=>{
 	var regExpId = /^[a-zA-Z0-9]{4,12}$/;
 	var regExpPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 	var regExpName = /^[가-힣]{2,4}$/;
-	var regExpEmail = /\w+@\w+\.\w+/g;
+	var regExpEmail = /\w+@\w+\.\w+/;
 	var regExpPhone = /^01[0179][0-9]{7,8}$/;
 	
 

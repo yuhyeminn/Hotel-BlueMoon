@@ -1,6 +1,7 @@
 <%@page import="reservation.model.vo.BookedRoom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/chat/chat.jsp" %>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp"%>
 <%@ page import="java.util.*"%>
