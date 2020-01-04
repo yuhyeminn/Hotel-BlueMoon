@@ -48,9 +48,9 @@ public class AdminQnAFinderServlet extends HttpServlet {
 
 			int totalContent = 0;
 			switch (searchType) {
-			case "memberId"	:totalContent = new AdminService().selectTotalContentByMemberId(searchKeyword);break;
-			case "category" :totalContent = new AdminService().selectTotalContentByQuestionName(searchKeyword);break;
-			case "answer"	:totalContent = new AdminService().selectTotalContentByAnswer(searchKeyword);break;
+			case "memberId"	:totalContent = new AdminService().selectTotalQnAContentByMemberId(searchKeyword);break;
+			case "category" :totalContent = new AdminService().selectTotalQnAContentByQuestionName(searchKeyword);break;
+			case "answer"	:totalContent = new AdminService().selectTotalQnAContentByAnswer(searchKeyword);break;
 			}
 
 			int totalPage = (int)Math.ceil((double)totalContent/numPerPage);

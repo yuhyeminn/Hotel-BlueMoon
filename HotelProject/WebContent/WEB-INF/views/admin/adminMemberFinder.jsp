@@ -5,8 +5,11 @@
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 <%
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
     List<Member> list = (List<Member>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
+	
 %>
 <!-- 관리자용 css link -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />
@@ -15,8 +18,8 @@ h1{
 	text-align: center;
 	padding: 20px;
 }
-#search-memberId {display: inline-block;}
-#search-memberName {display: none;}
+div#search-memberId {display:<%="memberId".equals(searchType)||searchType==null?"inline-block":"none"%>;}
+div#search-memberName {display:<%="memberName".equals(searchType)?"inline-block":"none"%>;}
 </style>
 <script>
 function oneCheckbox(a){
@@ -27,6 +30,8 @@ function oneCheckbox(a){
         }
     }
 }
+
+
 //onload
 $(()=>{
 	$(".btn-delete").click(function(){
@@ -39,7 +44,6 @@ $(()=>{
        console.log(a,"a");
        a.submit();
 	});
-	
 	var $searchMemberId = $("#search-memberId");
 	var $searchMemberName = $("#search-memberName");
 	
@@ -50,28 +54,34 @@ $(()=>{
 		$("#search-"+$(this).val()).css("display", "inline-block");
 	});
 });
+  
+
+
 </script>
+
 
 <div class="container">
 	<h1>회원 관리</h1>
 	<div id="search-container">
         <label for="searchType">검색타입 : </label>
         <select id="searchType">
-            <option value="memberId">아이디</option>		
-            <option value="memberName">회원명</option>
+            <option value="memberId" <%="memberId".equals(searchType)?"selected":""%>>아이디</option>		
+            <option value="memberName" <%="memberName".equals(searchType)?"selected":""%>>회원명</option>
         </select>
         
         <div id="search-memberId">
             <form action="<%=request.getContextPath()%>/admin/memberFinder">
                 <input type="hidden" name="searchType" value="memberId"/>
-                <input type="text" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요."/>
+                <input type="search" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요." 
+                    value="<%="memberId".equals(searchType)?searchKeyword:""%>" />
                 <button type="submit">검색</button>			
             </form>	
         </div>
         <div id="search-memberName">
             <form action="<%=request.getContextPath()%>/admin/memberFinder">
                 <input type="hidden" name="searchType" value="memberName"/>
-                <input type="text" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."/>
+                <input type="search" name="searchKeyword" size="25" placeholder="검색할 이름을 입력하세요."
+                    value="<%="memberName".equals(searchType)?searchKeyword:""%>"/>
                 <button type="submit">검색</button>			
             </form>	
         </div>

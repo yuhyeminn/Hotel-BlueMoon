@@ -189,7 +189,6 @@ $(() => {
   </div>
 </div>
 </form>
-    <div class="table-responsive">
       <table class="table">
         <thead>
           <tr>
@@ -237,7 +236,6 @@ $(() => {
       </div>
       
     
-  </div>
 </div>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>>
