@@ -100,6 +100,121 @@ commit;
 --drop sequence seq_notice_no;
 
 --=======================================================
+--문의사항 
+--=======================================================
+--문의사항 코드 테이블 생성
+--drop table question_category;
+create table question_category(
+    question_code varchar2(30) not null,
+    question_name varchar2(30) not null,
+    constraint pk_question_name primary key(question_name)
+);
+
+--문의사항 코드 insert
+insert into question_category values('123', '예약문의');
+insert into question_category values('456', '객실문의');
+insert into question_category values('789', '기타문의');
+
+select * from question_category;
+
+
+--문의게시판 테이블 생성
+--drop table question_board;
+create table question_board(
+    question_no number not null,
+    question_writer varchar2(30) not null,
+    question_name varchar2(30) not null,
+    question_title varchar2(90) not null,
+    question_content varchar2(4000) not null,
+    question_date date default sysdate,
+    question_originalFileName varchar2(1000),
+    question_renamedFileName varchar2(1000),
+    question_answer char(1) default 'F',
+    constraint pk_question_no primary key (question_no),
+    constraint fk_question_writer foreign key (question_writer) references member(member_id),
+    constraint fk_question_name foreign key (question_name) references question_category(question_name),
+    constraint ck_question_answer check(question_answer in ('T','F'))
+);
+
+--INSERT INTO QUESTION_BOARD VALUES(SEQ_QUESTION_NO.NEXTVAL, ?, ?, ?, ?, DEFAULT, ?, ?, DEFAULT);
+
+
+--SELECT COUNT(*) CNT FROM QUESTION_BOARD;
+--SELECT * FROM( SELECT RANK() OVER(ORDER BY room_name DESC) RNUM, R.* FROM room R) V WHERE RNUM BETWEEN ? AND ?
+--SELECT * FROM QUESTION_BOARD WHERE QUESTION_WRITER = ?;
+--SELECT * FROM( SELECT RANK() OVER(ORDER BY QUESTION_NO DESC) RNUM, R.* FROM QUESTION_BOARD R where question_writer like 'qwerty') V WHERE RNUM BETWEEN 1 AND 5;
+
+--===>
+--select * from (select rank() over(order by question_no desc) rnum, r.* from question_board r ) v where qeustion_writer and rnum betwwen 1 and 5;
+--select * from (select rank() over(order by question_no desc) rnum, r.* from question_board r where question_writer) v where rnum betwwen 1 and 5;
+
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '예약문의 드립니다', '예약 어떻게합니까?', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'alin', '기타문의', '호텔에 대한 문의 드립니다', '호텔에 어떻게 갑니까?', default, null, null, default);
+delete from question_board where question_title = '호텔에 대한 문의 드립니다';
+
+--페이징바용 문의사항 목록 리스트
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트2', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트3', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트4', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트5', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트6', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트7', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트8', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트9', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트10', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트11', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트12', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트13', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트14', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트15', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트16', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트16', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트16', '제곧내', default, null, null, default);
+insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문의', '문의사항테스트16', '제곧내', default, null, null, default);
+
+--UPDATE QUESTION_BOARD SET QUESTION_WRITER='qwerty', QUESTION_NAME='예약문의', QUESTION_TITLE='짜증난다', QUESTION_CONTENT='제곧내' ,QUESTION_ORIGINALFILENAME=NULL ,QUESTION_RENAMEDFILENAME =NULL WHERE QUESTION_NO= 119;
+--UPDATE QUESTION_BOARD SET QUESTION_WRITER=?, QUESTION_NAME=?, QUESTION_TITLE=?, QUESTION_CONTENT=? ,QUESTION_ORIGINALFILENAME=? ,QUESTION_RENAMEDFILENAME =? WHERE QUESTION_NO= ?;
+--DELETE FROM MEMBER WHERE MEMBERID=?
+
+delete from question_board where question_no = 95; 
+
+select * from question_board;
+
+commit;
+
+--문의게시판 댓글 테이블 생성
+--drop table question_comment;
+create table question_comment(
+    comment_no number not null,
+    question_ref number not null,
+    comment_writer varchar2(30) not null,
+    comment_content varchar2(4000) not null,
+    comment_date date default sysdate,
+    constraint pk_comment_no primary key(comment_no),
+    constraint fk_question_ref foreign key(question_ref) references question_board(question_no) on delete cascade,
+    constraint fk_comment_writer foreign key(comment_writer) references member(member_id) on delete cascade
+);
+
+insert into question_comment values(seq_commenet_no.nextval, 94, 'admin', '잘 해보십쇼', default);
+insert into question_comment values(seq_commenet_no.nextval, 95, 'admin', '비행기타고 오세요', default);
+
+select * from question_comment;
+
+SELECT * FROM QUESTION_BOARD WHERE QUESTION_WRITER = 'qwerty' ;
+SELECT * FROM( SELECT RANK() OVER(ORDER BY QUESTION_NO DESC) RNUM, R.* FROM QUESTION_BOARD R where question_writer like 'qwerty') V WHERE RNUM BETWEEN 1 AND 5;
+
+--문의사항 번호 시퀀스 생성
+create sequence seq_question_no;
+
+--댓글번호 시퀀스 생성
+create sequence seq_commenet_no;
+
+
+--SELECT SEQ_QUESTION_NO.CURRVAL CURRVAL FROM DUAL;
+
+commit;
+
+--=======================================================
 --room테이블 생성
 --=======================================================
 create table room(
@@ -373,7 +488,7 @@ select * from booked_room order by resv_no;
 --delete from booked_room
 select * from point_io order by update_date;
 select * from coupon;
-select * from member where member_id='hyeminyu';
+select * from member where member_id='test4';
 commit;
 
 --=======================================================
@@ -396,3 +511,4 @@ create table payment(
 --     insert into create table values(:new.resv_no,sysdate,sysdate,'I');
 --end;
 --/
+
