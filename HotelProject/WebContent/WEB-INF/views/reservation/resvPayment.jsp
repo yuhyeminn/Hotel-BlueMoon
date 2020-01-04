@@ -22,7 +22,7 @@
 	String checkindate = (String) infomap.get("checkindate");
 	String checkoutdate = (String) infomap.get("checkoutdate");
 	int room1 = Integer.parseInt(infomap.get("room1").toString());
-	int room2 = infomap.get("room2") != null ? Integer.parseInt(infomap.get("room2").toString()) : 0;
+	int room2 = infomap.get("room2") != null ? Integer.parseInt(infomap.get("room2").toString()):0;
 	int roomcnt = Integer.parseInt(infomap.get("roomcnt").toString());
 	int diffDay = Integer.parseInt(infomap.get("diffDay").toString());
 	int totalRoomPrice = Integer.parseInt(infomap.get("totalRoomPrice").toString());
@@ -438,10 +438,10 @@
     	//쿠폰 사용 선택 시 이벤트
      	$("#couponlist").change(function(){
     		var salePersent = $(this).val();
-    		if(salePersent!=''){
-    			couponSale=salePersent;
-    		}
-    		$("#form-used-coupon").val($(this).attr('id'));
+    		console.log(salePersent)
+    		couponSale=salePersent;
+    		
+    		$("#form-used-coupon").val($("#couponlist option:selected").attr('id'));
     		getTotalPrice();
     	});
     	
@@ -456,7 +456,7 @@
     		
     		$("#resvTotalPrice").text(result.toLocaleString());
     		resvPrice = result;
-    		$("#resvTotalPrice").val(resvPrice);
+    		$("#form-resv-price").val(resvPrice);
     	}
     	
     	$("#payment-btn").click(function(){
@@ -465,7 +465,7 @@
             var msg;
             
             IMP.request_pay({
-                pg : 'inicis',
+                pg : 'kakaopay',
                 pay_method : 'card',
                 merchant_uid : 'BLUEMOON_' + new Date().getTime(),
                 name : 'HOTEL BLUEMOON 예약',

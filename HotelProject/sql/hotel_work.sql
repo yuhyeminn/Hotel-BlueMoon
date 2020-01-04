@@ -17,7 +17,7 @@ create table member(
 );
 select * from member;
 alter table member add unique(member_email);
-alter table member modify (member_id default 3000);
+alter table member modify (member_id default 0);
 
 --insert
 --admin 비밀번호 : adminadmin++00
@@ -275,6 +275,17 @@ create table coupon(
     constraint ck_coupon_used check(coupon_used in ('T','F'))
 );
 
+create or replace trigger trg_coupon
+    after
+    insert on member
+    for each row
+begin
+        --회원가입한 경우, welcome 쿠폰발급
+        insert into coupon values(DBMS_RANDOM.STRING('X', 10), 1, :new.member_id, default, default ,default);
+        dbms_output.put_line(:new.member_id || ' 회원에게 WELCOME 쿠폰이 발급되었습니다.');
+end;
+/
+commit;
 insert into coupon values(DBMS_RANDOM.STRING('X', 10),'1','hyeminyu', default, default, default);
 
 --회원이 사용 가능한 쿠폰 리스트 조회

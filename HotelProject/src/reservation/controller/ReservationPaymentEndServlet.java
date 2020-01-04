@@ -34,7 +34,9 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 		String checkindate = request.getParameter("checkindate");
 		String checkoutdate = request.getParameter("checkoutdate");
 		int room1 = Integer.parseInt(request.getParameter("room1"));
+		System.out.println("room1="+room1);
 		int room2 = Integer.parseInt(request.getParameter("room2"));
+		System.out.println("room2="+room2);
 		int roomcnt = Integer.parseInt(request.getParameter("roomcnt"));
 		int diffDay = Integer.parseInt(request.getParameter("diffDay"));
 		

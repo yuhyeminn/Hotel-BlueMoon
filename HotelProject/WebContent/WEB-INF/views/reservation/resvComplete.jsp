@@ -20,12 +20,6 @@
 	
 	%>
 
-<script>
-    function ToMainPage(){
-		location.href = "<%=request.getContextPath()%>";	
-	};
-</script>
-   
     <div class="reservation-container">
         <div class="current-path">
             <span>홈</span>
@@ -120,6 +114,13 @@
             </div>
           </div>
     </div><!--End of reservation-container-->
+    
+<script>
+    function ToMainPage(){
+    	location.href = "<%=request.getContextPath()%>";
+	};
+</script>
+   
 <style>
 .reservation-container{
     padding: 0;
