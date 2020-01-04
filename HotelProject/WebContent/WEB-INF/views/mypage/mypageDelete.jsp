@@ -17,17 +17,44 @@
 	</h6>
 	<br /><br />
 	<div align="center">
-		<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요." />
+		<%
+			if("admin".equals(memberLoggedIn.getMemberId())){
+		%>	
+		<input type="password" name="password" id="password1" placeholder="비밀번호를 입력해주세요." disabled="false" />
+		<%
+			}else{
+		%>
+		<input type="password" name="password" id="password2" placeholder="비밀번호를 입력해주세요." />
+		<%
+			}
+		%>
 	</div>
 	<br /><br />
 	<div align="center">
+		<%
+			if("admin".equals(memberLoggedIn.getMemberId())){
+		%>	
+		<input type="submit" class="btn btn-outline-secondary" id="btnDel" value="탈퇴하기" onclick="return deleteValidate();" disabled="false"></button>
+		<%
+			}else{
+		%>
 		<input type="submit" class="btn btn-outline-secondary" id="btnDel" value="탈퇴하기" onclick="return deleteValidate();"></button>
+		<%
+			}
+		%>
 	</div>
 	<br /><br />
 	<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" />
 </form>
 <style>
-#password{
+#password1{
+	width: 250px;
+	height: 40px;
+	border-radius: 5px;
+	border: 1px solid gray;
+	text-align:center;
+}
+#password2{
 	width: 250px;
 	height: 40px;
 	border-radius: 5px;
@@ -44,6 +71,7 @@ function deleteValidate(){
 	}
 	return true;
 }
+
 </script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

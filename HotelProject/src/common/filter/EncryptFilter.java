@@ -23,6 +23,7 @@ import common.wrapper.EncryptWrapper;
 				"MemberFinderUpdatePWEndServlet",
 				"MemberFinderUpdatePWServlet",
 				"MypageUpdatePasswordEndServlet",
+				"MypageDeleteEndServlet"
 //				"MemberUpdateServlet",
 //				"UpdatePasswordEndServlet"
 		})
