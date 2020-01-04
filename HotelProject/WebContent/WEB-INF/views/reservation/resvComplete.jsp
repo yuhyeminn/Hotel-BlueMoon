@@ -1,10 +1,128 @@
+<%@page import="room.model.vo.Room"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,200,300,400,500,700|Noto+Serif+KR&display=swap" rel="stylesheet">
-</head>
+	<%
+	Map<Object, Object> infomap = (Map<Object, Object>)request.getAttribute("infomap");
+	Room resvRoom = (Room)request.getAttribute("resvRoom");
+	Member resvMember = (Member)request.getAttribute("resvMember");
+	
+	String checkindate = (String) infomap.get("checkindate");
+	String checkoutdate = (String) infomap.get("checkoutdate");
+	int room1 = Integer.parseInt(infomap.get("room1").toString());
+	int room2 = infomap.get("room2") != null ? Integer.parseInt(infomap.get("room2").toString()) : 0;
+	int roomcnt = Integer.parseInt(infomap.get("roomcnt").toString());
+	int diffDay = Integer.parseInt(infomap.get("diffDay").toString());
+	int resvTotalPrice = Integer.parseInt(infomap.get("resvTotalPrice").toString());
+	int breakfastcnt = Integer.parseInt(infomap.get("breakfastcnt").toString());
+	
+	%>
+
+    <div class="reservation-container">
+        <div class="current-path">
+            <span>홈</span>
+            <span>예약하기</span>
+            <span>객실,요금 선택</span>
+            <span>예약완료</span>
+        </div>
+        <div class="stepbox">
+          <div class="container-fluid ">
+              <br /><br />
+              <ul class="list-unstyled multi-steps">
+                  <li>일정선택</li>
+                  <li>객실/요금 선택</li>
+                  <li>결제</li>
+                  <li class="is-active">예약완료</li>
+              </ul>
+          </div>
+        </div>
+        <!-- <div class="complete-title">예약 완료</div> -->
+        
+        <div class="card crd1">
+            <div class="card-header crd1-header">
+                예약 정보
+              </div>
+            <div class="card-body">
+              <p class="card-text">
+                  <div class="complete-room-info">
+                      <div class="complete-roominfo-wrap">
+                        <div class="complete-room-resvName ct1">
+                          <p class="resvName-title ct2">예약자 이름</p>
+                          <ul class="resvName-detail ct3">
+                            <li><%=resvMember.getMemberId() %></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-phone ct1">
+                          <p class="resvName-phone ct2">전화번호</p>
+                          <ul class="phone-detail ct3">
+                            <li><%=resvMember.getPhone() %></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-name ct1">
+                          <p class="roomName-title ct2">객실명</p>
+                          <ul class="roomName-detail ct3">
+                            <li><%=resvRoom.getRoomName() %></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-count ct1">
+                          <p class="roomCount-title ct2">객실 수</p>
+                          <ul class="roomCount-detail ct3">
+                            <li><%=roomcnt %></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-people ct1">
+                          <p class="people-title ct2">예약 인원</p>
+                          <ul class="people-detail ct3">
+                            <li><span class="adult-text">총 </span><%= room1+room2%>명</li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-breakfast ct1">
+                          <p class="breakfast-title ct2">조식 인원</p>
+                          <ul class="breakfast-detail ct3">
+                            <li><%=breakfastcnt==0?"신청안함":breakfastcnt %></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-date ct1">
+                          <p class="date-title ct2">예약일</p>
+                          <ul class="date-detail ct3">
+                            <li><%=checkindate %></li>
+                            <span> ~ </span>
+                            <li><%=checkoutdate %></li>
+                            <li>(<%=diffDay %>박)</li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-checkInOut ct1">
+                          <p class="checkInOut-title ct2">체크인/체크아웃</p>
+                          <ul class="checkInOut-detail ct3">
+                            <li>15:00<span class="ampm">PM</span></li>
+                            <span>/</span>
+                            <li>12:00<span class="ampm">PM</span></li>
+                          </ul>
+                        </div>
+                        <div class="complete-room-totalPrice ct1">
+                          <p class="totalPrice-title ct2">총 요금</p>
+                          <ul class="totalPrice-detail ct3">
+                            <li><span class="price-unit">KRW</span><%=String.format("%,d", resvTotalPrice) %></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+              </p>
+              <a href="" class="btn btn-secondary" onclick="ToMainPage();">메인페이지로 이동</a>
+            </div>
+          </div>
+    </div><!--End of reservation-container-->
+    
+<script>
+    function ToMainPage(){
+    	location.href = "<%=request.getContextPath()%>";
+	};
+</script>
+   
 <style>
-body {
+.reservation-container{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -13,7 +131,6 @@ body {
     color: #666;
     -webkit-font-smoothing: antialiased;
 }
-.reservation-container{width: 1280px;padding: 0 90px;margin: 0 auto;}
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
 .current-path{font-size: 16px;padding: 13px 0 30px 0;}
@@ -232,113 +349,4 @@ body {
   font-weight: 500;
 }
 </style>
-<script>
-    function ToMainPage(){
-		location.href = "<%=request.getContextPath()%>";	
-	};
-</script>
-    <div class="reservation-container">
-        <div class="current-path">
-            <span>홈</span>
-            <span>예약하기</span>
-            <span>객실,요금 선택</span>
-            <span>예약완료</span>
-        </div>
-        <div class="stepbox">
-          <div class="container-fluid ">
-              <br /><br />
-              <ul class="list-unstyled multi-steps">
-                  <li>일정선택</li>
-                  <li>객실/요금 선택</li>
-                  <li>결제</li>
-                  <li class="is-active">예약완료</li>
-              </ul>
-          </div>
-        </div>
-        <!-- <div class="complete-title">예약 완료</div> -->
-        
-        <div class="card crd1">
-            <div class="card-header crd1-header">
-                예약완료
-              </div>
-            <div class="card-body">
-              <p class="card-text">
-                  <div class="complete-room-info">
-                      <div class="complete-roominfo-wrap">
-                        <div class="complete-room-resvName ct1">
-                          <p class="resvName-title ct2">예약자 이름</p>
-                          <ul class="resvName-detail ct3">
-                            <li>허준</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-phone ct1">
-                          <p class="resvName-phone ct2">전화번호</p>
-                          <ul class="phone-detail ct3">
-                            <li>010-1234-1234</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-name ct1">
-                          <p class="roomName-title ct2">객실명</p>
-                          <ul class="roomName-detail ct3">
-                            <!-- <li>프리미엄디럭스</li> -->
-                            <li>프리미엄디럭스 더블</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-view ct1">
-                          <p class="viewName-title ct2">객실 뷰</p>
-                          <ul class="viewName-detail ct3">
-                            <li>시티뷰/리버뷰</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-count ct1">
-                          <p class="roomCount-title ct2">객실 수</p>
-                          <ul class="roomCount-detail ct3">
-                            <li>1</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-people ct1">
-                          <p class="people-title ct2">예약 인원</p>
-                          <ul class="people-detail ct3">
-                            <li><span class="adult-text">성인</span>1</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-date ct1">
-                          <p class="date-title ct2">예약일</p>
-                          <ul class="date-detail ct3">
-                            <li>2019.12.25</li>
-                            <span>-</span>
-                            <li>2019.12.27</li>
-                            <li>(2박)</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-checkInOut ct1">
-                          <p class="checkInOut-title ct2">체크인/체크아웃</p>
-                          <ul class="checkInOut-detail ct3">
-                            <li>15:00<span class="ampm">PM</span></li>
-                            <span>/</span>
-                            <li>12:00<span class="ampm">PM</span></li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-breakfast ct1">
-                          <p class="breakfast-title ct2">조식 인원</p>
-                          <ul class="breakfast-detail ct3">
-                            <li>0</li>
-                          </ul>
-                        </div>
-                        <div class="complete-room-totalPrice ct1">
-                          <p class="totalPrice-title ct2">총 요금</p>
-                          <ul class="totalPrice-detail ct3">
-                            <li><span class="price-unit">KRW</span>1,160,000</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-              </p>
-              <a href="#" class="btn btn-secondary" onclick="ToMainPage();">메인페이지로 이동</a>
-            </div>
-          </div>
-    </div><!--End of reservation-container-->
-
-
-
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

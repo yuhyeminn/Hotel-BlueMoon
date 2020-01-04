@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.model.service.AdminService;
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import room.model.vo.Room;
 
 /**
  * Servlet implementation class MemerLoginCheckServlet
@@ -28,7 +31,6 @@ public class MemerLoginCheckServlet extends HttpServlet {
 		System.out.println("memberId="+memberId+" | "+"password="+password);
 		
 		Member m = new MemberService().selectOne(memberId);
-		//System.out.println("member@loginServlet="+m);
 		
 		String msg = "";
 		String loc = "/";
@@ -55,7 +57,6 @@ public class MemerLoginCheckServlet extends HttpServlet {
 				HttpSession session = request.getSession(true);
 				System.out.println("SESSIONID="+session.getId());
 				session.setAttribute("memberLoggedIn", m);
-				
 				response.sendRedirect(request.getContextPath());
 			}
 		}

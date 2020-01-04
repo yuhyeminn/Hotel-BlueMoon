@@ -14,10 +14,6 @@ body{
     height: auto;
     /* font-size: 0; */
 }
-section, header, aside {
-	padding: 10px;
-}
-
 /*header*/
 header {
 	position: relative;
