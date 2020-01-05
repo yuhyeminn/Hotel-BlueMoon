@@ -2,6 +2,7 @@ package member.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;

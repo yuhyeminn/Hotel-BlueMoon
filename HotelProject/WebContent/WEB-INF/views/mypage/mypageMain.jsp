@@ -11,7 +11,18 @@
 
 <%
 	Member m = (Member)request.getAttribute("m");
+	int totalContent = ((Integer)request.getAttribute("totalContent")).intValue();
 %>
+<script>
+$(()=>{
+	function setValue(){
+		if(m.getMemberId()!=null){
+			var value = <%=m.getMemberId()%>		
+			return true;
+		}
+	}
+});
+</script>
 <div id="my-profile" class="inform-card">
 	<br />
 	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원
@@ -34,7 +45,10 @@
 
 	<div id="my-coupon" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
-		<h2>1개</h2>
+		<h2><a href="<%=request.getContextPath()%>//mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer">
+			<%=totalContent%>개</a>
+		</h2>
+		
 	</div>
 </div>
 

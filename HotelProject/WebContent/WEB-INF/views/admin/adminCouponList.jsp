@@ -21,9 +21,8 @@ function oneCheckbox(a){
 }
 </script>
 
-<h2>회원 쿠폰 조회</h2>
 <div class="container">
-    <div class="table-responsive">
+	<h2>회원 쿠폰 조회</h2>
       <table class="table">
         <thead>
           <tr>
@@ -70,7 +69,6 @@ function oneCheckbox(a){
 	    <input type="button" value="수정">
 	    <input type="button" value="삭제">
     </div> -->
-  </div>
 </div>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>>

@@ -73,7 +73,7 @@ header {
 footer {
 	background-color: rgb(33, 32, 30);
 	height: 250px;
-	with: 100%;
+	width: 100%;
 }
 
 #footer {

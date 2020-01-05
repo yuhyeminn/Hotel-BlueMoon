@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <link href="https://fonts.googleapis.com/css?family=Roboto|Playfair+Display|Dancing+Script|Nanum+Gothic|Noto+Serif+KR|Gothic+A1|Do+Hyeon|Jua|Noto+Sans+KR|Song+Myung|Marck+Script|Kaushan+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 <style>
 /*header*/
 header {
@@ -432,11 +433,14 @@ footer {
     font-weight: 700;
 }
 .Heading-text{
-    font-family: 'Roboto';
+	font-family: 'Nanum Myeongjo', serif;
     font-size: 18px;
 }
 .image-panel-itemContent{
 	text-align: center;
+}
+#pFont{
+	font-family: font-family: 'Nanum Myeongjo', serif;
 }
 </style>
 <!-- video content -->
@@ -561,14 +565,14 @@ footer {
         <div class="image-panel-item-container">
             <div class="image-panel-itemContent">
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-5 offset-lg-1 col-xl-4 offset-xl-start ImageAndTextPanel-columns">
-                        <img src="<%=request.getContextPath() %>/images/main_detail.jpg" alt="">
+                        <img style="width:370px; height:493px;" src="<%=request.getContextPath() %>/images/hotel1.jpg" alt="">
                     </div>
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-4 offset-lg-1 col-xl-4 ImageAndTextPanel-columns text-panel">
                         <div class="image-text-pangel-textPanel">
                                 <div class="Heading ImageAndTextPanel-Heading">
                                     <span class="Heading-eyebrow ty-h4">Blue Moon at Home Collection</span>
                                     <h3 class="Heading-title ty-h3">Wrap Yourself in Blue Moon Luxury at Home</h3>
-                                    <p class="normal Heading-text ty-b2">Enjoy our coveted mattress, bed and robes at home – without a check-out time, and at the click of a button.</p>
+                                    <p class="normal Heading-text ty-b2">합리적인 가격에 편안하고 아늑한 객실과 고품격 다이닝을 갖춘 호텔블루문이 제주의 휴양 문화를 한층 높은 격으로 이끌어 나아갑니다. 객실에서 보는 자연과 어우러진 푸른 제주의 조망은 포근한 힐링을 드립니다.</p>
                                 </div>
                         </div>
                     </div>
@@ -584,7 +588,7 @@ footer {
                                 <div class="Heading ImageAndTextPanel-Heading">
                                     <span class="Heading-eyebrow ty-h4">Blue Moon Private Retreats</span>
                                     <h3 class="Heading-title ty-h3">RENT A HOME WITH BLUE MOON</h3>
-                                    <p class="normal Heading-text ty-b2">Our villas and homes provide the perfect stage for unforgettable moments that are distinctly yours, featuring legendary Blue Moon service and amenities, with all the comforts of home.</p>
+                                    <p class="normal Heading-text ty-b2">세계자연문화유산인 제주의 아름다운 풍광을 담은 호텔로써 그 명성을 쌓아가고 있는 호텔블루문은 90년 개관 후부터 지금까지 품격과 문화가 있는 휴식지로써 수많은 굵직한 국제행사를 성공적으로 치러온 최고의 호텔입니다.</p>
                                 </div>
                         </div>
                     </div>
@@ -606,7 +610,7 @@ footer {
                             <div class="Heading ImageAndTextPanel-Heading">
                                 <span class="Heading-eyebrow ty-h4">Residences</span>
                                 <h3 class="Heading-title ty-h3">AT HOME WITH BLUE MOON</h3>
-                                <p class="normal Heading-text ty-b2">Explore all the joys of living with Blue Moon and wake up every day to legendary Blue Moon service and world-class amenities.</p>
+                                <p class="normal Heading-text ty-b2">이국적인 분위기와 최고의 시설을 선보이며 고객에게 먼저 다가가는 호텔에 특화된 서비스로 호텔에 다녀간 세계의 국가 수반을 비롯 많은 VIP에게 크나 큰 찬사를 받아 왔습니다.</p>
                             </div>
                     </div>
                 </div>
@@ -622,12 +626,12 @@ footer {
                             <div class="Heading ImageAndTextPanel-Heading">
                                 <span class="Heading-eyebrow ty-h4">Blue Moon Private Jet</span>
                                 <h3 class="Heading-title ty-h3">PREVIEW OUR NEW JET TAKING FLIGHT 2021</h3>
-                                <p class="normal Heading-text ty-b2">Reimagined for a Blue Moon experience in the sky like never before, the new Jet offers an even more modern, enriching and interactive flight experience.</p>
+                                <p class="normal Heading-text ty-b2">한국의 전통미와 현대적 감각을 겸비하고 있는 세계 속의 명문호텔 블루문호텔은 세계 최고의 어번(Urban)라이프스타일 호텔로 고객들에게 최고급 Hospitality 서비스를 제공합니다.</p>
                             </div>
                         </div>
                     </div>
                 <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-5 offset-lg-1 col-xl-4 offset-xl-start ImageAndTextPanel-columns">
-                    <img src="<%=request.getContextPath() %>/images/main_Detail4.jpg" alt="">
+                    <img style="width:370px; height:493px;" src="<%=request.getContextPath() %>/images/hotelImg1.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -642,9 +646,9 @@ footer {
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-4 offset-lg-1 col-xl-4 ImageAndTextPanel-columns text-panel">
                         <div class="image-text-pangel-textPanel">
                             <div class="Heading ImageAndTextPanel-Heading">
-                                <span class="Heading-eyebrow ty-h4">Four Seasons at Home Collection</span>
-                                <h3 class="Heading-title ty-h3">Wrap Yourself in Four Seasons Luxury at Home</h3>
-                                <p class="normal Heading-text ty-b2">Enjoy our coveted mattress, bed and robes at home – without a check-out time, and at the click of a button.</p>
+                                <span class="Heading-eyebrow ty-h4">Blue Moon at Home Collection</span>
+                                <h3 class="Heading-title ty-h3">Wrap Yourself in Blue Moon Luxury at Home</h3>
+                                <p class="normal Heading-text ty-b2">한국을 대표하는 럭셔리 호텔로서 '일상이 최고의 순간이 되는 곳'이라는 컨셉을 새롭게 선보이며 휴식은 물론 고급 식문화, 예술, 엔터테인먼트 등 고객의 고품격 라이프스타일을 제안하는 공간으로 거듭나고 있습니다.</p>
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import admin.model.service.AdminService;
 
@@ -65,9 +66,10 @@ public class RoomDeleteServlet extends HttpServlet {
 		if(result>0)
 			System.out.println("객실 삭제 성공!");
 			
-		else 
-			System.out.println("게시글 삭제 실패!");	
-		
+		else {
+			System.out.println("게시글 삭제 실패!");
+			JOptionPane.showMessageDialog(null, "객실을 삭제할수 없습니다. 관리자에게 문의하세요.", "객실 삭제 오류", JOptionPane.WARNING_MESSAGE);
+		}
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/views/admin/adminRoomList");
 		reqDispatcher.forward(request, response);
 	}
