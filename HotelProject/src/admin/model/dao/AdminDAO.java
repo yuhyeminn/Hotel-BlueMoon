@@ -1056,96 +1056,95 @@ public class AdminDAO {
 	}
 
 	public List<ReservationCount> selectResvCountYear(Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		List<ReservationCount> rcYearList = null;
-		ReservationCount rc = null;
-		String query = prop.getProperty("selectResvCountYear");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			rset = pstmt.executeQuery();
-			rcYearList = new ArrayList<>();
-			
-			while(rset.next()) {
-				rc = new ReservationCount();
-				rc.setDay(rset.getInt("day"));
-				rc.setResvCount(rset.getInt("resvcount"));
-				rc.setResvPrice(rset.getInt("price"));
-				rcYearList.add(rc);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return rcYearList;
-	}
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<ReservationCount> rcYearList = null;
+	      ReservationCount rc = null;
+	      String query = prop.getProperty("selectResvCountYear");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         rset = pstmt.executeQuery();
+	         rcYearList = new ArrayList<>();
+	         
+	         while(rset.next()) {
+	            rc = new ReservationCount();
+	            rc.setDay(rset.getInt("day"));
+	            rc.setResvCount(rset.getInt("resvcount"));
+	            rc.setResvPrice(rset.getInt("price"));
+	            rcYearList.add(rc);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return rcYearList;
+	   }
 
-	public List<ReservationCount> select2019Month(Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		List<ReservationCount> month2019List = null;
-		ReservationCount rc = null;
-		String query = prop.getProperty("selectMonthByYear");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, "20190101");
-			pstmt.setString(2, "20191231");
-			rset = pstmt.executeQuery();
-			month2019List = new ArrayList<>();
-			
-			while(rset.next()) {
-				rc = new ReservationCount();
-				rc.setDay(rset.getInt("day"));
-				rc.setResvCount(rset.getInt("resvcount"));
-				rc.setResvPrice(rset.getInt("price"));
-				month2019List.add(rc);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return month2019List;
-	}
+	   public List<ReservationCount> select2019Month(Connection conn) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<ReservationCount> month2019List = null;
+	      ReservationCount rc = null;
+	      String query = prop.getProperty("selectYear");
+	      
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         
+	         pstmt.setString(1, "20190101");
+	         pstmt.setString(2, "20191231");
+	         rset = pstmt.executeQuery();
+	         month2019List = new ArrayList<>();
+	         
+	         while(rset.next()) {
+	            rc = new ReservationCount();
+	            rc.setDay(rset.getInt("day"));
+	            rc.setResvCount(rset.getInt("resvcount"));
+	            rc.setResvPrice(rset.getInt("price"));
+	            month2019List.add(rc);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return month2019List;
+	   }
 
-	public List<ReservationCount> select2020Month(Connection conn) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		List<ReservationCount> month2020List = null;
-		ReservationCount rc = null;
-		String query = prop.getProperty("selectNextYear");
-		System.out.println("DAOSelect@="+query);
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, "20200101");
-			pstmt.setString(2, "20201231");
-			rset = pstmt.executeQuery();
-			month2020List = new ArrayList<>();
-			
-			while(rset.next()) {
-				rc = new ReservationCount();
-				rc.setDay(rset.getInt("day"));
-				rc.setResvCount(rset.getInt("resvcount"));
-				rc.setResvPrice(rset.getInt("price"));
-				month2020List.add(rc);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		System.out.println("DAO@2020List="+month2020List);
-		return month2020List;
-	}
+	   public List<ReservationCount> select2020Month(Connection conn) {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      List<ReservationCount> month2020List = null;
+	      ReservationCount rc = null;
+	      String query = prop.getProperty("selectNextYear");
+	      System.out.println("DAOSelect@="+query);
+	      
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         
+	         pstmt.setString(1, "20200101");
+	         pstmt.setString(2, "20201231");
+	         rset = pstmt.executeQuery();
+	         month2020List = new ArrayList<>();
+	         
+	         while(rset.next()) {
+	            rc = new ReservationCount();
+	            rc.setDay(rset.getInt("day"));
+	            rc.setResvCount(rset.getInt("resvcount"));
+	            rc.setResvPrice(rset.getInt("price"));
+	            month2020List.add(rc);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      return month2020List;
+	   }
 
 
 }
