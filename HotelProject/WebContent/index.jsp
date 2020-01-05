@@ -450,7 +450,9 @@ footer {
         <div class="w-100 text-white text-container">
             <p class="lead mb-0 semi-text">Discover</p>
             <h1 class="display-3 main-title">Designers of remarkable travel journeys</h1>
-            <div class="underbar"></div>
+            <div class="underbar">
+            	<%@include file="/WEB-INF/views/common/resvbar.jsp"%>
+            </div>
         </div>
         </div>
     </div>
