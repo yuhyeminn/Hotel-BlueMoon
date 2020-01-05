@@ -8,18 +8,18 @@ public class Coupon implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String couponNo;
-	private String couponCode;
+	private int couponCode;
 	private String couponMemberId;
 	private Date couponStartDate;
 	private Date couponEndDate;
-	private char couponUsed;
+	private String couponUsed;
 	
 	public Coupon() {
 		super();
 	}
 
-	public Coupon(String couponNo, String couponCode, String couponMemberId, Date couponStartDate, Date couponEndDate,
-			char couponUsed) {
+	public Coupon(String couponNo, int couponCode, String couponMemberId, Date couponStartDate, Date couponEndDate,
+			String couponUsed) {
 		super();
 		this.couponNo = couponNo;
 		this.couponCode = couponCode;
@@ -37,11 +37,11 @@ public class Coupon implements Serializable{
 		this.couponNo = couponNo;
 	}
 
-	public String getCouponCode() {
+	public int getCouponCode() {
 		return couponCode;
 	}
 
-	public void setCouponCode(String couponCode) {
+	public void setCouponCode(int couponCode) {
 		this.couponCode = couponCode;
 	}
 
@@ -69,11 +69,11 @@ public class Coupon implements Serializable{
 		this.couponEndDate = couponEndDate;
 	}
 
-	public char getCouponUsed() {
+	public String getCouponUsed() {
 		return couponUsed;
 	}
 
-	public void setCouponUsed(char couponUsed) {
+	public void setCouponUsed(String couponUsed) {
 		this.couponUsed = couponUsed;
 	}
 

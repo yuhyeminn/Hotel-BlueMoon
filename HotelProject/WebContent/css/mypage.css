@@ -12,3 +12,24 @@
 	height: 200px;
 	visibility: hidden;
 }
+#cpnAmount{
+	color: black;
+}
+/*페이지바*/
+div#pageBar{
+	margin-top: 10px;
+	text-align: center;
+	background-color: rgba(0,188,212,0.3);
+}
+div#pageBar span.cPage{
+	color: #06f;
+	margin-right: 10px;
+}
+​
+div#pageBar a{
+	margin-right: 10px;
+}
+div#btn{
+	margin: 10px;
+    text-align: center;
+}

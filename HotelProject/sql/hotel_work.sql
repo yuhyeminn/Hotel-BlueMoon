@@ -157,6 +157,7 @@ create table coupon_kind(
     constraint pk_coupon_code primary key(coupon_code)
 );
 
+--select C.coupon_no, K.coupon_content, C.coupon_startDate, C.coupon_endDate, C.coupon_used from coupon C join coupon_kind K using(coupon_code) where member_id like ?
 
 drop table coupon_kind;
 
@@ -169,7 +170,7 @@ create table coupon(
     member_id varchar2(20) default null,
     coupon_startDate date default sysdate,
     coupon_endDate date default sysdate+365,
-    coupon_used char(1) default 'F',
+    coupon_used varchar2(20) default '사용가능',
     constraint pk_coupon_no primary key(coupon_no),
     constraint fk_coupon_code foreign key(coupon_code) references coupon_kind(coupon_code),
     constraint fk_member_id foreign key(member_id) references member(member_id),
@@ -178,6 +179,16 @@ create table coupon(
 
 --쿠폰 시퀀스 생성
 create sequence seq_coupon_kind;
+    constraint fk_coupon_code foreign key(coupon_code) references coupon_kind(coupon_code) on delete cascade,
+    constraint fk_member_id foreign key(member_id) references member(member_id) on delete cascade,
+    constraint ck_coupon_used check(coupon_used in ('사용가능','사용불가'))
+);
+insert into coupon values(DBMS_RANDOM.STRING('X', 10),'1','qwerty', default, default, default);
+insert into coupon values(DBMS_RANDOM.STRING('X', 10),'1','korea', default, default, default);
+select * from coupon_kind;
+select * from coupon;
+--rollback;
+commit;
 
 create or replace trigger trg_coupon
     after

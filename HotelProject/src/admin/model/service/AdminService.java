@@ -380,6 +380,23 @@ public class AdminService {
 			return totalContent;
 		}
 
+		public int selectTotalCpnContentByMemberId(String memberId) {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalCpnContentByMemberId(conn, memberId);
+			close(conn);
+			return totalContent;
+		}
+
+		public List<Coupon> selectCouponByMemberIdByPaging(String memberId, int cPage, int numPerPage) {
+			List<Coupon> list = null;
+			Connection conn = getConnection();
+			list = new AdminDAO().selectCouponByMemberIdByPaging(conn, memberId, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		
+
 }
 
 

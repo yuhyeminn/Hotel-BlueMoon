@@ -768,11 +768,11 @@ public class AdminDAO {
                  Coupon c = new Coupon();
                  //컬럼명은 대소문자 구분이 없다.
                  c.setCouponNo(rset.getString("coupon_no"));
-                 c.setCouponCode(rset.getString("coupon_code"));
+                 c.setCouponCode(rset.getInt("coupon_code"));
                  c.setCouponMemberId(rset.getString("member_id"));
                  c.setCouponStartDate(rset.getDate("coupon_startDate"));
                  c.setCouponEndDate(rset.getDate("coupon_endDate"));
-                 c.setCouponUsed(rset.getString("coupon_used").charAt(0));
+                 c.setCouponUsed(rset.getString("coupon_used"));
                  
                  list.add(c);
              }
@@ -1366,6 +1366,76 @@ public class AdminDAO {
 		}
 
 		return totalContent;
+	}
+
+	public int selectTotalCpnContentByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalCpnContentByMemberId");
+		int totalContent = 0;
+
+		System.out.println(query);
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + memberId + "%");
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				totalContent = rset.getInt("cnt");
+
+			System.out.println("totalContent@dao=" + totalContent);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContent;
+	}
+
+	public List<Coupon> selectCouponByMemberIdByPaging(Connection conn, String memberId, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Coupon> list = null;
+		String query = prop.getProperty("selectCouponByMemberIdByPaging");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+memberId+"%");
+			
+			//(공식1)
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()){
+                Coupon c = new Coupon();
+                //컬럼명은 대소문자 구분이 없다.
+                c.setCouponNo(rset.getString("coupon_no"));
+                c.setCouponCode(rset.getInt("coupon_code"));
+                c.setCouponMemberId(rset.getString("member_id"));
+                c.setCouponStartDate(rset.getDate("coupon_startDate"));
+                c.setCouponEndDate(rset.getDate("coupon_endDate"));
+                c.setCouponUsed(rset.getString("coupon_used"));
+                
+                list.add(c);
+            }
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
