@@ -207,10 +207,10 @@ public class AdminDAO {
 		return list;
 	}
 
-	public int selectTotalContent(Connection conn) {
+	public int selectTotalQnAContent(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContent");
+		String query = prop.getProperty("selectTotalQnAContent");
 		int totalContent = 0;
 
 		try {
@@ -234,10 +234,10 @@ public class AdminDAO {
 		return totalContent;
 	}
 
-	public int selectTotalContentByMemberId(Connection conn, String searchKeyword) {
+	public int selectTotalQnAContentByMemberId(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContentByMemberId");
+		String query = prop.getProperty("selectTotalQnAContentByMemberId");
 		int totalContent = 0;
 
 		System.out.println(query);
@@ -263,10 +263,10 @@ public class AdminDAO {
 		return totalContent;
 	}
 
-	public int selectTotalContentByQuestionName(Connection conn, String searchKeyword) {
+	public int selectTotalQnAContentByQuestionName(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContentByQuestionName");
+		String query = prop.getProperty("selectTotalQnAContentByQuestionName");
 		int totalContent = 0;
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -277,7 +277,7 @@ public class AdminDAO {
 			if (rset.next())
 				totalContent = rset.getInt("cnt");
 
-			System.out.println("totalContent@dao=" + totalContent);
+			System.out.println("totalQnAContent@dao=" + totalContent);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -289,10 +289,10 @@ public class AdminDAO {
 		return totalContent;
 	}
 
-	public int selectTotalContentByAnswer(Connection conn, String searchKeyword) {
+	public int selectTotalQnAContentByAnswer(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = prop.getProperty("selectTotalContentByAnswer");
+		String query = prop.getProperty("selectTotalQnAContentByAnswer");
 		int totalContent = 0;
 
 		try {
@@ -305,7 +305,7 @@ public class AdminDAO {
 				totalContent = rset.getInt("cnt");
 			}
 
-			System.out.println("totalContent@dao=" + totalContent);
+			System.out.println("totalQnAContent@dao=" + totalContent);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1146,5 +1146,226 @@ public class AdminDAO {
 	      return month2020List;
 	   }
 
+	
+	//각 항목별 검색
+	public List<Member> selectMemberByMemberId(Connection conn, String searchKeyword, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Member> list = null;
+		String query = prop.getProperty("selectMemberByMemberIdByPaging");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			//(공식1)
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while (rset.next()) {
+				Member m = new Member();
+				// 컬럼명은 대소문자 구분이 없다.
+				m.setMemberId(rset.getString("member_id"));
+                m.setPassword(rset.getString("member_password"));
+                m.setMemberName(rset.getString("member_name"));
+                m.setBirth(rset.getString("member_birth"));
+                m.setEmail(rset.getString("member_email"));
+                m.setPhone(rset.getString("member_phone"));
+                m.setPoint(rset.getInt("member_points"));
+                m.setEnrollDate(rset.getDate("member_enrolldate"));
+
+				list.add(m);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public List<Member> selectMemberByMemberName(Connection conn, String searchKeyword, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Member> list = null;
+		String query = prop.getProperty("selectMemberByMemberNameByPaging");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			//(공식1)
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while (rset.next()) {
+				Member m = new Member();
+				// 컬럼명은 대소문자 구분이 없다.
+				m.setMemberId(rset.getString("member_id"));
+                m.setPassword(rset.getString("member_password"));
+                m.setMemberName(rset.getString("member_name"));
+                m.setBirth(rset.getString("member_birth"));
+                m.setEmail(rset.getString("member_email"));
+                m.setPhone(rset.getString("member_phone"));
+                m.setPoint(rset.getInt("member_points"));
+                m.setEnrollDate(rset.getDate("member_enrolldate"));
+
+				list.add(m);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int selectTotalMemberContentByMemberId(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalMemberContentByMemberId");
+		int totalContent = 0;
+
+		System.out.println(query);
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				totalContent = rset.getInt("cnt");
+
+			System.out.println("totalContent@dao=" + totalContent);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContent;
+	}
+
+	public int selectTotalMemberContentByMemberName(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalMemberContentByMemberName");
+		int totalContent = 0;
+
+		System.out.println(query);
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				totalContent = rset.getInt("cnt");
+
+			System.out.println("totalContent@dao=" + totalContent);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContent;
+	}
+
+	public List<AdminReservation> selectResvByMemberId(Connection conn, String searchKeyword, int cPage,
+			int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<AdminReservation> list = null;
+		String query = prop.getProperty("selectResvByMemberIdByPaging");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			//(공식1)
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);//start rownum
+			pstmt.setInt(3, cPage*numPerPage);//end rownum
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while (rset.next()) {
+				AdminReservation ar = new AdminReservation();
+                //컬럼명은 대소문자 구분이 없다.
+                ar.setNo(rset.getLong("resv_no"));
+                ar.setRsvMember(rset.getString("resv_member"));
+                ar.setPeople(rset.getInt("resv_people"));
+                ar.setUsedPnt(rset.getInt("resv_usedpoint"));
+                ar.setAddPnt(rset.getInt("resv_addpoint"));
+                ar.setEnrollDate(rset.getDate("resv_date"));
+                ar.setPrice(rset.getInt("resv_price"));
+                ar.setCancel(rset.getString("resv_iscancel").charAt(0));
+                ar.setChkIn(rset.getDate("resv_in"));
+                ar.setChkOut(rset.getDate("resv_out"));
+                ar.setBreakfast(rset.getInt("resv_breakfast"));
+                
+                list.add(ar);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int selectTotalResvContentByMemberId(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTotalResvContentByMemberId");
+		int totalContent = 0;
+
+		System.out.println(query);
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + searchKeyword + "%");
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next())
+				totalContent = rset.getInt("cnt");
+
+			System.out.println("totalContent@dao=" + totalContent);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return totalContent;
+	}
 
 }
