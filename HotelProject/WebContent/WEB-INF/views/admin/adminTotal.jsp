@@ -59,35 +59,35 @@
       /* 2020 월별 예약 */
      var month_2020_resv = new google.visualization.arrayToDataTable([
           ['Month', ''],
-          ["1월", <%=month2020List.get(0).getResvCount()%>],
-          ["2월", <%=month2020List.get(1).getResvCount()%>],
-          ["3월", <%=month2020List.get(2).getResvCount()%>],
-          ["4월", <%=month2020List.get(3).getResvCount()%>],
-          ["5월", <%=month2020List.get(4).getResvCount()%>],
-          ["6월", <%=month2020List.get(5).getResvCount()%>],
-          ["7월", <%=month2020List.get(6).getResvCount()%>],
-          ["8월", <%=month2020List.get(7).getResvCount()%>],
-          ["9월", <%=month2020List.get(8).getResvCount()%>],
-          ["10월", <%=month2020List.get(9).getResvCount()%>],
-          ["11월", <%=month2020List.get(10).getResvCount()%>],
-          ["12월", <%=month2020List.get(11).getResvCount()%>]
+          ["1월", <%=month2020List.get(12).getResvCount()%>],
+          ["2월", <%=month2020List.get(13).getResvCount()%>],
+          ["3월", <%=month2020List.get(14).getResvCount()%>],
+          ["4월", <%=month2020List.get(15).getResvCount()%>],
+          ["5월", <%=month2020List.get(16).getResvCount()%>],
+          ["6월", <%=month2020List.get(17).getResvCount()%>],
+          ["7월", <%=month2020List.get(18).getResvCount()%>],
+          ["8월", <%=month2020List.get(19).getResvCount()%>],
+          ["9월", <%=month2020List.get(20).getResvCount()%>],
+          ["10월", <%=month2020List.get(21).getResvCount()%>],
+          ["11월", <%=month2020List.get(22).getResvCount()%>],
+          ["12월", <%=month2020List.get(23).getResvCount()%>]
         ]);
         
       	/* 2020 월별 결제금액 */
         var month_2020_price = new google.visualization.arrayToDataTable([
             ['Month', ''],
-            ["1월", <%=month2020List.get(0).getResvPrice()%>],
-            ["2월", <%=month2020List.get(1).getResvPrice()%>],
-            ["3월", <%=month2020List.get(2).getResvPrice()%>],
-            ["4월", <%=month2020List.get(3).getResvPrice()%>],
-            ["5월", <%=month2020List.get(4).getResvPrice()%>],
-            ["6월", <%=month2020List.get(5).getResvPrice()%>],
-            ["7월", <%=month2020List.get(6).getResvPrice()%>],
-            ["8월", <%=month2020List.get(7).getResvPrice()%>],
-            ["9월", <%=month2020List.get(8).getResvPrice()%>],
-            ["10월", <%=month2020List.get(9).getResvPrice()%>],
-            ["11월", <%=month2020List.get(10).getResvPrice()%>],
-            ["12월", <%=month2020List.get(11).getResvPrice()%>]
+            ["1월", <%=month2020List.get(12).getResvPrice()%>],
+            ["2월", <%=month2020List.get(13).getResvPrice()%>],
+            ["3월", <%=month2020List.get(14).getResvPrice()%>],
+            ["4월", <%=month2020List.get(15).getResvPrice()%>],
+            ["5월", <%=month2020List.get(16).getResvPrice()%>],
+            ["6월", <%=month2020List.get(17).getResvPrice()%>],
+            ["7월", <%=month2020List.get(18).getResvPrice()%>],
+            ["8월", <%=month2020List.get(19).getResvPrice()%>],
+            ["9월", <%=month2020List.get(20).getResvPrice()%>],
+            ["10월", <%=month2020List.get(21).getResvPrice()%>],
+            ["11월", <%=month2020List.get(22).getResvPrice()%>],
+            ["12월", <%=month2020List.get(23).getResvPrice()%>]
             ]);
     	
 

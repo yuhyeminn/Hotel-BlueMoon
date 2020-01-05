@@ -126,17 +126,29 @@ border:none;
         $(document).ready(function () {
             $(".room-add").one('click', function () {
                 $cntbox = $("#person-form");
-                var html = "<div class='cntform person-cnt2'>"
-                    + "<span>객실</span>"
-                    + "<span style='font-size:17px;'>2</span>"
-                    + "<div id='person-cnt'>"
-                    + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>"
-                    + "<input type='number' name='room2-cnt' value='1' readonly>"
-                    + "<span id='counter-view'></span>"
-                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/><img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'>"
-                    +"</div></div>";
+
+                html = "<div class='cntform person-cnt2'>"
+                    + "<span>객실</span> "
+                    + "<span style='font-size:17px;'>2</span>\n"
+                    + "<div id='person-cnt'>\n"
+                    + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>\n"
+                    + "<input type='number' name='room2-cnt' value='1' readonly>\n"
+                    + " <span id='counter-view'></span>"
+                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"+"</div>\n</div>";
                     
                 $cntbox.append(html);
+               <%--  <div id="person-form">
+
+    			<div id="form-cnt" class="cntform">
+    				<span>객실</span> <span style="font-size: 17px;">1</span>
+    				<div id="person-cnt" class="cntform">
+    					<img src="<%=request.getContextPath() %>/images/minus.svg" class="minus numberbtn"/>
+    					<input type="number" name="room1-cnt" value="1" readonly> <span
+    						id="counter-view"></span>
+    					<img src="<%=request.getContextPath() %>/images/plus.svg" class="plus numberbtn"/>
+    				</div>
+    			</div>
+    		</div> --%>
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");
