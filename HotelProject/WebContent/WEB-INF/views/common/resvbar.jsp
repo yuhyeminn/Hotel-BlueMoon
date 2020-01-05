@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <div id="resv-bar-container">
 	<div id="hidden-container">
 
@@ -13,6 +13,9 @@
 		<div id="roompeople-box">
 			<div style="text-align: right; padding-right: 10px;">
 				<img src="<%=request.getContextPath() %>/images/cancel.svg" alt="" width="20px" id="close-calendar">
+			</div>
+			<div>
+			<p>투숙객 인원</p>
 			</div>
 			<div id="person-form">
 				<div id="form-cnt" class="cntform">
@@ -101,6 +104,7 @@
 	background-color: white;
 	text-align: center;
 	color: rgb(141, 141, 141);
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 #bar-content {

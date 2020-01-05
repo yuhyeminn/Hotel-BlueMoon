@@ -113,6 +113,9 @@ border:none;
 	margin-top:15px;
 	text-align:initial
 }
+#cancel-add{
+	margin-left:15px;
+}
 
 
 .current-path span:not(:last-of-type)::after  {content: " / "}
@@ -123,14 +126,15 @@ border:none;
         $(document).ready(function () {
             $(".room-add").one('click', function () {
                 $cntbox = $("#person-form");
-                html = "<div class='cntform person-cnt2'>"
+                var html = "<div class='cntform person-cnt2'>"
                     + "<span>객실</span>"
                     + "<span style='font-size:17px;'>2</span>"
                     + "<div id='person-cnt'>"
                     + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>"
                     + "<input type='number' name='room2-cnt' value='1' readonly>"
                     + "<span id='counter-view'></span>"
-                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>"+"</div></div>";
+                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/><img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'>"
+                    +"</div></div>";
                     
                 $cntbox.append(html);
                 $('.plus').click(function (e) {

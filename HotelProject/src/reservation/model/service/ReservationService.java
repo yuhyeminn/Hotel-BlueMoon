@@ -30,6 +30,7 @@ public class ReservationService {
 	}
 
 	public Map<String, Object> selectCouponListByMemberId(String memberId, int totalRoomPrice) {
+		
 		Connection conn = getConnection();
 		Map<String, Object> map = new ReservationDAO().selectCouponListByMemberId(conn,memberId,totalRoomPrice);
 		close(conn);

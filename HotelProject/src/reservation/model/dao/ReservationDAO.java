@@ -105,7 +105,6 @@ public class ReservationDAO {
 		List<Object> list = new ArrayList<>();
 		String query = prop.getProperty("selectCouponListByMemberId");
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);

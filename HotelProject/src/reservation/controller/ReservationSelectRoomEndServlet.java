@@ -50,6 +50,7 @@ public class ReservationSelectRoomEndServlet extends HttpServlet {
 		int totalRoomPrice = roomcnt * selectedroom.getRoomPrice() * diffDay;
 		//예약자의 보유 쿠폰 리스트
 		Map<String, Object> couponMap = new ReservationService().selectCouponListByMemberId(resvMember.getMemberId(),totalRoomPrice);
+		
 		request.setAttribute("couponMap", couponMap);
 		System.out.println("couponMap@selectRoomEnd="+couponMap);
 		

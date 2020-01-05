@@ -110,17 +110,11 @@
                       </div>
                     </div>
               </p>
-              <a href="" class="btn btn-secondary" onclick="ToMainPage();">메인페이지로 이동</a>
+              <a href="<%=request.getContextPath() %>" class="btn btn-secondary">메인페이지로 이동</a>
             </div>
           </div>
     </div><!--End of reservation-container-->
     
-<script>
-    function ToMainPage(){
-    	location.href = "<%=request.getContextPath()%>";
-	};
-</script>
-   
 <style>
 .reservation-container{
     padding: 0;
