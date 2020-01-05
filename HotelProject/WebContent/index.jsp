@@ -644,8 +644,8 @@ footer {
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-4 offset-lg-1 col-xl-4 ImageAndTextPanel-columns text-panel">
                         <div class="image-text-pangel-textPanel">
                             <div class="Heading ImageAndTextPanel-Heading">
-                                <span class="Heading-eyebrow ty-h4">Four Seasons at Home Collection</span>
-                                <h3 class="Heading-title ty-h3">Wrap Yourself in Four Seasons Luxury at Home</h3>
+                                <span class="Heading-eyebrow ty-h4">Blue Moon at Home Collection</span>
+                                <h3 class="Heading-title ty-h3">Wrap Yourself in Blue Moon Luxury at Home</h3>
                                 <p class="normal Heading-text ty-b2">한국을 대표하는 럭셔리 호텔로서 '일상이 최고의 순간이 되는 곳'이라는 컨셉을 새롭게 선보이며 휴식은 물론 고급 식문화, 예술, 엔터테인먼트 등 고객의 고품격 라이프스타일을 제안하는 공간으로 거듭나고 있습니다.</p>
                             </div>
                         </div>

@@ -176,6 +176,7 @@ create table coupon(
     constraint ck_coupon_used check(coupon_used in ('T','F'))
 );
 
+--쿠폰 시퀀스 생성
 create sequence seq_coupon_kind;
 
 create or replace trigger trg_coupon
