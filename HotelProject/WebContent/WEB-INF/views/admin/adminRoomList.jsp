@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="room.model.vo.Room"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +12,7 @@
 	List<Room> list = (List<Room>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
 %>    
-    
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css" />    
 <style>
 </style>
 <script>
@@ -272,9 +273,9 @@ function handleFiles() {
           <td class="rName"><%= r.getRoomName() %></td>
           <td><%= r.getRoomPeople()%></td>
           <td><%= r.getRoomBed()%></td>
-          <td><%= r.getRoomPrice()%></td>
+          <td><%= NumberFormat.getInstance().format(r.getRoomPrice())%>원</td>
           <td><%= r.getRoomAmount() %></td>
-          <td><%= r.getRoomSize() %></td>
+          <td><%= r.getRoomSize() %>㎡</td>
           <td>
           	<% if(r.getOriginalFileName() != null){ %>
           	<img alt="첨부파일" 

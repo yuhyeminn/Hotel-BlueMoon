@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-h1,h2,#container2{
+h1,h2,.container{
 	text-align: center;
 	padding: 20px;
 	/* margin-top: 55px; */

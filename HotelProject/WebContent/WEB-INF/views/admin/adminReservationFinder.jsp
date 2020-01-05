@@ -6,6 +6,8 @@
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 <%
+	String searchType = request.getParameter("searchType");
+	String searchKeyword = request.getParameter("searchKeyword");
     List<AdminReservation> list = (List<AdminReservation>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");	
 %>
@@ -17,7 +19,7 @@ h1{
 	text-align: center;
 	padding: 20px;
 }
-#search-memberId {display: inline-block;}
+div#search-memberId {display:<%="memberId".equals(searchType)||searchType==null?"inline-block":"none"%>;}
 </style>
 <script>
 function oneCheckbox(a){
@@ -44,13 +46,14 @@ $(()=>{
 	       console.log(a,"a");
 	       a.submit();
 	   });
+  
 });
 </script>
 
 
 <div class="container">
-	<h1>예약 관리</h1>
-	<div id="search-container">
+	  <h1>예약 관리</h1>
+	  <div id="search-container">
         <label for="searchType">검색타입 : </label>
         <select id="searchType">
             <option value="memberId">아이디</option>		
@@ -59,11 +62,12 @@ $(()=>{
         <div id="search-memberId">
             <form action="<%=request.getContextPath()%>/admin/resvFinder">
                 <input type="hidden" name="searchType" value="memberId"/>
-                <input type="search" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요."/>
+                <input type="search" name="searchKeyword"  size="25" placeholder="검색할 아이디를 입력하세요."
+                	value="<%="memberId".equals(searchType)?searchKeyword:""%>"/>
                 <button type="submit">검색</button>			
             </form>	
         </div>
-    </div>
+      </div>
       <table class="table">
         <thead>
           <tr>

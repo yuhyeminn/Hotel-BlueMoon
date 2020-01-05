@@ -53,30 +53,30 @@ public class AdminService {
 		return list;
 	}
 
-	public int selectTotalContent() {
+	public int selectTotalQnAContent() {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContent(conn);
+		int totalContent = new AdminDAO().selectTotalQnAContent(conn);
 		close(conn);
 		return totalContent;
 	}
 
-	public int selectTotalContentByMemberId(String searchKeyword) {
+	public int selectTotalQnAContentByMemberId(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByMemberId(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalQnAContentByMemberId(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
 
-	public int selectTotalContentByQuestionName(String searchKeyword) {
+	public int selectTotalQnAContentByQuestionName(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByQuestionName(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalQnAContentByQuestionName(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
 
-	public int selectTotalContentByAnswer(String searchKeyword) {
+	public int selectTotalQnAContentByAnswer(String searchKeyword) {
 		Connection conn = getConnection();
-		int totalContent = new AdminDAO().selectTotalContentByAnswer(conn, searchKeyword);
+		int totalContent = new AdminDAO().selectTotalQnAContentByAnswer(conn, searchKeyword);
 		close(conn);
 		return totalContent;
 	}
@@ -220,6 +220,7 @@ public class AdminService {
 	        List<Member> list= new AdminDAO().selectMemberList(conn, cPage, numPerPage);
 	        close(conn);
 	        return list;
+	        
 	    }
 	 
 	    public List<AdminReservation> selectReservationList(int cPage, int numPerPage) {
@@ -331,6 +332,52 @@ public class AdminService {
 			close(conn);
 			
 			return result;
+		}
+		
+		//항목별 검색
+		public List<Member> selectMemberByMemberId(String searchKeyword, int cPage, int numPerPage) {
+			List<Member> list = null;
+			Connection conn = getConnection();
+			list = new AdminDAO().selectMemberByMemberId(conn, searchKeyword, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public List<Member> selectMemberByMemberName(String searchKeyword, int cPage, int numPerPage) {
+			List<Member> list = null;
+			Connection conn = getConnection();
+			list = new AdminDAO().selectMemberByMemberName(conn, searchKeyword, cPage, numPerPage);
+			close(conn);
+			return list;		
+		}
+
+		public int selectTotalMemberContentByMemberId(String searchKeyword) {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalMemberContentByMemberId(conn, searchKeyword);
+			close(conn);
+			return totalContent;
+		}
+
+		public int selectTotalMemberContentByMemberName(String searchKeyword) {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalMemberContentByMemberName(conn, searchKeyword);
+			close(conn);
+			return totalContent;
+		}
+
+		public List<AdminReservation> selectResvByMemberId(String searchKeyword, int cPage, int numPerPage) {
+			List<AdminReservation> list = null;
+			Connection conn = getConnection();
+			list = new AdminDAO().selectResvByMemberId(conn, searchKeyword, cPage, numPerPage);
+			close(conn);
+			return list;
+		}
+
+		public int selectTotalResvContentByMemberId(String searchKeyword) {
+			Connection conn = getConnection();
+			int totalContent = new AdminDAO().selectTotalResvContentByMemberId(conn, searchKeyword);
+			close(conn);
+			return totalContent;
 		}
 
 }

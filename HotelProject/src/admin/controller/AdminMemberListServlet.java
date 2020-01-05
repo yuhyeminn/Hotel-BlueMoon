@@ -16,7 +16,7 @@ import member.model.vo.Member;
  * Servlet implementation class AdminMemberViewServlet
  */
 @WebServlet("/views/admin/adminMemberList")
-public class AdminMemberViewServlet extends HttpServlet {
+public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**

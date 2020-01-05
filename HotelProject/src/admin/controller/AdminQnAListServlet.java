@@ -30,7 +30,7 @@ public class AdminQnAListServlet extends HttpServlet {
 		}
 		System.out.println("cPage@list="+cPage);
 				
-		int totalContent = new AdminService().selectTotalContent();
+		int totalContent = new AdminService().selectTotalQnAContent();
 		int totalPage = (int)Math.ceil((double)totalContent/numPerPage);
 		System.out.printf("totalContent=%s, totalPage=%s%n", totalContent, totalPage);
 		
