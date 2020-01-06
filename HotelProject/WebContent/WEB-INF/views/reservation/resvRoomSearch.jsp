@@ -117,7 +117,7 @@ border:none;
 
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
-.current-path{font-size: 16px;padding: 13px 0 30px 0;}
+.current-path{font-size: 14px;padding: 13px 0 30px 0;}
 </style>
 <script>
         $(document).ready(function () {

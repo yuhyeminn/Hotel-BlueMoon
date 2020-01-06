@@ -389,7 +389,7 @@ footer {
 }
 .text-panel{
     text-align: center;
-    margin-left: 60px;
+    vertical-align: middle;
 }
 .image-text-wrapper{
     margin-bottom: 100px;

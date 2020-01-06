@@ -36,7 +36,7 @@
 %>
 <div class="reservation-container">
 	<div class="current-path">
-		<span>홈</span> <span>일정선택</span> <span>객실,요금 선택</span>
+		<span>홈 / </span> <span>일정선택 / </span> <span>객실,요금 선택</span>
 	</div>
 	<div class="stepbox">
 		<div class="container-fluid ">

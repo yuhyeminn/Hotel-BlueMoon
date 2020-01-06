@@ -69,7 +69,7 @@ header {
 #logo-img img{
     margin: 10px;
     width: 32%;
-    height: 30%;
+    height: auto;
 }
 
 /*content*/

@@ -167,6 +167,9 @@ h1.room-title span {
 </script>
 <body>
 	<div class="room-detail-container">
+	<div class="current-path">
+		<span>홈 / </span> <span>객실 </span>
+	</div>
 		<h1 class="room-title">
 			<span>객실</span>
 			<p>

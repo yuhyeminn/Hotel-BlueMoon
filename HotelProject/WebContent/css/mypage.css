@@ -37,7 +37,7 @@ aside.context a {
   /* border-bottom: 1px dashed; */
 }
 aside.context a:hover {
-  border-bottom: 1px solid;
+  text-decoration: none;
 }
 aside.context .explanation {
   max-width: 700px;
@@ -199,7 +199,9 @@ input.full:focus, textarea.full:focus {
 #couponLink{
 	text-decoration: none;
 }
-
+#couponLink:hover{
+	text-decoration: none!important;
+}
 aside.context .explanation {
     max-width: 1300px; 
     margin: 0 7.6em 0;
