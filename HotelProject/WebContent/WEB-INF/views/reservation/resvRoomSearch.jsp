@@ -133,18 +133,7 @@ border:none;
                     + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"+"</div>\n</div>";
                     
                 $cntbox.append(html);
-               <%--  <div id="person-form">
-
-    			<div id="form-cnt" class="cntform">
-    				<span>객실</span> <span style="font-size: 17px;">1</span>
-    				<div id="person-cnt" class="cntform">
-    					<img src="<%=request.getContextPath() %>/images/minus.svg" class="minus numberbtn"/>
-    					<input type="number" name="room1-cnt" value="1" readonly> <span
-    						id="counter-view"></span>
-    					<img src="<%=request.getContextPath() %>/images/plus.svg" class="plus numberbtn"/>
-    				</div>
-    			</div>
-    		</div> --%>
+              
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");
