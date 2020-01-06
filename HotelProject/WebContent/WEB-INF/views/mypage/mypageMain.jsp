@@ -41,13 +41,15 @@ $(()=>{
 <div id="inform-group">
 	<div id="my-resv" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 예약건</h1>
-		<h2>1건</h2>
+		<h2>
+			<a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalContent%>개</a>
+		</h2>
 	</div>
 
 	<div id="my-coupon" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
-		<h2><a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer">
-			<%=totalContent%>개</a>
+		<h2>
+			<a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalContent%>개</a>
 		</h2>
 		
 	</div>

@@ -8,7 +8,6 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
 	List<BookedRoom> brList = (List<BookedRoom>) request.getAttribute("list");
-	//System.out.println("brList=" + brList);
 	
 %>
 <hr />
