@@ -494,6 +494,7 @@ footer {
 	padding:0;
 	margin:0;
 	list-style: none;
+    margin-left: -16px;
 	
 	}
 	
@@ -516,11 +517,6 @@ footer {
 
 .navbar ul li ul li:hover { background: #000000; }
 
-/* Background color change on Hover */
-.navbar a:hover { 
-	background-color: #000000; 
-}
-
 /* Hide Dropdowns by Default
  * and giving it a position of absolute */
 .navbar ul ul {
@@ -535,6 +531,7 @@ footer {
 .navbar ul li:hover > ul {
 	display:inherit;
     z-index: 100;
+    width: 190px;
 }
 	
 /* Fisrt Tier Dropdown */
@@ -707,13 +704,15 @@ li > a:only-child:after { content: ''; }
 	      		<ul class="main-nav2">
 	      		<%if("admin".equals(memberLoggedIn.getMemberId())){ %>
 	                <li><a href="<%=request.getContextPath()%>/views/admin/adminMemberList"><%=memberLoggedIn.getMemberName()%>님</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
+	                <li><a href="<%=request.getContextPath()%>/views/admin/adminMemberList">관리자페이지</a></li>
                 <% } %>
                 <%if(!("admin".equals(memberLoggedIn.getMemberId()))){ %>
-                		<li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>"><%=memberLoggedIn.getMemberName()%>님</a></li>
-                <% } %>
-	                <li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
+               		<li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>"><%=memberLoggedIn.getMemberName()%>님</a></li>
+               		<li><a href="<%=request.getContextPath()%>/views/member/logout">로그아웃</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLoggedIn.getMemberId()%>">마이페이지</a></li>
 	                <li><a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=memberLoggedIn.getMemberId()%>">예약조회</a></li>
+                <% } %>
 	            </ul>
 	      		<%} %>
 	        </nav>
@@ -741,15 +740,10 @@ li > a:only-child:after { content: ''; }
                                      <label for="drop-1" class="toggle">객실</label>
                                      <a href="<%=request.getContextPath()%>/views/room/roomList">객실</a>
                                      <input type="checkbox" id="drop-1"/>
-                                     <ul>
-                                         <li><a href="#">객실1</a></li>
-                                         <li><a href="#">객실2</a></li>
-                                         <li><a href="#">객실3</a></li>
-                                     </ul> 
                                  </li>
                  
                                  <li><a href="<%=request.getContextPath()%>/notice/noticeList">공지사항</a></li>
-                                 
+                                 <li><a href="<%=request.getContextPath()%>/views/reservation/search">예약하기</a></li>
                              </ul>
                          </nav>
                      </div>

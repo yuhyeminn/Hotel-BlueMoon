@@ -10,6 +10,7 @@
 <%
 	List<ReviewN> rvnl = (List<ReviewN>)request.getAttribute("rvnl");
 	List<ReviewNN> rvnnl = (List<ReviewNN>)request.getAttribute("rvnnl");
+	System.out.println(rvnl.size());
 %>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.js"></script>
@@ -222,6 +223,10 @@ body {
 #pagination-demo2 li{
   display: inline-block;
 }
+.rvnnlNull{
+	text-align: center;
+	font-size: 16px
+}
 </style>
 <script>
 	//onload
@@ -430,6 +435,7 @@ body {
         <th scope="col">리뷰작성</th>
       </tr>
     </thead>
+    <%if(rvnl.size()!=0){ %>
     <% for(ReviewN  nl: rvnl){ %>
     <tbody class="cr-tbody">
       <tr>
@@ -444,7 +450,13 @@ body {
             <button type="button" class="btn btn-primary" name="modal-btn-write" id="modal-btn-write" data-toggle="modal" data-target="#btn-write-review">리뷰 작성</button>
         </td>
       </tr>
- 	<% }%>	
+ 	<% }}else{ %>
+	<tbody class="cr-tbody">
+		<tr>
+	        <td colspan='4'><p class="nvnlNull">작성가능한 리뷰가 존재하지 않습니다.</p></td>
+	   	</tr>
+    </tbody>
+<% }%>	
     </tbody>
 </table>
 <ul id="pagination-demo"></ul>
@@ -454,7 +466,8 @@ body {
 <%-- 작성한리뷰 --%>
 <h4 style="text-align:center" class="wtnr">[ 작성한 리뷰 ]</h4>
 <br />
-<% for(ReviewNN  nnl: rvnnl){ %>
+<%if(rvnnl.size()!=0){ %>
+	<% for(ReviewNN  nnl: rvnnl){ %>
  <div class="container-nnl">
         <div class="col s12 m7">
               <div class="card horizontal">
@@ -518,6 +531,8 @@ body {
 		    </div>
 		  </div>
 		</div>
+<%}}else{ %>
+	<p class="rvnnlNull">작성한 리뷰 내역이 존재하지 않습니다.</p>
 <% }%>
 <ul id="pagination-demo2"></ul>
         <br />

@@ -1,12 +1,14 @@
 package mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminService;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 import reservation.model.service.ReservationService;
@@ -24,14 +26,11 @@ public class MypageViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberId = request.getParameter("memberId");
-		
 		Member m = new MemberService().selectOne(memberId);
-//		int result = new MemberService().selectResvCntByMemberId(memberId);
 		int result = new ReservationService().selectResvCntByMemberId(memberId);
 		
 		request.setAttribute("m", m);
 		request.setAttribute("result", result);
-		
 		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp")
 				.forward(request, response);

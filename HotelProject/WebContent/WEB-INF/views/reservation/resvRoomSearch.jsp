@@ -124,15 +124,16 @@ border:none;
             $(".room-add").one('click', function () {
                 $cntbox = $("#person-form");
                 html = "<div class='cntform person-cnt2'>"
-                    + "<span>객실</span>"
-                    + "<span style='font-size:17px;'>2</span>"
-                    + "<div id='person-cnt'>"
-                    + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>"
-                    + "<input type='number' name='room2-cnt' value='1' readonly>"
-                    + "<span id='counter-view'></span>"
-                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>"+"</div></div>";
+                    + "<span>객실</span> "
+                    + "<span style='font-size:17px;'>2</span>\n"
+                    + "<div id='person-cnt'>\n"
+                    + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>\n"
+                    + "<input type='number' name='room2-cnt' value='1' readonly>\n"
+                    + " <span id='counter-view'></span>"
+                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"+"</div>\n</div>";
                     
                 $cntbox.append(html);
+              
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");

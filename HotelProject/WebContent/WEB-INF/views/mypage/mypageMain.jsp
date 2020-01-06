@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <%@page import="reservation.model.vo.ReservationCount"%>
 <%@page import="reservation.model.vo.Reservation"%>
+=======
+<%@page import="java.text.NumberFormat"%>
+>>>>>>> 1bc1b1d3049c2664251c2c5acfd310696f7f58da
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet"
@@ -55,6 +59,7 @@
 			</div>
 
 		</div>
+
 	</div>
 
 	<aside class="context">

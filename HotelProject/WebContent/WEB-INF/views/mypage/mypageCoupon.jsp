@@ -1,37 +1,66 @@
+<%@page import="coupon.model.vo.Coupon"%>
+<%@page import="coupon.model.vo.CouponKind"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 <%@include file="/WEB-INF/views/chat/chat.jsp" %>
-<hr />
-<h1 style="text-align:center">나의 쿠폰 내역</h1>
-<hr />
-<table border="1">
-<tr>
-	<th>쿠폰번호</th>
-	<th>쿠폰이름</th>
-	<th>발급일자</th>
-	<th>만료일자</th>
-	<th>내용</th>
-	<th>사용 여부</th>
-</tr>
-<tr>
-	<td>PQUG8394KVND8393</td>
-	<td>웰컴 쿠폰</td>
-	<td>2019-12-24</td>
-	<td>2020/12/25</td>
-	<td>가입 환영 5% 할인</td>
-	<td>미사용</td>
-</tr>
-<tr>
-	<td>DJEI9473DJSI8483</td>
-	<td>생일축하 쿠폰</td>
-	<td>2019-12-01</td>
-	<td>2020-12-01</td>
-	<td>생일 축하 쿠폰 10% 할인</td>
-	<td>사용</td>
-</tr>
-</table>
+<%
+	List<Coupon> cpnlist = (List<Coupon>)request.getAttribute("cpnlist");
+	List<CouponKind> list = (List<CouponKind>)request.getAttribute("list");
+	String pageBar = (String)request.getAttribute("pageBar");
+%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css" />
+<div class="container">
+	<hr />
+	<h1 style="text-align:center">나의 쿠폰 내역</h1>
+	<hr />
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>쿠폰번호</th>
+				<th>쿠폰이름</th>
+				<th>발급일자</th>
+				<th>만료일자</th>
+				<th>할인율(%)</th>
+				<th>사용 여부</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if(cpnlist==null || cpnlist.isEmpty()){ %>
+	            <tr>
+	                <td colspan="6" align="center"> 조회 결과가 없습니다. </td>
+	            </tr>
+	        <% 
+	            } 
+	            else {
+	            	for(CouponKind ck: list){
+	                	for(Coupon c : cpnlist){
+	                		if(ck.getCouponCode() == c.getCouponCode()){
+	        %>
+			            <tr>
+			                <td><%=c.getCouponNo()%></td>
+			                <td><%=ck.getCouponContent()%></td>
+			                <td><%=c.getCouponStartDate()%></td>
+			                <td><%=c.getCouponEndDate()%></td>
+			                <td><%=ck.getCouponSalePercent()%></td>
+			                <td><%=c.getCouponUsed()%></td>
+			            </tr>		
+	        <%			
+	                		}
+	        			} 
+	            	}
+	            }
+	        %>
+			
+		</tbody>
+	</table>
+	<div id="pageBar">
+		<%=pageBar %>
+    </div>
+</div>
 <style>
 table{
 	margin: 0 auto;
