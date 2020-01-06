@@ -531,6 +531,7 @@ footer {
 .navbar ul li:hover > ul {
 	display:inherit;
     z-index: 100;
+    width: 190px;
 }
 	
 /* Fisrt Tier Dropdown */
