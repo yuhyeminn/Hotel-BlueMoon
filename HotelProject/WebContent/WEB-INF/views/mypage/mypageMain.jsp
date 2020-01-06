@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet"
@@ -32,7 +33,7 @@ $(()=>{
 	<ul class="list-group list-group-flush">
 		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberName() %></span></li>
 		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberId() %></span></li>
-		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getPoint() %>원</span></li>
+		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=NumberFormat.getInstance().format(m.getPoint()) %> point</span></li>
 		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getPhone() %></span></li>
 		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getEmail() %></span></li>
 	</ul>
@@ -45,7 +46,7 @@ $(()=>{
 
 	<div id="my-coupon" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
-		<h2><a href="<%=request.getContextPath()%>//mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer">
+		<h2><a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer">
 			<%=totalContent%>개</a>
 		</h2>
 		
