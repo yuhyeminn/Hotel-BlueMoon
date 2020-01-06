@@ -447,13 +447,13 @@ footer {
 <div class="header2">
              <div class="overlay"></div>
              <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-                 <source src="<%=request.getContextPath() %>/video/mainVid.mp4" type="video/mp4">
+                 <source src="<%=request.getContextPath() %>/video/mainVid.mp4" type="video/mp4"> 
     </video>
     <div class="container h-100">
         <div class="d-flex h-100 text-center align-items-center">
         <div class="w-100 text-white text-container">
-            <p class="lead mb-0 semi-text">Discover</p>
-            <h1 class="display-3 main-title">Designers of remarkable travel journeys</h1>
+           <!--  <p class="lead mb-0 semi-text">Discover</p>
+            <h1 class="display-3 main-title">Designers of remarkable travel journeys</h1> -->
             <div class="underbar">
             	<%@include file="/WEB-INF/views/common/resvbar.jsp"%>
             </div>
