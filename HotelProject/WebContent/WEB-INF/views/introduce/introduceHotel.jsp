@@ -27,6 +27,9 @@
 .card-body {
 	padding-left: 0px;
 }
+.card-img-top{
+    height: 348.09px;
+}
 </style>
 
 <section>
@@ -43,7 +46,7 @@
 	<div class="row">
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/introduce-room.jpg"
+				<a href="<%=request.getContextPath()%>/views/room/roomList"><img class="card-img-top" src="<%=request.getContextPath() %>/images/introduce-room.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
@@ -52,7 +55,7 @@
 					<p class="card-text">
 						비즈니스 고객, 관광객을 포함한 다양한 고객층이 만족할 수 있는 맞춤형 공간을 제공합니다.<br>
 					<ul class="card-text-list">
-						<li>전 객실에서 서울 도심의 환상적인 야경을 감상</li>
+						<li>전 객실에서 제주 도심의 환상적인 야경을 감상</li>
 						<li>최신 시설과 현대적인 감각의 인테리어</li>
 						<li>최상의 평온함을 위한 해온(he:on) 베딩 시스템</li>
 					</ul>
@@ -62,7 +65,7 @@
 		</div>
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/jeju.jpg"
+				<a href="<%=request.getContextPath()%>/views/introduce/introduceLocation"><img class="card-img-top" src="<%=request.getContextPath() %>/images/jeju.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
@@ -75,7 +78,7 @@
 		</div>
 		<div class="col-lg-6 mb-4">
 			<div class="card h-100">
-				<a href="#"><img class="card-img-top" src="<%=request.getContextPath() %>/images/pool1.jpg"
+				<a href="<%=request.getContextPath()%>/views/introduce/introduceFacility"><img class="card-img-top" src="<%=request.getContextPath() %>/images/pool1.jpg"
 					alt=""></a>
 				<div class="card-body">
 					<h4 class="card-title">
