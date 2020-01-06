@@ -21,9 +21,9 @@ import member.model.vo.Member;
 				   "/mypage/*",
 				   "/views/member/logout",
 				   "/member/memberView",
-				   "/member/pwdFinder",
-				   "/member/finderUpdatePW",
-				   "/member/finderUpdatePWEnd",
+				   /*"/member/pwdFinder",*/
+				   /*"/member/finderUpdatePW",
+				   "/member/finderUpdatePWEnd",*/
 				   "/views/reservation/complete",
 				   "/views/reservation/payment",
 				   "/views/reservation/roomPriceSelect"
