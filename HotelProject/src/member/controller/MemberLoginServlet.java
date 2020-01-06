@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberLoginCheckServlet
@@ -18,7 +21,23 @@ public class MemberLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
+		
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		
+		String referer = request.getHeader("Referer");
+		request.setAttribute("refererPage", referer);
+		String view = "/WEB-INF/views/member/login.jsp";
+		
+		if(memberLoggedIn != null) {
+			String msg = "이미 로그인 하셨습니다.";
+			String loc = "/";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			view = "/WEB-INF/views/common/msg.jsp";
+		}
+		
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 	/**
