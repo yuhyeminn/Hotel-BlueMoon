@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 <%@page import="reservation.model.vo.ReservationCount"%>
 <%@page import="reservation.model.vo.Reservation"%>
-=======
 <%@page import="java.text.NumberFormat"%>
->>>>>>> 1bc1b1d3049c2664251c2c5acfd310696f7f58da
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link rel="stylesheet"
@@ -90,7 +87,7 @@
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><a></a></h3>
+						<h3><a id="couponLink"  href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId()%>"></a>1</h3>
 						<span>개</span>
 					</div>
 					<div class="barcode"></div>

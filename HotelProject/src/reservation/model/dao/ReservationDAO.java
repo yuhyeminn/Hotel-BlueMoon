@@ -236,6 +236,9 @@ public class ReservationDAO {
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 			
+			if (rset.next())
+				result = rset.getInt("cnt");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
