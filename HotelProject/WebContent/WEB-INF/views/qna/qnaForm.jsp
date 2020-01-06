@@ -89,7 +89,7 @@
          <div id="qna-category">
             <span class="form-txt">문의 종류</span> 
             <select class="form-control" name="select"
-               style="width: 150px; display: inline-block;">
+               style="width: 150px; display: inline-block;" required="required">
                <option value="">카테고리 선택</option>
                <option value="예약문의">예약문의</option>
                <option value="객실문의">객실문의</option>

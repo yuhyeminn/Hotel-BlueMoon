@@ -12,3 +12,360 @@
 	height: 200px;
 	visibility: hidden;
 }
+/*================================================================================*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f6f6f6;
+  font-family: "Prompt", sans-serif;
+  overflow-x: hidden;
+}
+
+aside.context {
+  display: inline;
+  text-align: center;
+  color: #333;
+  line-height: 1.7;
+}
+aside.context a {
+  text-decoration: none;
+  color: #333;
+  padding: 3px 0;
+  border-bottom: 1px dashed;
+}
+aside.context a:hover {
+  border-bottom: 1px solid;
+}
+aside.context .explanation {
+  max-width: 700px;
+  margin: 2em auto 0;
+}
+
+
+
+.main-content {
+  margin: 5em 7em 0;
+  max-width: 900px;
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+}
+
+.id__wrapper {
+  display: grid;
+  width: 100%;
+  transition: width 0.2s ease-in-out;
+  margin: auto;
+  grid-gap: 15px;
+  padding: 15px;
+  background: white;
+  border: 0px solid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, auto);
+  grid-template-areas: "your-face name name" "your-face job country" "your-face twitter codepen" "your-face blood blood";
+}
+.id__wrapper > div {
+  transition: all 0.1s ease;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px 0;
+  font: 600 28px "Prompt";
+}
+.header span:nth-child(2) {
+  display: none;
+}
+
+.your-face {
+  grid-area: your-face;
+  background: #fff;
+  border: 0px solid;
+  cursor: pointer;
+  position: relative;
+  max-height: 300px;
+  overflow: hidden;
+}
+.your-face img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  /* z-index: 10; */
+  position: relative;
+
+}
+.your-face .image-persuader {
+  position: absolute;
+  top: 40%;
+  text-align: center;
+  width: 70%;
+  left: 15%;
+}
+.your-face input {
+  display: none;
+}
+
+label {
+  font: 600 16px "Prompt";
+  margin-bottom: 2px;
+  display: block;
+  flex: 0 0 auto;
+}
+
+input.full, textarea.full {
+  font: 400 20px "Prompt";
+  border: none;
+  padding: 10px;
+  height: 40px;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  resize: none;
+  overflow: visible;
+  line-height: 1;
+}
+input.full:focus, textarea.full:focus {
+  outline: none;
+}
+
+.name {
+  grid-area: name;
+}
+
+.job {
+  grid-area: job;
+}
+
+.country {
+  grid-area: country;
+}
+
+.twitter {
+  grid-area: twitter;
+}
+
+.codepen {
+  grid-area: codepen;
+}
+
+.blood {
+  grid-area: blood;
+}
+
+
+.deco {
+  position: absolute;
+  background: linear-gradient(to top left, rgba(0, 242, 96, 0.8), rgba(76, 162, 205, 0.8));
+  width: 1%;
+  height: 170px;
+  top: 20px;
+  right: -165px;
+  transform: rotate(55deg);
+  opacity: 0;
+}
+.deco:before {
+  content: "";
+  background: linear-gradient(to top right, rgba(0, 242, 96, 0.6), rgba(76, 162, 205, 0.9));
+  width: 1%;
+  height: 120px;
+  position: absolute;
+  transform: rotate(140deg);
+  bottom: 0px;
+  margin-left: -140px;
+}
+
+@keyframes deco-piece {
+  0% {
+    opacity: 0;
+    width: 0%;
+  }
+  100% {
+    opacity: 1;
+    width: 120%;
+  }
+}
+
+/* -----------------------------------------쿠폰------------------------------- */
+
+
+aside.context .explanation {
+    max-width: 1300px; 
+    margin: 0 7.6em 0;
+  display: inline-block;
+}
+
+.cardWrap {
+  margin: 3em auto;
+  color: #fff;
+  font-family: sans-serif;
+  display: inline-block;
+}
+
+.card {
+  background: linear-gradient(to bottom, #153450 0%, #153450 26%, #ecedef 26%, #ecedef 100%);
+  height: 11em;
+  float: left;
+  position: relative;
+  padding: 1em;
+  margin-top: 0px;
+}
+
+.cardLeft {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 16em;
+  height: 220px;
+  margin-left: 100px 0 0;
+}
+
+.cardRight {
+  width: 10em;
+  height: 220px;
+  border-left: .18em dashed #fff;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.cardRight:before, .cardRight:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: .9em;
+  height: .9em;
+  background: #fff;
+  border-radius: 50%;
+  left: -.5em;
+}
+.cardRight:before {
+  top: -.4em;
+}
+.cardRight:after {
+  bottom: -.4em;
+}
+
+h1 {
+/*   font-size: 150px; */
+  margin-top: 0;
+}
+h1 span {
+  font-weight: normal;
+  font-size: 0.5em; 
+}
+
+.title, .name, .seat, .time {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.title h2, .name h2, .seat h2, .time h2 {
+  font-size: .9em;
+  color: #525252;
+  margin: 0;
+}
+.title span, .name span, .time span {
+  font-size: .7em;
+  color: #a2aeae;
+}
+
+.title {
+  margin:  15 0 15;
+  text-align: left;
+
+}
+
+.name{
+  margin:  10 0 15;
+  text-align: left;
+
+}
+
+.time {
+  margin:  0 0 0;
+  text-align: left;
+
+}
+
+ .reservation-text{
+	margin-left:0 50 30;
+	text-align: left;
+	font-size: 10px;
+	color: #525252;
+} 
+
+.eye {
+  position: relative;
+  width: 2em;
+  height: 1.5em;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 1em/0.6em;
+  z-index: 1;
+}
+.eye:before, .eye:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+}
+.eye:before {
+  width: 1em;
+  height: 1em;
+  background: #153450;
+  z-index: 2;
+  left: 8px;
+  top: 4px;
+}
+.eye:after {
+  width: .5em;
+  height: .5em;
+  background: #fff;
+  z-index: 3;
+  left: 12px;
+  top: 8px;
+}
+
+.number {
+  text-align: center;
+  text-transform: uppercase;
+}
+.number h3 {
+  color: #153450;
+  margin: .9em 0 0 0;
+  font-size: 2.5em;
+}
+.number span {
+  display: block;
+  color: #a2aeae;
+}
+
+.barcode {
+  height: 2em;
+  width: 0;
+  margin: 1.2em 0 0 .8em;
+  box-shadow: 1px 0 0 1px #343434, 5px 0 0 1px #343434, 10px 0 0 1px #343434, 11px 0 0 1px #343434, 15px 0 0 1px #343434, 18px 0 0 1px #343434, 22px 0 0 1px #343434, 23px 0 0 1px #343434, 26px 0 0 1px #343434, 30px 0 0 1px #343434, 35px 0 0 1px #343434, 37px 0 0 1px #343434, 41px 0 0 1px #343434, 44px 0 0 1px #343434, 47px 0 0 1px #343434, 51px 0 0 1px #343434, 56px 0 0 1px #343434, 59px 0 0 1px #343434, 64px 0 0 1px #343434, 68px 0 0 1px #343434, 72px 0 0 1px #343434, 74px 0 0 1px #343434, 77px 0 0 1px #343434, 81px 0 0 1px #343434;
+}
+
+.js-switch {
+  cursor: pointer;
+  margin: 60 10 50;
+  display: inline-block;
+  padding: 0.6em 1.5em;
+  color: #374e71;
+  border: 2px solid;
+  font: 20px "Prompt";
+  position: relative;
+  top: 0;
+  transition: 0.1s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.js-switch:hover {
+  top: -3px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}

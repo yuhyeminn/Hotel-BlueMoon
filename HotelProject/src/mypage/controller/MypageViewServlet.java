@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
+import reservation.model.service.ReservationService;
 
 /**
  * Servlet implementation class MypageViewServlet
@@ -25,8 +26,12 @@ public class MypageViewServlet extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		
 		Member m = new MemberService().selectOne(memberId);
+//		int result = new MemberService().selectResvCntByMemberId(memberId);
+		int result = new ReservationService().selectResvCntByMemberId(memberId);
 		
 		request.setAttribute("m", m);
+		request.setAttribute("result", result);
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp")
 				.forward(request, response);
