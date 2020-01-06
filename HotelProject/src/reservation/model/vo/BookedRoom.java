@@ -14,14 +14,13 @@ public class BookedRoom implements Serializable{
 	private Date bookedCheckIn;
 	private Date bookedCheckOut;
 	private int bookedPrice;
-	private int bookedBreakfast;
 	
 	public BookedRoom() {
 		super();
 	}
 
 	public BookedRoom(int bookedNo, int bookedRoomNo, long bookedResvNo, int bookedPeople, Date bookedCheckIn,
-			Date bookedCheckOut, int bookedPrice, int bookedBreakfast) {
+			Date bookedCheckOut, int bookedPrice) {
 		super();
 		this.bookedNo = bookedNo;
 		this.bookedRoomNo = bookedRoomNo;
@@ -30,16 +29,8 @@ public class BookedRoom implements Serializable{
 		this.bookedCheckIn = bookedCheckIn;
 		this.bookedCheckOut = bookedCheckOut;
 		this.bookedPrice = bookedPrice;
-		this.bookedBreakfast = bookedBreakfast;
 	}
 
-	public int getBookedBreakfast() {
-		return bookedBreakfast;
-	}
-
-	public void setBookedBreakfast(int bookedBreakfast) {
-		this.bookedBreakfast = bookedBreakfast;
-	}
 
 	public int getBookedNo() {
 		return bookedNo;

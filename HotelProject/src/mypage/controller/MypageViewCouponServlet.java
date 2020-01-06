@@ -52,7 +52,7 @@ public class MypageViewCouponServlet extends HttpServlet {
 				
 				//1.이전
 				if(pageNo != 1) {
-					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+					pageBar += "<a href='"+request.getContextPath()+"/views/mypage/mypageCoupon?cPage="+(pageNo-1)+"'>[이전]</a>\n";
 				}
 				
 				//2.pageNo
@@ -62,7 +62,7 @@ public class MypageViewCouponServlet extends HttpServlet {
 						pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
 					}
 					else {
-						pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+						pageBar += "<a href='"+request.getContextPath()+"/views/mypage/mypageCoupon?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
 					}
 					
 					pageNo++;
@@ -70,7 +70,7 @@ public class MypageViewCouponServlet extends HttpServlet {
 				
 				//3.다음
 				if(pageNo <= totalPage) {
-					pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>[다음]</a>\n";							
+					pageBar += "<a href='"+request.getContextPath()+"/views//mypage/mypageCoupon?cPage="+pageNo+"'>[다음]</a>\n";							
 				}
 				
 				//3.업무로직

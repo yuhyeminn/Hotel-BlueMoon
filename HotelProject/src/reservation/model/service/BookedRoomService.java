@@ -5,6 +5,7 @@ import java.util.List;
 
 import reservation.model.dao.BookedRoomDAO;
 import reservation.model.vo.BookedRoom;
+import reservation.model.vo.MyReservation;
 
 import static common.JDBCTemplate.*;
 
@@ -17,9 +18,9 @@ public class BookedRoomService {
 //		return brList;
 //		
 //	}
-	public List<BookedRoom> selectBookedRoom(String memberId) {
+	public List<BookedRoom> selectBookedRoom() {
 		Connection conn = getConnection();
-		List<BookedRoom> brList = new BookedRoomDAO().selectBookedRoom(conn,memberId);
+		List<BookedRoom> brList = new BookedRoomDAO().selectBookedRoom(conn);
 		System.out.println("brList@BookedRoomserivce="+brList);
 		close(conn);
 		return brList;
@@ -47,5 +48,14 @@ public class BookedRoomService {
 		close(conn);
 		return result;
 	}
+
+	public List<MyReservation> selectMyResvByMemberId(String memberId) {
+		List<MyReservation> list = null;
+		Connection conn = getConnection();
+		list = new BookedRoomDAO().selectMyResvByMemberId(conn,memberId);
+		close(conn);
+		return list;
+	}
+	
 
 }

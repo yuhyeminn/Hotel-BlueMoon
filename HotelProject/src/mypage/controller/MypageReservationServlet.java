@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import coupon.model.vo.Coupon;
-import coupon.model.vo.CouponKind;
-import member.model.service.MemberService;
-import member.model.vo.Member;
-import reservation.model.vo.BookedRoom;
+import reservation.model.service.BookedRoomService;
+import reservation.model.vo.MyReservation;
 
 /**
  * Servlet implementation class MypageReservationServlet
@@ -54,7 +51,7 @@ public class MypageReservationServlet extends HttpServlet {
 		
 		//1.이전
 		if(pageNo != 1) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
+			pageBar += "<a href='"+request.getContextPath()+"/views/mypage/myReservationList?cPage="+(pageNo-1)+"'>[이전]</a>\n";
 		}
 		
 		//2.pageNo
@@ -64,7 +61,7 @@ public class MypageReservationServlet extends HttpServlet {
 				pageBar += "<span class='cPage'>"+pageNo+"</span>\n";
 			}
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
+				pageBar += "<a href='"+request.getContextPath()+"/views/mypage/myReservationList?cPage="+pageNo+"'>"+pageNo+"</a>\n";				
 			}
 			
 			pageNo++;
@@ -72,21 +69,18 @@ public class MypageReservationServlet extends HttpServlet {
 		
 		//3.다음
 		if(pageNo <= totalPage) {
-			pageBar += "<a href='"+request.getContextPath()+"/views/admin/adminCouponList?cPage="+pageNo+"'>[다음]</a>\n";							
+			pageBar += "<a href='"+request.getContextPath()+"/views/mypage/myReservationList?cPage="+pageNo+"'>[다음]</a>\n";							
 		}
 		
 		//3.업무로직
-		List<Coupon> cpnlist = new AdminService().selectCouponByMemberIdByPaging(memberId, cPage, numPerPage);
-		List<CouponKind> list = new AdminService().selectCouponKindList(cPage, numPerPage);
+		List<MyReservation> resvList = new BookedRoomService().selectMyResvByMemberId(memberId);
 		
-		
-		
-		request.setAttribute("cpnlist",cpnlist);
-		request.setAttribute("list",list);
+		request.setAttribute("resvList",resvList);
 		request.setAttribute("pageBar", pageBar);
 		
+		
 		//4.view단처리
-		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageCoupon.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageReservation.jsp")
 				.forward(request, response);
 	}
 	

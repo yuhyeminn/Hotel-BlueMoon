@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import member.model.dao.MemberDAO;
 import reservation.model.vo.BookedRoom;
+import reservation.model.vo.MyReservation;
 
 
 public class BookedRoomDAO {
@@ -30,7 +31,7 @@ public class BookedRoomDAO {
 		}
 	}
 
-	public List<BookedRoom> selectBookedRoom(Connection conn, String memberId) {
+	public List<BookedRoom> selectBookedRoom(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		List<BookedRoom> brList = new ArrayList<>();
@@ -38,7 +39,6 @@ public class BookedRoomDAO {
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberId);
 
 			rset = pstmt.executeQuery();
 			
@@ -88,7 +88,6 @@ public class BookedRoomDAO {
 				br.setBookedCheckIn(rset.getDate("booked_checkin"));
 				br.setBookedCheckOut(rset.getDate("booked_checkout"));
 				br.setBookedPeople(rset.getInt("booked_people"));
-				br.setBookedBreakfast(rset.getInt("resv_breakfast"));
 
 				brList.add(br);
 
@@ -122,6 +121,45 @@ public class BookedRoomDAO {
 		}
 
 		return result;
+	}
+
+	public List<MyReservation> selectMyResvByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<MyReservation> list = new ArrayList<>();
+		String query = prop.getProperty("selectMyResvByMemberId");
+//		System.out.println("query="+query);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while (rset.next()) {
+				MyReservation mr = new MyReservation();
+				mr.setBookedNo(rset.getInt("booked_no"));
+				mr.setResvNo(rset.getLong("resv_no"));
+				mr.setRoomName(rset.getString("room_name"));
+				mr.setChkIn(rset.getDate("booked_checkin"));
+				mr.setChkOut(rset.getDate("booked_checkout"));
+				mr.setResvPeople(rset.getInt("booked_people"));
+				mr.setResvBfPeople(rset.getInt("resv_breakfast"));
+				mr.setResvCancel(rset.getString("resv_iscancel").charAt(0));
+
+				list.add(mr);
+
+			}
+//			System.out.println("brList@DAO="+brList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 	

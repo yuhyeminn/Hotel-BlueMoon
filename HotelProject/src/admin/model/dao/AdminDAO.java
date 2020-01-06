@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import admin.model.vo.AdminReservation;
 import coupon.model.vo.Coupon;
 import coupon.model.vo.CouponKind;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import reservation.model.vo.Reservation;
 import reservation.model.vo.ReservationCount;
 import review.model.vo.Review;
 import room.model.vo.Room;
@@ -649,8 +649,8 @@ public class AdminDAO {
         }
         return list;
     }
-    public List<AdminReservation> selectReservationList(Connection conn, int cPage, int numPerPage) {
-        List<AdminReservation> list = new ArrayList<>();
+    public List<Reservation> selectReservationList(Connection conn, int cPage, int numPerPage) {
+        List<Reservation> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         
@@ -673,22 +673,21 @@ public class AdminDAO {
             rset = pstmt.executeQuery();
             
             while(rset.next()){
-                AdminReservation ar = new AdminReservation();
+            	Reservation resv = new Reservation();
                 //컬럼명은 대소문자 구분이 없다.
-                ar.setNo(rset.getLong("resv_no"));
-                ar.setRsvMember(rset.getString("resv_member"));
-                ar.setPeople(rset.getInt("resv_people"));
-                ar.setUsedPnt(rset.getInt("resv_usedpoint"));
-                ar.setAddPnt(rset.getInt("resv_addpoint"));
-                ar.setEnrollDate(rset.getDate("resv_date"));
-                ar.setPrice(rset.getInt("resv_price"));
-                ar.setCancel(rset.getString("resv_iscancel").charAt(0));
-                ar.setChkIn(rset.getDate("resv_in"));
-                ar.setChkOut(rset.getDate("resv_out"));
-                ar.setBreakfast(rset.getInt("resv_breakfast"));
+                resv.setResvNo(rset.getLong("resv_no"));
+                resv.setResvMemberId(rset.getString("resv_member"));
+                resv.setResvPeople(rset.getInt("resv_people"));
+                resv.setResvUsedPoint(rset.getInt("resv_usedpoint"));
+                resv.setResvAddPoint(rset.getInt("resv_addpoint"));
+                resv.setResvDate(rset.getDate("resv_date"));
+                resv.setResvPrice(rset.getInt("resv_price"));
+                resv.setResvCancel(rset.getString("resv_iscancel"));
+                resv.setResvIn(rset.getDate("resv_in"));
+                resv.setResvOut(rset.getDate("resv_out"));
+                resv.setResvBfPeople(rset.getInt("resv_breakfast"));
                 
-                
-                list.add(ar);
+                list.add(resv);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -1292,11 +1291,11 @@ public class AdminDAO {
 		return totalContent;
 	}
 
-	public List<AdminReservation> selectResvByMemberId(Connection conn, String searchKeyword, int cPage,
+	public List<Reservation> selectResvByMemberId(Connection conn, String searchKeyword, int cPage,
 			int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<AdminReservation> list = null;
+		List<Reservation> list = null;
 		String query = prop.getProperty("selectResvByMemberIdByPaging");
 		
 		try {
@@ -1312,21 +1311,21 @@ public class AdminDAO {
 			
 			list = new ArrayList<>();
 			while (rset.next()) {
-				AdminReservation ar = new AdminReservation();
+				Reservation resv = new Reservation();
                 //컬럼명은 대소문자 구분이 없다.
-                ar.setNo(rset.getLong("resv_no"));
-                ar.setRsvMember(rset.getString("resv_member"));
-                ar.setPeople(rset.getInt("resv_people"));
-                ar.setUsedPnt(rset.getInt("resv_usedpoint"));
-                ar.setAddPnt(rset.getInt("resv_addpoint"));
-                ar.setEnrollDate(rset.getDate("resv_date"));
-                ar.setPrice(rset.getInt("resv_price"));
-                ar.setCancel(rset.getString("resv_iscancel").charAt(0));
-                ar.setChkIn(rset.getDate("resv_in"));
-                ar.setChkOut(rset.getDate("resv_out"));
-                ar.setBreakfast(rset.getInt("resv_breakfast"));
+                resv.setResvNo(rset.getLong("resv_no"));
+                resv.setResvMemberId(rset.getString("resv_member"));
+                resv.setResvPeople(rset.getInt("resv_people"));
+                resv.setResvUsedPoint(rset.getInt("resv_usedpoint"));
+                resv.setResvAddPoint(rset.getInt("resv_addpoint"));
+                resv.setResvDate(rset.getDate("resv_date"));
+                resv.setResvPrice(rset.getInt("resv_price"));
+                resv.setResvCancel(rset.getString("resv_iscancel"));
+                resv.setResvIn(rset.getDate("resv_in"));
+                resv.setResvOut(rset.getDate("resv_out"));
+                resv.setResvBfPeople(rset.getInt("resv_breakfast"));
                 
-                list.add(ar);
+                list.add(resv);
 			}
 			
 		} catch (Exception e) {
@@ -1437,5 +1436,7 @@ public class AdminDAO {
 		
 		return list;
 	}
+
+	
 
 }

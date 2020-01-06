@@ -17,8 +17,8 @@
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/main?memberId=<%=memberLogIn.getMemberId()%>">내정보 보기</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/update?memberId=<%=memberLogIn.getMemberId()%>">내정보 수정</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/updatePassword?memberId=<%=memberLogIn.getMemberId()%>">비밀번호 변경</a></li>
-<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=memberLogIn.getMemberId()%>">예약 관리</a></li>
-<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=memberLogIn.getMemberId()%>">쿠폰 조회</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=memberLogIn.getMemberId()%>">예약 내역</a></li>
+<li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=memberLogIn.getMemberId()%>">쿠폰 내역</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/questionList?memberId=<%=memberLogIn.getMemberId()%>">문의사항 조회</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/review?memberId=<%=memberLogIn.getMemberId()%>">리뷰 관리</a></li>
 <li class="sidenav__list-item"><a id="aTag" href="<%=request.getContextPath()%>/mypage/deleteMember">회원탈퇴</a></li>

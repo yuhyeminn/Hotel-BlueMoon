@@ -95,7 +95,7 @@ public class Reservation implements Serializable{
 		this.resvPrice = resvPrice;
 	}
 
-	public String isResvCancel() {
+	public String getResvCancel() {
 		return resvCancel;
 	}
 
