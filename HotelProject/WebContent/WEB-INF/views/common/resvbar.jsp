@@ -110,16 +110,20 @@
 <style>
 
 #resv-bar {
-	width: 850px;
-	padding: 5px;
-	background-color: white;
-	text-align: center;
-	color: rgb(141, 141, 141);
-	font-family: 'Noto Sans KR', sans-serif;
+    width: 860px;
+    height: 90px;
+    padding: 5px;
+    background-color: white;
+    text-align: center;
+    border-radius: 40px;
+    color: rgb(141, 141, 141);
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 #bar-content {
 	margin-top: 10px;
+	float: left;
+    width: auto;
 }
 
 #checkin-box, #checkout-box, #room, #people {
@@ -139,13 +143,17 @@
 }
 
 #search {
-	width: 150px;
-	height: 50px;
-	background-color: rgb(19, 42, 22);
-	color: white;
-	border: 0px;
-	display: inline-block;
-	vertical-align: middle;
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(19, 42, 22);
+    color: white;
+    border: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    top: 328px;
+    left: 680px;
+    border-radius: 50px;
 }
 
 .vertical-line {
