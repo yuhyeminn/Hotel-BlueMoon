@@ -32,7 +32,7 @@
 %>
 <div class="reservation-container">
 	<div class="current-path">
-		<span>홈</span> <span>일정선택</span> <span>객실,요금 선택</span> <span>결제</span>
+		<span>홈 / </span> <span>일정선택 / </span> <span>객실,요금 선택 / </span> <span>결제</span>
 	</div>
 	<div class="stepbox">
 		<div class="container-fluid ">
@@ -67,7 +67,7 @@
 				</div>
 				<div class="price-textInfo">
 					<p>
-						표준요금/1박<br>(세금,봉사료 별도)
+						표준요금/1박<br>(세금,봉사료 포함)
 					</p>
 				</div>
 			</div>

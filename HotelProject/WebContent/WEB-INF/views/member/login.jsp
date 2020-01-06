@@ -40,7 +40,7 @@
 	float: center;
 	width: 180px;
 	height: 50px;
-	background-color: rgb(19, 42, 22);
+	background-color: #153450;
 	color: white;
 	border: 0px;
 }

@@ -40,7 +40,7 @@
 }
 
 #person-form {
-	text-align: center;
+	text-align: initial;
 	height: auto;
 }
 
@@ -113,27 +113,37 @@ border:none;
 	margin-top:15px;
 	text-align:initial
 }
-
-
+#cancel-add{
+	margin-left:15px;
+}
+#cancel-add{
+display:inline-block;
+margin-left:15px;
+cursor:pointer;}
+#form-cnt2{
+	display:inline-block;
+}
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
-.current-path{font-size: 16px;padding: 13px 0 30px 0;}
+.current-path{font-size: 14px;padding: 13px 0 30px 0;}
 </style>
 <script>
         $(document).ready(function () {
             $(".room-add").one('click', function () {
                 $cntbox = $("#person-form");
-                html = "<div class='cntform person-cnt2'>"
+
+                html = "<div id='form-cnt2' class='cntform person-cnt2'>"
                     + "<span>객실</span> "
                     + "<span style='font-size:17px;'>2</span>\n"
                     + "<div id='person-cnt'>\n"
                     + "<img src='<%=request.getContextPath() %>/images/minus.svg' class='minus numberbtn'/>\n"
                     + "<input type='number' name='room2-cnt' value='1' readonly>\n"
                     + " <span id='counter-view'></span>"
-                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"+"</div>\n</div>";
+                    + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"
+                    +"<img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'></div>\n</div>";
                     
                 $cntbox.append(html);
-              
+
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");
@@ -225,7 +235,7 @@ border:none;
 		<!--인원 선택 부분-->
 		<div id="person-form">
 
-			<div id="form-cnt" class="cntform">
+			<div id="form-cnt2" class="cntform">
 				<span>객실</span> <span style="font-size: 17px;">1</span>
 				<div id="person-cnt" class="cntform">
 					<img src="<%=request.getContextPath() %>/images/minus.svg" class="minus numberbtn"/>

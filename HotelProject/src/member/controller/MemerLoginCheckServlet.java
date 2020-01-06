@@ -39,6 +39,7 @@ public class MemerLoginCheckServlet extends HttpServlet {
 		
 		if(m == null) {
 			msg = "존재하지 않는 아이디입니다.";
+			loc="/views/member/login";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			reqDispatcher.forward(request, response);
@@ -48,6 +49,7 @@ public class MemerLoginCheckServlet extends HttpServlet {
 			//비번이 틀린 경우 =>  로그인 실패
 			if(!m.getPassword().equals(password)) {
 				msg = "비밀번호가 틀렸습니다.";
+				loc="/views/member/login";
 				request.setAttribute("msg", msg);
 				request.setAttribute("loc", loc);
 				reqDispatcher.forward(request, response);
@@ -56,7 +58,11 @@ public class MemerLoginCheckServlet extends HttpServlet {
 			else {
 				HttpSession session = request.getSession(true);
 				System.out.println("SESSIONID="+session.getId());
+				
 				session.setAttribute("memberLoggedIn", m);
+				
+				//session유효시간 설정: 초단위
+				session.setMaxInactiveInterval(60*30);
 				response.sendRedirect(request.getContextPath());
 			}
 		}

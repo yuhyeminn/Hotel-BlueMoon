@@ -2,3 +2,5 @@
 create user hotel identified by hotel
 default tablespace users;
 grant connect , resource to hotel;
+
+--drop user hotel cascade;

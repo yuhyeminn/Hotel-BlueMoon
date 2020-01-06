@@ -151,22 +151,11 @@ h1.room-title span {
 	outline: 2px #927962;
 }
 </style>
-<script>
-    function ToDeluxDetailPage(){
-		location.href = "<%=request.getContextPath()%>/views/room/deluxDetail";	
-	};
-	function ToPremiumDeluxDetailPage(){
-		location.href = "<%=request.getContextPath()%>/views/room/premiumDeluxDetail";	
-	};
-	function ToSweetDetailPage(){
-		location.href = "<%=request.getContextPath()%>/views/room/sweetDetail";
-	};
-	function ToSpecialSweetDetailPage(){
-		location.href = "<%=request.getContextPath()%>/views/room/specialSweetDetail";
-	};
-</script>
 <body>
 	<div class="room-detail-container">
+	<div class="current-path">
+		<span>홈 / </span> <span>객실 </span>
+	</div>
 		<h1 class="room-title">
 			<span>객실</span>
 			<p>
