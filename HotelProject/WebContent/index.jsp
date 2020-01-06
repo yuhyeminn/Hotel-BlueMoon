@@ -19,7 +19,7 @@ header {
     display: block;
     margin: 0 auto;
     width: fit-content;
-    height: 190px;
+    height: 160px;
 }
 
 #logo-img{
@@ -31,8 +31,8 @@ header {
 }
 #logo-img img{
     margin: 10px;
-    width: 220px;
-    height: 140px;
+    width: 32%;
+    height: 30%;
 }
 
 /*content*/
