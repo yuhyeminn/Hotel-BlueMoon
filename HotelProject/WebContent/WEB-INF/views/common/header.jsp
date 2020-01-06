@@ -56,7 +56,7 @@ header {
     display: block;
     margin: 0 auto;
     width: fit-content;
-    height: 190px;
+    height: 160px;
 }
 
 #logo-img{
@@ -68,8 +68,8 @@ header {
 }
 #logo-img img{
     margin: 10px;
-    width: 220px;
-    height: 140px;
+    width: 32%;
+    height: auto;
 }
 
 /*content*/
@@ -449,10 +449,11 @@ footer {
 /* -----------------------navbar---------------------- */
 /* CSS Document */
 .nav-container {
-	clear: both;
+   	clear: both;
     width: 100%;
     margin: 0 auto;
     float: left;
+    height: 45px;
 }
 .toggle,
 [id^=drop] {
@@ -462,6 +463,7 @@ footer {
 
 /* Giving a background-color to the .navbar container. */
 .navbar { 
+	height: 100%;
 	margin:0;
 	padding: 0;
 	background-color: #153450;
@@ -507,11 +509,11 @@ footer {
 
 /* Styling the links */
 .navbar a {
-	display:block;
-	padding:14px 50px;	
-	color:#FFF;
-	font-size:17px;
-	text-decoration:none;
+	display: block;
+    padding: 12px 44px;
+    color: #FFF;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 
@@ -523,7 +525,7 @@ footer {
 	display: none;
 	position: absolute; 
 	/* has to be the same number as the "line-height" of ".navbar a" */
-    top: 50px;
+    top: 40px;
     margin-left: -93px;
 }
 	
@@ -531,6 +533,7 @@ footer {
 .navbar ul li:hover > ul {
 	display:inherit;
     z-index: 100;
+    width: 190px;
 }
 	
 /* Fisrt Tier Dropdown */

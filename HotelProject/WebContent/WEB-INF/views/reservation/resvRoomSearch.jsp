@@ -125,7 +125,7 @@ cursor:pointer;}
 }
 .current-path span:not(:last-of-type)::after  {content: " / "}
 .current-path span:last-child{font-weight: 500;}
-.current-path{font-size: 16px;padding: 13px 0 30px 0;}
+.current-path{font-size: 14px;padding: 13px 0 30px 0;}
 </style>
 <script>
         $(document).ready(function () {
@@ -143,7 +143,7 @@ cursor:pointer;}
                     +"<img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'></div>\n</div>";
                     
                 $cntbox.append(html);
-               
+
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");

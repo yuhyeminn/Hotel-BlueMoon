@@ -19,7 +19,7 @@ header {
     display: block;
     margin: 0 auto;
     width: fit-content;
-    height: 190px;
+    height: 160px;
 }
 
 #logo-img{
@@ -31,8 +31,8 @@ header {
 }
 #logo-img img{
     margin: 10px;
-    width: 220px;
-    height: 140px;
+    width: 32%;
+    height: 30%;
 }
 
 /*content*/
@@ -389,7 +389,7 @@ footer {
 }
 .text-panel{
     text-align: center;
-    margin-left: 60px;
+    vertical-align: middle;
 }
 .image-text-wrapper{
     margin-bottom: 100px;
@@ -565,7 +565,7 @@ footer {
         <div class="image-panel-item-container">
             <div class="image-panel-itemContent">
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-5 offset-lg-1 col-xl-4 offset-xl-start ImageAndTextPanel-columns">
-                        <img style="width:370px; height:493px;" src="<%=request.getContextPath() %>/images/hotel1.jpg" alt="">
+                        <img style="width:370px; height:493px;" src="<%=request.getContextPath() %>/images/hotelroom.jpg" alt="">
                     </div>
                     <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-start col-lg-4 offset-lg-1 col-xl-4 ImageAndTextPanel-columns text-panel">
                         <div class="image-text-pangel-textPanel">

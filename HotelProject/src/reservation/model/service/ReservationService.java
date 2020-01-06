@@ -1,13 +1,13 @@
 package reservation.model.service;
 
 import static common.JDBCTemplate.*;
-import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import member.model.dao.MemberDAO;
 import reservation.model.dao.ReservationDAO;
 import reservation.model.vo.BookedRoom;
 import reservation.model.vo.Reservation;
@@ -64,4 +64,12 @@ public class ReservationService {
 		else commit(conn);
 		return result;
 	}
+
+	public int selectResvCntByMemberId(String memberId) {
+		Connection conn = getConnection();
+		int result = new ReservationDAO().selectResvCntByMemberId(conn,memberId);
+		close(conn);
+		return result;
+	}
+	
 }

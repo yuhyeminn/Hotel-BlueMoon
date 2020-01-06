@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import coupon.model.vo.Coupon;
+import member.model.vo.Member;
 import notice.model.dao.NoticeDAO;
 import reservation.model.vo.BookedRoom;
 import reservation.model.vo.Reservation;
@@ -222,4 +223,27 @@ public class ReservationDAO {
 		}
 		return result;
 	}
+
+		public int selectResvCntByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = prop.getProperty("selectResvCntByMemberId");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next())
+				result = rset.getInt("cnt");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
