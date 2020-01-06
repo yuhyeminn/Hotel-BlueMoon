@@ -38,6 +38,12 @@ $(function() {
           $('#check-in-date').text(checkIn ? checkIn.format('YYYY-MM-DD') : '날짜를 선택하세요');
           $('#check-out-date').text(checkOut ? checkOut.format('YYYY-MM-DD') : '날짜를 선택하세요');
           
+          if($('#checkin-date')!=null){
+        	  $('#checkin-date').text(checkIn ? checkIn.format('YYYY-MM-DD') : '날짜 선택');
+          }
+          if($('#checkout-date')!=null){
+        	  $('#checkout-date').text(checkOut ? checkOut.format('YYYY-MM-DD') : '날짜 선택');
+          }
           $('[name=checkin-date]').val(checkIn ? checkIn.format('YYYY-MM-DD') : null);
           $('[name=checkout-date]').val(checkOut ? checkOut.format('YYYY-MM-DD') : null);
         },
