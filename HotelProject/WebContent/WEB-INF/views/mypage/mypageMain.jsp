@@ -87,7 +87,7 @@
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><a id="couponLink"  href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId()%>"></a>1</h3>
+						<h3><a id="couponLink"  href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId()%>">1</a></h3>
 						<span>개</span>
 					</div>
 					<div class="barcode"></div>
