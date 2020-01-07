@@ -19,7 +19,7 @@
 	<h1 style="text-align: center">예약 내역</h1>
 	<hr />
 	
-	<table border="1">
+	<table border="1" id="myresv">
 		<thead>
 		<tr>
 			<th>예약번호</th>

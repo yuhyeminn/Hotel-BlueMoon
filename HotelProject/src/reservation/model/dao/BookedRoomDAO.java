@@ -145,6 +145,7 @@ public class BookedRoomDAO {
 				mr.setChkOut(rset.getDate("booked_checkout"));
 				mr.setResvPeople(rset.getInt("booked_people"));
 				mr.setResvBfPeople(rset.getInt("resv_breakfast"));
+				mr.setResvPrice(rset.getInt("resv_price"));
 				mr.setResvCancel(rset.getString("resv_iscancel").charAt(0));
 
 				list.add(mr);
