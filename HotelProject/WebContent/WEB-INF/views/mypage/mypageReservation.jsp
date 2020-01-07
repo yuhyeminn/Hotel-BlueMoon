@@ -72,6 +72,11 @@
 			
 			<%
 	            	}
+				else if('Y'==mr.getResvCancel()){
+					%>
+					<td></td>
+					<%
+				}
 				else {
 			%>
 		 	<td>
@@ -79,7 +84,7 @@
 					onsubmit="return cancelReserv();">
 					<input type="submit" value="취소"> 
 					<input type="hidden" name="resvNo" value="<%=mr.getResvNo()%>">
-					<%-- <input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>"> --%>
+					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
 				</form>
 			</td> 
 		</tr>
