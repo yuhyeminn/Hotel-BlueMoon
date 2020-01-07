@@ -14,16 +14,16 @@ public class MyReservation implements Serializable{
 	private Date chkOut;
 	private int resvPeople;
 	private int resvBfPeople;
+	private int resvPrice;
 	private char resvCancel;
 	
 	public MyReservation() {
 
 	}
 
-	public MyReservation(int bookedNo, long resvNo, String roomName, Date chkIn, Date chkOut, int resvPeople, int resvBfPeople,
-			char resvCancel) {
+	public MyReservation(int bookedNo, long resvNo, String roomName, Date chkIn, Date chkOut, int resvPeople,
+			int resvBfPeople, int resvPrice, char resvCancel) {
 		super();
-		
 		this.bookedNo = bookedNo;
 		this.resvNo = resvNo;
 		this.roomName = roomName;
@@ -31,10 +31,10 @@ public class MyReservation implements Serializable{
 		this.chkOut = chkOut;
 		this.resvPeople = resvPeople;
 		this.resvBfPeople = resvBfPeople;
+		this.resvPrice = resvPrice;
 		this.resvCancel = resvCancel;
 	}
 
-	
 	public int getBookedNo() {
 		return bookedNo;
 	}
@@ -58,6 +58,7 @@ public class MyReservation implements Serializable{
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
+	
 
 	public Date getChkIn() {
 		return chkIn;
@@ -91,6 +92,14 @@ public class MyReservation implements Serializable{
 		this.resvBfPeople = resvBfPeople;
 	}
 
+	public int getResvPrice() {
+		return resvPrice;
+	}
+
+	public void setResvPrice(int resvPrice) {
+		this.resvPrice = resvPrice;
+	}
+
 	public char getResvCancel() {
 		return resvCancel;
 	}
@@ -107,8 +116,9 @@ public class MyReservation implements Serializable{
 	public String toString() {
 		return "MyReservation [bookedNo=" + bookedNo + ", resvNo=" + resvNo + ", roomName=" + roomName + ", chkIn="
 				+ chkIn + ", chkOut=" + chkOut + ", resvPeople=" + resvPeople + ", resvBfPeople=" + resvBfPeople
-				+ ", resvCancel=" + resvCancel + "]";
+				+ ", resvPrice=" + resvPrice + ", resvCancel=" + resvCancel + "]";
 	}
 
+	
 	
 }

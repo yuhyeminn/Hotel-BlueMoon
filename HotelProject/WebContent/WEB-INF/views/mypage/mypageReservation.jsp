@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="reservation.model.vo.MyReservation"%>
 <%@page import="reservation.model.vo.Reservation"%>
 <%@page import="reservation.model.vo.BookedRoom"%>
@@ -27,6 +28,7 @@
 			<th>체크아웃</th>
 			<th>인원</th>
 			<th>조식인원</th>
+			<th>결제비용</th>
 			<th>취소</th>
 			<th></th>
 		</tr>
@@ -34,7 +36,7 @@
 		<tbody>
 			<% if(resvList==null || resvList.isEmpty()){ %>
 	            <tr>
-	                <td colspan="8" align="center"> 조회 결과가 없습니다. </td>
+	                <td colspan="9" align="center"> 조회 결과가 없습니다. </td>
 	            </tr>
 	        <% 
 	            } 
@@ -48,6 +50,7 @@
 			<td><%=mr.getChkOut()%></td>
 			<td><%=mr.getResvPeople()%>명</td>
 			<td><%=mr.getResvBfPeople()%>명</td>
+			<td><%=NumberFormat.getInstance().format(mr.getResvPrice())%>원</td>
 			<td><%=mr.getResvCancel()%></td>
 	
 		
@@ -76,7 +79,7 @@
 					onsubmit="return cancelReserv();">
 					<input type="submit" value="취소"> 
 					<input type="hidden" name="resvNo" value="<%=mr.getResvNo()%>">
-					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
+					<%-- <input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>"> --%>
 				</form>
 			</td> 
 		</tr>

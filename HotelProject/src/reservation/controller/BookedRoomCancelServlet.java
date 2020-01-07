@@ -22,12 +22,12 @@ public class BookedRoomCancelServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  int bookedNo = Integer.parseInt(request.getParameter("bookedNo"));
+		  long resvNo = Long.parseLong(request.getParameter("resvNo"));
 //	      System.out.println("BookedRoomCancelServlet@bookedNo="+bookedNo);
 	      String memberId = request.getParameter("memberId");
 //	      System.out.println("BookedRoomCancelServlet@memberId="+memberId);
 	      
-	      int result = new BookedRoomService().cancelBookedRoom(bookedNo);
+	      int result = new BookedRoomService().cancelBookedRoom(resvNo);
 
 	      String view = "/WEB-INF/views/common/msg.jsp";
 	      String msg = "";

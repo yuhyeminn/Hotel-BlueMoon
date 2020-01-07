@@ -104,14 +104,14 @@ public class BookedRoomDAO {
 		return brList;
 	}
 
-	public int cancelBookedRoom(Connection conn, int bookedNo) {
+	public int cancelBookedRoom(Connection conn, long resvNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("cancelBookedRoom");
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, bookedNo);
+			pstmt.setLong(1, resvNo);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

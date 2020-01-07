@@ -36,9 +36,9 @@ public class BookedRoomService {
 		return list;
 	}
 
-	public int cancelBookedRoom(int bookedNo) {
+	public int cancelBookedRoom(long resvNo) {
 		Connection conn = getConnection();
-		int result = new BookedRoomDAO().cancelBookedRoom(conn,bookedNo);
+		int result = new BookedRoomDAO().cancelBookedRoom(conn,resvNo);
 		if(result>0) {
 			commit(conn);
 		}else {
