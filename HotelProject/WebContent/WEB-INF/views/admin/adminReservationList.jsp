@@ -1,3 +1,4 @@
+<%@page import="reservation.model.vo.Reservation"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="admin.model.vo.AdminReservation"%>
@@ -6,7 +7,7 @@
 <%@include file="/WEB-INF/views/common/header.jsp" %>
 <%@include file="/WEB-INF/views/admin/adminSideBar.jsp" %>
 <%
-    List<AdminReservation> list = (List<AdminReservation>)request.getAttribute("list");
+    List<Reservation> list = (List<Reservation>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");	
 %>
 <!-- 관리자용 css link -->
@@ -87,22 +88,22 @@ $(()=>{
         <% 
             } 
             else {
-                for(AdminReservation ar : list){ 
+                for(Reservation r : list){ 
         %>
             <tr>
                 <td><input type="checkbox" name="chkbox" id="chkbox" onclick="oneCheckbox(this);"/></td>
-                <td><%=ar.getNo()%></td>
-                <td><%=ar.getRsvMember()%></td>
-                <td><%=ar.getPeople()%></td>
-                <td><%=ar.getChkIn()%></td>
-                <td><%=ar.getChkOut()%></td>
-                <td><%=NumberFormat.getInstance().format(ar.getPrice())%>원</td>
-                <td><%=ar.getEnrollDate()%></td>
-                <td><%=ar.getCancel()%></td>
-                <td><%=ar.getBreakfast()%></td>
+                <td><%=r.getResvNo()%></td>
+                <td><%=r.getResvMemberId()%></td>
+                <td><%=r.getResvPeople()%></td>
+                <td><%=r.getResvIn()%></td>
+                <td><%=r.getResvOut()%></td>
+                <td><%=NumberFormat.getInstance().format(r.getResvPrice())%>원</td>
+                <td><%=r.getResvDate()%></td>
+                <td><%=r.getResvCancel()%></td>
+                <td><%=r.getResvBfPeople()%></td>
             </tr>
             <form name="resvDelFrm" action="<%=request.getContextPath()%>/views/admin/adminResvDelete" method="post">
-	    		<input type="hidden" name="resvNo" value="<%=ar.getNo() %>" />
+	    		<input type="hidden" name="resvNo" value="<%=r.getResvNo() %>" />
     		</form>		
         <%		} 
             }

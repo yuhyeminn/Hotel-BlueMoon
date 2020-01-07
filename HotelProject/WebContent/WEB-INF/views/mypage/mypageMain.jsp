@@ -13,7 +13,6 @@
 <%@include file="/WEB-INF/views/chat/chat.jsp" %>
 <%
 	Member m = (Member)request.getAttribute("m");
-	int r = (int)request.getAttribute("result");
 	int totalCpnContent = ((Integer)request.getAttribute("totalCpnContent")).intValue();
 	int totalResvContent = ((Integer)request.getAttribute("totalResvContent")).intValue();
 %>
@@ -27,7 +26,7 @@ $(()=>{
 	}
 });
 </script>
-<div id="my-profile" class="inform-card">
+<%-- <div id="my-profile" class="inform-card">
 	<br />
 	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원
 		프로필</h1>
@@ -44,16 +43,16 @@ $(()=>{
 <div id="inform-group">
 	<div id="my-resv" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 예약건</h1>
-		<h2>
-			<a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalResvContent%>개</a>
-		</h2>
+		<h2> --%>
+			
+		<!-- </h2>
 	</div>
 
 	<div id="my-coupon" class="inform-card">
 		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
-		<h2>
-			<a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalCpnContent%>개</a>
-		</h2>
+		<h2> -->
+			
+		<!-- </h2> -->
 		
 <body>
 
@@ -126,7 +125,7 @@ $(()=>{
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><a id="couponLink"  href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId()%>">1</a></h3>
+						<h3><a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalCpnContent%></a></h3>
 						<span>개</span>
 					</div>
 					<div class="barcode"></div>
@@ -149,7 +148,7 @@ $(()=>{
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><%=r%></h3> 
+						<h3><a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalResvContent%></a></h3> 
 						<span>건</span>
 					</div>
 					<div class="barcode"></div>
