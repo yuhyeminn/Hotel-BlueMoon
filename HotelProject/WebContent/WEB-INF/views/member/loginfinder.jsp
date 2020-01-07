@@ -8,7 +8,7 @@
 
 .form-control{width:400px; height:40px;}
 
-.send{width:180px; height:50px; background-color: rgb(19,42,22); color: white; border: 0px;}
+.send{width:180px; height:50px; background-color: #153450; color: white; border: 0px;}
 .send:hover{text-decoration: none; color:white;}
 #finder-container{display:flex;margin:0 auto;}
 .form-info-group input{
@@ -19,6 +19,9 @@ margin:40px 15px;
 }
 #id-finder .form-info-group{
 margin-top:75px;
+}
+#send-find1{
+margin-top: 56px;
 }
 </style>
 

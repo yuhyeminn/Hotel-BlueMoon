@@ -36,21 +36,8 @@ public class MypageReviewEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-//		String aa = request.getParameter("clickedResvNo");
-//		System.out.println("string@"+aa);
 		long resvNo = Long.parseLong(request.getParameter("clickedResvNo"));
-		System.out.println("doubleResvNo@"+resvNo);
-		
-//		NumberFormat f = NumberFormat.getInstance();
-//		f.setGroupingUsed(false);
-//		String resvNoAfter = f.format(resvNo);
-//		System.out.println("resvNoAfter@"+resvNoAfter);
-		
-//		long dbb = Long.parseLong(resvNoAfter);
-//		System.out.println(dbb);
-		
 		String memberId = request.getParameter("memberId");
-		//		int resvNo = Integer.parseInt(request.getParameter("clickedResvNo"));
 		int roomNo = Integer.parseInt(request.getParameter("clickedRoomNo"));
 		String reviewContext = request.getParameter("review-context");
 		int starClean = Integer.parseInt(request.getParameter("input-1"));
@@ -59,24 +46,12 @@ public class MypageReviewEndServlet extends HttpServlet {
 		int starLocation = Integer.parseInt(request.getParameter("input-4"));
 		int starValue = Integer.parseInt(request.getParameter("input-5"));
 		
-		System.out.println("reviewContext@ReviewEndServlet="+reviewContext);
-		System.out.println("star1@ReviewEndServlet="+starClean);
-		System.out.println("star2@ReviewEndServlet="+starComm);
-		System.out.println("star3@ReviewEndServlet="+starCheckIn);
-		System.out.println("star4@ReviewEndServlet="+starLocation);
-		System.out.println("star5@ReviewEndServlet="+starValue);
-		System.out.println("memberId@ReviewEndServlet="+memberId);
-		System.out.println("roomNo@ReviewEndServlet="+roomNo);
-//		System.out.println("resvNo@ReviewEndServlet="+resvNo);
-//		System.out.println("resvNoToDouble@ReviewEndServlet="+resvNoToDouble);
-		
-		
 		Review review = new Review(0, memberId, resvNo, roomNo, reviewContext, null,
 				starClean, starComm, starCheckIn, starLocation, starValue);
 
 		int result = new MemberService().insertReview(review);
 		
-		//4. 받은 결과에 따라 뷰페이지 내보내기
+		//받은 결과에 따라 뷰페이지 내보내기
 		if(result>0)
 			System.out.println("리뷰 작성 성공!");
 		else 
@@ -84,10 +59,6 @@ public class MypageReviewEndServlet extends HttpServlet {
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/mypage/review");
 		reqDispatcher.forward(request, response);
-		
-		
-		
-		
 	}
 
 	/**
