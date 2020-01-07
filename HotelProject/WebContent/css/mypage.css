@@ -374,3 +374,25 @@ h1 span {
   top: -3px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+/*페이지바*/
+div#pageBar{
+	margin-top: 10px;
+	text-align: center;
+	background-color: rgba(0,188,212,0.3);
+}
+div#pageBar span.cPage{
+	color: #06f;
+	margin-right: 10px;
+}
+​
+div#pageBar a{
+	margin-right: 10px;
+}
+div#btn{
+	margin: 10px;
+    text-align: center;
+}
+table{
+    width: 100%;
+	
+}

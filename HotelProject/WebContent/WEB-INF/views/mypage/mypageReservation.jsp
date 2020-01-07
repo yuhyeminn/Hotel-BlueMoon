@@ -75,7 +75,7 @@
 				<form action="<%=request.getContextPath()%>/mypage/cancelReserv"
 					onsubmit="return cancelReserv();">
 					<input type="submit" value="취소"> 
-					<input type="hidden" name="bookedNo" value="<%=mr.getBookedNo()%>">
+					<input type="hidden" name="resvNo" value="<%=mr.getResvNo()%>">
 					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
 				</form>
 			</td> 
