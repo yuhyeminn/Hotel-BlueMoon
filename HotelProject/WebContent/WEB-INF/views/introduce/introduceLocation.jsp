@@ -42,8 +42,7 @@
 }
 
 #locationLogo {
-	width: 200px;
-	height: 100px;
+	width: 150px;
 	margin-top: 20px;
 	margin-left: 150px;
 }

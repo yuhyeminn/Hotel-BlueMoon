@@ -1,31 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp" %>
-<hr/>
-<h2 align="center"><strong>아이디/비밀번호 찾기</strong></h2>
-<style>
-#body{width:700px; height:600px;}
-.info-text{position: absolute; top: 80px; left:145px; width:300px; height: 300px; float:center;}
-.finder{width:500px; height:500px; border:1.5px solid gray; position:absolute; margin: 0 auto;}
-#id-finder{top:310px; left:250px;}
-#pwd-finder{top:310px; left:770px;}
-.form-control{position: absolute; width:400px; height:40px; left:50px;}
-#id-finder-name{top:200px;}
-#id-finder-email{top:300px;}
-#pwd-finder-id{top:150px;}
-#pwd-finder-name{top:250px;}
-#pwd-finder-email{top:350px;}
-.id-label{position: absolute; left:50px;}
-#id-name-label{top:175px;}
-#id-email-label{top:275px;}
-#pwd-id-label{top:120px;}
-#pwd-name-label{top: 220px;}
-#pwd-email-label{top: 320px;}
 
-#send-find1{left:160px; top:400px;}
-.send{float: center; width:180px; height:50px; background-color: rgb(19,42,22); color: white; border: 0px; position:absolute;}
+<style>
+.info-text{text-align:center;}
+.finder{width:500px; height:500px; border:1.5px solid gray;margin:15px;padding:30px; margin-top:50px;}
+
+.form-control{width:400px; height:40px;}
+
+.send{width:180px; height:50px; background-color: rgb(19,42,22); color: white; border: 0px;}
 .send:hover{text-decoration: none; color:white;}
-#send-find2{left:160px; top:400px;}
+#finder-container{display:flex;margin:0 auto;}
+.form-info-group input{
+	margin-bottom:20px;
+}
+.form-info-group{
+margin:40px 15px;
+}
+#id-finder .form-info-group{
+margin-top:75px;
+}
 </style>
 
 <script>
@@ -66,18 +60,25 @@ function findId(){
 </script>
 
 <section>
+<hr/>
+<h2 align="center"><strong>아이디/비밀번호 찾기</strong></h2>
+	<hr />
+<div id="finder-container">
 <form action="<%=request.getContextPath()%>/member/idFinder" id="idFinderFrm" onsubmit="return findId();">
 <div id="id-finder" class="finder">
 <div class="info-text">
 	<h4><strong>블루문 아이디 찾기</strong></h4>
 	</div>
+	<div class="form-info-group">
 	<label id="id-name-label" class="id-label">성명</label><br>
   			<input type="text" name="name" id="id-finder-name" class="form-control" placeholder="이름을 입력하세요." aria-label="성명" aria-describedby="send">		
-  		<br><br><br><br><br>
+  		
 		<label id="id-email-label" class="id-label">이메일주소</label><br>
   			<input type="email" name="email" id="id-finder-email" class="form-control" placeholder="이메일주소를 입력하세요." aria-label="이메일주소" aria-describedby="send">
-  		<br><br>
+  		</div>
+  		<div style="text-align:center">
   		<input type="submit" class="send" id="send-find1" onsubmit="return findId();" value="아이디 찾기">
+  		</div>
 </div>
 </form>
   
@@ -86,18 +87,20 @@ function findId(){
 <div class="info-text">
 	<h4><strong>블루문 비밀번호 찾기</strong></h4>
 	</div>
+	<div class="form-info-group">
 	<label id="pwd-id-label" class="id-label">아이디</label><br>
   			<input type="text" name="id" id="pwd-finder-id" class="form-control" placeholder="아이디를 입력하세요." aria-label="성명" aria-describedby="send">		
-  		<br><br><br>
 	<label id="pwd-name-label" class="id-label">성명</label><br>
   			<input type="text" name="name" id="pwd-finder-name" class="form-control" placeholder="이름을 입력하세요." aria-label="성명" aria-describedby="send">		
-  		<br><br><br>
 		<label id="pwd-email-label" class="id-label">이메일주소</label><br>
   			<input type="email" name="email" id="pwd-finder-email" class="form-control" placeholder="이메일주소를 입력하세요." aria-label="이메일주소" aria-describedby="send">
-  		<br><br>
+  	</div>
+  	<div style="text-align:center">
   		<input type="submit" class="send" id="send-find2" value="비밀번호 찾기">
+  		</div>
 </div>
 </form>
+</div>
 </section>
 
 <%@include file="/WEB-INF/views/common/footer.jsp" %>     

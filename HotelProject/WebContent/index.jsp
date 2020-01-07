@@ -425,7 +425,7 @@ footer {
 }
 .Heading-eyebrow{
     font-family: 'Dancing Script';
-    font-size: 20px;
+    font-size: 23px;
     font-weight: 600;
 }
 .Heading-title{
@@ -433,14 +433,17 @@ footer {
     font-weight: 700;
 }
 .Heading-text{
-	font-family: 'Nanum Myeongjo', serif;
-    font-size: 18px;
+	/* font-family: 'Nanum Myeongjo', serif; */
+    font-size: 14px;
 }
 .image-panel-itemContent{
 	text-align: center;
 }
 #pFont{
-	font-family: font-family: 'Nanum Myeongjo', serif;
+	/* font-family: font-family: 'Nanum Myeongjo', serif; */
+}
+.ty-h3{
+font-size: 0.75rem;
 }
 </style>
 <!-- video content -->

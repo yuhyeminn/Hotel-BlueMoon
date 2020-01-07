@@ -1,4 +1,3 @@
-@charset "UTF-8";
 
 @charset "UTF-8";
 /* @import url("https://fonts.googleapis.com/css?family=Raleway:400,300,600"); */
@@ -74,26 +73,27 @@
   border-radius: .5em;
   text-align: center;
   width: 2em;
+  color: rgb(0, 30, 70);
 }
 .ui-datepicker td a.ui-state-active, .ui-datepicker td span.ui-state-active {
-  background-color: #1EAEDB;
+  background-color: #81b8ca;
   color: #fff;
 }
 .ui-datepicker td a.ui-state-hover, .ui-datepicker td span.ui-state-hover {
-  border-color: #1EAEDB;
+  border-color: #81b8ca;
 }
 .ui-datepicker td.ui-datepicker-reserved a, .ui-datepicker td.ui-datepicker-reserved span {
-  background-color: #1EAEDB;
+  background-color: #81b8ca;
   color: #fff;
 }
 .ui-datepicker td.ui-datepicker-reserved.ui-datepicker-checkin a, .ui-datepicker td.ui-datepicker-reserved.ui-datepicker-checkin span, .ui-datepicker td.ui-datepicker-reserved.ui-datepicker-checkout a, .ui-datepicker td.ui-datepicker-reserved.ui-datepicker-checkout span {
   background-color: #fff;
-  border-color: #1EAEDB;
-  color: #1EAEDB;
+  border-color: #81b8ca;
+  color: #81b8ca;
 }
 .ui-datepicker .ui-datepicker-today a:not(.ui-state-hover), .ui-datepicker .ui-datepicker-today span:not(.ui-state-hover) {
-  border-color: #11DFC7;
-  color: #11DFC7;
+  border-color: #0769d2;
+  color: #0769d2;
 }
 .ui-datepicker .ui-datepicker-prev,
 .ui-datepicker .ui-datepicker-next {
@@ -109,7 +109,7 @@
 }
 .ui-datepicker .ui-datepicker-prev.ui-state-hover,
 .ui-datepicker .ui-datepicker-next.ui-state-hover {
-  border-color: #1EAEDB;
+  border-color: #81b8ca;
   top: 2px;
 }
 .ui-datepicker .ui-datepicker-prev:before {
@@ -131,4 +131,3 @@
   -webkit-animation-name: fade-in;
           animation-name: fade-in;
 }
-

@@ -100,7 +100,7 @@
 				</div>
 				<div class="room-button">
 				<form action="<%=request.getContextPath()%>/views/reservation/selectRoomEnd" method="post">
-					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" />
+<%-- 					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId() %>" /> --%>
 					<input type="hidden" name="checkindate" value="<%=checkindate %>" />
 					<input type="hidden" name="checkoutdate" value="<%=checkoutdate %>" />
 					<input type="hidden" name="room1" value="<%=room1 %>" />
