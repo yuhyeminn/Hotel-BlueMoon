@@ -187,20 +187,21 @@ public class AdminService {
 		return rcYearList;
 	}
 
-	public List<ReservationCount> select2019Month() {
+	public List<ReservationCount> selectMonth() {
 		Connection conn = getConnection();
-		List<ReservationCount> month2019List = new AdminDAO().select2019Month(conn);
+		List<ReservationCount> selectMonth = new AdminDAO().selectMonth(conn);
+		System.out.println("selectMonth@service="+selectMonth);
 		close(conn);
-		return month2019List;
+		return selectMonth;
 	}
 
-	public List<ReservationCount> select2020Month() {
-		Connection conn = getConnection();
-		List<ReservationCount> month2020List = new AdminDAO().select2020Month(conn);
-		System.out.println("month2020List@service="+month2020List);
-		close(conn);
-		return month2020List;
-	}
+//	public List<ReservationCount> select2020Month() {
+//		Connection conn = getConnection();
+//		List<ReservationCount> month2020List = new AdminDAO().select2020Month(conn);
+//		System.out.println("month2020List@service="+month2020List);
+//		close(conn);
+//		return month2020List;
+//	}
 
 	public int updateRoomByRoomNo(Room r) {
 		Connection conn = getConnection();

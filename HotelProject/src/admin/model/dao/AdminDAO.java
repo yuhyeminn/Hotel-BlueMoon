@@ -1082,27 +1082,27 @@ public class AdminDAO {
 	      return rcYearList;
 	   }
 
-	   public List<ReservationCount> select2019Month(Connection conn) {
+	   public List<ReservationCount> selectMonth(Connection conn) {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
-	      List<ReservationCount> month2019List = null;
+	      List<ReservationCount> selectMonth = null;
 	      ReservationCount rc = null;
-	      String query = prop.getProperty("selectYear");
+	      String query = prop.getProperty("selectMonth");
 	      
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         
 	         pstmt.setString(1, "20190101");
-	         pstmt.setString(2, "20191231");
+	         pstmt.setString(2, "20201231");
 	         rset = pstmt.executeQuery();
-	         month2019List = new ArrayList<>();
+	         selectMonth = new ArrayList<>();
 	         
 	         while(rset.next()) {
 	            rc = new ReservationCount();
 	            rc.setDay(rset.getInt("day"));
 	            rc.setResvCount(rset.getInt("resvcount"));
 	            rc.setResvPrice(rset.getInt("price"));
-	            month2019List.add(rc);
+	            selectMonth.add(rc);
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();
@@ -1110,10 +1110,10 @@ public class AdminDAO {
 	         close(rset);
 	         close(pstmt);
 	      }
-	      return month2019List;
+	      return selectMonth;
 	   }
 
-	   public List<ReservationCount> select2020Month(Connection conn) {
+	   /*public List<ReservationCount> select2020Month(Connection conn) {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      List<ReservationCount> month2020List = null;
@@ -1143,7 +1143,7 @@ public class AdminDAO {
 	         close(pstmt);
 	      }
 	      return month2020List;
-	   }
+	   }*/
 
 	
 	//각 항목별 검색

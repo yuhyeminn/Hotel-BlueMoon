@@ -22,12 +22,10 @@ public class AdminTotalServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String searchType = request.getParameter("searchType");
-		List<ReservationCount> month2019List = new AdminService().select2019Month();
-		List<ReservationCount> month2020List = new AdminService().select2020Month();
+		List<ReservationCount> selectMonth = new AdminService().selectMonth();
 		List<ReservationCount> rcYearList = new AdminService().selectResvCountYear();
 				
-		request.setAttribute("month2019List", month2019List);
-		request.setAttribute("month2020List", month2020List);
+		request.setAttribute("selectMonth", selectMonth);
 		request.setAttribute("rcYearList", rcYearList);
 		request.setAttribute("searchType", searchType);
 		
