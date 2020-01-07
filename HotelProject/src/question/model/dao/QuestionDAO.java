@@ -70,7 +70,7 @@ public class QuestionDAO {
 		return qnaList;
 	}
 
-	public Question selectQuestionOne(Connection conn, int question_no) {
+	public Question selectQuestionOne(Connection conn, int question_no, String question_writer) {
 		PreparedStatement pstmt = null;
 		Question q = new Question();
 		ResultSet rset = null;
@@ -79,6 +79,7 @@ public class QuestionDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, question_no);
+			pstmt.setString(2, question_writer);
 
 			rset = pstmt.executeQuery();
 
@@ -296,5 +297,38 @@ public class QuestionDAO {
 	      }
 	      return result;
 	   }
+
+	public Question selectQuestionOneByNo(Connection conn, int question_no) {
+
+		PreparedStatement pstmt = null;
+		Question q = new Question();
+		ResultSet rset = null;
+		String query = prop.getProperty("selectQuestionOneByNo");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, question_no);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				q.setQuestionNo(rset.getInt("question_no"));
+				q.setQuestionWriter(rset.getString("question_writer"));
+				q.setQuestionCode(rset.getString("question_name"));
+				q.setQuestionTitle(rset.getString("question_title"));
+				q.setQuestionContent(rset.getString("question_content"));
+				q.setQuestionDate(rset.getDate("question_date"));
+				q.setQuestionOriginalFileName(rset.getString("question_originalFileName"));
+				q.setQuestionRenamedFileName(rset.getString("question_renamedFileName"));
+				q.setQuestionAnswer(rset.getString("question_answer"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return q;
+	}
 
 }

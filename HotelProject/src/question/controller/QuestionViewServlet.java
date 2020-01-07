@@ -21,9 +21,11 @@ public class QuestionViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int question_no = Integer.parseInt(request.getParameter("question_no"));
-		System.out.println("question_no@servlet="+question_no);
+		//System.out.println("question_no@servlet="+question_no);
+		String question_writer = request.getParameter("question_writer");
+		System.out.println("!!!question_writer@servlet="+question_writer);
 		
-		Question question = new QuestionService().selectQuestionOne(question_no);
+		Question question = new QuestionService().selectQuestionOne(question_no, question_writer);
 		Comment comment = new QuestionService().selectComment(question_no);
 		
 		request.setAttribute("question", question);

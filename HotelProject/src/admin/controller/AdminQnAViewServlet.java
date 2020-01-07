@@ -23,7 +23,7 @@ public class AdminQnAViewServlet extends HttpServlet {
 		int question_no = Integer.parseInt(request.getParameter("question_no"));
 		System.out.println("question_no@servlet="+question_no);
 		
-		Question question = new QuestionService().selectQuestionOne(question_no);
+		Question question = new QuestionService().selectQuestionOneByNo(question_no);
 		Comment comment = new QuestionService().selectComment(question_no);
 		
 		request.setAttribute("question", question);

@@ -38,7 +38,7 @@ public class QuestionUpdateEndServlet extends HttpServlet {
          
          //1.parameter handling
          int questionNo = Integer.parseInt(multiReq.getParameter("question_no"));
-         System.out.println("qnaNo@updateServlet======================================="+questionNo);
+         //System.out.println("qnaNo@updateServlet======================================="+questionNo);
          String questionTitle = multiReq.getParameter("qnaTitle");
          String questionWriter = multiReq.getParameter("memberId");
          String questionCode = multiReq.getParameter("select");

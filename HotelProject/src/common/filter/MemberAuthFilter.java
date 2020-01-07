@@ -27,6 +27,9 @@ import member.model.vo.Member;
 			/*"/mypage/update",
 			"/mypage/questionList",
 			"/mypage/updatePassword"*/
+			"/mypage/questionView",
+			"/mypage/UpdateQuestion",
+			/*"/mypage/qnaUpdateEnd"*/
 	})
 public class MemberAuthFilter implements Filter {
 
@@ -56,13 +59,13 @@ public class MemberAuthFilter implements Filter {
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		
 		//상세보기 요청사용자
-		String viewMemberId =  ((HttpServletRequest)request).getParameter("memberId");
+		String viewMemberId =  ((HttpServletRequest)request).getParameter("question_writer");
 		System.out.println("viewMemberId@filter="+viewMemberId);
 		
 		if(memberLoggedIn==null
 		 || !(memberLoggedIn.getMemberId().equals(viewMemberId)
 			   ||"admin".equals(memberLoggedIn.getMemberId()))) {
-			request.setAttribute("msg", "로그인 후 마이페이지를 통해 이용가능한 페이지입니다.");
+			request.setAttribute("msg", "잘못된 경로입니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 				   .forward(request, response);
