@@ -396,3 +396,12 @@ table{
     width: 100%;
 	
 }
+
+/* 예약내역 */
+#myresv th, #myresv td{
+	padding: 15px 13px 15px 13px;
+}
+#myresv td:nth-last-child(1){
+	padding-top: 30px;
+}
+

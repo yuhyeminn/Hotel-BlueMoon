@@ -231,7 +231,6 @@ $(() => {
 		<%=pageBar %>
 	  </div>
 	  <div id="btn">
-	    <input type="button" value="수정">
 	    <input type="button" class="btn-delete" value="삭제">
       </div>
       
