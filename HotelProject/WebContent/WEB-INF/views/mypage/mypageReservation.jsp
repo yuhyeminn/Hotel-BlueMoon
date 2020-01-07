@@ -1,3 +1,5 @@
+<%@page import="reservation.model.vo.MyReservation"%>
+<%@page import="reservation.model.vo.Reservation"%>
 <%@page import="reservation.model.vo.BookedRoom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -7,81 +9,90 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
-	List<BookedRoom> brList = (List<BookedRoom>) request.getAttribute("list");
-	//System.out.println("brList=" + brList);
-	
+	List<MyReservation> resvList = (List<MyReservation>)request.getAttribute("resvList");
+	String pageBar = (String)request.getAttribute("pageBar");
 %>
-<hr />
-<h1 style="text-align: center">예약 조회</h1>
-<hr />
-
-<table border="1">
-	<tr>
-		<th>예약번호</th>
-		<th>객실번호</th>
-		<th>체크인</th>
-		<th>체크아웃</th>
-		<th>인원</th>
-		<th>조식인원</th>
-		<th>취소</th>
-	</tr>
-
-	<%
-		if (!brList.isEmpty()) {
-			for (BookedRoom br : brList) {
-	%>
-	<tr>
-		<td><%=br.getBookedResvNo()%></td>
-		<td><%=br.getBookedRoomNo()%></td>
-		<td><%=br.getBookedCheckIn()%></td>
-		<td><%=br.getBookedCheckOut()%></td>
-		<td><%=br.getBookedPeople()%>명</td>
-		<td><%=br.getBookedBreakfast()%>명</td>
-
-		<%-- 	<%
-			}
-		}
-	%>
-	 --%>
-		<%
-			/* 체크인 날짜 1일 전부터 취소버튼 안보이게 하기 */
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date today = new Date();
-			String sdfToday = sdf.format(today);
-			Date checkIn = br.getBookedCheckIn();
-			
-			int result1 = today.compareTo(checkIn);
-			
-			//체크인날짜가 오늘날짜를 지낫거나, 오늘날짜일때 취소불가버튼 출력
-			if ( result1 > 0 || result1 == 0) {      
-		%>
-	 	<td>
-			<input type="submit" id="cancelButton" value="취소불가" disabled=""> 
-		</td> 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css" />
+<div class="container">
+	<hr />
+	<h1 style="text-align: center">예약 내역</h1>
+	<hr />
+	
+	<table border="1">
+		<thead>
+		<tr>
+			<th>예약번호</th>
+			<th>객실</th>
+			<th>체크인</th>
+			<th>체크아웃</th>
+			<th>인원</th>
+			<th>조식인원</th>
+			<th>취소</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+			<% if(resvList==null || resvList.isEmpty()){ %>
+	            <tr>
+	                <td colspan="8" align="center"> 조회 결과가 없습니다. </td>
+	            </tr>
+	        <% 
+	            } 
+	            else {
+	            	for(MyReservation mr : resvList){
+	        %>
+		<tr>
+			<td><%=mr.getResvNo()%></td>
+			<td><%=mr.getRoomName()%></td>
+			<td><%=mr.getChkIn()%></td>
+			<td><%=mr.getChkOut()%></td>
+			<td><%=mr.getResvPeople()%>명</td>
+			<td><%=mr.getResvBfPeople()%>명</td>
+			<td><%=mr.getResvCancel()%></td>
+	
 		
-		<%
-			} else {
-		%>
-	 	<td>
-			<form action="<%=request.getContextPath()%>/mypage/cancelReserv"
-				onsubmit="return cancelReserv();">
-				<input type="submit" value="취소"> 
-				<input type="hidden" name="bookedNo" value="<%=br.getBookedNo()%>">
-				<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
-			</form>
-		</td> 
+		 
+			<%	
+				/* 체크인 날짜 1일 전부터 취소버튼 안보이게 하기 */
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date today = new Date();
+				String sdfToday = sdf.format(today);
+				Date checkIn = mr.getChkIn();
+				
+				int result1 = today.compareTo(checkIn);
+				//체크인날짜가 오늘날짜를 지낫거나, 오늘날짜일때 취소불가버튼 출력
+				if ( result1 > 0 || result1 == 0) {      
+			%>
+		 	<td>
+				<input type="submit" id="cancelButton" value="취소불가" disabled=""> 
+			</td> 
+			
+			<%
+	            	}
+				else {
+			%>
+		 	<td>
+				<form action="<%=request.getContextPath()%>/mypage/cancelReserv"
+					onsubmit="return cancelReserv();">
+					<input type="submit" value="취소"> 
+					<input type="hidden" name="bookedNo" value="<%=mr.getBookedNo()%>">
+					<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>">
+				</form>
+			</td> 
+		</tr>
+			<%
+						}
+	            				}
+	            
+				} 
+			%>
 		
-		<%
-					}
-				}
-			}
-		%>
-	</tr>
-
-
-
-</table>
-
+	
+	
+	
+		</tbody>
+	</table>
+</div>
 
 <style>
 table {

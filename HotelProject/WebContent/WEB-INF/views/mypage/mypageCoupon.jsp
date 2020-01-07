@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage.css" />
 <div class="container">
 	<hr />
-	<h1 style="text-align:center">나의 쿠폰 내역</h1>
+	<h1 style="text-align:center">쿠폰 내역</h1>
 	<hr />
 	
 	<table border="1">

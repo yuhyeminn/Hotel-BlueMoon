@@ -26,11 +26,15 @@ public class MypageViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberId = request.getParameter("memberId");
+		int totalCpnContent = new AdminService().selectTotalCpnContentByMemberId(memberId);
+		int totalResvContent = new AdminService().selectTotalResvContentByMemberId(memberId);
 		Member m = new MemberService().selectOne(memberId);
 		int result = new ReservationService().selectResvCntByMemberId(memberId);
 		
 		request.setAttribute("m", m);
 		request.setAttribute("result", result);
+		request.setAttribute("totalCpnContent", totalCpnContent);
+		request.setAttribute("totalResvContent", totalResvContent);
 		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp")
 				.forward(request, response);

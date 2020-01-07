@@ -61,10 +61,10 @@ public class ReservationPaymentEndServlet extends HttpServlet {
 		int resvResult = new ReservationService().insertReservation(resv);
 		
 		//예약된 방 insert
-		BookedRoom bookedroom1 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room1,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice(),0);
+		BookedRoom bookedroom1 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room1,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice());
 		int room1Result = new ReservationService().insertBookedRoom(bookedroom1);
 		if(room2!=0) {
-			BookedRoom bookedroom2 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room2,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice(),0);
+			BookedRoom bookedroom2 = new BookedRoom(0,resvRoom.getRoomNo(),resv.getResvNo(),room2,Date.valueOf(checkindate),Date.valueOf(checkoutdate),diffDay*resvRoom.getRoomPrice());
 			int room2Result = new ReservationService().insertBookedRoom(bookedroom2);
 		}
 		System.out.println("CouponNo="+usedCouponNo);

@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import admin.model.vo.AdminReservation;
-import member.model.vo.Member;
+import reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class AdminReservationFinderServlet
@@ -40,7 +39,7 @@ public class AdminReservationFinderServlet extends HttpServlet {
 //				System.out.println("searchKeyword@finder="+searchKeyword);
 				
 				//2.업무로직
-				List<AdminReservation> list = null;
+				List<Reservation> list = null;
 				AdminService adminService = new AdminService();
 				
 				switch(searchType) {

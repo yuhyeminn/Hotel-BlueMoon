@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminService;
-import admin.model.vo.AdminReservation;
-import member.model.vo.Member;
+import reservation.model.vo.Reservation;
 
 /**
  * Servlet implementation class AdminReservationListServlet
@@ -85,7 +84,7 @@ public class AdminReservationListServlet extends HttpServlet {
 		}
 		
 		//3.업무로직
-		List<AdminReservation> list = new AdminService().selectReservationList(cPage, numPerPage);
+		List<Reservation> list = new AdminService().selectReservationList(cPage, numPerPage);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar", pageBar);
 		

@@ -11,11 +11,49 @@
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 <%@include file="/WEB-INF/views/common/mypageSideBar.jsp" %>
 <%@include file="/WEB-INF/views/chat/chat.jsp" %>
-
 <%
 	Member m = (Member)request.getAttribute("m");
-	int r = (int)request.getAttribute("result");
+	int totalCpnContent = ((Integer)request.getAttribute("totalCpnContent")).intValue();
+	int totalResvContent = ((Integer)request.getAttribute("totalResvContent")).intValue();
 %>
+<script>
+$(()=>{
+	function setValue(){
+		if(m.getMemberId()!=null){
+			var value = <%=m.getMemberId()%>		
+			return true;
+		}
+	}
+});
+</script>
+<%-- <div id="my-profile" class="inform-card">
+	<br />
+	<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">회원
+		프로필</h1>
+	<br />
+	<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" />
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item"><strong>이름</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberName() %></span></li>
+		<li class="list-group-item"><strong>아이디</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getMemberId() %></span></li>
+		<li class="list-group-item"><strong>적립금</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=NumberFormat.getInstance().format(m.getPoint()) %> point</span></li>
+		<li class="list-group-item"><strong>전화번호</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getPhone() %></span></li>
+		<li class="list-group-item"><strong>이메일</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span><%=m.getEmail() %></span></li>
+	</ul>
+</div>
+<div id="inform-group">
+	<div id="my-resv" class="inform-card">
+		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 예약건</h1>
+		<h2> --%>
+			
+		<!-- </h2>
+	</div>
+
+	<div id="my-coupon" class="inform-card">
+		<h1 style="text-align: center; font-family: 'Nanum Myeongjo', serif;">나의 쿠폰</h1>
+		<h2> -->
+			
+		<!-- </h2> -->
+		
 <body>
 
 	<div class="main-content printed">
@@ -87,7 +125,7 @@
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><a id="couponLink"  href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId()%>">1</a></h3>
+						<h3><a href="<%=request.getContextPath()%>/mypage/myCoupon?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalCpnContent%></a></h3>
 						<span>개</span>
 					</div>
 					<div class="barcode"></div>
@@ -110,7 +148,7 @@
 				<div class="card cardRight">
 					<div class="eye"></div>
 					<div class="number">
-						<h3><%=r%></h3> 
+						<h3><a href="<%=request.getContextPath()%>/mypage/myReservationList?memberId=<%=m.getMemberId() %>" style="cursor:pointer"><%=totalResvContent%></a></h3> 
 						<span>건</span>
 					</div>
 					<div class="barcode"></div>

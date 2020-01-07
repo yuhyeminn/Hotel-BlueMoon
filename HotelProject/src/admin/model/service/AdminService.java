@@ -1,7 +1,6 @@
 package admin.model.service;
 
 import static common.JDBCTemplate.close;
-
 import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
@@ -10,12 +9,12 @@ import java.sql.Connection;
 import java.util.List;
 
 import admin.model.dao.AdminDAO;
-import admin.model.vo.AdminReservation;
 import coupon.model.vo.Coupon;
 import coupon.model.vo.CouponKind;
 import member.model.vo.Member;
 import question.model.vo.Comment;
 import question.model.vo.Question;
+import reservation.model.vo.Reservation;
 import reservation.model.vo.ReservationCount;
 import review.model.vo.Review;
 import room.model.vo.Room;
@@ -223,9 +222,9 @@ public class AdminService {
 	        
 	    }
 	 
-	    public List<AdminReservation> selectReservationList(int cPage, int numPerPage) {
+	    public List<Reservation> selectReservationList(int cPage, int numPerPage) {
 	    	Connection conn = getConnection();
-	    	List<AdminReservation> list= new AdminDAO().selectReservationList(conn, cPage, numPerPage);
+	    	List<Reservation> list= new AdminDAO().selectReservationList(conn, cPage, numPerPage);
 	    	close(conn);
 	    	return list;
 	    }
@@ -365,8 +364,8 @@ public class AdminService {
 			return totalContent;
 		}
 
-		public List<AdminReservation> selectResvByMemberId(String searchKeyword, int cPage, int numPerPage) {
-			List<AdminReservation> list = null;
+		public List<Reservation> selectResvByMemberId(String searchKeyword, int cPage, int numPerPage) {
+			List<Reservation> list = null;
 			Connection conn = getConnection();
 			list = new AdminDAO().selectResvByMemberId(conn, searchKeyword, cPage, numPerPage);
 			close(conn);
@@ -394,6 +393,8 @@ public class AdminService {
 			close(conn);
 			return list;
 		}
+
+		
 
 		
 
