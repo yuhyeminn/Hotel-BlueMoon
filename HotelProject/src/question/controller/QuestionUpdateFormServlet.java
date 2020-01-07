@@ -26,8 +26,10 @@ public class QuestionUpdateFormServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       int question_no = Integer.parseInt(request.getParameter("qnaNo"));
+      String question_writer = request.getParameter("question_writer");
+      System.out.println("업데이트에서 멤버아이디="+question_writer);
       
-      Question question = new QuestionService().selectQuestionOne(question_no);
+      Question question = new QuestionService().selectQuestionOne(question_no, question_writer);
       
       request.setAttribute("question", question);
 

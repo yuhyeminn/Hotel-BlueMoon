@@ -21,9 +21,9 @@ public class QuestionService {
 		return qnaList;
 	}
 
-	public Question selectQuestionOne(int question_no) {
+	public Question selectQuestionOne(int question_no, String question_writer) {
 		Connection conn = getConnection();
-		Question question = new QuestionDAO().selectQuestionOne(conn, question_no);
+		Question question = new QuestionDAO().selectQuestionOne(conn, question_no, question_writer);
 		close(conn);
 
 		return question;
@@ -90,6 +90,15 @@ public class QuestionService {
 	      return result;
 	            
 	   }
+
+	public Question selectQuestionOneByNo(int question_no) {
+
+		Connection conn = getConnection();
+		Question question = new QuestionDAO().selectQuestionOneByNo(conn, question_no);
+		close(conn);
+
+		return question;
+	}
 	
 
 }

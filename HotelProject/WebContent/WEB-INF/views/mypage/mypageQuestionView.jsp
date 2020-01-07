@@ -39,7 +39,7 @@
 <tr>
 	<td><%=q.getQuestionNo() %></td>
 	<td><%=q.getQuestionCode() %></td>
-	<td><a id="qnaATag" href="<%=request.getContextPath()%>/mypage/questionView?question_no=<%=q.getQuestionNo()%>"><%=q.getQuestionTitle() %></a></td>
+	<td><a id="qnaATag" href="<%=request.getContextPath()%>/mypage/questionView?question_no=<%=q.getQuestionNo()%>&question_writer=<%=memberLoggedIn.getMemberId()%>"><%=q.getQuestionTitle() %></a></td>
 	<td><%=q.getQuestionDate() %></td>
 	<td><%=q.getQuestionOriginalFileName()== null ? "X":"O" %></td>
 	<td><%="T".equals(q.getQuestionAnswer())? "답변완료":"답변대기" %></td>

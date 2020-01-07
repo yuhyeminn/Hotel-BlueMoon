@@ -201,12 +201,13 @@
 		%>
 		<div>
 			<form
-				action="<%=request.getContextPath()%>/mypage/UpdateQuestion?question_no=<%=q.getQuestionNo()%>"
+				action="<%=request.getContextPath()%>/mypage/UpdateQuestion?question_no=<%=q.getQuestionNo()%>&question_writer=<%=memberLoggedIn.getMemberId()%>"
 				enctype="multipart/form-data">
 				<div id="btn-group">
 					<input type="submit" class="btn btn-dark" value="수정" />
 				</div>
 				<input type="hidden" name="qnaNo" value="<%=q.getQuestionNo()%>" />
+				<input type="hidden" name="question_writer" value="<%=q.getQuestionWriter()%>" />
 			</form>
 		</div>
 
