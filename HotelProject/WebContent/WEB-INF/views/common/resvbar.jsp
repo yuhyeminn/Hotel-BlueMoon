@@ -118,12 +118,14 @@
     border-radius: 40px;
     color: rgb(141, 141, 141);
     font-family: 'Noto Sans KR', sans-serif;
+    position:relative;
 }
 
 #bar-content {
 	margin-top: 10px;
 	float: left;
     width: auto;
+    margin-left: 31px;
 }
 
 #checkin-box, #checkout-box, #room, #people {
@@ -151,8 +153,8 @@
     border: 0px;
     display: inline-block;
     vertical-align: middle;
-    top: 328px;
-    left: 680px;
+        top: 20px;
+    right: 25px;
     border-radius: 50px;
 }
 
@@ -202,7 +204,9 @@
 	visibility: hidden;
 	float: left;
 	background:white;
+	zoom:0.9;
 }
+
 
 #check-in-out-box, #close-calendar {
 	cursor: pointer;
@@ -217,6 +221,7 @@
 	float: left;
 	visibility: hidden;
 	background:white;
+	zoom:0.9;
 }
 
 #hidden-container {
@@ -241,7 +246,7 @@
 #resv-bar-container{
 	margin: 0 auto;
     position: absolute;
-    top: 80px;
+    top: 125px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -277,6 +282,7 @@ cursor:pointer;
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/daterange.css">
 <script>
+var room2;
 $(document).ready(function () {
         $("#check-in-out-box").click(function(){
         	$("#roompeople-box").css("visibility","hidden");
@@ -297,7 +303,7 @@ $(document).ready(function () {
             $("#room-add").on('click', function () {
             	if(!$("#form-cnt2").length){
                 $cntbox = $("#person-form");
-
+				
                 html = "<div id='form-cnt2' class='cntform'><div id='person-cnt2' class='cntform'>"
                     + "<span style='margin-right: 15px;font-size:14px;'>객실 2</span> \n"
                     + "<img src='<%=request.getContextPath() %>/images/minusbtn.svg' class='minus numberbtn'/>\n"
@@ -308,7 +314,9 @@ $(document).ready(function () {
                     
                 $cntbox.append(html);
                 $("#roomcnt").text('2개');
-                
+                room2 = 1;
+                getTotalPeople();
+                	
                 $('.plus').click(function (e) {
                     e.preventDefault();
                     var $input = $(this).parents(1).children("input[type=number]");
@@ -360,7 +368,10 @@ $(document).ready(function () {
                 getTotalPeople();
             });
             function getTotalPeople(){
-            	$("#people-cnt").text((Number($("#room1-cnt").val()) + $("#room2-cnt").val()==null?0:$("#room2-cnt").val())+'명');
+            	var room1=Number($("#room1-cnt").val());
+            	room2=$("#room2-cnt").val()==null?0:$("#room2-cnt").val()
+             $("#people-cnt").text((room1+Number(room2))+'명');
+            	
             }
         });
         

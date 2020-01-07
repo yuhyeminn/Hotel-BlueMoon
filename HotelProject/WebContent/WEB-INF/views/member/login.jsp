@@ -100,7 +100,7 @@ function loginValidate(){
 	var $password = $("#login-pwd");
 	
 	if($memberId.val().trim().length == 0){
-		alert("아이디를 입력하세요.");
+		bootbox.alert("아이디를 입력하세요.");
 		$memberId.focus();
 		return false;
 	} 

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import admin.model.service.AdminService;
 import coupon.model.vo.Coupon;
@@ -30,7 +31,10 @@ public class ReservationSelectRoomEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		String memberId=memberLoggedIn.getMemberId();
+		
 		String checkindate = request.getParameter("checkindate");
 		String checkoutdate = request.getParameter("checkoutdate");
 		int room1 = Integer.parseInt(request.getParameter("room1"));

@@ -3,14 +3,10 @@
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <style>
-#content {
-	width: 1400px;
-	margin: 0 auto;
-	min-height: 1000px;
-}
+
 #frm1 {
 	margin: 0 auto;
-	height:830px;
+	height:800px;
 	border: 30px solid rgb(223, 216, 213);
 	padding: 50px 0px;
 }
@@ -58,7 +54,7 @@
 	border:none;
 }
 
-.room-add {
+#room-add {
 	margin: 30px auto;
 	width: 400px;
 	height: 50px;
@@ -97,6 +93,7 @@ border:none;
 }
 #person-form{
 	margin-top:40px;
+	    margin-left: 169px;
 }
 .container{
 	margin-bottom:40px;
@@ -129,7 +126,9 @@ cursor:pointer;}
 </style>
 <script>
         $(document).ready(function () {
-            $(".room-add").one('click', function () {
+        	var html;
+            $("#room-add").on('click', function () {
+            	if(!$("#form-cnt2").length){
                 $cntbox = $("#person-form");
 
                 html = "<div id='form-cnt2' class='cntform person-cnt2'>"
@@ -140,7 +139,7 @@ cursor:pointer;}
                     + "<input type='number' name='room2-cnt' value='1' readonly>\n"
                     + " <span id='counter-view'></span>"
                     + "<img src='<%=request.getContextPath() %>/images/plus.svg' class='plus numberbtn'/>\n"
-                    +"<img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'></div>\n</div>";
+                    +"<img src='<%=request.getContextPath() %>/images/cancel.svg' width='20px' id='cancel-add'>";
                     
                 $cntbox.append(html);
 
@@ -162,6 +161,13 @@ cursor:pointer;}
                         $input.val(currentVal - 1);
                     }
                 });
+                $("#cancel-add").click(function(){
+                	$("#form-cnt2").remove();
+                	$(this).remove();
+                });
+            	}else{
+            		bootbox.alert("객실은 최대 2개까지 예약 가능합니다.");
+            	}
             });
             $('.plus').click(function (e) {
                 e.preventDefault();
@@ -235,7 +241,7 @@ cursor:pointer;}
 		<!--인원 선택 부분-->
 		<div id="person-form">
 
-			<div id="form-cnt2" class="cntform">
+			<div id="form-cnt1" class="cntform">
 				<span>객실</span> <span style="font-size: 17px;">1</span>
 				<div id="person-cnt" class="cntform">
 					<img src="<%=request.getContextPath() %>/images/minus.svg" class="minus numberbtn"/>
@@ -247,7 +253,7 @@ cursor:pointer;}
 		</div>
 		
 		<div style="text-align: center;">
-			<button type="button" class="room-add">객실 추가</button>
+			<button type="button" id="room-add">객실 추가</button>
 		</div>
 	</div>
 
