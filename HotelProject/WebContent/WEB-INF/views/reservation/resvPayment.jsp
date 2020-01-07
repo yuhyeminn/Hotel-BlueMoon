@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Calendar"%>
@@ -63,7 +64,7 @@
 			</ul>
 			<div class="product-price">
 				<div class="room-price">
-					<span>KRW</span> <span class="price-text"><%=selectedRoom.getRoomPrice() %></span>
+					<span>KRW</span> <span class="price-text"><%=NumberFormat.getInstance().format(selectedRoom.getRoomPrice()) %></span>
 				</div>
 				<div class="price-textInfo">
 					<p>

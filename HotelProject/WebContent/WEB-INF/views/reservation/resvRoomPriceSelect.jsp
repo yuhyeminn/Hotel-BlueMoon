@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="room.model.vo.Room"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
@@ -91,7 +92,7 @@
 			</ul>
 			<div class="product-price">
 				<div class="room-price">
-					<span>KRW</span> <span class="price-text"><%=r.getRoomPrice()%></span>
+					<span>KRW</span> <span class="price-text"><%=NumberFormat.getInstance().format(r.getRoomPrice())%></span>
 				</div>
 				<div class="price-textInfo">
 					<p>

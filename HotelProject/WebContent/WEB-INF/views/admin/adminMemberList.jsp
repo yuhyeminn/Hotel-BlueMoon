@@ -1,4 +1,4 @@
-<%@page import="java.util.regex.Pattern"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -85,7 +85,7 @@ $(()=>{
      		<th>생일</th>
      		<th>이메일</th>
      		<th>전화번호</th>
-     		<th>포인트</th>
+     		<th>적립금</th>
      		<th>가입일</th>
          </tr>
        </thead>
@@ -106,7 +106,7 @@ $(()=>{
                <td><%=m.getBirth().replaceAll("(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3")%></td>
                <td><%=m.getEmail()%></td>
                <td><%=m.getPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3")%></td>
-               <td><%=m.getPoint()%></td>
+               <td><%=NumberFormat.getInstance().format(m.getPoint())%></td>
                <td><%=m.getEnrollDate()%></td>
            </tr>
            <form name="memberDelFrm" action="<%=request.getContextPath()%>/views/admin/adminMemberDelete" method="post">
