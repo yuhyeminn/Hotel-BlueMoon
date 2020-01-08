@@ -24,10 +24,8 @@ public class MypageUpdateEndServlet extends HttpServlet {
 		String memberId = request.getParameter("id");
 		String memberName = request.getParameter("name");
 		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		System.out.println(phone+"|"+email);
 		
-		Member m = new Member(memberId, null, memberName, null, email, phone, 0, null);
+		Member m = new Member(memberId, null, memberName, null, null, phone, 0, null);
 		int result = new MemberService().updateMember(m);
 		
 		String view = "/WEB-INF/views/common/msg.jsp";

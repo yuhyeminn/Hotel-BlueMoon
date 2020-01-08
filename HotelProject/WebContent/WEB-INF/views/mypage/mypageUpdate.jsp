@@ -51,52 +51,8 @@ function updateValidate(){
 	if(!regExpTest(/^01[0179][0-9]{7,8}$/, phone, "전화번호 형식이 올바르지 않습니다.")){
         return false;
 	}
-	
-	<%--이메일 유효성검사--%>
-	if(!regExpTest(/\w+@\w+\.\w+/g, email, "이메일 형식이 올바르지 않습니다.")){
-        return false;
-	}
-	
-	<%--이메일 중복검사를 하지않았을경우--%>
-	if($emailValid.val() == 0){
-		alert("이메일 중복 검사를 해주세요.");
-		return false;
-	}
-	
-	return true;
+		return true;
 }
-
-function emailDuplicatedCheck(){
-	var regExpEmail = /\w+@\w+\.\w+/g;
-	var email = document.getElementById("email");
-	
-	$.ajax({
-		url: "<%=request.getContextPath()%>/member/memberEmailDuplicatedCheckServlet",
-		type: "post",
-		data: {email: $("#email").val()},
-		dataType: "json",
-		success: data => {
-			console.log(data);
-			
-			if((data == 0) && (!$("#email").val() == "") && regExpEmail.test(email.value)){
-				alert("사용가능한 이메일 입니다.");
-				$("#email").attr("style","border-bottom: 2px solid #00c500");
-				$("#emailValid").val(1);
-				
-			}
-			else if(data ==1){
-				alert("중복된 이메일 입니다.");
-				$("#email").val("");
-				$("#email").attr("style","border-bottom: 2px solid red");
-				$("#emailValid").val(0);
-			}
-		},
-		error : (jqxhr, textStatus, errorThrown)=>{
-			console.log(jqxhr, textStatus, errorThrown);
-		}
-	});
-}
-
 
 <%--유효성검사 함수--%>		
 function regExpTest(regExp, el, msg){
@@ -132,17 +88,6 @@ function regExpTest(regExp, el, msg){
    <td>
     <input type = "text" name="phone" id="phone" value="<%=m.getPhone()%>"/>
    </td>
-  </tr>
-  <tr>
-   <td>이메일</td>
-   <td>
-    <input type = "email" name="email" id="email" value="<%=m.getEmail()%>"/>
-   </td>
-   <td>
-	<input type="button" class="btn btn-outline-secondary btn-sm" onclick="emailDuplicatedCheck();"
-	id="btn-email-already" value="중복확인" />
-	<input type="hidden" id="emailValid" value="0"/>
-	</td>
   </tr>
 </table>
 <input type="submit" class="btn btn-outline-secondary" id="btn-updateEnd" value="수정하기"></input>
