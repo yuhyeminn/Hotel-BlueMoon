@@ -232,7 +232,7 @@ $(()=>{
 </script>
 <style>
 path {
-	fill: #BDBDBD;
+	fill: #153450;
 }
 #div-resv-month-2019 {
 	margin: 90px auto;
