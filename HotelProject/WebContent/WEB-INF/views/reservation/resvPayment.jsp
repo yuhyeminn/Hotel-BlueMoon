@@ -50,7 +50,7 @@
 
 	<div class="product-container">
 		<div class="product-img">
-			<img src="<%=request.getContextPath()%>/images/premiumDelux.jpg"
+			<img src="<%=request.getContextPath()%>/upload/adminRoomAdd/<%=selectedRoom.getRenamedFileName()%>"
 				alt="프리미엄디럭스">
 		</div>
 		<div class="room-info">
@@ -986,6 +986,10 @@
 	display:inline-block;
 	width:257px;
 	margin-left:10px;
+}
+.product-img img{
+	width: 283px;
+	height: 159px;
 }
 </style>
 	

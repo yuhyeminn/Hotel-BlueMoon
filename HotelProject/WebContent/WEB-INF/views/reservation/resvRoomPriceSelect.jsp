@@ -20,6 +20,7 @@
 	int roomcnt = Integer.parseInt(infomap.get("roomcnt").toString());
 
 	System.out.println(checkindate + "," + checkoutdate + "," + room1 + "," + room2 + "," + roomcnt);
+	System.out.println("룸리스트"+roomlist.size());
 
 	String strFormat = "yyyy-MM-dd";
 
@@ -72,7 +73,7 @@
 		</div>
 	</div>
 	<%
-		if (roomlist != null) {
+		if (roomlist.size() != 0) {
 			for (Room r : roomlist) {
 	%>
 	<div class="product-container">
@@ -121,8 +122,10 @@
 	</div>
 	<%
 		}
-		}
+		} else{
 	%>
+		<p class="room-notAvailable">이용 가능한 객실이 존재하지 않습니다.</p>
+	<% } %>
 	<%-- <div class="product-container">
 		<div class="product-img">
 			<img src="<%=request.getContextPath()%>/images/premiumDelux2.jpg"
@@ -312,7 +315,7 @@
 
 .product-img img {
 	width: 100%;
-	height: auto;
+	height: 159px;
 	border: 0;
 	vertical-align: top;
 }
@@ -472,6 +475,17 @@
 /* prograss bar end */
 .btn-outline-secondary {
 	width: 160px;
+}
+.room-notAvailable{
+	margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+    width: 460px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 20px;
+    border-top: #a9a9a9 solid 1px;
+    border-bottom: #a9a9a9 solid 1px;
 }
 </style>
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
