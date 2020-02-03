@@ -191,7 +191,6 @@ insert into question_board values(seq_question_no.nextval, 'qwerty', '예약문�
 --UPDATE QUESTION_BOARD SET QUESTION_WRITER=?, QUESTION_NAME=?, QUESTION_TITLE=?, QUESTION_CONTENT=? ,QUESTION_ORIGINALFILENAME=? ,QUESTION_RENAMEDFILENAME =? WHERE QUESTION_NO= ?;
 --DELETE FROM MEMBER WHERE MEMBERID=?
 
-delete from question_board where question_no = 95; 
 
 select * from question_board;
 
@@ -296,7 +295,12 @@ insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'qwerty',2,0,0,default,350000,'N','2019-12-31','2020-1-1',0);
 insert into reservation values(to_char(sysdate,'YYYYMMDD')||seq_resv_no.nextval,'qwerty',2,0,0,default,450000,'N','2019-12-29','2019-12-30',0);
 
+
+insert into reservation values('201912121115','kkkk',2,0,0,default,450000,'N','2020-01-01','2020-01-02',0);
+insert into booked_room values(seq_booked_no.nextval,1,'201912121115',2,'2020-01-01','2020-01-02',450000);
+commit;
 select * from reservation;
+select * from reservation r left join booked_room br on r.resv_no = br.resv_no;
 
 --drop table reservation;
 --=======================================================
@@ -314,11 +318,12 @@ create table booked_room(
     constraint fk_room_no foreign key(room_no) references room(room_no) on delete set null,
     constraint fk_resv_no foreign key(resv_no) references reservation(resv_no) on delete cascade
 );
---insert into booked_room values(seq_booked_no.nextval,1,'202001051006',2,'19/12/29','19-12-30',350000);
+insert into booked_room values(seq_booked_no.nextval,2,'201912151005',2,'19/12/29','19-12-30',350000);
 --insert into booked_room values(seq_booked_no.nextval,2,'201912291001',2,'2019-12-25','2019-12-29',450000);
 --insert into booked_room values(seq_booked_no.nextval,3,'201912291002',2,'2019-12-30','2019-12-31',550000);
 --insert into booked_room values(seq_booked_no.nextval,1,'201912291003',2,'2019-12-31','2020-1-1',350000);
 --insert into booked_room values(seq_booked_no.nextval,2,'201912291004',2,'2019-12-29','2019-12-30',450000);
+
 
 --booked_no 시퀀스 생성
 create sequence seq_booked_no;
@@ -530,7 +535,7 @@ create table resvtotal(
     day varchar2(50) not null,
     resvcount number not null,
     resvprice number not null
-    );
+);
     
 --통계 insert문
 --202001,202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012까지 insert해야합니다.
@@ -566,12 +571,6 @@ select * from resvtotal;
 
 commit;
 
-delete from reservation;
-delete from booked_room;
-delete from coupon;
-
-commit;
-
 --연별통계테이블
 create table resvyeartotal(
     day varchar2(50) not null,
@@ -596,3 +595,17 @@ select * from question_comment;
 select * from point_io;
 select * from resvtotal;
 select * from resvyeartotal;
+
+create or replace trigger trg_return_point_io
+    after
+    update on reservation
+    for each row
+begin
+    if :new.resv_usedpoint != 0 then
+        insert into point_io values(:new.resv_member,:new.resv_usedpoint,sysdate,'O');
+    end if;
+    if :new.resv_addpoint != 0 then
+        insert into point_io values(:new.resv_member,:new.resv_addpoint,sysdate,'I');
+    end if;
+end;
+/

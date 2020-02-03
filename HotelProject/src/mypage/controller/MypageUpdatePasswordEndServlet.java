@@ -43,6 +43,7 @@ public class MypageUpdatePasswordEndServlet extends HttpServlet {
 			int result = new MemberService().updatePassword(member);
 			if(result>0){
 				msg = "패스워드 변경 성공";
+				loc = "/mypage/updatePassword?memberId="+memberId;
 			}	
 		}
 		else {
