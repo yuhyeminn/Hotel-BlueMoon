@@ -232,7 +232,7 @@ public class MemberDAO {
 				r.setRoomName(rset.getString("room_name"));
 				r.setResvIn(rset.getDate("resv_in"));
 				r.setResvOut(rset.getDate("resv_out"));
-				r.setResvPeople(rset.getInt("resv_people"));
+				r.setResvPeople(rset.getInt("booked_people"));
 				r.setRoomNo(rset.getInt("room_no"));
 				r.setResvNo(rset.getLong("resv_no"));
 				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
@@ -338,7 +338,7 @@ public class MemberDAO {
 				r.setRoomName(rset.getString("room_name"));
 				r.setResvIn(rset.getDate("resv_in"));
 				r.setResvOut(rset.getDate("resv_out"));
-				r.setResvPeople(rset.getInt("resv_people"));
+				r.setResvPeople(rset.getInt("booked_people"));
 				r.setRoomNo(rset.getInt("room_no"));
 				r.setRoomRenamedFileName(rset.getString("room_renamed_filename"));
 				r.setReviewNo(rset.getInt("review_no"));
